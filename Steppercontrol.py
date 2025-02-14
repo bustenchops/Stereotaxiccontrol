@@ -62,11 +62,21 @@ rotoB_DV = 23
 APsteps = 0
 MVsteps = 0
 DVsteps = 0
-AP
+calibrationsteps = 4000
+APstepdistance = float(0.0005)
+MVstepdistance = float(0.00075)
+DVstepdistance = float(0.00075)
+backoff = 20
 
+#DEFINE STEPPER DIRECTIONS
+APback = 1
+APforward = 0
+MVleft = 1
+MVright = 0
+DVup = 1
+DVdown = 0
 
 #INITIALIZE PINS
-
 GPIO.setup(latchpin,GPIO.OUT)
 GPIO.setup(datapin,GPIO.OUT)
 
@@ -105,8 +115,6 @@ GPIO.setup(rotoclick_AP, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(rotoclick_MV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(rotoclick_DV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-#SCRIPT
-numberofsteps = 1200
 
 def getshiftregisterdata():
     #get number of buttons
@@ -125,32 +133,166 @@ def getshiftregisterdata():
     return shiftvalues
 
 def zerorig():
+    global APsteps
+    global MVsteps
+    global DVsteps
+
     while GPIO.input(limitDV):
-        GPIO.output(directionDV,1)
+        GPIO.output(directionDV,DVup)
         GPIO.output(stepDV, 1)
         time.sleep(0.0001)
         GPIO.output(stepDV, 0)
         time.sleep(0.0001)
-        DVsteps = 0
+    DVsteps = 0
 
     while GPIO.input(limitAP):
-        GPIO.output(directionAP,1)
+        GPIO.output(directionAP,APback)
         GPIO.output(stepAP, 1)
         time.sleep(0.0001)
         GPIO.output(stepAP, 0)
         time.sleep(0.0001)
-        APsteps = 0
+    APsteps = 0
 
     while GPIO.input(limitMV):
-        GPIO.output(directionMV,1)
+        GPIO.output(directionMV,MVleft)
         GPIO.output(stepMV, 1)
         time.sleep(0.0001)
         GPIO.output(stepMV, 0)
         time.sleep(0.0001)
-        MVsteps = 0
+    MVsteps = 0
 
-    def calibratedistance()
-        APstart = input
+    #move back from the limit by the number of steps in variable backoff
+    for x in range(backoff):
+        GPIO.output(directionDV, DVdown)
+        GPIO.output(stepDV, 1)
+        time.sleep(0.0001)
+        GPIO.output(stepDV, 0)
+        time.sleep(0.0001)
+        DVsteps += 1
+
+        GPIO.output(directionAP,APforward)
+        GPIO.output(stepAP, 1)
+        time.sleep(0.0001)
+        GPIO.output(stepAP, 0)
+        time.sleep(0.0001)
+        APsteps += 1
+
+        GPIO.output(directionMV,MVright)
+        GPIO.output(stepMV, 1)
+        time.sleep(0.0001)
+        GPIO.output(stepMV, 0)
+        time.sleep(0.0001)
+        MVsteps += 1
+
+    def calibratedistance():
+        global APsteps
+        global MVsteps
+        global DVsteps
+
+        global APstepdistance
+        global MVstepdistance
+        global DVstepdistance
+
+        file_name = 'calibration.txt'
+        file = open(file_name, 'r')
+        r = 0
+        while True:
+            line = file.readline()
+            if not line:
+                break
+            calibratetemp[r] = line.strip()
+            r += 1
+        file.close()
+
+        APstepdistance = float(calibratetemp[0])
+        MVstepdistance = float(calibratetemp[1])
+        DVstepdistance = float(calibratetemp[2])
+
+        print("Current calibration values are:")
+        print("AP distance per step:"," ", APstepdistance)
+        print("MV distance per step:", " ", MVstepdistance)
+        print("DV distance per step:", " ", DVstepdistance)
+
+        yesno = input("Perform calibration? (y/n)")
+            if yesno == "y":
+                notation = input("!!!Make sure to remove any attachments from rig!!!")
+                APinput = input("Enter the AP starting position in millimeters.")
+                MVinput = input("Enter the MV starting position in millimeters.")
+                DVinput = input("Enter the DV starting position in millimeters.")
+                for x in range(calibrationsteps)
+                    if  backoff < APsteps < 6000:
+                        GPIO.output(directionAP, APforward)
+                        GPIO.output(stepAP, 1)
+                        time.sleep(0.0001)
+                        GPIO.output(stepAP, 0)
+                        time.sleep(0.0001)
+                        APsteps += 1
+
+                for x in range(calibrationsteps)
+                    if  backoff < DVsteps < 6000:
+                        GPIO.output(directionDV, DVforward)
+                        GPIO.output(stepDV, 1)
+                        time.sleep(0.0001)
+                        GPIO.output(stepDV,0)
+                        time.sleep(0.0001)
+                        DVsteps += 1
+
+                for x in range(calibrationsteps)
+                    if  backoff < MVsteps < 6000:
+                        GPIO.output(directionMV, MVforward)
+                        GPIO.output(stepMV, 1)
+                        time.sleep(0.0001)
+                        GPIO.output(stepMV, 0)
+                        time.sleep(0.0001)
+                        MVsteps += 1
+
+                APinputend = input("Enter the AP final position in millimeters.")
+                MVinputend = input("Enter the MV final position in millimeters.")
+                DVinputend = input("Enter the DV final position in millimeters.")
+
+                flAPinput = float(APinput)
+                flMVinput = float(MVinput)
+                flDVinput = float(DVinput)
+                flAPinputend = float(APinputend)
+                flMVinputend = float(MVinputend)
+                flDVinputend = float(DVinputend)
+
+                APstepdistance = (flAPinputend - flAPinput)/calibrationsteps
+                MVstepdistance = (flMVinputend - flMVinput)/calibrationsteps
+                DVstepdistance = (flDVinputend - flDVinput)/calibrationsteps
+
+                calibratemp = [APstepdistance, MVstepdistance, DVstepdistance]
+                # Open the file in write mode
+                with open(file_name, "w") as file:
+                    # Write each variable to the file in Pine Script format
+                    for x, value in enumerate(calibratetemp):
+                        varvalue = calibratetemp[x]
+                        file.write(f"{varvalue}\n")
+                file.close()
+
+                print("NEW calibration values are:")
+                print("AP distance per step:", " ", APstepdistance)
+                print("MV distance per step:", " ", MVstepdistance)
+                print("DV distance per step:", " ", DVstepdistance)
+                print(f"Variables have been written to {file_name}")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
