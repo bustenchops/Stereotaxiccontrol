@@ -10,8 +10,8 @@ GPIO.setmode(GPIO.BCM)
 #DEFINE STEPPER CONTROL PINS
 enableAll = 1
 
-directionAV = 2
-stepAV = 3
+directionAP = 2
+stepAP = 3
 
 directionMV = 4
 stepMV = 5
@@ -33,24 +33,24 @@ clockpin = 13
 datapin = 14
 
 #DEFINE NUMBER OF BUTTONS AND ORDER IN ARRAY
-buttonarray = ['movefast','moveslow','buttontohome','relativeALL','relativeAV','relativeMV','relativeDV','buttonaction','rotoclick_AV','rotoclick_MV','rotoclick_DV']
+buttonarray = ['movefast','moveslow','buttontohome','relativeALL','relativeAP','relativeMV','relativeDV','buttonaction','rotoclick_AP','rotoclick_MV','rotoclick_DV']
 
 #BUTTON POSITION IN SHIFT REGISTER ARRAY
 movefast = 0
 moveslow = 1
 buttontohome = 2
 relativeALL = 3
-relativeAV = 4
+relativeAP = 4
 relativeMV = 5
 relativeDV = 6
 buttonaction = 7
-rotoclick_AV = 8
+rotoclick_AP = 8
 rotoclick_MV = 9
 rotoclick_DV = 10
 
 #DEFINE ROTARY ENCODERS
-rotoA_AV = 16
-rotoB_AV = 17
+rotoA_AP = 16
+rotoB_AP = 17
 
 rotoA_MV = 19
 rotoB_MV = 20
@@ -62,6 +62,7 @@ rotoB_DV = 23
 APsteps = 0
 MVsteps = 0
 DVsteps = 0
+AP
 
 
 #INITIALIZE PINS
@@ -76,11 +77,11 @@ GPIO.setup(limitAP, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(limitMV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(limitDV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-GPIO.setup(directionAV, GPIO.OUT, initial=0)
+GPIO.setup(directionAP, GPIO.OUT, initial=0)
 GPIO.setup(directionMV, GPIO.OUT, initial=0)
 GPIO.setup(directionDV, GPIO.OUT, initial=0)
 
-GPIO.setup(stepAV, GPIO.OUT, initial=0)
+GPIO.setup(stepAP, GPIO.OUT, initial=0)
 GPIO.setup(stepMV, GPIO.OUT, initial=0)
 GPIO.setup(stepDV, GPIO.OUT, initial=0)
 
@@ -93,14 +94,14 @@ GPIO.setup(buttontohome, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 GPIO.setup(buttonaction, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-GPIO.setup(rotoA_AV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(rotoB_AV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(rotoA_AP, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(rotoB_AP, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(rotoA_MV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(rotoB_MV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(rotoA_DV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(rotoB_DV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-GPIO.setup(rotoclick_AV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(rotoclick_AP, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(rotoclick_MV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(rotoclick_DV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
@@ -132,11 +133,11 @@ def zerorig():
         time.sleep(0.0001)
         DVsteps = 0
 
-    while GPIO.input(limitAV):
-        GPIO.output(directionAV,1)
-        GPIO.output(stepAV, 1)
+    while GPIO.input(limitAP):
+        GPIO.output(directionAP,1)
+        GPIO.output(stepAP, 1)
         time.sleep(0.0001)
-        GPIO.output(stepAV, 0)
+        GPIO.output(stepAP, 0)
         time.sleep(0.0001)
         APsteps = 0
 
@@ -148,6 +149,8 @@ def zerorig():
         time.sleep(0.0001)
         MVsteps = 0
 
+    def calibratedistance()
+        APstart = input
 
 
 
