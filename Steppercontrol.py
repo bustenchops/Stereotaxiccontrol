@@ -1,4 +1,6 @@
 import time
+import threading
+from os.path import relpath
 import RPi.GPIO as GPIO
 
 # setup GPIO
@@ -20,35 +22,54 @@ stepDV = 7
 #DEFINE LIMIT SWITCH PINS
 limitAP = 8
 limitMV = 9
-LimitDV = 10
-
-#DEFINE SPEED PINS
-movefast = 11
-moveslow = 12
+limitDV = 10
 
 #DEFINE EMERGENCY STOP
-emergstop = 13
+emergstop = 11
 
-#DEFINE HOME BUTTON
-buttontohome = 14
+#DEFINE SHIFT REGISTER PINS
+latchpin = 12
+clockpin = 13
+datapin = 14
 
-#DEFINE ACTION BUTTON
-buttonaction = 15
+#DEFINE NUMBER OF BUTTONS AND ORDER IN ARRAY
+buttonarray = ['movefast','moveslow','buttontohome','relativeALL','relativeAV','relativeMV','relativeDV','buttonaction','rotoclick_AV','rotoclick_MV','rotoclick_DV']
+
+#BUTTON POSITION IN SHIFT REGISTER ARRAY
+movefast = 0
+moveslow = 1
+buttontohome = 2
+relativeALL = 3
+relativeAV = 4
+relativeMV = 5
+relativeDV = 6
+buttonaction = 7
+rotoclick_AV = 8
+rotoclick_MV = 9
+rotoclick_DV = 10
 
 #DEFINE ROTARY ENCODERS
 rotoA_AV = 16
 rotoB_AV = 17
-rotoclick_AV = 18
 
 rotoA_MV = 19
 rotoB_MV = 20
-rotoclick_MV = 21
 
 rotoA_DV = 22
 rotoB_DV = 23
-rotoclick_DV = 24
+
+#DEFINE GLOBAL VARIABLES
+APsteps = 0
+MVsteps = 0
+DVsteps = 0
+
 
 #INITIALIZE PINS
+
+GPIO.setup(latchpin,GPIO.OUT)
+GPIO.setup(datapin,GPIO.OUT)
+
+
 GPIO.setup(enableAll, GPIO.OUT, initial=1)
 
 GPIO.setup(limitAP, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -72,13 +93,72 @@ GPIO.setup(buttontohome, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 GPIO.setup(buttonaction, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-##NOTE: use signal OR thread to catch the encoder input?
+GPIO.setup(rotoA_AV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(rotoB_AV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(rotoA_MV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(rotoB_MV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(rotoA_DV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(rotoB_DV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-
-
+GPIO.setup(rotoclick_AV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(rotoclick_MV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(rotoclick_DV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 #SCRIPT
 numberofsteps = 1200
+
+def getshiftregisterdata():
+    #get number of buttons
+    x = len(buttonarray)
+    #LOAD DATA
+    GPIO.output(latchpin,GPIO.LOW)
+    time.sleep(0.01)
+    GPIO.output(latchpin,GPIO.HIGH)
+    #READ DATA
+    for i in range(x):
+        GPIO.output(clockpin,GPIO.LOW)
+        time.sleep(0.01)
+        shiftvalues[i] = GPIO.input(datapin)
+        GPIO.output(clockpin, GPIO.HIGH)
+        time.sleep(0.01)
+    return shiftvalues
+
+def zerorig():
+    while GPIO.input(limitDV):
+        GPIO.output(directionDV,1)
+        GPIO.output(stepDV, 1)
+        time.sleep(0.0001)
+        GPIO.output(stepDV, 0)
+        time.sleep(0.0001)
+        DVsteps = 0
+
+    while GPIO.input(limitAV):
+        GPIO.output(directionAV,1)
+        GPIO.output(stepAV, 1)
+        time.sleep(0.0001)
+        GPIO.output(stepAV, 0)
+        time.sleep(0.0001)
+        APsteps = 0
+
+    while GPIO.input(limitMV):
+        GPIO.output(directionMV,1)
+        GPIO.output(stepMV, 1)
+        time.sleep(0.0001)
+        GPIO.output(stepMV, 0)
+        time.sleep(0.0001)
+        MVsteps = 0
+
+
+
+
+#MAIN CODE
+
+
+
+
+
+
+
 
 quest = input('enable (0) : direction (0)')
 GPIO.output(enablepin, 0)
