@@ -116,7 +116,7 @@ GPIO.setup(rotoclick_MV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(rotoclick_DV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 
-def getshiftregisterdata():
+def getshiftregisterdata(self):
     #get number of buttons
     x = len(buttonarray)
     #LOAD DATA
@@ -132,7 +132,7 @@ def getshiftregisterdata():
         time.sleep(0.01)
     return shiftvalues
 
-def zerorig():
+def zerorig(self):
     global APsteps
     global MVsteps
     global DVsteps
@@ -183,7 +183,7 @@ def zerorig():
     MVsteps = 0
     DVsteps = 0
 
-def calibratedistance():
+def calibratedistance(self):
     global APsteps
     global MVsteps
     global DVsteps
