@@ -1,10 +1,9 @@
 import sys
 import time
-import threading
 from os.path import relpath
 import RPi.GPIO as GPIO
 from motorcontrolclass_v2 import StepperSetup
-from rotary_class import RotartEncoder
+from rotary_class import RotaryEncoder
 
 # setup GPIO
 GPIO.setwarnings(False)
@@ -121,12 +120,6 @@ APmove = StepperSetup(enableAll,stepAP,directionAP,limitAP)
 MVmove = StepperSetup(enableAll,stepMV,directionMV,limitMV)
 DVmove = StepperSetup(enableAll,stepDV,directionDV,limitDV)
 
-#INITIALIZE ENCODERS
-AProto = RotaryEncoder(rotoA_AP,rotoB_AP,emergstop,AP_event)
-MVroto = RotaryEncoder(rotoA_MV,rotoB_MV,misc_eventbuttonA,MV_event)
-DVroto = RotaryEncoder(rotoA_DV,rotoB_DV,misc_eventbuttonB,DV_event)
-
-
 def getshiftregisterdata(self):
 
     #get number of buttons
@@ -140,10 +133,10 @@ def getshiftregisterdata(self):
     for i in range(x):
         GPIO.output(clockpin,GPIO.LOW)
         time.sleep(0.01)
-        shiftvalues[i] = GPIO.input(datapin)
+        self.shiftvalues[i] = GPIO.input(datapin)
         GPIO.output(clockpin, GPIO.HIGH)
         time.sleep(0.01)
-    return shiftvalues
+    return self.shiftvalues
 
 
 def CalibrateDistance(self,calsteps):
@@ -163,13 +156,13 @@ def CalibrateDistance(self,calsteps):
         line = file.readline()
         if not line:
             break
-        calibratetemp[r] = line.strip()
+        self.calibratetemp[r] = line.strip()
         r += 1
     file.close()
 
-    APstepdistance = float(calibratetemp[0])
-    MVstepdistance = float(calibratetemp[1])
-    DVstepdistance = float(calibratetemp[2])
+    APstepdistance = float(self.calibratetemp[0])
+    MVstepdistance = float(self.calibratetemp[1])
+    DVstepdistance = float(self.calibratetemp[2])
 
     print("Current calibration values are:")
     print("AP distance per step:", " ", APstepdistance, "mm")
@@ -267,7 +260,7 @@ def PosAbsCalc(self,APstppos, MVstppos, DVstppos, APrelpos, MVrelpos, DVrelpos, 
 def emergencystop():
     
     GPIO.output(enableAll,0)
-    print("!EMERGENCY STOP!)
+    print("!EMERGENCY STOP!")
     print("Re-Zero axis to enable movement again") 
 
 
@@ -309,7 +302,10 @@ def DV_event(event):
         return
     return
 
-
+#INITIALIZE ENCODERS
+AProto = RotaryEncoder(rotoA_AP,rotoB_AP,emergstop,AP_event)
+MVroto = RotaryEncoder(rotoA_MV,rotoB_MV,misc_eventbuttonA,MV_event)
+DVroto = RotaryEncoder(rotoA_DV,rotoB_DV,misc_eventbuttonB,DV_event)
     
 #MAIN CODE
 

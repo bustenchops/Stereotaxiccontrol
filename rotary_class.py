@@ -67,38 +67,38 @@ class RotaryEncoder:
         self.last_state = new_state
         event = 0
  
-    if delta == 1:
+        if delta == 1:
  
-        if self.direction == self.CLOCKWISE:
-            # print "Clockwise"
-            event = self.direction
-        else:
-            self.direction = self.CLOCKWISE
+            if self.direction == self.CLOCKWISE:
+                # print "Clockwise"
+                event = self.direction
+            else:
+                self.direction = self.CLOCKWISE
     
-    elif delta == 3:
+        elif delta == 3:
     
-        if self.direction == self.ANTICLOCKWISE:
-            # print "Anticlockwise"
-            event = self.direction
-        else:
-            self.direction = self.ANTICLOCKWISE
+            if self.direction == self.ANTICLOCKWISE:
+                # print "Anticlockwise"
+                event = self.direction
+            else:
+                self.direction = self.ANTICLOCKWISE
     
-    if event > 0:
-        self.callback(event)
+        if event > 0:
+            self.callback(event)
  
-    return
+        return
 
 # Push button up event
-def button_event(self,button):
+    def button_event(self):
     
-    if GPIO.input(button):
-        event = self.BUTTONUP
-    else:
-        event = self.BUTTONDOWN
+        if GPIO.input(self.button):
+            event = self.BUTTONUP
+        else:
+            event = self.BUTTONDOWN
     
-    self.callback(event)
+        self.callback(event)
 
-    return
+        return
  
 # Get a switch state
 def getSwitchState(self, switch):

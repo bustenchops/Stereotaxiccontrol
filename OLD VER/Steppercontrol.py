@@ -192,7 +192,7 @@ def calibratedistance(self):
     global MVstepdistance
     global DVstepdistance
 
-    file_name = 'calibration.txt'
+    file_name = '../Calibration.txt'
     file = open(file_name, 'r')
     r = 0
     while True:

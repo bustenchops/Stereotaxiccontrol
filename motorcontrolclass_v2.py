@@ -1,4 +1,5 @@
 import RPi.GPIO as GPIO
+import time
 
 class StepperSetup:
     
@@ -7,7 +8,8 @@ class StepperSetup:
         self.step = step
         self.direction = direction
         self.limit = limit
-        
+        self.cursteps = 0
+
         # setup GPIO
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)
@@ -18,9 +20,9 @@ class StepperSetup:
         GPIO.setup(self.limit, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 
-    def SteppGo(self,spindir,speed):
+    def steppgo(self,spindir,speed):
         
-        for x in range (speed);
+        for x in range (speed):
             if GPIO.input(self.limit):
                 GPIO.output(self.enable,1)
                 GPIO.output(self.direction,spindir)
@@ -32,11 +34,11 @@ class StepperSetup:
                 print("ERROR - limit reached")
         
         
-    def ZeroStep(self,spindir,backoff):
+    def zerostep(self,spindir,backoff):
 
         GPIO.output(self.enable,1)
         while GPIO.input(self.limit):
-            SteppGo(spindir,1)
+            self.steppgo(spindir,1)
             
         if spindir == 0:
             revspin = 1
@@ -44,25 +46,25 @@ class StepperSetup:
             revspin = 0
             
         for x in range(backoff):
-            SteppGo(revspin,1)       
+            self.steppgo(revspin,1)
     
         
-    def HomeTo(self,spindir,curStep,StepTo)
-        self.curStep = curStep
-        if self.curStep > StepTo:
-            while self.curStep > StepTo:
+    def hometo(self,spindir,curstep,stepto):
+        self.cursteps = curstep
+        if self.cursteps > stepto:
+            while self.cursteps > stepto:
                 if GPIO.input(self.limit):
-                    SteppGo(spindir,1)
-                    self.curStep -= 1
+                    self.steppgo(spindir,1)
+                    self.cursteps -= 1
                 else:
                     print("ERROR - limit reached")
             
-            return self.curStep
+            return self.cursteps
         
         else:
-            while self.curStep < StepTo:
+            while self.cursteps < stepto:
                 if GPIO.input(self.limit):
-                    SteppGo(spindir,1)
-                    self.curStep += 1
+                    self.steppgo(spindir,1)
+                    self.cursteps += 1
             
-            return self.curStep
+            return self.cursteps
