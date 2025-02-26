@@ -198,15 +198,15 @@ def CalibrateDistance(self,calsteps):
         DVinput = input("Enter the DV starting position in millimeters.")
         for x in range(calsteps):
             if  0 < APsteps < 6000:
-                APmove.SteppGo(APforward,finespeed)
+                APmove.steppgo(APforward,finespeed)
 
         for x in range(calsteps):
             if  0 < DVsteps < 6000:
-                DVmove.SteppGo(DVdown,finespeed)
+                DVmove.steppgo(DVdown,finespeed)
 
         for x in range(calsteps):
             if  0 < MVsteps < 6000:
-                MVmove.SteppGo(MVright,finespeed)
+                MVmove.steppgo(MVright,finespeed)
 
         APinputend = input("Enter the AP final position in millimeters.")
         MVinputend = input("Enter the MV final position in millimeters.")
