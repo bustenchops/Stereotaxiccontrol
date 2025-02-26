@@ -1,9 +1,16 @@
 import RPi.GPIO as GPIO
 import time
 
+from Steppercontrol_v2 import APsteps, MVsteps, DVsteps
+
+
 class StepperSetup:
-    
-    def __init__(self,enable,step,direction,limit,Axis):
+
+    APsteps = 0
+    MVsteps = 0
+    DVsteps = 0
+
+    def __init__(self,enable,step,direction,limit,Axis,startstep):
         self.enable = enable
         self.step = step
         self.direction = direction
@@ -26,8 +33,17 @@ class StepperSetup:
         GPIO.setup(self.limit, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 
+    def exportsteps(self):
+        if self.axis == 1:
+            return APsteps
+        elif self.axis == 2:
+            return MVsteps
+        elif self.axis == 3:
+            return DVsteps
+
+
     def steppgo(self,spindir,speed):
-        
+
         for x in range (speed):
             if GPIO.input(self.limit):
                 GPIO.output(self.enable,1)
@@ -36,31 +52,54 @@ class StepperSetup:
                 time.sleep(0.0001)
                 GPIO.output(self.step, 0)
                 time.sleep(0.0001)
+
                 if spindir == 1:
                     stepmodifier = 1
                 else:
                     stepmodifier = -1
 
+                if self.axis == 1:
+                    StepperSetup.APsteps += stepmodifier
+                elif self.axis == 2:
+                    StepperSetup.MVsteps += stepmodifier
+                elif self.axis == 3:
+                    StepperSteup.DVsteps += stepmodifier
+
             else:
                 print("ERROR - limit reached")
 
 
-    def zerostep(self,spindir,backoff):
+    def zerostep(self,backoff):
 
         GPIO.output(self.enable,1)
         while GPIO.input(self.limit):
-            self.steppgo(spindir,1)
+            self.steppgo(0,1)
+            if self.axis == 1:
+                StepperSetup.APsteps -= 1
+            elif self.axis == 2:
+                StepperSetup.MVsteps -= 1
+            elif self.axis == 3:
+                StepperSteup.DVsteps -= 1
 
-        if spindir == 0:
-            revspin = 1
-        else:
-            revspin = 0
-            
         for x in range(backoff):
-            self.steppgo(revspin,1)
+            GPIO.output(self.enable, 1)
+            GPIO.output(self.direction, 1)
+            GPIO.output(self.step, 1)
+            time.sleep(0.0001)
+            GPIO.output(self.step, 0)
+            time.sleep(0.0001)
 
-        return 0
-    
+            if self.axis == 1:
+                StepperSetup.APsteps += 1
+            elif self.axis == 2:
+                StepperSetup.MVsteps += 1
+            elif self.axis == 3:
+                StepperSteup.DVsteps += 1
+
+        StepperSetup.APsteps = 0
+        StepperSetup.MVsteps = 0
+        StepperSetup.DVsteps = 0
+
         
     def hometo(self,spindir,curstep,stepto):
         self.cursteps = curstep
@@ -105,9 +144,9 @@ class StepperSetup:
         self.MVcalbval = MVcalbval
         self.DVcalbval = DVcalbval
 
-        APcurRELdist = round(((self.APstppos - self.APrepos) * self.APcalbval), 4)
-        MVcurRELdist = round(((self.MVstppos - self.MVrepos) * self.MVcalbval), 4)
-        DVcurRELdist = round(((self.DVstppos - self.DVrepos) * self.DVcalbval), 4)
+        APcurRELdist = round(((self.APstppos - self.APrelpos) * self.APcalbval), 4)
+        MVcurRELdist = round(((self.MVstppos - self.MVrelpos) * self.MVcalbval), 4)
+        DVcurRELdist = round(((self.DVstppos - self.DVrelpos) * self.DVcalbval), 4)
 
         APcurABSdist = round((self.APstppos * self.APcalbval), 4)
         MVcurABSdist = round((self.MVstppos * self.MVcalbval), 4)

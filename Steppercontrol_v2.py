@@ -67,9 +67,9 @@ rotoA_DV = 22
 rotoB_DV = 23
 
 #DEFINE GLOBAL VARIABLES
-APsteps = 0
-MVsteps = 0
-DVsteps = 0
+# defined in motorcontrolclass APsteps = 0
+# defined in motorcontrolclass MVsteps = 0
+# defined in motorcontrolclass DVsteps = 0
 
 APrelOffset = 0
 MVrelOffset = 0
@@ -242,9 +242,9 @@ def CalibrateDistance(self,calsteps):
         print(f"Variables have been written to {file_name}")
 
         #Zero again
-        DVsteps = DVmove.ZeroStep(DVup,backoff)
-        APsteps = APmove.ZeroStep(APback,backoff)
-        MVsteps = MVmove.ZeroStep(MVleft,backoff)
+        DVmove.ZeroStep(DVup,backoff)
+        APmove.ZeroStep(APback,backoff)
+        MVmove.ZeroStep(MVleft,backoff)
 
 
 def emergencystop(event):
@@ -319,12 +319,12 @@ quest = input("Initialization Process ... anykey to continue.")
 quest = input("CAUTION...Remove all attachments from frame arms! Anykey to continue.")
 
 #Zero steppers
-DVsteps = DVmove.ZeroStep(DVup,backoff)
-APsteps = APmove.ZeroStep(APback,backoff)
-MVsteps = MVmove.ZeroStep(MVleft,backoff)
+DVmove.zerostep(backoff)
+APmove.zerostep(backoff)
+MVmove.zerostep(backoff)
 
 #calibration routine
-CalibrateDistance()
+CalibrateDistance(calibrationsteps)
 
 while keepalive:
     #button settings
