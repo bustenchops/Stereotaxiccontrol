@@ -94,12 +94,12 @@ backoff = 20
 keepalive = True
 
 #DEFINE STEPPER DIRECTIONS
-APback = 1
-APforward = 0
-MVleft = 1
-MVright = 0
-DVup = 1
-DVdown = 0
+APback = 0
+APforward = 1
+MVleft = 0
+MVright = 1
+DVup = 0
+DVdown = 1
 
 #DEFINE STEPPER SPPEEDS
 finespeed = 1
@@ -118,9 +118,9 @@ GPIO.setup(moveslow, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(emergstop, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 #INITIALIZE STEPPERS
-APmove = StepperSetup(enableAll,stepAP,directionAP,limitAP)
-MVmove = StepperSetup(enableAll,stepMV,directionMV,limitMV)
-DVmove = StepperSetup(enableAll,stepDV,directionDV,limitDV)
+APmove = StepperSetup(enableAll,stepAP,directionAP,limitAP,1)
+MVmove = StepperSetup(enableAll,stepMV,directionMV,limitMV,2)
+DVmove = StepperSetup(enableAll,stepDV,directionDV,limitDV,3)
 
 def getshiftregisterdata(self):
 
@@ -199,22 +199,19 @@ def CalibrateDistance(self,calsteps):
         for x in range(calsteps):
             if  0 < APsteps < 6000:
                 APmove.SteppGo(APforward,finespeed)
-                APsteps += 1
 
         for x in range(calsteps):
             if  0 < DVsteps < 6000:
                 DVmove.SteppGo(DVdown,finespeed)
-                DVsteps += 1
 
         for x in range(calsteps):
             if  0 < MVsteps < 6000:
                 MVmove.SteppGo(MVright,finespeed)
-                MVsteps += 1
 
         APinputend = input("Enter the AP final position in millimeters.")
         MVinputend = input("Enter the MV final position in millimeters.")
         DVinputend = input("Enter the DV final position in millimeters.")
-        
+
         #make sure all are converted to float values
         flAPinput = float(APinput)
         flMVinput = float(MVinput)
@@ -248,33 +245,6 @@ def CalibrateDistance(self,calsteps):
         DVsteps = DVmove.ZeroStep(DVup,backoff)
         APsteps = APmove.ZeroStep(APback,backoff)
         MVsteps = MVmove.ZeroStep(MVleft,backoff)
-
-
-def PosAbsCalc(self, APstppos, MVstppos, DVstppos, APrelpos, MVrelpos, DVrelpos, APcalbval, MVcalbval, DVcalbval):
-    global APcurABSdist
-    global MVcurABSdist
-    global DVcurABSdist
-    global APcurRELdist
-    global MVcurRELdist
-    global DVcurRELdist
-    
-    self.APstppos = APstppos
-    self.MVstppos = MVstppos
-    self.DVstppos = DVstppos
-    self.APrelpos = APrelpos
-    self.MVrelpos = MVrelpos
-    self.DVrelpos = DVrelpos
-    self.APcalbval = APcalbval
-    self.MVcalbval = MVcalbval
-    self.DVcalbval = DVcalbval
-    
-    APcurRELdist = round(((self.APstppos - self.APrepos) * self.APcalbval),4)
-    MVcurRELdist = round(((self.MVstppos - self.MVrepos) * self.MVcalbval),4)
-    DVcurRELdist = round(((self.DVstppos - self.DVrepos) * self.DVcalbval),4)
-
-    APcurABSdist = round((self.APstppos * self.APcalbval),4)
-    MVcurABSdist = round((self.MVstppos * self.MVcalbval),4)
-    DVcurABSdist = round((self.DVstppos * self.DVcalbval),4)
 
 
 def emergencystop(event):
@@ -355,7 +325,6 @@ MVsteps = MVmove.ZeroStep(MVleft,backoff)
 
 #calibration routine
 CalibrateDistance()
-PosAbsCalc(APsteps,MVsteps,DVsteps,APrelOffset,MVrelOffset,DVrelOffset,APstepdistance,MVstepdistance,DVstepdistance)
 
 while keepalive:
     #button settings
