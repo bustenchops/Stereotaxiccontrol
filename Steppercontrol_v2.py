@@ -26,7 +26,7 @@ limitAP = 8
 limitMV = 9
 limitDV = 10
 
-#DEFINE EMERGENCY STOP
+#DEFINE EMERGENCY STOP and hard wired buttons
 emergstop = 11
 misc_eventbuttonA = 15
 misc_eventbuttonB = 24
@@ -91,6 +91,8 @@ DVcurRELdist = float(0)
 
 backoff = 20
 
+keepalive = True
+
 #DEFINE STEPPER DIRECTIONS
 APback = 1
 APforward = 0
@@ -137,6 +139,25 @@ def getshiftregisterdata(self):
         GPIO.output(clockpin, GPIO.HIGH)
         time.sleep(0.01)
     return self.shiftvalues
+
+
+def laststatebuttonvalues_init(self):
+
+    x = len(buttonarray)
+    for i in range(x):
+        self.laststate[i] = 0
+    return self.laststate
+
+def buttonvalues(self, lastbut, newbut, butarr):
+    self.lastbuttemp = lastbut
+    x = len(lastbut)
+
+    for i in range(x):
+        if lastbut[i] != newbut[i]:
+            self.lastbuttemp[i] = newbut[i]
+            print("button ", buttonarray[i], " state change")
+            if lastbut[i] == movefast:
+    return self.lastbuttemp
 
 
 def CalibrateDistance(self,calsteps):
@@ -224,14 +245,12 @@ def CalibrateDistance(self,calsteps):
         print(f"Variables have been written to {file_name}")
 
         #Zero again
-        DVmove.ZeroStep(DVup,backoff)
-        DVsteps = 0
-        APmove.ZeroStep(APback,backoff)
-        APsteps = 0
-        MVmove.ZeroStep(MVleft,backoff)
-        MVsteps = 0
+        DVsteps = DVmove.ZeroStep(DVup,backoff)
+        APsteps = APmove.ZeroStep(APback,backoff)
+        MVsteps = MVmove.ZeroStep(MVleft,backoff)
 
-def PosAbsCalc(self,APstppos, MVstppos, DVstppos, APrelpos, MVrelpos, DVrelpos, APcalbval, MVcalbval, DVcalbval):
+
+def PosAbsCalc(self, APstppos, MVstppos, DVstppos, APrelpos, MVrelpos, DVrelpos, APcalbval, MVcalbval, DVcalbval):
     global APcurABSdist
     global MVcurABSdist
     global DVcurABSdist
@@ -257,19 +276,26 @@ def PosAbsCalc(self,APstppos, MVstppos, DVstppos, APrelpos, MVrelpos, DVrelpos, 
     MVcurABSdist = round((self.MVstppos * self.MVcalbval),4)
     DVcurABSdist = round((self.DVstppos * self.DVcalbval),4)
 
-def emergencystop():
-    
-    GPIO.output(enableAll,0)
-    print("!EMERGENCY STOP!")
-    print("Re-Zero axis to enable movement again") 
+
+def emergencystop(event):
+
+    if event == RotaryEncoder.BUTTONDOWN:
+        print("!EMERGENCY STOP!")
+        print("Re-Zero axis to enable movement again")
+        GPIO.output(enableAll,0)
+    else:
+        return
+    return
 
 
 def AP_event(event): 
  
     if event == RotaryEncoder.CLOCKWISE:
         APmove.SteppGo(APforward,stepper_speed)
+        APsteps += stepper_speed
     elif event == RotaryEncoder.ANTICLOCKWISE:
         APmove.SteppGo(APback,stepper_speed)
+        APsteps -= stepper_speed
     elif event == RotaryEncoder.BUTTONDOWN:
         emergencystop()        
     elif event == RotaryEncoder.BUTTONUP:
@@ -281,9 +307,12 @@ def MV_event(event):
     
     if event == RotaryEncoder.CLOCKWISE:
         MVmove.SteppGo(MVright,stepper_speed)
+        MVsteps += stepper_speed
     elif event == RotaryEncoder.ANTICLOCKWISE:
         MVmove.SteppGo(MVleft,stepper_speed)
+        MVsteps -= stepper_speed
     elif event == RotaryEncoder.BUTTONDOWN:
+        print("event button B clicked")
         return  
     elif event == RotaryEncoder.BUTTONUP:
         return
@@ -294,9 +323,12 @@ def DV_event(event):
 
     if event == RotaryEncoder.CLOCKWISE:
         DVmove.SteppGo(DVdown,stepper_speed)
+        DVsteps += stepper_speed
     elif event == RotaryEncoder.ANTICLOCKWISE:
         DVmove.SteppGo(DVup,stepper_speed)
+        DVsteps -= stepper_speed
     elif event == RotaryEncoder.BUTTONDOWN:
+        print("event button B clicked")
         return  
     elif event == RotaryEncoder.BUTTONUP:
         return
@@ -306,23 +338,58 @@ def DV_event(event):
 AProto = RotaryEncoder(rotoA_AP,rotoB_AP,emergstop,AP_event)
 MVroto = RotaryEncoder(rotoA_MV,rotoB_MV,misc_eventbuttonA,MV_event)
 DVroto = RotaryEncoder(rotoA_DV,rotoB_DV,misc_eventbuttonB,DV_event)
-    
-#MAIN CODE
+
+
+#MAIN CODE ################################################################################################
+
+# INITIALIZE BUTTON STATE
+lastbuttonstate = laststatebuttonvalues_init()
 
 quest = input("Initialization Process ... anykey to continue.")
 quest = input("CAUTION...Remove all attachments from frame arms! Anykey to continue.")
 
 #Zero steppers
-DVmove.ZeroStep(DVup,backoff)
-APmove.ZeroStep(APback,backoff)
-MVmove.ZeroStep(MVleft,backoff)
+DVsteps = DVmove.ZeroStep(DVup,backoff)
+APsteps = APmove.ZeroStep(APback,backoff)
+MVsteps = MVmove.ZeroStep(MVleft,backoff)
 
 #calibration routine
 CalibrateDistance()
 PosAbsCalc(APsteps,MVsteps,DVsteps,APrelOffset,MVrelOffset,DVrelOffset,APstepdistance,MVstepdistance,DVstepdistance)
 
+while keepalive:
+    #button settings
+    newbuttonstate = getshiftregisterdata()
+    lastbuttonstate = buttonvalues(lastbuttonstate,newbuttonstate,buttonarray)
+
+    #stepper_speed
+    if lastbuttonstate[0] == 1 and lastbuttonstate[1] == 1:
+        stepper_speed = normalspeed
+    elif lastbuttonstate[0] == 0 and lastbuttonstate[1] == 1:
+        stepper_speed = fastspeed
+    elif lastbuttonstate[0] == 1 and lastbuttonstate[1] == 0:
+        stepper_speed = finespeed
+    #homebutton
+    if lastbuttonstate[2] == 0:
+        if APsteps > 0:
+            DVsteps = DVmove.zerostep(DVup, DVsteps,0)
+        else:
+            DVsteps = DVmove.zerostep(DVdown, DVsteps, 0)
+        if MVsteps > 0:
+            APsteps = MVmove.zerostep(APback, APsteps,0)
+        else:
+            APsteps = APmove.zerostep(APforward, APsteps, 0)
+        if MVsteps > 0:
+            MVsteps = MVmove.zerostep(MVleft, MVsteps, 0)
+        else:
+            MVsteps = MVmove.zerostep(MVright, MVsteps, 0)
+
+
+
+
+need to figure out way to report distance every time a step is made
 need to check buttons 
-stepper_speed is defined alreay
+
 relative abs position
 relative zreo
 home

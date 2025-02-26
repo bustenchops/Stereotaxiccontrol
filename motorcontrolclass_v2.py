@@ -3,7 +3,7 @@ import time
 
 class StepperSetup:
     
-    def _init_(self,enable,step,direction,limit):
+    def __init__(self,enable,step,direction,limit):
         self.enable = enable
         self.step = step
         self.direction = direction
@@ -39,7 +39,7 @@ class StepperSetup:
         GPIO.output(self.enable,1)
         while GPIO.input(self.limit):
             self.steppgo(spindir,1)
-            
+
         if spindir == 0:
             revspin = 1
         else:
@@ -47,6 +47,8 @@ class StepperSetup:
             
         for x in range(backoff):
             self.steppgo(revspin,1)
+
+        return 0
     
         
     def hometo(self,spindir,curstep,stepto):

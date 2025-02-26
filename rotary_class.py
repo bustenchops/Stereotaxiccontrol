@@ -26,12 +26,13 @@ class RotaryEncoder:
     direction = 0
     
     # Initialise rotary encoder object
-    def __init__(self,pinA,pinB,button,callback):
+    def __init__(self,pinA,pinB,button,callbackdef):
 
         self.pinA = pinA
         self.pinB = pinB
         self.button = button
-        self.callback = callback
+        self.callback = callbackdef
+
         GPIO.setmode(GPIO.BCM)
 
         # The following lines enable the internal pull-up resistors
@@ -50,6 +51,8 @@ class RotaryEncoder:
 
     # Call back routine called by switch events
     def switch_event(self,switch):
+
+        print(f"event detected on {switch}")
 
         if GPIO.input(self.pinA):
             self.rotary_a = 1
@@ -89,13 +92,13 @@ class RotaryEncoder:
         return
 
 # Push button up event
-    def button_event(self):
-    
-        if GPIO.input(self.button):
+    def button_event(self, button):
+
+        if GPIO.input(button):
             event = self.BUTTONUP
         else:
             event = self.BUTTONDOWN
-    
+
         self.callback(event)
 
         return
