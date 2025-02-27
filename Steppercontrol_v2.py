@@ -77,18 +77,6 @@ DVrelOffset= 0
 
 calibrationsteps = 4000
 
-APstepdistance = float(0.0005)
-MVstepdistance = float(0.00075)
-DVstepdistance = float(0.00075)
-
-APcurABSdist = float(0)
-MVcurABSdist = float(0)
-DVcurABSdist = float(0)
-
-APcurRELdist = float(0)
-MVcurRELdist = float(0)
-DVcurRELdist = float(0)
-
 backoff = 20
 
 keepalive = True
@@ -118,9 +106,16 @@ GPIO.setup(moveslow, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(emergstop, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 #INITIALIZE STEPPERS
-APmove = StepperSetup(enableAll,stepAP,directionAP,limitAP,1)
-MVmove = StepperSetup(enableAll,stepMV,directionMV,limitMV,2)
-DVmove = StepperSetup(enableAll,stepDV,directionDV,limitDV,3)
+
+APmove = StepperSetup(enableAll,stepAP,directionAP,limitAP,1,APforward,APback)
+MVmove = StepperSetup(enableAll,stepMV,directionMV,limitMV,2,MVright,MVleft)
+DVmove = StepperSetup(enableAll,stepDV,directionDV,limitDV,3,DVup,DVdown)
+
+#send to motorcontrol
+APmove.iliketomoveit(APmove)
+MVmove.iliketomoveit(MVmove)
+DVmove.iliketomoveit(DVmove)
+
 
 def getshiftregisterdata(self):
 
@@ -157,94 +152,8 @@ def buttonvalues(self, lastbut, newbut, butarr):
             self.lastbuttemp[i] = newbut[i]
             print("button ", buttonarray[i], " state change")
             if lastbut[i] == movefast:
+                REST OF BUTTONS
     return self.lastbuttemp
-
-
-def CalibrateDistance(self,calsteps):
-
-    global APsteps
-    global MVsteps
-    global DVsteps
-
-    global APstepdistance
-    global MVstepdistance
-    global DVstepdistance
-
-    file_name = 'calibration.txt'
-    file = open(file_name, 'r')
-    r = 0
-    while True:
-        line = file.readline()
-        if not line:
-            break
-        self.calibratetemp[r] = line.strip()
-        r += 1
-    file.close()
-
-    APstepdistance = float(self.calibratetemp[0])
-    MVstepdistance = float(self.calibratetemp[1])
-    DVstepdistance = float(self.calibratetemp[2])
-
-    print("Current calibration values are:")
-    print("AP distance per step:", " ", APstepdistance, "mm")
-    print("MV distance per step:", " ", MVstepdistance, "mm")
-    print("DV distance per step:", " ", DVstepdistance, "mm")
-
-    yesno = input("Perform calibration? (y/n)")
-    if yesno == "y":
-        notation = input("!!!Make sure to remove any attachments from rig!!!")
-        APinput = input("Enter the AP starting position in millimeters.")
-        MVinput = input("Enter the MV starting position in millimeters.")
-        DVinput = input("Enter the DV starting position in millimeters.")
-        for x in range(calsteps):
-            if  0 < APsteps < 6000:
-                APmove.steppgo(APforward,finespeed)
-
-        for x in range(calsteps):
-            if  0 < DVsteps < 6000:
-                DVmove.steppgo(DVdown,finespeed)
-
-        for x in range(calsteps):
-            if  0 < MVsteps < 6000:
-                MVmove.steppgo(MVright,finespeed)
-
-        APinputend = input("Enter the AP final position in millimeters.")
-        MVinputend = input("Enter the MV final position in millimeters.")
-        DVinputend = input("Enter the DV final position in millimeters.")
-
-        #make sure all are converted to float values
-        flAPinput = float(APinput)
-        flMVinput = float(MVinput)
-        flDVinput = float(DVinput)
-        flAPinputend = float(APinputend)
-        flMVinputend = float(MVinputend)
-        flDVinputend = float(DVinputend)
-
-        #calculated distance moved per step
-        APstepdistance = (flAPinputend - flAPinput)/calibrationsteps
-        MVstepdistance = (flMVinputend - flMVinput)/calibrationsteps
-        DVstepdistance = (flDVinputend - flDVinput)/calibrationsteps
-
-        #write values to file
-        calibratetemp = [APstepdistance, MVstepdistance, DVstepdistance]
-        # Open the file in write mode
-        with open(file_name, "w") as file:
-            # Write each variable to the file in Pine Script format
-            for x, value in enumerate(calibratetemp):
-                varvalue = calibratetemp[x]
-                file.write(f"{varvalue}\n")
-        file.close()
-
-        print("NEW calibration values are:")
-        print("AP distance per step:", " ", APstepdistance, "mm")
-        print("MV distance per step:", " ", MVstepdistance, "mm")
-        print("DV distance per step:", " ", DVstepdistance, "mm")
-        print(f"Variables have been written to {file_name}")
-
-        #Zero again
-        DVmove.ZeroStep(DVup,backoff)
-        APmove.ZeroStep(APback,backoff)
-        MVmove.ZeroStep(MVleft,backoff)
 
 
 def emergencystop(event):
@@ -261,13 +170,13 @@ def emergencystop(event):
 def AP_event(event): 
  
     if event == RotaryEncoder.CLOCKWISE:
-        APmove.SteppGo(APforward,stepper_speed)
-        APsteps += stepper_speed
+        APmove.steppgo(APforward,stepper_speed)
+        StepperSetup.APsteps += stepper_speed
     elif event == RotaryEncoder.ANTICLOCKWISE:
-        APmove.SteppGo(APback,stepper_speed)
-        APsteps -= stepper_speed
+        APmove.steppgo(APback,stepper_speed)
+        StepperSetup.APsteps -= stepper_speed
     elif event == RotaryEncoder.BUTTONDOWN:
-        emergencystop()        
+        emergencystop(event)
     elif event == RotaryEncoder.BUTTONUP:
         return
     return
@@ -276,11 +185,11 @@ def AP_event(event):
 def MV_event(event):
     
     if event == RotaryEncoder.CLOCKWISE:
-        MVmove.SteppGo(MVright,stepper_speed)
-        MVsteps += stepper_speed
+        MVmove.steppgo(MVright,stepper_speed)
+        StepperSetup.MVsteps += stepper_speed
     elif event == RotaryEncoder.ANTICLOCKWISE:
-        MVmove.SteppGo(MVleft,stepper_speed)
-        MVsteps -= stepper_speed
+        MVmove.steppgo(MVleft,stepper_speed)
+        StepperSetup.MVsteps -= stepper_speed
     elif event == RotaryEncoder.BUTTONDOWN:
         print("event button B clicked")
         return  
@@ -292,11 +201,11 @@ def MV_event(event):
 def DV_event(event):
 
     if event == RotaryEncoder.CLOCKWISE:
-        DVmove.SteppGo(DVdown,stepper_speed)
-        DVsteps += stepper_speed
+        DVmove.steppgo(DVdown,stepper_speed)
+        StepperSetup.DVsteps += stepper_speed
     elif event == RotaryEncoder.ANTICLOCKWISE:
-        DVmove.SteppGo(DVup,stepper_speed)
-        DVsteps -= stepper_speed
+        DVmove.steppgo(DVup,stepper_speed)
+        StepperSetup.DVsteps -= stepper_speed
     elif event == RotaryEncoder.BUTTONDOWN:
         print("event button B clicked")
         return  
@@ -324,7 +233,9 @@ APmove.zerostep(backoff)
 MVmove.zerostep(backoff)
 
 #calibration routine
-CalibrateDistance(calibrationsteps)
+APmove.CalibrateDistance(calibrationsteps,backoff)
+MVmove.CalibrateDistance(calibrationsteps,backoff)
+DVmove.CalibrateDistance(calibrationsteps,backoff)
 
 while keepalive:
     #button settings
@@ -341,17 +252,17 @@ while keepalive:
     #homebutton
     if lastbuttonstate[2] == 0:
         if APsteps > 0:
-            DVsteps = DVmove.zerostep(DVup, DVsteps,0)
+            StepperSetup.DVsteps = DVmove.zerostep(DVup, DVsteps,0)
         else:
-            DVsteps = DVmove.zerostep(DVdown, DVsteps, 0)
+            StepperSetup.DVsteps = DVmove.zerostep(DVdown, DVsteps, 0)
         if MVsteps > 0:
-            APsteps = MVmove.zerostep(APback, APsteps,0)
+            StepperSetup.APsteps = MVmove.zerostep(APback, APsteps,0)
         else:
-            APsteps = APmove.zerostep(APforward, APsteps, 0)
+            StepperSetup.APsteps = APmove.zerostep(APforward, APsteps, 0)
         if MVsteps > 0:
-            MVsteps = MVmove.zerostep(MVleft, MVsteps, 0)
+            StepperSetup.MVsteps = MVmove.zerostep(MVleft, MVsteps, 0)
         else:
-            MVsteps = MVmove.zerostep(MVright, MVsteps, 0)
+            StepperSetup.MVsteps = MVmove.zerostep(MVright, MVsteps, 0)
 
 
 

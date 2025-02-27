@@ -1,3 +1,6 @@
+from tesgtbed3 import my2ndclass
+
+
 class MyClass:
     # Class variable
     shared_variable = 0
@@ -13,20 +16,12 @@ class MyClass:
         print(f"Instance Variable: {self.instance_variable}")
         print(f"Shared Variable: {MyClass.shared_variable}")
 
-# Create instances of MyClass
-obj1 = MyClass(10)
-obj2 = MyClass(20)
 
-# Increment the shared variable using obj1
-obj1.increment_shared_variable()
-
-# Display variables for both objects
-obj1.display_variables()
-obj2.display_variables()
-
-# Increment the shared variable using obj2
-obj2.increment_shared_variable()
-
-# Display variables again to see the change
-obj1.display_variables()
-obj2.display_variables()
+    shitty = my2ndclass(20)
+    shitty.showfromclass(shitty)
+    crappy = my2ndclass(10)
+    crappy.showfromclass(crappy)
+    my2ndclass.share2 += 1000
+    print(shared_variable)
+    print(my2ndclass.share2)
+    crappy.showfromclass(crappy)
