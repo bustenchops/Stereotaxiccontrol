@@ -30,6 +30,7 @@ class StepperSetup:
         self.axis = Axis
         self.goplus = Plusdir
         self.gominus = Minusdir
+        self.iliketomoveit = "none"
 
         #Axis defined:
         # AP = 1
@@ -45,14 +46,14 @@ class StepperSetup:
         GPIO.setup(self.direction, GPIO.OUT, initial=0)
         GPIO.setup(self.limit, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-
+#may not need but put in in case I need to export the steps to the main program
     def exportsteps(self):
         if self.axis == 1:
-            return APsteps
+            return StepperSetup.APsteps
         elif self.axis == 2:
-            return MVsteps
+            return StepperSetup.MVsteps
         elif self.axis == 3:
-            return DVsteps
+            return StepperSetup.DVsteps
 
 
     def receive_instance(self,maininstance):
@@ -267,32 +268,12 @@ class StepperSetup:
             return self.cursteps
 
 
-    def PosAbsCalc(self, APstppos, MVstppos, DVstppos, APrelpos, MVrelpos, DVrelpos, APcalbval, MVcalbval, DVcalbval):
-        global APsteps
-        global MVsteps
-        global DVsteps
+    def PosRelAbsCalc(self):
 
-        global APcurABSdist
-        global MVcurABSdist
-        global DVcurABSdist
-        global APcurRELdist
-        global MVcurRELdist
-        global DVcurRELdist
+        StepperSetup.APcurRELdist = round(((StepperSetup.APsteps - StepperSetup.APrelpos) * StepperSetup.APstepdistance), 4)
+        StepperSetup.MVcurRELdist = round(((StepperSetup.MVsteps - StepperSetup.MVrelpos) * StepperSetup.MVstepdistance), 4)
+        StepperSetup.DVcurRELdist = round(((StepperSetup.DVsteps - StepperSetup.DVrelpos) * StepperSetup.DVstepdistance), 4)
 
-        self.APstppos = APstppos
-        self.MVstppos = MVstppos
-        self.DVstppos = DVstppos
-        self.APrelpos = APrelpos
-        self.MVrelpos = MVrelpos
-        self.DVrelpos = DVrelpos
-        self.APcalbval = APcalbval
-        self.MVcalbval = MVcalbval
-        self.DVcalbval = DVcalbval
-
-        APcurRELdist = round(((self.APstppos - self.APrelpos) * self.APcalbval), 4)
-        MVcurRELdist = round(((self.MVstppos - self.MVrelpos) * self.MVcalbval), 4)
-        DVcurRELdist = round(((self.DVstppos - self.DVrelpos) * self.DVcalbval), 4)
-
-        APcurABSdist = round((self.APstppos * self.APcalbval), 4)
-        MVcurABSdist = round((self.MVstppos * self.MVcalbval), 4)
-        DVcurABSdist = round((self.DVstppos * self.DVcalbval), 4)
+        StepperSetup.APcurABSdist = round((StepperSetup.APsteps * StepperSetup.APstepdistance), 4)
+        StepperSetup.MVcurABSdist = round((StepperSetup.MVsteps * StepperSetup.MVstepdistance), 4)
+        StepperSetup.DVcurABSdist = round((StepperSetup.MVsteps * StepperSetup.DVstepdistance), 4)

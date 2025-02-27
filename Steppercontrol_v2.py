@@ -89,7 +89,7 @@ MVright = 1
 DVup = 0
 DVdown = 1
 
-#DEFINE STEPPER SPPEEDS
+#DEFINE STEPPER SPEEDS
 finespeed = 1
 normalspeed = 5
 fastspeed = 10
@@ -112,9 +112,10 @@ MVmove = StepperSetup(enableAll,stepMV,directionMV,limitMV,2,MVright,MVleft)
 DVmove = StepperSetup(enableAll,stepDV,directionDV,limitDV,3,DVup,DVdown)
 
 #send to motorcontrol
-APmove.iliketomoveit(APmove)
-MVmove.iliketomoveit(MVmove)
-DVmove.iliketomoveit(DVmove)
+APmove.receive_instance(APmove)
+MVmove.receive_instance(MVmove)
+DVmove.receive_instance(DVmove)
+
 
 
 def getshiftregisterdata(self):
