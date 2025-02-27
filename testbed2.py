@@ -18,16 +18,16 @@ class MyClass:
         MyClass.shared_variable = 100
         print('heeeee')
 
-print("new----------------------------------------")
+
 shitty = my2ndclass(20)
 shitty.showfromclass(shitty)
 crappy = my2ndclass(10)
 crappy.showfromclass(crappy)
 my2ndclass.share2 += 1000
-print(MyClass.shared_variable)
+print(shared_variable)
 print(my2ndclass.share2)
 crappy.showfromclass(crappy)
-
+print("new")
 fart = MyClass(5)
 fart.display_variables()
 print(MyClass.shared_variable)

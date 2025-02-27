@@ -21,21 +21,21 @@ class StepperSetup:
     DVcurRELdist = float(0)
 
 
-    def __init__(self,enable,step,direction,limit,Axis,Plusdir,Minusdir):
-        self.enable = enable
-        self.step = step
-        self.direction = direction
-        self.limit = limit
-        self.cursteps = 0
+    def __init__(self,enablepin,steppin,directionpin,limitpin,Axis,Plusdir,Minusdir):
+        self.enable = enablepin
+        self.step = steppin
+        self.direction = directionpin
+        self.limit = limitpin
+            # Axis defined:
+            # AP = 1
+            # MV = 2
+            # DV = 3
         self.axis = Axis
+            # NOTE plus and minus direction relative to stereo coordinates
         self.goplus = Plusdir
         self.gominus = Minusdir
+            # NOTE: placeholder to import object instances from main program
         self.iliketomoveit = "none"
-
-        #Axis defined:
-        # AP = 1
-        # MV = 2
-        # DV = 3
 
         # setup GPIO
         GPIO.setwarnings(False)
@@ -46,7 +46,7 @@ class StepperSetup:
         GPIO.setup(self.direction, GPIO.OUT, initial=0)
         GPIO.setup(self.limit, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-#may not need but put in in case I need to export the steps to the main program
+    #may not need but put in in case I need to export the steps to the main program
     def exportsteps(self):
         if self.axis == 1:
             return StepperSetup.APsteps
@@ -56,18 +56,20 @@ class StepperSetup:
             return StepperSetup.DVsteps
 
 
+    #receives object instance from main program so it can be utilized with this class
+        #Object instance calls on this function from within itself and sends itself here.
     def receive_instance(self,maininstance):
         self.iliketomoveit = maininstance
 
 
-    def steppgo(self,spindir,speed):
+    def steppgo(self,move_direction,speed):
 
         self.stepmodifier = 0
 
         for x in range (speed):
             if GPIO.input(self.limit):
                 GPIO.output(self.enable,1)
-                GPIO.output(self.direction,spindir)
+                GPIO.output(self.direction,move_direction)
                 GPIO.output(self.step, 1)
                 time.sleep(0.0001)
                 GPIO.output(self.step, 0)
@@ -118,14 +120,18 @@ class StepperSetup:
 
             print(f"APsteps: {StepperSetup.APsteps} MVsteps: {StepperSetup.MVsteps} DVsteps {StepperSetup.DVsteps}")
 
-        StepperSetup.APsteps = 0
-        StepperSetup.MVsteps = 0
-        StepperSetup.DVsteps = 0
+        #Sets the step for that axis to 0
+        if self.axis == 1:
+            StepperSetup.APsteps = 0
+        elif self.axis == 2:
+            StepperSetup.MVsteps = 0
+        elif self.axis == 3:
+            StepperSetup.DVsteps = 0
 
         print(f"Zeroed: APsteps: {StepperSetup.APsteps} MVsteps: {StepperSetup.MVsteps} DVsteps {StepperSetup.DVsteps}")
 
 
-    def CalibrateDistance(self, calsteps, rollback):
+    def CalibrateDistance(self, calibrationsteps, rollback):
 
         self.calibratetemp = []
         file_name = 'calibration.txt'
@@ -150,6 +156,7 @@ class StepperSetup:
 
         yesno = input("Perform calibration? (y/n)")
 
+        #init the input variables
         self.APinput = 0
         self.MVinput = 0
         self.DVinput = 0
@@ -158,11 +165,11 @@ class StepperSetup:
         self.DVinputend = 0
 
         if yesno == "y":
-            notation = input("!!!Make sure to remove all attachments from rig!!!")
+            notation = input("!!!Make sure to remove all attachments from rig!!! any key to continue")
             if self.axis == 1:
                 self.APinput = input("Enter the AP starting position in millimeters.")
 
-                for x in range(calsteps):
+                for x in range(calibrationsteps):
                     if 0 < StepperSetup.APsteps < 6000:
                         self.iliketomoveit.steppgo(self.goplus, 1)
 
@@ -171,7 +178,7 @@ class StepperSetup:
                 flAPinput = float(self.APinput)
                 flAPinputend = float(self.APinputend)
                 # calculated distance moved per step
-                StepperSetup.APstepdistance = (flAPinputend - flAPinput) / calsteps
+                StepperSetup.APstepdistance = (flAPinputend - flAPinput) / calibrationsteps
 
                 # write values to file
                 calibratetemp = [StepperSetup.APstepdistance, StepperSetup.MVstepdistance, StepperSetup.DVstepdistance]
@@ -199,7 +206,7 @@ class StepperSetup:
                 flMVinput = float(self.MVinput)
                 flMVinputend = float(self.MVinputend)
                 # calculated distance moved per step
-                StepperSetup.MVstepdistance = (flMVinputend - flMVinput) / calsteps
+                StepperSetup.MVstepdistance = (flMVinputend - flMVinput) / calibrationsteps
 
                 # write values to file
                 calibratetemp = [StepperSetup.APstepdistance, StepperSetup.MVstepdistance, StepperSetup.DVstepdistance]
@@ -227,7 +234,7 @@ class StepperSetup:
                 flDVinput = float(self.DVinput)
                 flDVinputend = float(self.DVinputend)
                 # calculated distance moved per step
-                StepperSetup.DVstepdistance = (flDVinput - flDVinputend) / calsteps
+                StepperSetup.DVstepdistance = (flDVinput - flDVinputend) / calibrationsteps
 
                 # write values to file
                 calibratetemp = [StepperSetup.APstepdistance, StepperSetup.MVstepdistance, StepperSetup.DVstepdistance]
