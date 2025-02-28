@@ -10,10 +10,25 @@ keepalive = True
 
 #Variables that may need tweaking
 calibrationsteps = 4000
-backoff = 20
+backoff = 150
+
+#OFFSETS FOR THE DRILL, Syringe, Needle
+APDRILL = 0
+MVDRILL = 0
+DVDRILL = -1333
+
+APfiber = 0
+MVfiber = 0
+DVfiber = 0
+
+APneedle = 0
+MVneedle = 0
+DVneedle = 0
+
 
 #DEFINE NUMBER OF BUTTONS AND ORDER IN ARRAY
 buttonarray = ['movefast','moveslow','buttontohome','relativeALL','relativeAP','relativeMV','relativeDV','buttonaction','miscbuttonC','miscbuttonD','miscbuttonE','zerobutton','calibratebutton','miscbuttonA','miscbuttonB']
+lastbuttonstate = [len(buttonarray)]
 
 #BUTTON POSITION IN SHIFT REGISTER ARRAY
     # 2 position switch (3 states 1/2 and all off)
@@ -110,6 +125,7 @@ shiftvalues = []
 laststate = []
 quest = ""
 
+
 #INITIALIZE STEPPERS
 
 APmove = StepperSetup(enableAll,stepAP,directionAP,limitAP,1,APforward,APback)
@@ -120,6 +136,7 @@ DVmove = StepperSetup(enableAll,stepDV,directionDV,limitDV,3,DVup,DVdown)
 APmove.receive_instance(APmove)
 MVmove.receive_instance(MVmove)
 DVmove.receive_instance(DVmove)
+
 
 
 def getshiftregisterdata():
@@ -140,27 +157,6 @@ def getshiftregisterdata():
         time.sleep(0.01)
     return shiftvalues
 
-#######NEEEDS WORK#########################################
-def laststatebuttonvalues_init():
-
-    x = len(buttonarray)
-    for i in range(x):
-        laststate[i] = 0
-    return laststate
-
-#######NEEEDS WORK#########################################
-def buttonvalues(self, lastbut, newbut, butarr):
-    self.lastbuttemp = lastbut
-    x = len(lastbut)
-
-    for i in range(x):
-        if lastbut[i] != newbut[i]:
-            self.lastbuttemp[i] = newbut[i]
-            print("button ", buttonarray[i], " state change")
-            if lastbut[i] == movefast:
-                ######REST OF BUTTONS
-    return self.lastbuttemp
-
 
 #Shuts down steppers regardless of what they were doing direction - restart by re-zeroing
 def emergencystop(event):
@@ -178,9 +174,9 @@ def emergencystop(event):
 def AP_event(event): 
  
     if event == RotaryEncoder.CLOCKWISE:
-        APmove.steppgo(APforward,stepper_speed)
+        APmove.steppgo(APforward,stepper_speed,StepperSetup.btnSteps)
     elif event == RotaryEncoder.ANTICLOCKWISE:
-        APmove.steppgo(APback,stepper_speed)
+        APmove.steppgo(APback,stepper_speed,StepperSetup.btnSteps)
     #This is a hard wired button note the encoder switch
     elif event == RotaryEncoder.BUTTONDOWN:
         emergencystop(event)
@@ -193,9 +189,9 @@ def AP_event(event):
 def MV_event(event):
     
     if event == RotaryEncoder.CLOCKWISE:
-        MVmove.steppgo(MVright,stepper_speed)
+        MVmove.steppgo(MVright,stepper_speed,StepperSetup.btnSteps)
     elif event == RotaryEncoder.ANTICLOCKWISE:
-        MVmove.steppgo(MVleft,stepper_speed)
+        MVmove.steppgo(MVleft,stepper_speed,StepperSetup.btnSteps)
     elif event == RotaryEncoder.BUTTONDOWN:
         print("event button B clicked")
         return  
@@ -208,9 +204,9 @@ def MV_event(event):
 def DV_event(event):
 
     if event == RotaryEncoder.CLOCKWISE:
-        DVmove.steppgo(DVdown,stepper_speed)
+        DVmove.steppgo(DVdown,stepper_speed,StepperSetup.btnSteps)
     elif event == RotaryEncoder.ANTICLOCKWISE:
-        DVmove.steppgo(DVup,stepper_speed)
+        DVmove.steppgo(DVup,stepper_speed,StepperSetup.btnSteps)
     elif event == RotaryEncoder.BUTTONDOWN:
         print("event button B clicked")
         return  
@@ -224,6 +220,195 @@ MVroto = RotaryEncoder(rotoA_MV,rotoB_MV,misc_eventbuttonA,MV_event)
 DVroto = RotaryEncoder(rotoA_DV,rotoB_DV,misc_eventbuttonB,DV_event)
 
 
+def buttonvalues(lastbut, newbut, butarr):
+
+    x = len(lastbut)
+
+    for i in range(x):
+        if lastbut[i] != newbut[i]:
+            lastbut[i] = newbut[i]
+            print("button ", butarr[i], " state change")
+
+    # stepper_speed (pos 0 and pos 1)
+    if lastbut[0] == 1 and lastbut[1] == 1:
+        stepper_speed = normalspeed
+    elif lastbuttonstate[0] == 0 and lastbut[1] == 1:
+        stepper_speed = fastspeed
+    elif lastbut[0] == 1 and lastbut[1] == 0:
+        stepper_speed = finespeed
+
+    #button to home to zero
+    if lastbut[2] == 0:
+
+        for x in range(StepperSetup.DVsteps):
+            DVmove.steppgo(DVup, 1,StepperSetup.btnSteps)
+        for x in range(StepperSetup.MVsteps):
+            MVmove.steppgo(MVleft, 1,StepperSetup.btnSteps)
+        for x in range(StepperSetup.APsteps):
+            APmove.steppgo(APback,1,StepperSetup.btnSteps)
+
+        return lastbut
+
+    #set relative zero
+    if lastbut[3] == 0:
+        StepperSetup.APrelpos = StepperSetup.APsteps
+        StepperSetup.MVrelpos = StepperSetup.MVsteps
+        StepperSetup.DVrelpos = StepperSetup.DVsteps
+        APmove.PosRelAbsCalc()
+        MVmove.PosRelAbsCalc()
+        DVmove.PosRelAbsCalc()
+    #set only AP relative zero
+    if lastbut[4] == 0:
+        StepperSetup.APrelpos = StepperSetup.APsteps
+        APmove.PosRelAbsCalc()
+    # set only AP relative zero
+    if lastbut[5] == 0:
+        StepperSetup.MVrelpos = StepperSetup.MVsteps
+        MVmove.PosRelAbsCalc()
+    # set only AP relative zero
+    if lastbut[6] == 0:
+        StepperSetup.DVrelpos = StepperSetup.DVsteps
+        DVmove.PosRelAbsCalc()
+
+    #button action - unused
+    #if lastbut[7] == 0:
+
+    #miscbuttonC - DRILL ZERO
+    if lastbut[8] == 0:
+        if StepperSetup.DVsteps < (StepperSetup.DVrelpos + DVDRILL):
+            shiftdistance = (StepperSetup.DVrelpos + DVDRILL) - StepperSetup.DVsteps
+            for x in range(shiftdistance):
+                DVmove.steppgo(DVdown,finespeed,StepperSetup.btnSteps)
+        elif StepperSetup.DVsteps > (StepperSetup.DVrelpos + DVDRILL):
+            shiftdistance = StepperSetup.DVsteps - (StepperSetup.DVrelpos + DVDRILL)
+            for x in range(shiftdistance):
+                DVmove.steppgo(DVup, finespeed, StepperSetup.btnSteps)
+
+        if StepperSetup.MVsteps < (StepperSetup.MVrelpos + MVDRILL):
+            shiftdistance = (StepperSetup.MVrelpos + DVDRILL) - StepperSetup.MVsteps
+            for x in range(shiftdistance):
+                MVmove.steppgo(MVright,finespeed,StepperSetup.btnSteps)
+        elif StepperSetup.MVsteps > (StepperSetup.DVrelpos + MVDRILL):
+            shiftdistance = StepperSetup.MVsteps - (StepperSetup.MVrelpos + MVDRILL)
+            for x in range(shiftdistance):
+                MVmove.steppgo(MVleft, finespeed, StepperSetup.btnSteps)
+
+        if StepperSetup.APsteps < (StepperSetup.APrelpos + APDRILL):
+            shiftdistance = (StepperSetup.APrelpos + APDRILL) - StepperSetup.APsteps
+            for x in range(shiftdistance):
+                APmove.steppgo(APforward,finespeed,StepperSetup.btnSteps)
+        elif StepperSetup.APsteps > (StepperSetup.APrelpos + APDRILL):
+            shiftdistance = StepperSetup.APsteps - (StepperSetup.APrelpos + APDRILL)
+            for x in range(shiftdistance):
+                APmove.steppgo(APback, finespeed, StepperSetup.btnSteps)
+
+    #miscbuttonD - needle offset
+    if lastbut[9] == 0:
+        if StepperSetup.DVsteps < (StepperSetup.DVrelpos + DVneedle):
+            shiftdistance = (StepperSetup.DVrelpos + DVneedle) - StepperSetup.DVsteps
+            for x in range(shiftdistance):
+                DVmove.steppgo(DVdown,finespeed,StepperSetup.btnSteps)
+        elif StepperSetup.DVsteps > (StepperSetup.DVrelpos + DVneedle):
+            shiftdistance = StepperSetup.DVsteps - (StepperSetup.DVrelpos + DVneedle)
+            for x in range(shiftdistance):
+                DVmove.steppgo(DVup, finespeed, StepperSetup.btnSteps)
+
+        if StepperSetup.MVsteps < (StepperSetup.MVrelpos + MVneedle):
+            shiftdistance = (StepperSetup.MVrelpos + MVneedle) - StepperSetup.MVsteps
+            for x in range(shiftdistance):
+                MVmove.steppgo(MVright,finespeed,StepperSetup.btnSteps)
+        elif StepperSetup.MVsteps > (StepperSetup.DVrelpos + MVneedle):
+            shiftdistance = StepperSetup.MVsteps - (StepperSetup.MVrelpos + MVneedle)
+            for x in range(shiftdistance):
+                MVmove.steppgo(MVleft, finespeed, StepperSetup.btnSteps)
+
+        if StepperSetup.APsteps < (StepperSetup.APrelpos + APneedle):
+            shiftdistance = (StepperSetup.APrelpos + APneedle) - StepperSetup.APsteps
+            for x in range(shiftdistance):
+                APmove.steppgo(APforward,finespeed,StepperSetup.btnSteps)
+        elif StepperSetup.APsteps > (StepperSetup.APrelpos + APneedle):
+            shiftdistance = StepperSetup.APsteps - (StepperSetup.APrelpos + APneedle)
+            for x in range(shiftdistance):
+                APmove.steppgo(APback, finespeed, StepperSetup.btnSteps)
+
+
+    #miscbuttonE - fiber probe offset
+    if lastbut[10] == 0:
+        if StepperSetup.DVsteps < (StepperSetup.DVrelpos + DVfiber):
+            shiftdistance = (StepperSetup.DVrelpos + DVfiber) - StepperSetup.DVsteps
+            for x in range(shiftdistance):
+                DVmove.steppgo(DVdown,finespeed,StepperSetup.btnSteps)
+        elif StepperSetup.DVsteps > (StepperSetup.DVrelpos + DVfiber):
+            shiftdistance = StepperSetup.DVsteps - (StepperSetup.DVrelpos + DVfiber)
+            for x in range(shiftdistance):
+                DVmove.steppgo(DVup, finespeed, StepperSetup.btnSteps)
+
+        if StepperSetup.MVsteps < (StepperSetup.MVrelpos + MVfiber):
+            shiftdistance = (StepperSetup.MVrelpos + MVfiber) - StepperSetup.MVsteps
+            for x in range(shiftdistance):
+                MVmove.steppgo(MVright,finespeed,StepperSetup.btnSteps)
+        elif StepperSetup.MVsteps > (StepperSetup.DVrelpos + MVfiber):
+            shiftdistance = StepperSetup.MVsteps - (StepperSetup.MVrelpos + MVfiber)
+            for x in range(shiftdistance):
+                MVmove.steppgo(MVleft, finespeed, StepperSetup.btnSteps)
+
+        if StepperSetup.APsteps < (StepperSetup.APrelpos + APfiber):
+            shiftdistance = (StepperSetup.APrelpos + APfiber) - StepperSetup.APsteps
+            for x in range(shiftdistance):
+                APmove.steppgo(APforward,finespeed,StepperSetup.btnSteps)
+        elif StepperSetup.APsteps > (StepperSetup.APrelpos + APfiber):
+            shiftdistance = StepperSetup.APsteps - (StepperSetup.APrelpos + APfiber)
+            for x in range(shiftdistance):
+                APmove.steppgo(APback, finespeed, StepperSetup.btnSteps)
+
+    #zero to bregma (relative) but up ~10mm (relative home)
+    if lastbut[11] == 0:
+        for x in range(1333):
+            DVmove.steppgo(DVup,finespeed,StepperSetup.btnSteps)
+
+        if StepperSetup.APrelpos > StepperSetup.APsteps:
+            APdiff = StepperSetup.APrelpos - StepperSetup.APsteps
+            for x in range(APdiff):
+                APmove.steppgo(APforward, finespeed, StepperSetup.btnSteps)
+        else:
+            APdiff = StepperSetup.APsteps - StepperSetup.APrelpos
+            for x in range(APdiff):
+                APmove.steppgo(APback, finespeed, StepperSetup.btnSteps)
+
+        if StepperSetup.MVrelpos > StepperSetup.MVsteps:
+            MVdiff = StepperSetup.MVrelpos - StepperSetup.MVsteps
+            for x in range(MVdiff):
+                MVmove.steppgo(MVright, finespeed, StepperSetup.btnSteps)
+        else:
+            MVdiff = StepperSetup.MVsteps - StepperSetup.MVrelpos
+            for x in range(MVdiff):
+                MVmove.steppgo(MVleft, finespeed, StepperSetup.btnSteps)
+
+        print("That's bregma G!")
+
+    #re-calibrate button
+    if lastbut[12] == 0:
+
+        print("Let us re-calibrate this biz-E-ness")
+        for x in range(StepperSetup.DVsteps):
+            DVmove.steppgo(DVup, finespeed, StepperSetup.btnSteps)
+        for x in range(StepperSetup.MVsteps):
+            MVmove.steppgo(MVleft, finespeed, StepperSetup.btnSteps)
+        for x in range(StepperSetup.APsteps):
+            APmove.steppgo(APback, finespeed, StepperSetup.btnSteps)
+
+        APmove.CalibrateDistance(calibrationsteps, backoff, StepperSetup.btnSteps)
+        MVmove.CalibrateDistance(calibrationsteps, backoff, StepperSetup.btnSteps)
+        DVmove.CalibrateDistance(calibrationsteps, backoff, StepperSetup.btnSteps)
+
+    #miscbuttonA - unused
+    #if lastbut[13] == 0:
+    #miscbuttonB - unused
+    # if lastbut[14] == 0:
+
+    return lastbut
+
+
 #MAIN CODE ################################################################################################
 
 #question and waits for ANY user input
@@ -231,57 +416,30 @@ quest = input("Initialization Process ... anykey to continue.")
 quest = input("CAUTION...Remove all attachments from frame arms! anykey to continue.")
 
 #Zero steppers
-DVmove.zerostep(backoff)
-APmove.zerostep(backoff)
-MVmove.zerostep(backoff)
+DVmove.zerostep(backoff,StepperSetup.btnSteps)
+APmove.zerostep(backoff,StepperSetup.btnSteps)
+MVmove.zerostep(backoff,StepperSetup.btnSteps)
 
 #calibration routine
-APmove.CalibrateDistance(calibrationsteps,backoff)
-MVmove.CalibrateDistance(calibrationsteps,backoff)
-DVmove.CalibrateDistance(calibrationsteps,backoff)
+APmove.CalibrateDistance(calibrationsteps,backoff,StepperSetup.btnSteps)
+MVmove.CalibrateDistance(calibrationsteps,backoff,StepperSetup.btnSteps)
+DVmove.CalibrateDistance(calibrationsteps,backoff,StepperSetup.btnSteps)
 
 while keepalive:
 
-# INITIALIZE BUTTON STATE +++++++++++++++++++needs work
-lastbuttonstate = laststatebuttonvalues_init()
-#######NEEDS WORK = MOVE TO CLASS and fucntion or just function?
-    #button settings
+    #reading the buttons
     newbuttonstate = getshiftregisterdata()
     lastbuttonstate = buttonvalues(lastbuttonstate,newbuttonstate,buttonarray)
 
-    #stepper_speed
-    if lastbuttonstate[0] == 1 and lastbuttonstate[1] == 1:
-        stepper_speed = normalspeed
-    elif lastbuttonstate[0] == 0 and lastbuttonstate[1] == 1:
-        stepper_speed = fastspeed
-    elif lastbuttonstate[0] == 1 and lastbuttonstate[1] == 0:
-        stepper_speed = finespeed
-    #homebutton
-    if lastbuttonstate[2] == 0:
-        if APsteps > 0:
-            StepperSetup.DVsteps = DVmove.zerostep(DVup, DVsteps,0)
-        else:
-            StepperSetup.DVsteps = DVmove.zerostep(DVdown, DVsteps, 0)
-        if MVsteps > 0:
-            StepperSetup.APsteps = MVmove.zerostep(APback, APsteps,0)
-        else:
-            StepperSetup.APsteps = APmove.zerostep(APforward, APsteps, 0)
-        if MVsteps > 0:
-            StepperSetup.MVsteps = MVmove.zerostep(MVleft, MVsteps, 0)
-        else:
-            StepperSetup.MVsteps = MVmove.zerostep(MVright, MVsteps, 0)
 
+#List to include:
+#syncs and loads a txt file from onedrive with a list of locations:
+    #format   Left mPFC 3.2 -0.5 10 and puts them in a dropdown list
+    #select the location (mouse in list?)
+    #goto using the a clickable button - use once then clears so it cant be hit 2x
 
+#can enter the coordinates manually and goto with a button click
 
+# I have 2 hard wired buttons I can use
+# I have 3 shift register buttons that can be used.
 
-need to figure out way to report distance every time a step is made
-need to check buttons 
-
-relative abs position
-relative zreo
-home
-calibrate
-button to save location
-button to scroll through list of targets and action button
-
-import target list ---- use rclone to pull list file.

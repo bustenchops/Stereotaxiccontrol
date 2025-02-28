@@ -19,3 +19,8 @@ class sentohere:
 
     def runfromout(self):
         self.iliketo.moveit()
+
+    def randomprint(self):
+        print("this is so radom")
+
+    sentohere.randomprint()

@@ -4,13 +4,19 @@ import time
 
 class StepperSetup:
 
+    btnSteps = 0.0001
+
     APsteps = 0
     MVsteps = 0
     DVsteps = 0
 
-    APstepdistance = float(0.000625)
-    MVstepdistance = float(0.00075)
-    DVstepdistance = float(0.00075)
+    APrelpos = 0
+    MVrelpos = 0
+    DVrelpos = 0
+
+    APstepdistance = float(0.00625)
+    MVstepdistance = float(0.0075)
+    DVstepdistance = float(0.0075)
 
     APcurABSdist = float(0)
     MVcurABSdist = float(0)
@@ -62,7 +68,7 @@ class StepperSetup:
         self.iliketomoveit = maininstance
 
 
-    def steppgo(self,move_direction,speed):
+    def steppgo(self,move_direction,speed,btwnsteps):
 
         self.stepmodifier = 0
 
@@ -71,11 +77,11 @@ class StepperSetup:
                 GPIO.output(self.enable,1)
                 GPIO.output(self.direction,move_direction)
                 GPIO.output(self.step, 1)
-                time.sleep(0.0001)
+                time.sleep(btwnsteps)
                 GPIO.output(self.step, 0)
-                time.sleep(0.0001)
+                time.sleep(btwnsteps)
 
-                if spindir == 1:
+                if move_direction == 1:
                     self.stepmodifier = 1
                 else:
                     self.stepmodifier = -1
@@ -86,16 +92,16 @@ class StepperSetup:
                     StepperSetup.MVsteps += self.stepmodifier
                 elif self.axis == 3:
                     StepperSetup.DVsteps += self.stepmodifier
-
+                self.iliketomoveit.PosRelAbsCalc()
             else:
                 print("ERROR - limit reached")
 
 
-    def zerostep(self,backoff):
+    def zerostep(self,backoff,btwnsteps):
 
         GPIO.output(self.enable,1)
         while GPIO.input(self.limit):
-            self.steppgo(0,1)
+            self.steppgo(0,1,btwnsteps)
             if self.axis == 1:
                 StepperSetup.APsteps -= 1
             elif self.axis == 2:
@@ -107,9 +113,9 @@ class StepperSetup:
             GPIO.output(self.enable, 1)
             GPIO.output(self.direction, 1)
             GPIO.output(self.step, 1)
-            time.sleep(0.0001)
+            time.sleep(btwnsteps)
             GPIO.output(self.step, 0)
-            time.sleep(0.0001)
+            time.sleep(btwnsteps)
 
             if self.axis == 1:
                 StepperSetup.APsteps += 1
@@ -129,9 +135,9 @@ class StepperSetup:
             StepperSetup.DVsteps = 0
 
         print(f"Zeroed: APsteps: {StepperSetup.APsteps} MVsteps: {StepperSetup.MVsteps} DVsteps {StepperSetup.DVsteps}")
+        self.iliketomoveit.PosRelAbsCalc()
 
-
-    def CalibrateDistance(self, calibrationsteps, rollback):
+    def CalibrateDistance(self, calibrationsteps, rollback,btwnSteps):
 
         self.calibratetemp = []
         file_name = 'calibration.txt'
@@ -171,7 +177,7 @@ class StepperSetup:
 
                 for x in range(calibrationsteps):
                     if 0 < StepperSetup.APsteps < 6000:
-                        self.iliketomoveit.steppgo(self.goplus, 1)
+                        self.iliketomoveit.steppgo(self.goplus, 1,btwnSteps)
 
                 self.APinputend = input("Enter the AP final position in millimeters.")
                 # converted to float values
@@ -197,9 +203,9 @@ class StepperSetup:
             elif self.axis == 2:
                 self.MVinput = input("Enter the MV starting position in millimeters.")
 
-                for x in range(calsteps):
+                for x in range(calibrationsteps):
                     if 0 < StepperSetup.MVsteps < 6000:
-                        self.iliketomoveit.steppgo(self.goplus, 1)
+                        self.iliketomoveit.steppgo(self.goplus, 1,btwnSteps)
 
                 self.MVinputend = input("Enter the MV final position in millimeters.")
                 # converted to float values
@@ -225,9 +231,9 @@ class StepperSetup:
             elif self.axis == 3:
                 self.DVinput = input("Enter the DV starting position in millimeters.")
 
-                for x in range(calsteps):
+                for x in range(calibrationsteps):
                     if 0 < StepperSetup.DVsteps < 6000:
-                        self.iliketomoveit.steppgo(self.gominus, 1)
+                        self.iliketomoveit.steppgo(self.gominus, 1,btwnSteps)
 
                 self.DVinputend = input("Enter the DV final position in millimeters.")
                 # converted to float values
@@ -254,27 +260,6 @@ class StepperSetup:
             self.iliketomoveit.zerostep(rollback)
 
 
-    def hometo(self,spindir,curstep,stepto):
-        self.cursteps = curstep
-        if self.cursteps > stepto:
-            while self.cursteps > stepto:
-                if GPIO.input(self.limit):
-                    self.steppgo(spindir,1)
-                    self.cursteps -= 1
-                else:
-                    print("ERROR - limit reached")
-            
-            return self.cursteps
-        
-        else:
-            while self.cursteps < stepto:
-                if GPIO.input(self.limit):
-                    self.steppgo(spindir,1)
-                    self.cursteps += 1
-            
-            return self.cursteps
-
-
     def PosRelAbsCalc(self):
 
         StepperSetup.APcurRELdist = round(((StepperSetup.APsteps - StepperSetup.APrelpos) * StepperSetup.APstepdistance), 4)
@@ -284,3 +269,6 @@ class StepperSetup:
         StepperSetup.APcurABSdist = round((StepperSetup.APsteps * StepperSetup.APstepdistance), 4)
         StepperSetup.MVcurABSdist = round((StepperSetup.MVsteps * StepperSetup.MVstepdistance), 4)
         StepperSetup.DVcurABSdist = round((StepperSetup.MVsteps * StepperSetup.DVstepdistance), 4)
+
+        print(f"Absolute position-|AP: {StepperSetup.APcurABSdist} | MV: {StepperSetup.MVcurABSdist} | DV: {StepperSetup.DVcurABSdist}")
+        print(f"Relative position-|AP: {StepperSetup.APcurRELdist} | MV: {StepperSetup.MVcurRELdist} | DV: {StepperSetup.DVcurRELdist}")
