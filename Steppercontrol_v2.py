@@ -12,7 +12,7 @@ keepalive = True
 calibrationsteps = 4000
 backoff = 150
 
-#OFFSETS FOR THE DRILL, Syringe, Needle
+#OFFSETS FOR THE DRILL, Syringe, Needle (minus values is back, left or up)
 APDRILL = 0
 MVDRILL = 0
 DVDRILL = -1333
@@ -91,10 +91,10 @@ rotoB_MV = 20
 rotoA_DV = 22
 rotoB_DV = 23
 
-#Relative Offset variables
-APrelOffset = 0
-MVrelOffset = 0
-DVrelOffset= 0
+#Relative Offset variables --> unused
+# APrelOffset = 0
+# MVrelOffset = 0
+# DVrelOffset= 0
 
 #DEFINE STEPPER DIRECTIONS
 APback = 0
@@ -123,7 +123,7 @@ GPIO.setup(emergstop, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 #EMPTY variables to initialize
 shiftvalues = []
 laststate = []
-quest = ""
+quest = "none"
 
 
 #INITIALIZE STEPPERS
@@ -237,7 +237,7 @@ def buttonvalues(lastbut, newbut, butarr):
     elif lastbut[0] == 1 and lastbut[1] == 0:
         stepper_speed = finespeed
 
-    #button to home to zero
+    #button to home to ABS zero
     if lastbut[2] == 0:
 
         for x in range(StepperSetup.DVsteps):
@@ -247,45 +247,74 @@ def buttonvalues(lastbut, newbut, butarr):
         for x in range(StepperSetup.APsteps):
             APmove.steppgo(APback,1,StepperSetup.btnSteps)
 
-        return lastbut
-
-    #set relative zero
+    #set relative zero for ALL
     if lastbut[3] == 0:
         StepperSetup.APrelpos = StepperSetup.APsteps
         StepperSetup.MVrelpos = StepperSetup.MVsteps
         StepperSetup.DVrelpos = StepperSetup.DVsteps
+        APinitREL_holdvalue = StepperSetup.APsteps
+        MVinitREL_holdvalue = StepperSetup.MVsteps
+        DVinitREL_holdvalue = StepperSetup.DVsteps
+
         APmove.PosRelAbsCalc()
         MVmove.PosRelAbsCalc()
         DVmove.PosRelAbsCalc()
     #set only AP relative zero
     if lastbut[4] == 0:
         StepperSetup.APrelpos = StepperSetup.APsteps
+        APinitREL_holdvalue = StepperSetup.APsteps
         APmove.PosRelAbsCalc()
-    # set only AP relative zero
+    # set only MV relative zero
     if lastbut[5] == 0:
         StepperSetup.MVrelpos = StepperSetup.MVsteps
+        MVinitREL_holdvalue = StepperSetup.MVsteps
         MVmove.PosRelAbsCalc()
-    # set only AP relative zero
+    # set only DV relative zero
     if lastbut[6] == 0:
         StepperSetup.DVrelpos = StepperSetup.DVsteps
+        StepperSetup.DVinitREL_holdvalue = StepperSetup.DVsteps
         DVmove.PosRelAbsCalc()
 
-    #button action - unused
-    #if lastbut[7] == 0:
+    #button action - Home to Rel zero for AP and MV BUT DV goes all up
+    if lastbut[7] == 0:
+      for x in range(StepperSetup.DVsteps):
+          DVmove.steppgo(DVup,finespeed,StepperSetup.btnSteps)
 
-    #miscbuttonC - DRILL ZERO
+      if StepperSetup.MVsteps < StepperSetup.MVrelpos:
+          shiftdistance = StepperSetup.MVrelpos - StepperSetup.MVsteps
+          for x in range(shiftdistance):
+              MVmove.steppgo(MVright, finespeed, StepperSetup.btnSteps)
+      elif StepperSetup.MVsteps > StepperSetup.DVrelpos:
+          shiftdistance = StepperSetup.MVsteps - StepperSetup.MVrelpos
+          for x in range(shiftdistance):
+              MVmove.steppgo(MVleft, finespeed, StepperSetup.btnSteps)
+
+      if StepperSetup.APsteps < StepperSetup.APrelpos:
+          shiftdistance = StepperSetup.APrelpos- StepperSetup.APsteps
+          for x in range(shiftdistance):
+              APmove.steppgo(APforward, finespeed, StepperSetup.btnSteps)
+      elif StepperSetup.APsteps > StepperSetup.APrelpos:
+          shiftdistance = StepperSetup.APsteps - StepperSetup.APrelpos
+          for x in range(shiftdistance):
+              APmove.steppgo(APback, finespeed, StepperSetup.btnSteps)
+
+
+    #miscbuttonC - DRILL to relative zero for AP and MV BUT DV homed ABS zero but still sets the relative pos
     if lastbut[8] == 0:
-        if StepperSetup.DVsteps < (StepperSetup.DVrelpos + DVDRILL):
-            shiftdistance = (StepperSetup.DVrelpos + DVDRILL) - StepperSetup.DVsteps
-            for x in range(shiftdistance):
-                DVmove.steppgo(DVdown,finespeed,StepperSetup.btnSteps)
-        elif StepperSetup.DVsteps > (StepperSetup.DVrelpos + DVDRILL):
-            shiftdistance = StepperSetup.DVsteps - (StepperSetup.DVrelpos + DVDRILL)
-            for x in range(shiftdistance):
-                DVmove.steppgo(DVup, finespeed, StepperSetup.btnSteps)
+        StepperSetup.APrelpos = APinitREL_holdvalue
+        StepperSetup.MVrelpos = MVinitREL_holdvalue
+        StepperSetup.DVrelpos = DVinitREL_holdvalue
 
+#        if StepperSetup.DVsteps < (StepperSetup.DVrelpos + DVDRILL):
+#            shiftdistance = (StepperSetup.DVrelpos + DVDRILL) - StepperSetup.DVsteps
+        for x in range(StepperSetup.DVsteps):
+#                DVmove.steppgo(DVdown,finespeed,StepperSetup.btnSteps)
+#        elif StepperSetup.DVsteps > (StepperSetup.DVrelpos + DVDRILL):
+#            shiftdistance = StepperSetup.DVsteps - (StepperSetup.DVrelpos + DVDRILL)
+#            for x in range(shiftdistance):
+            DVmove.steppgo(DVup, finespeed, StepperSetup.btnSteps)
         if StepperSetup.MVsteps < (StepperSetup.MVrelpos + MVDRILL):
-            shiftdistance = (StepperSetup.MVrelpos + DVDRILL) - StepperSetup.MVsteps
+            shiftdistance = (StepperSetup.MVrelpos + MVDRILL) - StepperSetup.MVsteps
             for x in range(shiftdistance):
                 MVmove.steppgo(MVright,finespeed,StepperSetup.btnSteps)
         elif StepperSetup.MVsteps > (StepperSetup.DVrelpos + MVDRILL):
@@ -302,17 +331,17 @@ def buttonvalues(lastbut, newbut, butarr):
             for x in range(shiftdistance):
                 APmove.steppgo(APback, finespeed, StepperSetup.btnSteps)
 
-    #miscbuttonD - needle offset
+    #miscbuttonD - needle to relative zero for AP and MV BUT DV homed ABS zero but still sets the relative pos
     if lastbut[9] == 0:
-        if StepperSetup.DVsteps < (StepperSetup.DVrelpos + DVneedle):
-            shiftdistance = (StepperSetup.DVrelpos + DVneedle) - StepperSetup.DVsteps
-            for x in range(shiftdistance):
-                DVmove.steppgo(DVdown,finespeed,StepperSetup.btnSteps)
-        elif StepperSetup.DVsteps > (StepperSetup.DVrelpos + DVneedle):
-            shiftdistance = StepperSetup.DVsteps - (StepperSetup.DVrelpos + DVneedle)
-            for x in range(shiftdistance):
-                DVmove.steppgo(DVup, finespeed, StepperSetup.btnSteps)
-
+#        if StepperSetup.DVsteps < (StepperSetup.DVrelpos + DVneedle):
+#            shiftdistance = (StepperSetup.DVrelpos + DVneedle) - StepperSetup.DVsteps
+        for x in range(StepperSetup.DVsteps):
+#            DVmove.steppgo(DVdown,finespeed,StepperSetup.btnSteps)
+#        elif StepperSetup.DVsteps > (StepperSetup.DVrelpos + DVneedle):
+#            shiftdistance = StepperSetup.DVsteps - (StepperSetup.DVrelpos + DVneedle)
+#            for x in range(shiftdistance):
+            DVmove.steppgo(DVup, finespeed, StepperSetup.btnSteps)
+        StepperSetup.DVrelpos = StepperSetup.DVrelpos + DVneedle
         if StepperSetup.MVsteps < (StepperSetup.MVrelpos + MVneedle):
             shiftdistance = (StepperSetup.MVrelpos + MVneedle) - StepperSetup.MVsteps
             for x in range(shiftdistance):
@@ -321,6 +350,7 @@ def buttonvalues(lastbut, newbut, butarr):
             shiftdistance = StepperSetup.MVsteps - (StepperSetup.MVrelpos + MVneedle)
             for x in range(shiftdistance):
                 MVmove.steppgo(MVleft, finespeed, StepperSetup.btnSteps)
+        StepperSetup.MVrelpos = StepperSetup.MVsteps + MVneedle
 
         if StepperSetup.APsteps < (StepperSetup.APrelpos + APneedle):
             shiftdistance = (StepperSetup.APrelpos + APneedle) - StepperSetup.APsteps
@@ -330,19 +360,20 @@ def buttonvalues(lastbut, newbut, butarr):
             shiftdistance = StepperSetup.APsteps - (StepperSetup.APrelpos + APneedle)
             for x in range(shiftdistance):
                 APmove.steppgo(APback, finespeed, StepperSetup.btnSteps)
+        StepperSetup.APrelpos = StepperSetup.APsteps + APneedle
 
 
-    #miscbuttonE - fiber probe offset
+    #miscbuttonE - fiber to relative zero for AP and MV BUT DV homed ABS zero but still sets the relative pos
     if lastbut[10] == 0:
-        if StepperSetup.DVsteps < (StepperSetup.DVrelpos + DVfiber):
-            shiftdistance = (StepperSetup.DVrelpos + DVfiber) - StepperSetup.DVsteps
-            for x in range(shiftdistance):
-                DVmove.steppgo(DVdown,finespeed,StepperSetup.btnSteps)
-        elif StepperSetup.DVsteps > (StepperSetup.DVrelpos + DVfiber):
-            shiftdistance = StepperSetup.DVsteps - (StepperSetup.DVrelpos + DVfiber)
-            for x in range(shiftdistance):
-                DVmove.steppgo(DVup, finespeed, StepperSetup.btnSteps)
-
+#        if StepperSetup.DVsteps < (StepperSetup.DVrelpos + DVfiber):
+#            shiftdistance = (StepperSetup.DVrelpos + DVfiber) - StepperSetup.DVsteps
+        for x in range(StepperSetup.DVsteps):
+#                DVmove.steppgo(DVdown,finespeed,StepperSetup.btnSteps)
+#        elif StepperSetup.DVsteps > (StepperSetup.DVrelpos + DVfiber):
+#            shiftdistance = StepperSetup.DVsteps - (StepperSetup.DVrelpos + DVfiber)
+#            for x in range(shiftdistance):
+            DVmove.steppgo(DVup, finespeed, StepperSetup.btnSteps)
+        StepperSetup.DVrelpos = StepperSetup.DVsteps + DVfiber
         if StepperSetup.MVsteps < (StepperSetup.MVrelpos + MVfiber):
             shiftdistance = (StepperSetup.MVrelpos + MVfiber) - StepperSetup.MVsteps
             for x in range(shiftdistance):
@@ -351,7 +382,7 @@ def buttonvalues(lastbut, newbut, butarr):
             shiftdistance = StepperSetup.MVsteps - (StepperSetup.MVrelpos + MVfiber)
             for x in range(shiftdistance):
                 MVmove.steppgo(MVleft, finespeed, StepperSetup.btnSteps)
-
+        StepperSetup.MVrelpos = StepperSetup.MVsteps + MVfiber
         if StepperSetup.APsteps < (StepperSetup.APrelpos + APfiber):
             shiftdistance = (StepperSetup.APrelpos + APfiber) - StepperSetup.APsteps
             for x in range(shiftdistance):
@@ -360,6 +391,7 @@ def buttonvalues(lastbut, newbut, butarr):
             shiftdistance = StepperSetup.APsteps - (StepperSetup.APrelpos + APfiber)
             for x in range(shiftdistance):
                 APmove.steppgo(APback, finespeed, StepperSetup.btnSteps)
+        StepperSetup.APrelpos = StepperSetup.APsteps + APfiber
 
     #zero to bregma (relative) but up ~10mm (relative home)
     if lastbut[11] == 0:

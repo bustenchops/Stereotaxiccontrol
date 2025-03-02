@@ -14,6 +14,10 @@ class StepperSetup:
     MVrelpos = 0
     DVrelpos = 0
 
+    DVinitREL_holdvalue = 0
+    MVinitREL_holdvalue = 0
+    APinitREL_holdvalue = 0
+
     APstepdistance = float(0.00625)
     MVstepdistance = float(0.0075)
     DVstepdistance = float(0.0075)
@@ -136,6 +140,7 @@ class StepperSetup:
 
         print(f"Zeroed: APsteps: {StepperSetup.APsteps} MVsteps: {StepperSetup.MVsteps} DVsteps {StepperSetup.DVsteps}")
         self.iliketomoveit.PosRelAbsCalc()
+
 
     def CalibrateDistance(self, calibrationsteps, rollback,btwnSteps):
 
