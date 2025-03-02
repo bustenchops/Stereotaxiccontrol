@@ -1,4 +1,4 @@
-from testclasssend import sentohere
+from Testfiles.testclasssend import sentohere
 
 fart = sentohere(5,1)
 shit = sentohere(10,2)

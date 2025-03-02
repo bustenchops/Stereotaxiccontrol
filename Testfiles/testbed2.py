@@ -1,4 +1,4 @@
-from tesgtbed3 import my2ndclass
+from testbed3 import my2ndclass
 
 
 class MyClass:

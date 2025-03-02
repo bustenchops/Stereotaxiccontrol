@@ -6,7 +6,7 @@ def calibratedistance():
     global APstepdistance
     global MVstepdistance
     global DVstepdistance
-    file_name = 'calibration.txt'
+    file_name = '../Calibration.txt'
     calibratetemp = ['a','b','c']
     print(calibratetemp)
     r = 0

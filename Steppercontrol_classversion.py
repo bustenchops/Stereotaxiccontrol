@@ -91,6 +91,11 @@ rotoB_MV = 20
 rotoA_DV = 22
 rotoB_DV = 23
 
+#Relative Offset variables --> unused
+# APrelOffset = 0
+# MVrelOffset = 0
+# DVrelOffset= 0
+
 #DEFINE STEPPER DIRECTIONS
 APback = 0
 APforward = 1
@@ -457,4 +462,16 @@ while keepalive:
     #reading the buttons
     newbuttonstate = getshiftregisterdata()
     lastbuttonstate = buttonvalues(lastbuttonstate,newbuttonstate,buttonarray)
+
+
+#List to include:
+#syncs and loads a txt file from onedrive with a list of locations:
+    #format   Left mPFC 3.2 -0.5 10 and puts them in a dropdown list
+    #select the location (mouse in list?)
+    #goto using the a clickable button - use once then clears so it cant be hit 2x
+
+#can enter the coordinates manually and goto with a button click
+
+# I have 2 hard wired buttons I can use
+# I have 3 shift register buttons that can be used.
 
