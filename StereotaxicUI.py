@@ -9,7 +9,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QLCDNumber, QMainWindow,
     QMenuBar, QRadioButton, QSizePolicy, QStatusBar,
-    QWidget,QLabel,QPlainTextEdit,QCheckBox)
+    QWidget,QLabel,QPlainTextEdit,QCheckBox,QPushButton,QListWidget)
 
 import sys
 
@@ -189,26 +189,44 @@ class MainWindow(QMainWindow):
         self.radiolabel.setFont(radiobuttonfont)
 
         self.drilloffsetcheck = QRadioButton("Drill", self.widget)
-        self.drilloffsetcheck.setObjectName(u"radioButton")
+        self.drilloffsetcheck.setObjectName(u"drillradio")
         self.drilloffsetcheck.setGeometry(QRect(662, 170, 92, 20))
         self.drilloffsetcheck.setFont(radiobuttonfont)
 
         self.needleoffsetcheck = QRadioButton("Syringe", self.widget)
-        self.needleoffsetcheck.setObjectName(u"radioButton_2")
+        self.needleoffsetcheck.setObjectName(u"needleradio")
         self.needleoffsetcheck.setGeometry(QRect(662, 200, 92, 20))
         self.needleoffsetcheck.setFont(radiobuttonfont)
 
         self.fiberoffsetcheck = QRadioButton("Probe", self.widget)
-        self.fiberoffsetcheck.setObjectName(u"radioButton_3")
+        self.fiberoffsetcheck.setObjectName(u"proberadio")
         self.fiberoffsetcheck.setGeometry(QRect(662, 230, 92, 20))
         self.fiberoffsetcheck.setFont(radiobuttonfont)
 
-        self.checkBox = QCheckBox(self.widget)
-        self.checkBox.setObjectName(u"checkBox")
-        self.checkBox.setGeometry(QRect(550, 270, 78, 20))
-        font3 = QFont()
-        font3.setPointSize(11)
-        self.checkBox.setFont(font3)
+        self.checkBox = QCheckBox("Make it so", self.widget)
+        self.checkBox.setObjectName(u"engagecheckbox")
+        self.checkBox.setGeometry(QRect(545, 270, 98, 20))
+        self.checkBox.setFont(radiobuttonfont)
+
+        self.armcoordinatebutton = QPushButton("Arm Coordinates", self.widget)
+        self.armcoordinatebutton.setObjectName(u"armcoordinatebutton")
+        self.armcoordinatebutton.setGeometry(QRect(160, 380, 161, 31))
+        self.armcoordinatebutton.setFont(stepposlabelfont)
+
+        self.loadpresetbutton = QPushButton("Load Preset File", self.widget)
+        self.loadpresetbutton.setObjectName(u"loadpresetbutton")
+        self.loadpresetbutton.setGeometry(QRect(160, 243, 171, 31))
+        self.loadpresetbutton.setFont(stepposlabelfont)
+
+        self.movebutton = QPushButton("Engage", self.widget)
+        self.movebutton.setObjectName(u"movebutton")
+        self.movebutton.setGeometry(QRect(540, 310, 101, 81))
+        self.movebutton.setFont(stepposlabelfont)
+
+        self.listWidget = QListWidget(self.widget)
+        self.listWidget.setObjectName(u"listWidget")
+        self.listWidget.setGeometry(QRect(140, 273, 211, 110))
+        self.listWidget.setFont(stepposlabelfont)
 
         self.menubar = QMenuBar()
         self.menubar.setGeometry(QRect(0, 0, 800, 33))

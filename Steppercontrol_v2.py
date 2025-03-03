@@ -438,23 +438,23 @@ def buttonvalues(lastbut, newbut, butarr):
 
 #MAIN CODE ################################################################################################
 
-#question and waits for ANY user input
-quest = input("Initialization Process ... anykey to continue.")
-quest = input("CAUTION...Remove all attachments from frame arms! anykey to continue.")
+def begin_setup (calibrationsteps, backoff):
+    quest = input("Initialization Process ... anykey to continue.")
+    quest = input("CAUTION...Remove all attachments from frame arms! anykey to continue.")
 
-#Zero steppers
-DVmove.zerostep(backoff,StepperSetup.btnSteps)
-APmove.zerostep(backoff,StepperSetup.btnSteps)
-MVmove.zerostep(backoff,StepperSetup.btnSteps)
+    #Zero steppers
+    DVmove.zerostep(backoff,StepperSetup.btnSteps)
+    APmove.zerostep(backoff,StepperSetup.btnSteps)
+    MVmove.zerostep(backoff,StepperSetup.btnSteps)
 
-#calibration routine
-APmove.CalibrateDistance(calibrationsteps,backoff,StepperSetup.btnSteps)
-MVmove.CalibrateDistance(calibrationsteps,backoff,StepperSetup.btnSteps)
-DVmove.CalibrateDistance(calibrationsteps,backoff,StepperSetup.btnSteps)
+    #calibration routine
+    APmove.CalibrateDistance(calibrationsteps,backoff,StepperSetup.btnSteps)
+    MVmove.CalibrateDistance(calibrationsteps,backoff,StepperSetup.btnSteps)
+    DVmove.CalibrateDistance(calibrationsteps,backoff,StepperSetup.btnSteps)
 
-while keepalive:
+def begin_in_thread(lastbuttonstate, buttonarray):
+    while keepalive:
 
-    #reading the buttons
-    newbuttonstate = getshiftregisterdata()
-    lastbuttonstate = buttonvalues(lastbuttonstate,newbuttonstate,buttonarray)
+        newbuttonstate = getshiftregisterdata()
+        lastbuttonstate = buttonvalues(lastbuttonstate,newbuttonstate,buttonarray)
 
