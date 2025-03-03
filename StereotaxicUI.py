@@ -9,7 +9,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QLCDNumber, QMainWindow,
     QMenuBar, QRadioButton, QSizePolicy, QStatusBar,
-    QWidget,QLabel)
+    QWidget,QLabel,QPlainTextEdit,QCheckBox)
 
 import sys
 
@@ -145,25 +145,70 @@ class MainWindow(QMainWindow):
         self.RELposLabel.setGeometry(QRect(60, 177, 111, 61))
         self.RELposLabel.setFont(poslabelfont)
 
+        manualenterfont = QFont()
+        manualenterfont.setPointSize(16)
+        manualenterfont.setBold(False)
+
         self.APmanualenter = QPlainTextEdit(self.widget)
-        self.plainTextEdit.setObjectName(u"APmanualenter")
-        self.plainTextEdit.setGeometry(QRect(420, 260, 91, 40))
-        self.plainTextEdit.setFont(font1)
+        self.APmanualenter.setObjectName(u"APmanualenter")
+        self.APmanualenter.setGeometry(QRect(420, 260, 91, 40))
+        self.APmanualenter.setFont(manualenterfont)
 
-        self.plainTextEdit_2 = QPlainTextEdit(self.widget)
-        self.plainTextEdit_2.setObjectName(u"plainTextEdit_2")
-        self.plainTextEdit_2.setGeometry(QRect(420, 310, 91, 40))
-        self.plainTextEdit_2.setFont(font1)
-        self.plainTextEdit_2.setLineWidth(1)
-        self.plainTextEdit_3 = QPlainTextEdit(self.centralwidget)
-        self.plainTextEdit_3.setObjectName(u"plainTextEdit_3")
-        self.plainTextEdit_3.setGeometry(QRect(420, 360, 91, 40))
-        self.plainTextEdit_3.setFont(font1)
-        self.plainTextEdit_3.setLineWidth(1)
+        self.MVmanualenter = QPlainTextEdit(self.widget)
+        self.MVmanualenter.setObjectName(u"MVmanualenter")
+        self.MVmanualenter.setGeometry(QRect(420, 310, 91, 40))
+        self.MVmanualenter.setFont(manualenterfont)
 
+        self.DVmanualenter = QPlainTextEdit(self.widget)
+        self.DVmanualenter.setObjectName(u"DVmanualenter")
+        self.DVmanualenter.setGeometry(QRect(420, 360, 91, 40))
+        self.DVmanualenter.setFont(manualenterfont)
 
+        self.APlabel = QLabel("AP", self.widget)
+        self.APlabel.setObjectName(u"APlabelmanual")
+        self.APlabel.setGeometry(QRect(370, 260, 41, 40))
+        self.APlabel.setFont(toplabelfont)
 
+        self.MVlabel = QLabel("MV", self.widget)
+        self.MVlabel.setObjectName(u"MVlabelmanual")
+        self.MVlabel.setGeometry(QRect(370, 310, 41, 40))
+        self.MVlabel.setFont(toplabelfont)
 
+        self.DVlabel = QLabel("DV", self.widget)
+        self.DVlabel.setObjectName(u"DVlabelmanual")
+        self.DVlabel.setGeometry(QRect(370, 360, 41, 40))
+        self.DVlabel.setFont(toplabelfont)
+
+        radiobuttonfont = QFont()
+        radiobuttonfont.setPointSize(12)
+        radiobuttonfont.setBold(False)
+
+        self.radiolabel = QLabel("Current Offset", self.widget)
+        self.radiolabel.setObjectName(u"DVlabelmanual")
+        self.radiolabel.setGeometry(QRect(652, 140, 111, 16))
+        self.radiolabel.setFont(radiobuttonfont)
+
+        self.drilloffsetcheck = QRadioButton("Drill", self.widget)
+        self.drilloffsetcheck.setObjectName(u"radioButton")
+        self.drilloffsetcheck.setGeometry(QRect(662, 170, 92, 20))
+        self.drilloffsetcheck.setFont(radiobuttonfont)
+
+        self.needleoffsetcheck = QRadioButton("Syringe", self.widget)
+        self.needleoffsetcheck.setObjectName(u"radioButton_2")
+        self.needleoffsetcheck.setGeometry(QRect(662, 200, 92, 20))
+        self.needleoffsetcheck.setFont(radiobuttonfont)
+
+        self.fiberoffsetcheck = QRadioButton("Probe", self.widget)
+        self.fiberoffsetcheck.setObjectName(u"radioButton_3")
+        self.fiberoffsetcheck.setGeometry(QRect(662, 230, 92, 20))
+        self.fiberoffsetcheck.setFont(radiobuttonfont)
+
+        self.checkBox = QCheckBox(self.widget)
+        self.checkBox.setObjectName(u"checkBox")
+        self.checkBox.setGeometry(QRect(550, 270, 78, 20))
+        font3 = QFont()
+        font3.setPointSize(11)
+        self.checkBox.setFont(font3)
 
         self.menubar = QMenuBar()
         self.menubar.setGeometry(QRect(0, 0, 800, 33))
