@@ -2,7 +2,7 @@
 
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
     QMetaObject, QObject, QPoint, QRect,
-    QSize, QTime, QUrl, Qt)
+    QSize, QTime, QUrl, Qt,Signal)
 from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
@@ -11,12 +11,18 @@ from PySide6.QtWidgets import (QApplication, QFrame, QLCDNumber, QMainWindow,
     QMenuBar, QRadioButton, QSizePolicy, QStatusBar,
     QWidget,QLabel,QPlainTextEdit,QCheckBox,QPushButton,QListWidget)
 
-import sys
+from stereotest import testsends
 
+import sys
+import time
 
 class MainWindow(QMainWindow):
+
     def __init__(self):
         super().__init__()
+
+
+
         self.setObjectName(u"MainWindow")
         self.resize(800, 480)
 
@@ -183,6 +189,7 @@ class MainWindow(QMainWindow):
         radiobuttonfont.setPointSize(12)
         radiobuttonfont.setBold(False)
 
+
         self.radiolabel = QLabel("Current Offset", self.widget)
         self.radiolabel.setObjectName(u"DVlabelmanual")
         self.radiolabel.setGeometry(QRect(652, 140, 111, 16))
@@ -222,6 +229,7 @@ class MainWindow(QMainWindow):
         self.movebutton.setObjectName(u"movebutton")
         self.movebutton.setGeometry(QRect(540, 310, 101, 81))
         self.movebutton.setFont(stepposlabelfont)
+        self.movebutton.clicked.connect(self.plaintextgrab)
 
         self.listWidget = QListWidget(self.widget)
         self.listWidget.setObjectName(u"listWidget")
@@ -234,11 +242,42 @@ class MainWindow(QMainWindow):
         self.statusbar = QStatusBar()
         self.setCentralWidget(self.widget)
 
+    #grabs the plaintext from the text boxes only if the checkbox is selected
+    def plaintextgrab(self):
+        APcooord = self.APmanualenter.toPlainText()
+        MVcooord = self.MVmanualenter.toPlainText()
+        DVcooord = self.DVmanualenter.toPlainText()
+        if self.checkBox.isChecked():
+            print(f"I want to go to AP:{APcooord}, MV:{MVcooord}, DV:{DVcooord}")
+        gottasend.changevar()
+
+
+#tests to see if I can access functions in the mainwindow from the imported class be sending an instance...
+    def canyousee(self):
+        print("i see you")
+
+    def handle_signal(self):
+        self.drilloffsetcheck.setChecked(True)
+        if self.drilloffsetcheck.isChecked() == False:
+            self.needleoffsetcheck.setChecked(True)
+        elif self.needleoffsetcheck.isChecked() == False:
+            self.fiberoffsetcheck.setChecked(True)
+
+
+        print(self.drilloffsetcheck.isChecked())
+
+
+
+
 
 
 
 
 app = QApplication(sys.argv)
 window = MainWindow()
+gottasend = testsends()
+gottasend.receive_instance(window)
+
 window.show()
+
 app.exec()

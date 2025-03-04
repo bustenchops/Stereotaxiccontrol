@@ -127,7 +127,7 @@ APmove = StepperSetup(enableAll,stepAP,directionAP,limitAP,1,APforward,APback)
 MVmove = StepperSetup(enableAll,stepMV,directionMV,limitMV,2,MVright,MVleft)
 DVmove = StepperSetup(enableAll,stepDV,directionDV,limitDV,3,DVup,DVdown)
 
-#send to motorcontrol
+#send to object instances to motorcontrol
 APmove.receive_instance(APmove)
 MVmove.receive_instance(MVmove)
 DVmove.receive_instance(DVmove)
