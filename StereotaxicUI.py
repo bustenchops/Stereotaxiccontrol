@@ -11,7 +11,9 @@ from PySide6.QtWidgets import (QApplication, QFrame, QLCDNumber, QMainWindow,
     QMenuBar, QRadioButton, QSizePolicy, QStatusBar,
     QWidget,QLabel,QPlainTextEdit,QCheckBox,QPushButton,QListWidget)
 
-from stereotest import testsends
+from os.path import relpath
+#from motorcontrolclass_v2 import StepperSetup
+#from rotary_class import RotaryEncoder
 
 import sys
 import time
@@ -249,34 +251,25 @@ class MainWindow(QMainWindow):
         DVcooord = self.DVmanualenter.toPlainText()
         if self.checkBox.isChecked():
             print(f"I want to go to AP:{APcooord}, MV:{MVcooord}, DV:{DVcooord}")
-        gottasend.changevar()
 
-
-#tests to see if I can access functions in the mainwindow from the imported class be sending an instance...
-    def canyousee(self):
-        print("i see you")
-
-    def handle_signal(self):
-        self.drilloffsetcheck.setChecked(True)
-        if self.drilloffsetcheck.isChecked() == False:
-            self.needleoffsetcheck.setChecked(True)
-        elif self.needleoffsetcheck.isChecked() == False:
-            self.fiberoffsetcheck.setChecked(True)
-
-
-        print(self.drilloffsetcheck.isChecked())
-
-
-
-
-
+    def updatepositionLCD(self, stepAP, stepMV, stepDV, ABS_AP, ABS_MV, ABS_DV, REL_AP, REL_MV, REL_DV):
+        print("lcds should update")
+        self.APstepLCD.display(stepAP)
+        self.MVstepLCD.display(stepMV)
+        self.DVstepLCD.display(stepDV)
+        self.APABSposLCD.display(ABS_AP)
+        self.MVABSposLCD.display(ABS_MV)
+        self.DVABSposLCD.display(ABS_DV)
+        self.APRelposLCD.display(REL_AP)
+        self.MVRelposLCD.display(REL_MV)
+        self.DVRelposLCD.display(REL_DV)
 
 
 
 app = QApplication(sys.argv)
 window = MainWindow()
-gottasend = testsends()
-gottasend.receive_instance(window)
+#maininstancesend = StepperSetup()
+#maininstancesend.receive_frommain(window)
 
 window.show()
 

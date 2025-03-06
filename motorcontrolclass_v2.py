@@ -71,6 +71,12 @@ class StepperSetup:
     def receive_instance(self,maininstance):
         self.iliketomoveit = maininstance
 
+    #receives object instance from main program so it can be utilized with this class
+    #Object instance calls on this function from within itself and sends itself here.
+    #just to keep UIstuff apart from working stuff
+    def receive_frommain(self, comingfrommain):
+        self.sendingtomain = comingfrommain
+
 
     def steppgo(self,move_direction,speed,btwnsteps):
 
@@ -274,6 +280,8 @@ class StepperSetup:
         StepperSetup.APcurABSdist = round((StepperSetup.APsteps * StepperSetup.APstepdistance), 4)
         StepperSetup.MVcurABSdist = round((StepperSetup.MVsteps * StepperSetup.MVstepdistance), 4)
         StepperSetup.DVcurABSdist = round((StepperSetup.MVsteps * StepperSetup.DVstepdistance), 4)
+
+        self.sendingtomain(StepperSetup.APsteps,StepperSetup.MVsteps,StepperSetup.DVsteps,StepperSetup.APcurABSdist,StepperSetup.MVcurABSdist,StepperSetup.DVcurABSdist,StepperSetup.APcurRELdist,StepperSetup.MVcurRELdist,StepperSetup.DVcurRELdist)
 
         print(f"Absolute position-|AP: {StepperSetup.APcurABSdist} | MV: {StepperSetup.MVcurABSdist} | DV: {StepperSetup.DVcurABSdist}")
         print(f"Relative position-|AP: {StepperSetup.APcurRELdist} | MV: {StepperSetup.MVcurRELdist} | DV: {StepperSetup.DVcurRELdist}")
