@@ -1,28 +1,23 @@
 # -*- coding: utf-8 -*-
 
-from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-    QMetaObject, QObject, QPoint, QRect,
-    QSize, QTime, QUrl, Qt,Signal)
-from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
-    QFont, QFontDatabase, QGradient, QIcon,
-    QImage, QKeySequence, QLinearGradient, QPainter,
-    QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QLCDNumber, QMainWindow,
-    QMenuBar, QRadioButton, QSizePolicy, QStatusBar,
-    QWidget,QLabel,QPlainTextEdit,QCheckBox,QPushButton,QListWidget)
+from PySide6.QtCore import (QRect, QThreadPool,QTimer, QRunnable, Slot, Signal, QObject)
+from PySide6.QtGui import (QFont)
+from PySide6.QtWidgets import (QApplication, QFrame, QLCDNumber, QMainWindow, QMenuBar, QRadioButton, QStatusBar,
+                               QWidget, QLabel, QPlainTextEdit, QCheckBox, QPushButton, QListWidget)
 
-from os.path import relpath
 #from motorcontrolclass_v2 import StepperSetup
 #from rotary_class import RotaryEncoder
 
 import sys
 import time
 
+from threadtest import threadtesting
+
+
 class MainWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
-
 
 
         self.setObjectName(u"MainWindow")
@@ -244,6 +239,11 @@ class MainWindow(QMainWindow):
         self.statusbar = QStatusBar()
         self.setCentralWidget(self.widget)
 
+# start the streads that need to keep the buttons and such working
+        self.threadpool = QThreadPool()
+        self.mainthread = threadtesting()
+        self.threadpool.start(self.mainthread.counterup)
+
     #grabs the plaintext from the text boxes only if the checkbox is selected
     def plaintextgrab(self):
         APcooord = self.APmanualenter.toPlainText()
@@ -264,7 +264,12 @@ class MainWindow(QMainWindow):
         self.MVRelposLCD.display(REL_MV)
         self.DVRelposLCD.display(REL_DV)
 
-
+    def testwhile(self):
+        self.count = 0
+        while True:
+            print(self.count)
+            time.sleep(1)
+            self.count +=1
 
 app = QApplication(sys.argv)
 window = MainWindow()

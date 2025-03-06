@@ -281,7 +281,7 @@ class StepperSetup:
         StepperSetup.MVcurABSdist = round((StepperSetup.MVsteps * StepperSetup.MVstepdistance), 4)
         StepperSetup.DVcurABSdist = round((StepperSetup.MVsteps * StepperSetup.DVstepdistance), 4)
 
-        self.sendingtomain(StepperSetup.APsteps,StepperSetup.MVsteps,StepperSetup.DVsteps,StepperSetup.APcurABSdist,StepperSetup.MVcurABSdist,StepperSetup.DVcurABSdist,StepperSetup.APcurRELdist,StepperSetup.MVcurRELdist,StepperSetup.DVcurRELdist)
+        self.sendingtomain.updatepositionLCD(StepperSetup.APsteps,StepperSetup.MVsteps,StepperSetup.DVsteps,StepperSetup.APcurABSdist,StepperSetup.MVcurABSdist,StepperSetup.DVcurABSdist,StepperSetup.APcurRELdist,StepperSetup.MVcurRELdist,StepperSetup.DVcurRELdist)
 
         print(f"Absolute position-|AP: {StepperSetup.APcurABSdist} | MV: {StepperSetup.MVcurABSdist} | DV: {StepperSetup.DVcurABSdist}")
         print(f"Relative position-|AP: {StepperSetup.APcurRELdist} | MV: {StepperSetup.MVcurRELdist} | DV: {StepperSetup.DVcurRELdist}")
