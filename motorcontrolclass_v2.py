@@ -78,7 +78,7 @@ class StepperSetup:
         self.sendingtomain = comingfrommain
 
 
-    def steppgo(self,move_direction,speed,btwnsteps):
+    def steppgo(self,move_direction, speed, btwnsteps):
 
         self.stepmodifier = 0
 
