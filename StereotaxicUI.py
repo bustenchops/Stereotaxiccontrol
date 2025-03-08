@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from PySide6.QtCore import (QRect, QThreadPool,QTimer, QRunnable, Slot, Signal, QObject)
+from PySide6.QtCore import (QRect, QThreadPool)
 from PySide6.QtGui import (QFont)
 from PySide6.QtWidgets import (QApplication, QFrame, QLCDNumber, QMainWindow, QMenuBar, QRadioButton, QStatusBar,
                                QWidget, QLabel, QPlainTextEdit, QCheckBox, QPushButton, QListWidget)
@@ -9,9 +9,8 @@ from PySide6.QtWidgets import (QApplication, QFrame, QLCDNumber, QMainWindow, QM
 #from rotary_class import RotaryEncoder
 
 import sys
-import time
 
-from threadtest import threadtesting
+from Testfiles.threadtest import threadtesting
 
 
 class MainWindow(QMainWindow):
@@ -264,12 +263,7 @@ class MainWindow(QMainWindow):
         self.MVRelposLCD.display(REL_MV)
         self.DVRelposLCD.display(REL_DV)
 
-    def testwhile(self):
-        self.count = 0
-        while True:
-            print(self.count)
-            time.sleep(1)
-            self.count +=1
+
 
 app = QApplication(sys.argv)
 window = MainWindow()
