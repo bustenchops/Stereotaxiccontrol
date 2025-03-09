@@ -2,6 +2,8 @@ import sys
 import time
 from os.path import relpath
 import RPi.GPIO as GPIO
+
+from Steppercontrol_v2 import miscbuttonA
 from motorcontrolclass_v2 import StepperSetup
 from rotary_class import RotaryEncoder
 
@@ -325,14 +327,14 @@ class mainprogram:
                 for x in range(shiftdistance):
                     self.MVmove.steppgo(mainprogram.MVleft, mainprogram.finespeed, StepperSetup.btnSteps)
 
-            if StepperSetup.APsteps < (StepperSetup.APrelpos + APDRILL):
-                shiftdistance = (StepperSetup.APrelpos + APDRILL) - StepperSetup.APsteps
+            if StepperSetup.APsteps < (StepperSetup.APrelpos + mainprogram.APDRILL):
+                shiftdistance = (StepperSetup.APrelpos + mainprogram.APDRILL) - StepperSetup.APsteps
                 for x in range(shiftdistance):
-                    APmove.steppgo(APforward,finespeed,StepperSetup.btnSteps)
-            elif StepperSetup.APsteps > (StepperSetup.APrelpos + APDRILL):
-                shiftdistance = StepperSetup.APsteps - (StepperSetup.APrelpos + APDRILL)
+                    self.APmove.steppgo(mainprogram.APforward, mainprogram.finespeed, StepperSetup.btnSteps)
+            elif StepperSetup.APsteps > (StepperSetup.APrelpos + mainprogram.APDRILL):
+                shiftdistance = StepperSetup.APsteps - (StepperSetup.APrelpos + mainprogram.APDRILL)
                 for x in range(shiftdistance):
-                    APmove.steppgo(APback, finespeed, StepperSetup.btnSteps)
+                    self.APmove.steppgo(mainprogram.APback, mainprogram.finespeed, StepperSetup.btnSteps)
 
         #miscbuttonD - needle to relative zero for AP and MV BUT DV homed ABS zero but still sets the relative pos
         if lastbut[9] == 0:
@@ -343,27 +345,27 @@ class mainprogram:
     #        elif StepperSetup.DVsteps > (StepperSetup.DVrelpos + DVneedle):
     #            shiftdistance = StepperSetup.DVsteps - (StepperSetup.DVrelpos + DVneedle)
     #            for x in range(shiftdistance):
-                DVmove.steppgo(DVup, finespeed, StepperSetup.btnSteps)
-            StepperSetup.DVrelpos = StepperSetup.DVrelpos + DVneedle
-            if StepperSetup.MVsteps < (StepperSetup.MVrelpos + MVneedle):
-                shiftdistance = (StepperSetup.MVrelpos + MVneedle) - StepperSetup.MVsteps
+                self.DVmove.steppgo(mainprogram.DVup, mainprogram.finespeed, StepperSetup.btnSteps)
+            StepperSetup.DVrelpos = StepperSetup.DVrelpos + mainprogram.DVneedle
+            if StepperSetup.MVsteps < (StepperSetup.MVrelpos + mainprogram.MVneedle):
+                shiftdistance = (StepperSetup.MVrelpos + mainprogram.MVneedle) - StepperSetup.MVsteps
                 for x in range(shiftdistance):
-                    MVmove.steppgo(MVright,finespeed,StepperSetup.btnSteps)
-            elif StepperSetup.MVsteps > (StepperSetup.DVrelpos + MVneedle):
-                shiftdistance = StepperSetup.MVsteps - (StepperSetup.MVrelpos + MVneedle)
+                    self.MVmove.steppgo(mainprogram.MVright, mainprogram.finespeed,StepperSetup.btnSteps)
+            elif StepperSetup.MVsteps > (StepperSetup.DVrelpos + mainprogram.MVneedle):
+                shiftdistance = StepperSetup.MVsteps - (StepperSetup.MVrelpos + mainprogram.MVneedle)
                 for x in range(shiftdistance):
-                    MVmove.steppgo(MVleft, finespeed, StepperSetup.btnSteps)
-            StepperSetup.MVrelpos = StepperSetup.MVsteps + MVneedle
+                    self.MVmove.steppgo(mainprogram.MVleft, mainprogram.finespeed, StepperSetup.btnSteps)
+            StepperSetup.MVrelpos = StepperSetup.MVsteps + mainprogram.MVneedle
 
-            if StepperSetup.APsteps < (StepperSetup.APrelpos + APneedle):
-                shiftdistance = (StepperSetup.APrelpos + APneedle) - StepperSetup.APsteps
+            if StepperSetup.APsteps < (StepperSetup.APrelpos + mainprogram.APneedle):
+                shiftdistance = (StepperSetup.APrelpos + mainprogram.APneedle) - StepperSetup.APsteps
                 for x in range(shiftdistance):
-                    APmove.steppgo(APforward,finespeed,StepperSetup.btnSteps)
-            elif StepperSetup.APsteps > (StepperSetup.APrelpos + APneedle):
-                shiftdistance = StepperSetup.APsteps - (StepperSetup.APrelpos + APneedle)
+                    self.APmove.steppgo(mainprogram.APforward, mainprogram.finespeed,StepperSetup.btnSteps)
+            elif StepperSetup.APsteps > (StepperSetup.APrelpos + mainprogram.APneedle):
+                shiftdistance = StepperSetup.APsteps - (StepperSetup.APrelpos + mainprogram.APneedle)
                 for x in range(shiftdistance):
-                    APmove.steppgo(APback, finespeed, StepperSetup.btnSteps)
-            StepperSetup.APrelpos = StepperSetup.APsteps + APneedle
+                    self.APmove.steppgo(mainprogram.APback, mainprogram.finespeed, StepperSetup.btnSteps)
+            StepperSetup.APrelpos = StepperSetup.APsteps + mainprogram.APneedle
 
 
         #miscbuttonE - fiber to relative zero for AP and MV BUT DV homed ABS zero but still sets the relative pos
@@ -375,49 +377,53 @@ class mainprogram:
     #        elif StepperSetup.DVsteps > (StepperSetup.DVrelpos + DVfiber):
     #            shiftdistance = StepperSetup.DVsteps - (StepperSetup.DVrelpos + DVfiber)
     #            for x in range(shiftdistance):
-                DVmove.steppgo(DVup, finespeed, StepperSetup.btnSteps)
-            StepperSetup.DVrelpos = StepperSetup.DVsteps + DVfiber
-            if StepperSetup.MVsteps < (StepperSetup.MVrelpos + MVfiber):
-                shiftdistance = (StepperSetup.MVrelpos + MVfiber) - StepperSetup.MVsteps
+                self.DVmove.steppgo(mainprogram.DVup, mainprogram.finespeed, StepperSetup.btnSteps)
+            StepperSetup.DVrelpos = StepperSetup.DVsteps + mainprogram.DVfiber
+            if StepperSetup.MVsteps < (StepperSetup.MVrelpos + mainprogram.MVfiber):
+                shiftdistance = (StepperSetup.MVrelpos + mainprogram.MVfiber) - StepperSetup.MVsteps
                 for x in range(shiftdistance):
-                    MVmove.steppgo(MVright,finespeed,StepperSetup.btnSteps)
-            elif StepperSetup.MVsteps > (StepperSetup.DVrelpos + MVfiber):
-                shiftdistance = StepperSetup.MVsteps - (StepperSetup.MVrelpos + MVfiber)
+                    self.MVmove.steppgo(mainprogram.MVright, mainprogram.finespeed, StepperSetup.btnSteps)
+            elif StepperSetup.MVsteps > (StepperSetup.DVrelpos + mainprogram.MVfiber):
+                shiftdistance = StepperSetup.MVsteps - (StepperSetup.MVrelpos + mainprogram.MVfiber)
                 for x in range(shiftdistance):
-                    MVmove.steppgo(MVleft, finespeed, StepperSetup.btnSteps)
-            StepperSetup.MVrelpos = StepperSetup.MVsteps + MVfiber
-            if StepperSetup.APsteps < (StepperSetup.APrelpos + APfiber):
-                shiftdistance = (StepperSetup.APrelpos + APfiber) - StepperSetup.APsteps
+                    self.MVmove.steppgo(mainprogram.MVleft, mainprogram.finespeed, StepperSetup.btnSteps)
+            StepperSetup.MVrelpos = StepperSetup.MVsteps + mainprogram.MVfiber
+            if StepperSetup.APsteps < (StepperSetup.APrelpos + mainprogram.APfiber):
+                shiftdistance = (StepperSetup.APrelpos + mainprogram.APfiber) - StepperSetup.APsteps
                 for x in range(shiftdistance):
-                    APmove.steppgo(APforward,finespeed,StepperSetup.btnSteps)
-            elif StepperSetup.APsteps > (StepperSetup.APrelpos + APfiber):
-                shiftdistance = StepperSetup.APsteps - (StepperSetup.APrelpos + APfiber)
+                    self.APmove.steppgo(mainprogram.APforward, mainprogram.finespeed, StepperSetup.btnSteps)
+            elif StepperSetup.APsteps > (StepperSetup.APrelpos + mainprogram.APfiber):
+                shiftdistance = StepperSetup.APsteps - (StepperSetup.APrelpos + mainprogram.APfiber)
                 for x in range(shiftdistance):
-                    APmove.steppgo(APback, finespeed, StepperSetup.btnSteps)
-            StepperSetup.APrelpos = StepperSetup.APsteps + APfiber
+                    self.APmove.steppgo(mainprogram.APback, mainprogram.finespeed, StepperSetup.btnSteps)
+            StepperSetup.APrelpos = StepperSetup.APsteps + mainprogram.APfiber
 
-        #zero to bregma (relative) but up ~10mm (relative home)
+        #zero to bregma (relative) moves DV up ~10mm, positions AP and MV to relative home
         if lastbut[11] == 0:
-            for x in range(1333):
-                DVmove.steppgo(DVup,finespeed,StepperSetup.btnSteps)
+            if (StepperSetup.DVsteps > 1333):
+                for x in range(1333):
+                    self.DVmove.steppgo(mainprogram.DVup, mainprogram.finespeed, StepperSetup.btnSteps)
+            else:
+                for x in range(StepperSetup.DVsteps):
+                    self.DVmove.steppgo(mainprogram.DVup, mainprogram.finespeed, StepperSetup.btnSteps)
 
             if StepperSetup.APrelpos > StepperSetup.APsteps:
                 APdiff = StepperSetup.APrelpos - StepperSetup.APsteps
                 for x in range(APdiff):
-                    APmove.steppgo(APforward, finespeed, StepperSetup.btnSteps)
+                    self.APmove.steppgo(mainprogram.APforward, mainprogram.finespeed, StepperSetup.btnSteps)
             else:
                 APdiff = StepperSetup.APsteps - StepperSetup.APrelpos
                 for x in range(APdiff):
-                    APmove.steppgo(APback, finespeed, StepperSetup.btnSteps)
+                    self.APmove.steppgo(mainprogram.APback, mainprogram.finespeed, StepperSetup.btnSteps)
 
             if StepperSetup.MVrelpos > StepperSetup.MVsteps:
                 MVdiff = StepperSetup.MVrelpos - StepperSetup.MVsteps
                 for x in range(MVdiff):
-                    MVmove.steppgo(MVright, finespeed, StepperSetup.btnSteps)
+                    self.MVmove.steppgo(mainprogram.MVright, mainprogram.finespeed, StepperSetup.btnSteps)
             else:
                 MVdiff = StepperSetup.MVsteps - StepperSetup.MVrelpos
                 for x in range(MVdiff):
-                    MVmove.steppgo(MVleft, finespeed, StepperSetup.btnSteps)
+                    self.MVmove.steppgo(mainprogram.MVleft, mainprogram.finespeed, StepperSetup.btnSteps)
 
             print("That's bregma G!")
 
@@ -426,15 +432,15 @@ class mainprogram:
 
             print("Let us re-calibrate this biz-E-ness")
             for x in range(StepperSetup.DVsteps):
-                DVmove.steppgo(DVup, finespeed, StepperSetup.btnSteps)
+                self.DVmove.steppgo(mainprogram.DVup, mainprogram.finespeed, StepperSetup.btnSteps)
             for x in range(StepperSetup.MVsteps):
-                MVmove.steppgo(MVleft, finespeed, StepperSetup.btnSteps)
+                self.MVmove.steppgo(mainprogram.MVleft, mainprogram.finespeed, StepperSetup.btnSteps)
             for x in range(StepperSetup.APsteps):
-                APmove.steppgo(APback, finespeed, StepperSetup.btnSteps)
+                self.APmove.steppgo(mainprogram.APback, mainprogram.finespeed, StepperSetup.btnSteps)
 
-            APmove.CalibrateDistance(calibrationsteps, backoff, StepperSetup.btnSteps)
-            MVmove.CalibrateDistance(calibrationsteps, backoff, StepperSetup.btnSteps)
-            DVmove.CalibrateDistance(calibrationsteps, backoff, StepperSetup.btnSteps)
+            self.APmove.CalibrateDistance(mainprogram.calibrationsteps, mainprogram.backoff, StepperSetup.btnSteps)
+            self.MVmove.CalibrateDistance(mainprogram.calibrationsteps, mainprogram.backoff, StepperSetup.btnSteps)
+            self.DVmove.CalibrateDistance(mainprogram.calibrationsteps, mainprogram.backoff, StepperSetup.btnSteps)
 
         #miscbuttonA - unused
         #if lastbut[13] == 0:
@@ -445,20 +451,20 @@ class mainprogram:
 
 
     #MAIN CODE ################################################################################################
-
+    def intializethesystem(self):
     #question and waits for ANY user input
-    quest = input("Initialization Process ... anykey to continue.")
-    quest = input("CAUTION...Remove all attachments from frame arms! anykey to continue.")
+        self.quest = input("Initialization Process ... anykey to continue.")
+        self.quest = input("CAUTION...Remove all attachments from frame arms! anykey to continue.")
 
     #Zero steppers
-    DVmove.zerostep(backoff,StepperSetup.btnSteps)
-    APmove.zerostep(backoff,StepperSetup.btnSteps)
-    MVmove.zerostep(backoff,StepperSetup.btnSteps)
+        self.DVmove.zerostep(mainprogram.backoff, StepperSetup.btnSteps)
+        self.APmove.zerostep(mainprogram.backoff, StepperSetup.btnSteps)
+        self.MVmove.zerostep(mainprogram.backoff, StepperSetup.btnSteps)
 
     #calibration routine
-    APmove.CalibrateDistance(calibrationsteps,backoff,StepperSetup.btnSteps)
-    MVmove.CalibrateDistance(calibrationsteps,backoff,StepperSetup.btnSteps)
-    DVmove.CalibrateDistance(calibrationsteps,backoff,StepperSetup.btnSteps)
+        self.APmove.CalibrateDistance(mainprogram.calibrationsteps, mainprogram.backoff, StepperSetup.btnSteps)
+        self.MVmove.CalibrateDistance(mainprogram.calibrationsteps, mainprogram.backoff, StepperSetup.btnSteps)
+        self.DVmove.CalibrateDistance(mainprogram.calibrationsteps, mainprogram.backoff, StepperSetup.btnSteps)
 
     while keepalive:
 
