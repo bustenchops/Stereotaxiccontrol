@@ -3,14 +3,14 @@
 from PySide6.QtCore import (QRect, QThreadPool)
 from PySide6.QtGui import (QFont)
 from PySide6.QtWidgets import (QApplication, QFrame, QLCDNumber, QMainWindow, QMenuBar, QRadioButton, QStatusBar,
-                               QWidget, QLabel, QPlainTextEdit, QCheckBox, QPushButton, QListWidget)
+                               QWidget, QLabel, QPlainTextEdit, QCheckBox, QPushButton, QListWidget,QFileDialog)
 
 #from motorcontrolclass_v2 import StepperSetup
 #from rotary_class import RotaryEncoder
+#from Steppercontrol_classversion import mainprogram
 
+import os
 import sys
-
-from Testfiles.threadtest import threadtesting
 
 
 class MainWindow(QMainWindow):
@@ -18,6 +18,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
+        os.system('rclone copy onedrive:scans D:/aa')
 
         self.setObjectName(u"MainWindow")
         self.resize(800, 480)
@@ -213,13 +214,15 @@ class MainWindow(QMainWindow):
 
         self.armcoordinatebutton = QPushButton("Arm Coordinates", self.widget)
         self.armcoordinatebutton.setObjectName(u"armcoordinatebutton")
-        self.armcoordinatebutton.setGeometry(QRect(160, 380, 161, 31))
+        self.armcoordinatebutton.setGeometry(QRect(110, 380, 161, 31))
         self.armcoordinatebutton.setFont(stepposlabelfont)
+        self.armcoordinatebutton.clicked.connect(self.selectlistcoordinates)
 
         self.loadpresetbutton = QPushButton("Load Preset File", self.widget)
         self.loadpresetbutton.setObjectName(u"loadpresetbutton")
-        self.loadpresetbutton.setGeometry(QRect(160, 243, 171, 31))
+        self.loadpresetbutton.setGeometry(QRect(110, 243, 171, 31))
         self.loadpresetbutton.setFont(stepposlabelfont)
+        self.loadpresetbutton.clicked.connect(self.choseafile)
 
         self.movebutton = QPushButton("Engage", self.widget)
         self.movebutton.setObjectName(u"movebutton")
@@ -229,7 +232,7 @@ class MainWindow(QMainWindow):
 
         self.listWidget = QListWidget(self.widget)
         self.listWidget.setObjectName(u"listWidget")
-        self.listWidget.setGeometry(QRect(140, 273, 211, 110))
+        self.listWidget.setGeometry(QRect(40, 273, 311, 110))
         self.listWidget.setFont(stepposlabelfont)
 
         self.menubar = QMenuBar()
@@ -238,10 +241,10 @@ class MainWindow(QMainWindow):
         self.statusbar = QStatusBar()
         self.setCentralWidget(self.widget)
 
-# start the streads that need to keep the buttons and such working
-        self.threadpool = QThreadPool()
-        self.mainthread = threadtesting()
-        self.threadpool.start(self.mainthread.counterup)
+# start the threads that need to keep the buttons and such working
+#       self.threadpool = QThreadPool()
+#        self.mainthread = mainprogram()
+#        self.threadpool.start(self.mainthread.intializethesystem_andrun)
 
     #grabs the plaintext from the text boxes only if the checkbox is selected
     def plaintextgrab(self):
@@ -250,6 +253,8 @@ class MainWindow(QMainWindow):
         DVcooord = self.DVmanualenter.toPlainText()
         if self.checkBox.isChecked():
             print(f"I want to go to AP:{APcooord}, MV:{MVcooord}, DV:{DVcooord}")
+            # RUN THE FUNCTION  TO DO THE CALC AND MOVE
+            self.checkBox.setChecked(False)
 
     def updatepositionLCD(self, stepAP, stepMV, stepDV, ABS_AP, ABS_MV, ABS_DV, REL_AP, REL_MV, REL_DV):
         print("lcds should update")
@@ -263,12 +268,48 @@ class MainWindow(QMainWindow):
         self.MVRelposLCD.display(REL_MV)
         self.DVRelposLCD.display(REL_DV)
 
+#    def copy_folder_from_onedrive(self):
+#       os.system('rclone copy onedrive:scans D:/aa')
 
+    def choseafile(self):
+        print("click load file")
+        file_dialog = QFileDialog(self)
+        file_dialog.setNameFilter("Text Files (*.txt)")
+
+        if file_dialog.exec():
+            self.selected_file = file_dialog.selectedFiles()[0]
+            print(f'Selected file: {self.selected_file}')
+
+        with open(self.selected_file, 'r') as file:
+            lines = file.readlines()
+            for line in lines:
+                self.listWidget.addItem(line.strip())
+
+    def selectlistcoordinates(self):
+        selected_items = self.listWidget.selectedItems()
+        selected_text = selected_items[0].text()
+        # Assuming the format is "Item,Value,Extra"
+        name, APlist, MVlist, DVlist = selected_text.split(' ')
+        self.APmanualenter.setPlainText(APlist)
+        self.MVmanualenter.setPlainText(MVlist)
+        self.DVmanualenter.setPlainText(DVlist)
+
+    def drilloffset(self):
+        self.drilloffsetcheck.toggle()
+
+    def needleoffset(self):
+        self.needleoffsetcheck.toggle()
+
+    def probeoffset(self):
+        self.fiberoffsetcheck.toggle()
 
 app = QApplication(sys.argv)
 window = MainWindow()
+
 #maininstancesend = StepperSetup()
 #maininstancesend.receive_frommain(window)
+#maininstancesend = mainprogram()
+#maininstancesendA.receive_frommainA(window)
 
 window.show()
 

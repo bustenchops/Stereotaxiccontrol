@@ -336,6 +336,8 @@ class mainprogram:
                 for x in range(shiftdistance):
                     self.APmove.steppgo(mainprogram.APback, mainprogram.finespeed, StepperSetup.btnSteps)
 
+            self.sendingtomainA.drilloffset()
+
         #miscbuttonD - needle to relative zero for AP and MV BUT DV homed ABS zero but still sets the relative pos
         if lastbut[9] == 0:
     #        if StepperSetup.DVsteps < (StepperSetup.DVrelpos + DVneedle):
@@ -367,6 +369,7 @@ class mainprogram:
                     self.APmove.steppgo(mainprogram.APback, mainprogram.finespeed, StepperSetup.btnSteps)
             StepperSetup.APrelpos = StepperSetup.APsteps + mainprogram.APneedle
 
+            self.sendingtomainA.needleoffset()
 
         #miscbuttonE - fiber to relative zero for AP and MV BUT DV homed ABS zero but still sets the relative pos
         if lastbut[10] == 0:
@@ -397,6 +400,8 @@ class mainprogram:
                 for x in range(shiftdistance):
                     self.APmove.steppgo(mainprogram.APback, mainprogram.finespeed, StepperSetup.btnSteps)
             StepperSetup.APrelpos = StepperSetup.APsteps + mainprogram.APfiber
+
+            self.sendingtomainA.probeoffset()
 
         #zero to bregma (relative) moves DV up ~10mm, positions AP and MV to relative home
         if lastbut[11] == 0:
@@ -449,9 +454,11 @@ class mainprogram:
 
         return lastbut
 
+    def receive_frommainA(self, comingfrommainA):
+        self.sendingtomainA = comingfrommainA
 
     #MAIN CODE ################################################################################################
-    def intializethesystem(self):
+    def intializethesystem_andrun(self):
     #question and waits for ANY user input
         self.quest = input("Initialization Process ... anykey to continue.")
         self.quest = input("CAUTION...Remove all attachments from frame arms! anykey to continue.")
@@ -466,11 +473,11 @@ class mainprogram:
         self.MVmove.CalibrateDistance(mainprogram.calibrationsteps, mainprogram.backoff, StepperSetup.btnSteps)
         self.DVmove.CalibrateDistance(mainprogram.calibrationsteps, mainprogram.backoff, StepperSetup.btnSteps)
 
-    while keepalive:
+        while mainprogram.keepalive:
 
         #reading the buttons
-        newbuttonstate = getshiftregisterdata()
-        lastbuttonstate = buttonvalues(lastbuttonstate,newbuttonstate,buttonarray)
+            newbuttonstate = self.getshiftregisterdata()
+            mainprogram.lastbuttonstate = self.buttonvalues(mainprogram.lastbuttonstate,newbuttonstate,mainprogram.buttonarray)
 
 
     #List to include:

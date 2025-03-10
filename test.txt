@@ -1,0 +1,7 @@
+mPFC -2.3 3 -3.23
+nacright 2.45 0.95 -2.3
+nacleft 2.45 -0.95 -2.3
+fart 1 -2 -1
+poop 2 -3 -4
+idgaf -3.4 2.54 -4.5
+whatnow -1 2 -0.5
