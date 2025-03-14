@@ -60,39 +60,39 @@ class mainprogram:
     GPIO.setmode(GPIO.BCM)
 
     #DEFINE STEPPER CONTROL PINS
-    enableAll = 1
+    enableAll = 2
 
-    directionAP = 2
-    stepAP = 3
+    directionAP = 3
+    stepAP = 4
 
-    directionMV = 4
-    stepMV = 5
+    directionMV = 17
+    stepMV = 27
 
-    directionDV = 6
-    stepDV = 7
+    directionDV = 5
+    stepDV = 6
 
     #DEFINE LIMIT SWITCH PINS
-    limitAP = 8
-    limitMV = 9
-    limitDV = 10
+    limitAP = 22
+    limitMV = 13
+    limitDV = 19
 
     #DEFINE EMERGENCY STOP and hard wired buttons
-    emergstop = 11
-    misc_eventbuttonA = 15
-    misc_eventbuttonB = 24
+    emergstop = 26
+    misc_eventbuttonA = 10
+    misc_eventbuttonB = 11
 
     #DEFINE SHIFT REGISTER PINS
-    latchpin = 12
-    clockpin = 13
-    datapin = 14
+    latchpin = 18
+    clockpin = 23
+    datapin = 24
 
-    #DEFINE ROTARY ENCODERS
-    rotoA_AP = 16
-    rotoB_AP = 17
-    rotoA_MV = 19
-    rotoB_MV = 20
-    rotoA_DV = 22
-    rotoB_DV = 23
+    #DEFINE ROTARY ENCODER PINS
+    rotoA_AP = 25
+    rotoB_AP =  8
+    rotoA_MV = 12
+    rotoB_MV = 16
+    rotoA_DV = 20
+    rotoB_DV = 21
 
     #Relative Offset variables --> unused
     # APrelOffset = 0
