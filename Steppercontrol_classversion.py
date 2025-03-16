@@ -117,7 +117,8 @@ class mainprogram:
     def __init__(self):
         #INITIALIZE PINS
         GPIO.setup(mainprogram.latchpin,GPIO.OUT)
-        GPIO.setup(mainprogram.datapin,GPIO.OUT)
+        GPIO.setup(mainprogram.clockpin,GPIO.OUT)
+        GPIO.setup(mainprogram.datapin,GPIO.IN)
 
         GPIO.setup(mainprogram.movefast, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.setup(mainprogram.moveslow, GPIO.IN, pull_up_down=GPIO.PUD_UP)
