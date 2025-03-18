@@ -29,6 +29,7 @@ class mainprogram:
     DVneedle = 0
 
 
+
     #DEFINE NUMBER OF BUTTONS AND ORDER IN ARRAY
     buttonarray = ['movefast','moveslow','buttontohome','relativeALL','relativeAP','relativeMV','relativeDV','buttonaction','miscbuttonC','miscbuttonD','miscbuttonE','zerobutton','calibratebutton','miscbuttonA','miscbuttonB']
     lastbuttonstate = [len(buttonarray)]
@@ -146,6 +147,30 @@ class mainprogram:
         self.MVmove.receive_instance(self.MVmove)
         self.DVmove.receive_instance(self.DVmove)
 
+#Import the offsets
+        self.offsetimport = []
+        self.importfile_name = 'offsets.txt'
+
+        file = open(self.importfile_name, 'r')
+        r = 0
+        while True:
+            line = file.readline()
+            if not line:
+                break
+            self.offsetimport[r] = line.strip()
+            r += 1
+        file.close()
+        mainprogram.APDRILL = self.offsetimport[0]
+        mainprogram.MVDRILL = self.offsetimport[1]
+        mainprogram.DVDRILL = self.offsetimport[2]
+
+        mainprogram.APfiber = self.offsetimport[3]
+        mainprogram.MVfiber = self.offsetimport[4]
+        mainprogram.DVfiber = self.offsetimport[5]
+
+        mainprogram.APneedle = self.offsetimport[6]
+        mainprogram.MVneedle = self.offsetimport[7]
+        mainprogram.DVneedle = self.offsetimport[8]
 
     def getshiftregisterdata(self):
 
