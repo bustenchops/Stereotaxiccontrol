@@ -18,7 +18,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        os.system('rclone copy onedrive:'Usask Job/Targetlists' /home/bustenchops/Stereotaxiccontrol/TargetLists')
+#        os.system('rclone copy onedrive:'Usask Job/Targetlists' /home/bustenchops/Stereotaxiccontrol/TargetLists')
 
         self.setObjectName(u"MainWindow")
         self.resize(800, 480)
