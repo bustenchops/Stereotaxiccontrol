@@ -1,9 +1,6 @@
-import sys
 import time
-from os.path import relpath
 import RPi.GPIO as GPIO
 
-from Steppercontrol_v2 import miscbuttonA
 from motorcontrolclass_v2 import StepperSetup
 from rotary_class import RotaryEncoder
 
@@ -125,9 +122,10 @@ class mainprogram:
         GPIO.setup(mainprogram.moveslow, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
         GPIO.setup(mainprogram.emergstop, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(mainprogram.misc_eventbuttonA, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(mainprogram.misc_eventbuttonB, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
         #EMPTY variables to initialize
-        self.shiftvalues = []
         self.quest = "none"
 
         # INITIALIZE ENCODERS
@@ -164,13 +162,13 @@ class mainprogram:
         mainprogram.MVDRILL = self.offsetimport[1]
         mainprogram.DVDRILL = self.offsetimport[2]
 
-        mainprogram.APfiber = self.offsetimport[3]
-        mainprogram.MVfiber = self.offsetimport[4]
-        mainprogram.DVfiber = self.offsetimport[5]
+        mainprogram.APneedle = self.offsetimport[3]
+        mainprogram.MVneedle = self.offsetimport[4]
+        mainprogram.DVneedle = self.offsetimport[5]
 
-        mainprogram.APneedle = self.offsetimport[6]
-        mainprogram.MVneedle = self.offsetimport[7]
-        mainprogram.DVneedle = self.offsetimport[8]
+        mainprogram.APfiber = self.offsetimport[6]
+        mainprogram.MVfiber = self.offsetimport[7]
+        mainprogram.DVfiber = self.offsetimport[8]
 
     def getshiftregisterdata(self):
 
