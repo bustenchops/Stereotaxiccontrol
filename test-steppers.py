@@ -197,7 +197,7 @@ class mainprogram:
             return
         return
 
-#--------------main code---------------
+    def executerrrr(self):
     quest=input('TEST limitswitches - any key to cont')
     while GPIO.input(limitAP) == 1 or GPIO.input(limitMV) == 1:
         if GPIO.input(limitAP == 0):
@@ -272,4 +272,8 @@ class mainprogram:
             GPIO.output(stepDV, 1)
             time.sleep(0.001)
             GPIO.output(stepDV, 0)
+
+#this is the executer
+Letsgonow = mainprogram()
+Letsgonow.executerrrr()
 
