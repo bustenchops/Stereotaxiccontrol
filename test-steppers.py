@@ -198,80 +198,86 @@ class mainprogram:
         return
 
     def executerrrr(self):
-    quest=input('TEST limitswitches - any key to cont')
-    while GPIO.input(limitAP) == 1 or GPIO.input(limitMV) == 1:
-        if GPIO.input(limitAP == 0):
-            print('AP limit reached')
-        if GPIO.input(limitMV == 0):
-            print('MV limit reached')
-        if GPIO.input(limitDV == 0):
-            print('DV limit reached')
+        quest=input('TEST limitswitches - any key to cont')
+        while GPIO.input(mainprogram.limitAP) == 1 or GPIO.input(mainprogram.limitMV) == 1:
+            if GPIO.input(mainprogram.limitAP == 0):
+                print('AP limit reached')
+            if GPIO.input(mainprogram.limitMV == 0):
+                print('MV limit reached')
+            if GPIO.input(mainprogram.limitDV == 0):
+                print('DV limit reached')
 
-    quest = input('Test the AP stepper 1500 steps using direction forward')
-    print('direction set to 1')
-    count = 1
-    while GPIO.input(limitAP) == 1:
-        if count >= 1500:
-            GPIO.output(enableAll, 1)
-            GPIO.output(directionAP, APforward)
-            GPIO.output(stepAP, 1)
-            time.sleep(0.001)
-            GPIO.output(stepAP, 0)
+        quest = input('Test the AP stepper 1500 steps using direction forward')
+        print('direction set to 1')
+        count = 1
+        while GPIO.input(mainprogram.limitAP) == 1:
+            if count >= 1500:
+                GPIO.output(mainprogram.enableAll, 1)
+                GPIO.output(mainprogram.directionAP, mainprogram.APforward)
+                GPIO.output(mainprogram.stepAP, 1)
+                time.sleep(0.001)
+                GPIO.output(mainprogram.stepAP, 0)
+                time.sleep(0.001)
 
-    quest = input('Test the AP stepper 1500 steps using direction back')
-    print('direction set to 0')
-    count = 1
-    while GPIO.input(limitAP) == 1:
-        if count >= 1500:
-            GPIO.output(enableAll, 1)
-            GPIO.output(directionAP, APback)
-            GPIO.output(stepAP, 1)
-            time.sleep(0.001)
-            GPIO.output(stepAP, 0)
+        quest = input('Test the AP stepper 1500 steps using direction back')
+        print('direction set to 0')
+        count = 1
+        while GPIO.input(mainprogram.limitAP) == 1:
+            if count >= 1500:
+                GPIO.output(mainprogram.enableAll, 1)
+                GPIO.output(mainprogram.directionAP, mainprogram.APback)
+                GPIO.output(mainprogram.stepAP, 1)
+                time.sleep(0.001)
+                GPIO.output(mainprogram.stepAP, 0)
+                time.sleep(0.001)
 
-    quest = input('Test the MV stepper 1500 steps using direction right')
-    print('direction set to 1')
-    count = 1
-    while GPIO.input(limitMV) == 1:
-        if count >= 1500:
-            GPIO.output(enableAll, 1)
-            GPIO.output(directionMV, MVright)
-            GPIO.output(stepMV, 1)
-            time.sleep(0.001)
-            GPIO.output(stepMV, 0)
+        quest = input('Test the MV stepper 1500 steps using direction right')
+        print('direction set to 1')
+        count = 1
+        while GPIO.input(mainprogram.limitMV) == 1:
+            if count >= 1500:
+                GPIO.output(mainprogram.enableAll, 1)
+                GPIO.output(mainprogram.directionMV, mainprogram.MVright)
+                GPIO.output(mainprogram.stepMV, 1)
+                time.sleep(0.001)
+                GPIO.output(mainprogram.stepMV, 0)
+                time.sleep(0.001)
 
-    quest = input('Test the MV stepper 1500 steps using direction left')
-    print('direction set to 0')
-    count = 1
-    while GPIO.input(limitMV) == 1:
-        if count >= 1500:
-            GPIO.output(enableAll, 1)
-            GPIO.output(directionMV, MVleft)
-            GPIO.output(stepMV, 1)
-            time.sleep(0.001)
-            GPIO.output(stepMV, 0)
+        quest = input('Test the MV stepper 1500 steps using direction left')
+        print('direction set to 0')
+        count = 1
+        while GPIO.input(mainprogram.limitMV) == 1:
+            if count >= 1500:
+                GPIO.output(mainprogram.enableAll, 1)
+                GPIO.output(mainprogram.directionMV, mainprogram.MVleft)
+                GPIO.output(mainprogram.stepMV, 1)
+                time.sleep(0.001)
+                GPIO.output(mainprogram.stepMV, 0)
+                time.sleep(0.001)
 
-    quest = input('Test the DV stepper 1500 steps using direction down')
-    print('direction set to 1')
-    count = 1
-    while GPIO.input(limitDV) == 1:
-        if count >= 1500:
-            GPIO.output(enableAll, 1)
-            GPIO.output(directionDV, DVdown)
-            GPIO.output(stepDV, 1)
-            time.sleep(0.001)
-            GPIO.output(stepDV, 0)
+        quest = input('Test the DV stepper 1500 steps using direction down')
+        print('direction set to 1')
+        count = 1
+        while GPIO.input(mainprogram.limitDV) == 1:
+            if count >= 1500:
+                GPIO.output(mainprogram.enableAll, 1)
+                GPIO.output(mainprogram.directionDV, mainprogram.DVdown)
+                GPIO.output(mainprogram.stepDV, 1)
+                time.sleep(0.001)
+                GPIO.output(mainprogram.stepDV, 0)
+                time.sleep(0.001)
 
-    quest = input('Test the DV stepper 1500 steps using direction up')
-    print('direction set to 0')
-    count = 1
-    while GPIO.input(limitDV) == 1:
-        if count >= 1500:
-            GPIO.output(enableAll, 1)
-            GPIO.output(directionDV, DVup)
-            GPIO.output(stepDV, 1)
-            time.sleep(0.001)
-            GPIO.output(stepDV, 0)
+        quest = input('Test the DV stepper 1500 steps using direction up')
+        print('direction set to 0')
+        count = 1
+        while GPIO.input(mainprogram.limitDV) == 1:
+            if count >= 1500:
+                GPIO.output(mainprogram.enableAll, 1)
+                GPIO.output(mainprogram.directionDV, mainprogram.DVup)
+                GPIO.output(mainprogram.stepDV, 1)
+                time.sleep(0.001)
+                GPIO.output(mainprogram.stepDV, 0)
+                time.sleep(0.001)
 
 #this is the executer
 Letsgonow = mainprogram()
