@@ -153,13 +153,13 @@ class StepperSetup:
         self.calibratetemp = []
         file_name = 'calibration.txt'
         file = open(file_name, 'r')
-        r = 0
+
         while True:
             line = file.readline()
             if not line:
                 break
-            self.calibratetemp[r] = line.strip()
-            r += 1
+            self.calibratetemp.append(line.strip())
+
         file.close()
 
         StepperSetup.APstepdistance = float(self.calibratetemp[0])
@@ -198,12 +198,12 @@ class StepperSetup:
                 StepperSetup.APstepdistance = (flAPinputend - flAPinput) / calibrationsteps
 
                 # write values to file
-                calibratetemp = [StepperSetup.APstepdistance, StepperSetup.MVstepdistance, StepperSetup.DVstepdistance]
+                self.calibratetemp = [StepperSetup.APstepdistance, StepperSetup.MVstepdistance, StepperSetup.DVstepdistance]
                 # Open the file in write mode
                 with open(file_name, "w") as file:
                     # Write each variable to the file in Pine Script format
-                    for x, value in enumerate(calibratetemp):
-                        varvalue = calibratetemp[x]
+                    for x, value in enumerate(self.calibratetemp):
+                        varvalue = self.calibratetemp[x]
                         file.write(f"{varvalue}\n")
                 file.close()
 

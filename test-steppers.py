@@ -106,13 +106,13 @@ class mainprogram:
         self.importfile_name = 'offsets.txt'
 
         file = open(self.importfile_name, 'r')
-        r = 0
+
         while True:
             line = file.readline()
             if not line:
                 break
-            self.offsetimport[r] = line.strip()
-            r += 1
+            self.offsetimport.append(line.strip())
+
         file.close()
         mainprogram.APDRILL = self.offsetimport[0]
         mainprogram.MVDRILL = self.offsetimport[1]
