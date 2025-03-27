@@ -92,9 +92,9 @@ class mainprogram:
         GPIO.setup(mainprogram.enableAll, GPIO.OUT, initial=1)
         GPIO.setup(mainprogram.stepAP, GPIO.OUT, initial=0)
         GPIO.setup(mainprogram.directionAP, GPIO.OUT, initial=0)
-        GPIO.setup(mainprogram.limitAP, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        print(mainprogram.LimitAP)
-        testss = GPIO.input(mainprogram.LimitAP)
+        GPIO.setup(limitAP, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        print(LimitAP)
+        testss = GPIO.input(LimitAP)
         print(testss)
 
         GPIO.setup(mainprogram.stepMV, GPIO.OUT, initial=0)
