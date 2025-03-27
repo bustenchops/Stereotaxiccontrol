@@ -228,7 +228,7 @@ class mainprogram:
                     print('MV limit reached', GPIO.input(mainprogram.limitMV))
                 stateMV = newMV
 
-            if newDV != stateDV
+            if newDV != stateDV:
                 if GPIO.input(mainprogram.limitDV) == 0:
                     print('DV limit reached', GPIO.input(mainprogram.limitDV))
                 if GPIO.input(mainprogram.limitDV) == 1:
