@@ -206,9 +206,9 @@ class mainprogram:
         while GPIO.input(mainprogram.limitAP) == 1 or GPIO.input(mainprogram.limitMV) == 1:
             if GPIO.input(mainprogram.limitAP) == 0:
                 print('AP limit reached')
-            if GPIO.input(mainprogram.limitMV == 0):
+            if GPIO.input(mainprogram.limitMV) == 0:
                 print('MV limit reached')
-            if GPIO.input(mainprogram.limitDV == 0):
+            if GPIO.input(mainprogram.limitDV) == 0:
                 print('DV limit reached')
 
         quest = input('Test the AP stepper 1500 steps using direction forward')
