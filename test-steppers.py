@@ -1,6 +1,6 @@
 import time
 import RPi.GPIO as GPIO
-from jupyterlab.handlers.announcements import news_handler_path
+
 
 from rotary_class import RotaryEncoder
 
