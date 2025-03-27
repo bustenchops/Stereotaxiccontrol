@@ -145,7 +145,7 @@ class mainprogram:
 
     #Shuts down steppers regardless of what they were doing direction - restart by re-zeroing
     def emergencystop(self):
-        GPIO.output(mainprogram.enableAll, 0)
+        GPIO.output(mainprogram.enableAll, 1)
         print("!EMERGENCY STOP!")
         print("Re-Zero axis to enable movement again")
 # I dont think I need a doubt check on this and sending "event" was giving an error.
@@ -205,7 +205,7 @@ class mainprogram:
         quest=input('TEST limitswitches - any key to cont')
         while GPIO.input(mainprogram.limitAP) == 1 or GPIO.input(mainprogram.limitMV) == 1:
             if GPIO.input(mainprogram.limitAP) == 0:
-                print('AP limit reached')
+                print('AP limit reached:', GPIO.input(mainprogram.limitAP))
             if GPIO.input(mainprogram.limitMV) == 0:
                 print('MV limit reached')
             if GPIO.input(mainprogram.limitDV) == 0:
@@ -216,7 +216,7 @@ class mainprogram:
         count = 1
         while GPIO.input(mainprogram.limitAP) == 1:
             if count >= 1500:
-                GPIO.output(mainprogram.enableAll, 1)
+                GPIO.output(mainprogram.enableAll, 0)
                 GPIO.output(mainprogram.directionAP, mainprogram.APforward)
                 GPIO.output(mainprogram.stepAP, 1)
                 time.sleep(0.001)
@@ -228,7 +228,7 @@ class mainprogram:
         count = 1
         while GPIO.input(mainprogram.limitAP) == 1:
             if count >= 1500:
-                GPIO.output(mainprogram.enableAll, 1)
+                GPIO.output(mainprogram.enableAll, 0)
                 GPIO.output(mainprogram.directionAP, mainprogram.APback)
                 GPIO.output(mainprogram.stepAP, 1)
                 time.sleep(0.001)
@@ -240,7 +240,7 @@ class mainprogram:
         count = 1
         while GPIO.input(mainprogram.limitMV) == 1:
             if count >= 1500:
-                GPIO.output(mainprogram.enableAll, 1)
+                GPIO.output(mainprogram.enableAll, 0)
                 GPIO.output(mainprogram.directionMV, mainprogram.MVright)
                 GPIO.output(mainprogram.stepMV, 1)
                 time.sleep(0.001)
@@ -252,7 +252,7 @@ class mainprogram:
         count = 1
         while GPIO.input(mainprogram.limitMV) == 1:
             if count >= 1500:
-                GPIO.output(mainprogram.enableAll, 1)
+                GPIO.output(mainprogram.enableAll, 0)
                 GPIO.output(mainprogram.directionMV, mainprogram.MVleft)
                 GPIO.output(mainprogram.stepMV, 1)
                 time.sleep(0.001)
@@ -264,7 +264,7 @@ class mainprogram:
         count = 1
         while GPIO.input(mainprogram.limitDV) == 1:
             if count >= 1500:
-                GPIO.output(mainprogram.enableAll, 1)
+                GPIO.output(mainprogram.enableAll, 0)
                 GPIO.output(mainprogram.directionDV, mainprogram.DVdown)
                 GPIO.output(mainprogram.stepDV, 1)
                 time.sleep(0.001)
@@ -276,7 +276,7 @@ class mainprogram:
         count = 1
         while GPIO.input(mainprogram.limitDV) == 1:
             if count >= 1500:
-                GPIO.output(mainprogram.enableAll, 1)
+                GPIO.output(mainprogram.enableAll, 0)
                 GPIO.output(mainprogram.directionDV, mainprogram.DVup)
                 GPIO.output(mainprogram.stepDV, 1)
                 time.sleep(0.001)
