@@ -71,6 +71,7 @@ class mainprogram:
     def __init__(self):
         #INITIALIZE PINS
 
+        print('what the fuck')
         GPIO.setup(mainprogram.emergstop, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.setup(mainprogram.misc_eventbuttonA, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.setup(mainprogram.misc_eventbuttonB, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -92,6 +93,9 @@ class mainprogram:
         GPIO.setup(mainprogram.stepAP, GPIO.OUT, initial=0)
         GPIO.setup(mainprogram.directionAP, GPIO.OUT, initial=0)
         GPIO.setup(mainprogram.limitAP, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        print(mainprogram.LimitAP)
+        testss = GPIO.input(mainprogram.LimitAP)
+        print(testss)
 
         GPIO.setup(mainprogram.stepMV, GPIO.OUT, initial=0)
         GPIO.setup(mainprogram.directionMV, GPIO.OUT, initial=0)
