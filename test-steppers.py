@@ -228,6 +228,7 @@ class mainprogram:
         quest = input('Test the AP stepper 1500 steps using direction back')
         print('direction set to 0')
         count = 1
+        print("LimitAP is:", GPIO.input(mainprogram.limitAP))
         while GPIO.input(mainprogram.limitAP) == 1:
             if count >= 1500:
                 GPIO.output(mainprogram.enableAll, 1)
