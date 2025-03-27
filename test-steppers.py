@@ -1,5 +1,7 @@
 import time
 import RPi.GPIO as GPIO
+from jupyterlab.handlers.announcements import news_handler_path
+
 from rotary_class import RotaryEncoder
 
 class mainprogram:
@@ -203,26 +205,42 @@ class mainprogram:
 
     def executerrrr(self):
         quest=input('TEST limitswitches - any key to cont')
+        stateAP = GPIO.input(mainprogram.limitAP)
+        stateMV = GPIO.input(mainprogram.limitMV)
+        stateDV = GPIO.input(mainprogram.limitDV)
+
         while GPIO.input(mainprogram.limitAP) == 1 or GPIO.input(mainprogram.limitMV) == 1:
-            if GPIO.input(mainprogram.limitAP) == 0:
-                print('AP limit reached:', GPIO.input(mainprogram.limitAP))
-            if GPIO.input(mainprogram.limitMV) == 0:
-                print('MV limit reached', GPIO.input(mainprogram.limitMV))
-            if GPIO.input(mainprogram.limitDV) == 0:
-                print('DV limit reached', GPIO.input(mainprogram.limitDV))
-            if GPIO.input(mainprogram.limitAP) == 1:
-                print('AP limit reached:', GPIO.input(mainprogram.limitAP))
-            if GPIO.input(mainprogram.limitMV) == 1:
-                print('MV limit reached', GPIO.input(mainprogram.limitMV))
-            if GPIO.input(mainprogram.limitDV) == 1:
-                print('DV limit reached', GPIO.input(mainprogram.limitDV))
+            newAP = GPIO.input(mainprogram.limitAP)
+            newMV = GPIO.input(mainprogram.limitMV)
+            newDV = GPIO.input(mainprogram.limitDV)
+
+            if newAP != stateAP:
+                if GPIO.input(mainprogram.limitAP) == 0:
+                    print('AP limit reached:', GPIO.input(mainprogram.limitAP))
+                if GPIO.input(mainprogram.limitAP) == 1:
+                    print('AP limit reached:', GPIO.input(mainprogram.limitAP))
+                stateAP = newAP
+
+            if newMV != stateMV:
+                if GPIO.input(mainprogram.limitMV) == 0:
+                    print('MV limit reached', GPIO.input(mainprogram.limitMV))
+                if GPIO.input(mainprogram.limitMV) == 1:
+                    print('MV limit reached', GPIO.input(mainprogram.limitMV))
+                stateMV = newMV
+
+            if newDV != stateDV
+                if GPIO.input(mainprogram.limitDV) == 0:
+                    print('DV limit reached', GPIO.input(mainprogram.limitDV))
+                if GPIO.input(mainprogram.limitDV) == 1:
+                    print('DV limit reached', GPIO.input(mainprogram.limitDV))
+                stateDV = newDV
 
         quest = input('Test the AP stepper 1500 steps using direction forward')
         print('direction set to 1')
         count = 1
         while GPIO.input(mainprogram.limitAP) == 1:
             print("start")
-            if count >= 1500:
+            if count <= 1500:
                 GPIO.output(mainprogram.enableAll, 1)
                 GPIO.output(mainprogram.directionAP, mainprogram.APforward)
                 GPIO.output(mainprogram.stepAP, 1)
@@ -237,7 +255,7 @@ class mainprogram:
         count = 1
         print("LimitAP is:", GPIO.input(mainprogram.limitAP))
         while GPIO.input(mainprogram.limitAP) == 1:
-            if count >= 1500:
+            if count <= 1500:
                 GPIO.output(mainprogram.enableAll, 1)
                 GPIO.output(mainprogram.directionAP, mainprogram.APback)
                 GPIO.output(mainprogram.stepAP, 0)
@@ -251,12 +269,12 @@ class mainprogram:
         print('direction set to 1')
         count = 1
         while GPIO.input(mainprogram.limitMV) == 1:
-            if count >= 1500:
+            if count <= 1500:
                 GPIO.output(mainprogram.enableAll, 1)
                 GPIO.output(mainprogram.directionMV, mainprogram.MVright)
-                GPIO.output(mainprogram.stepMV, 0)
-                time.sleep(0.01)
                 GPIO.output(mainprogram.stepMV, 1)
+                time.sleep(0.01)
+                GPIO.output(mainprogram.stepMV, 0)
                 time.sleep(0.01)
                 print('step', count)
                 count +=1
@@ -265,8 +283,8 @@ class mainprogram:
         print('direction set to 0')
         count = 1
         while GPIO.input(mainprogram.limitMV) == 1:
-            if count >= 1500:
-                GPIO.output(mainprogram.enableAll, 0)
+            if count <= 1500:
+                GPIO.output(mainprogram.enableAll, 1)
                 GPIO.output(mainprogram.directionMV, mainprogram.MVleft)
                 GPIO.output(mainprogram.stepMV, 1)
                 time.sleep(0.01)
@@ -279,8 +297,8 @@ class mainprogram:
         print('direction set to 1')
         count = 1
         while GPIO.input(mainprogram.limitDV) == 1:
-            if count >= 1500:
-                GPIO.output(mainprogram.enableAll, 0)
+            if count <= 1500:
+                GPIO.output(mainprogram.enableAll, 1)
                 GPIO.output(mainprogram.directionDV, mainprogram.DVdown)
                 GPIO.output(mainprogram.stepDV, 1)
                 time.sleep(0.01)
@@ -293,8 +311,8 @@ class mainprogram:
         print('direction set to 0')
         count = 1
         while GPIO.input(mainprogram.limitDV) == 1:
-            if count >= 1500:
-                GPIO.output(mainprogram.enableAll, 0)
+            if count <= 1500:
+                GPIO.output(mainprogram.enableAll, 1)
                 GPIO.output(mainprogram.directionDV, mainprogram.DVup)
                 GPIO.output(mainprogram.stepDV, 1)
                 time.sleep(0.01)
