@@ -204,7 +204,7 @@ class mainprogram:
     def executerrrr(self):
         quest=input('TEST limitswitches - any key to cont')
         while GPIO.input(mainprogram.limitAP) == 1 or GPIO.input(mainprogram.limitMV) == 1:
-            if GPIO.input(mainprogram.limitAP == 0):
+            if GPIO.input(mainprogram.limitAP) == 0:
                 print('AP limit reached')
             if GPIO.input(mainprogram.limitMV == 0):
                 print('MV limit reached')
