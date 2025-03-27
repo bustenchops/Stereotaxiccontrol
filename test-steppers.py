@@ -160,7 +160,7 @@ class mainprogram:
 
 
     #Event handling for the encoders and hard wired buttons each encoder
-    def AP_event(self,event):
+    def AP_event(self, event):
 
         if event == RotaryEncoder.CLOCKWISE:
             print('AP clockwise')
