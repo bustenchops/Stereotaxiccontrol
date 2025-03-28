@@ -26,20 +26,20 @@ GPIO.output(directionpin, 0)
 for x in range(numberofsteps):
     if GPIO.input(limitpin):
         GPIO.output(steppin, 1)
-        time.sleep(0.0003)
+        time.sleep(0.001)
         GPIO.output(steppin, 0)
-        time.sleep(0.0003)
+        time.sleep(0.001)
     else:
         print('LIMIT SWITCH TRIGGER')
 
-quest = input('enable (1) : direction (0)')
+quest = input('enable (0) : direction (1)')
 GPIO.output(enablepin, 0)
 GPIO.output(directionpin, 1)
 for x in range(numberofsteps):
     if GPIO.input(limitpin):
         GPIO.output(steppin, 1)
-        time.sleep(0.0003)
+        time.sleep(0.001)
         GPIO.output(steppin, 0)
-        time.sleep(0.0003)
+        time.sleep(0.001)
     else:
         print('LIMIT SWITCH TRIGGER')
