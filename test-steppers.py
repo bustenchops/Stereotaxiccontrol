@@ -241,11 +241,11 @@ class mainprogram:
         while GPIO.input(mainprogram.limitAP) == 1:
             print("start")
             if count <= 1500:
-                GPIO.output(mainprogram.enableAll, 1)
+                GPIO.output(mainprogram.enableAll, 0)
                 GPIO.output(mainprogram.directionAP, mainprogram.APforward)
                 GPIO.output(mainprogram.stepAP, 1)
                 time.sleep(0.01)
-                GPIO.output(mainprogram.stepAP, 1)
+                GPIO.output(mainprogram.stepAP, 0)
                 time.sleep(0.01)
                 print('step', count)
                 count += 1
