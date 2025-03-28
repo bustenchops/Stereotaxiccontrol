@@ -86,6 +86,15 @@ class mainprogram:
         GPIO.setup(mainprogram.directionAP, GPIO.OUT, initial=0)
         GPIO.setup(mainprogram.limitAP, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
+        GPIO.setup(mainprogram.enableAll, GPIO.OUT, initial=1)
+        GPIO.setup(mainprogram.stepMV, GPIO.OUT, initial=0)
+        GPIO.setup(mainprogram.directionMV, GPIO.OUT, initial=0)
+        GPIO.setup(mainprogram.limitMV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+        GPIO.setup(mainprogram.enableAll, GPIO.OUT, initial=1)
+        GPIO.setup(mainprogram.stepDV, GPIO.OUT, initial=0)
+        GPIO.setup(mainprogram.directionDV, GPIO.OUT, initial=0)
+        GPIO.setup(mainprogram.limitDV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
     def executerrrr(self):
 
