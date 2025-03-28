@@ -256,11 +256,11 @@ class mainprogram:
         print("LimitAP is:", GPIO.input(mainprogram.limitAP))
         while GPIO.input(mainprogram.limitAP) == 1:
             if count <= 1500:
-                GPIO.output(mainprogram.enableAll, 1)
+                GPIO.output(mainprogram.enableAll, 0)
                 GPIO.output(mainprogram.directionAP, mainprogram.APback)
-                GPIO.output(mainprogram.stepAP, 0)
-                time.sleep(0.01)
                 GPIO.output(mainprogram.stepAP, 1)
+                time.sleep(0.01)
+                GPIO.output(mainprogram.stepAP, 0)
                 time.sleep(0.01)
                 print('step', count)
                 count += 1
@@ -270,7 +270,7 @@ class mainprogram:
         count = 1
         while GPIO.input(mainprogram.limitMV) == 1:
             if count <= 1500:
-                GPIO.output(mainprogram.enableAll, 1)
+                GPIO.output(mainprogram.enableAll, 0)
                 GPIO.output(mainprogram.directionMV, mainprogram.MVright)
                 GPIO.output(mainprogram.stepMV, 1)
                 time.sleep(0.01)
@@ -284,7 +284,7 @@ class mainprogram:
         count = 1
         while GPIO.input(mainprogram.limitMV) == 1:
             if count <= 1500:
-                GPIO.output(mainprogram.enableAll, 1)
+                GPIO.output(mainprogram.enableAll, 0)
                 GPIO.output(mainprogram.directionMV, mainprogram.MVleft)
                 GPIO.output(mainprogram.stepMV, 1)
                 time.sleep(0.01)
@@ -298,7 +298,7 @@ class mainprogram:
         count = 1
         while GPIO.input(mainprogram.limitDV) == 1:
             if count <= 1500:
-                GPIO.output(mainprogram.enableAll, 1)
+                GPIO.output(mainprogram.enableAll, 0)
                 GPIO.output(mainprogram.directionDV, mainprogram.DVdown)
                 GPIO.output(mainprogram.stepDV, 1)
                 time.sleep(0.01)
@@ -312,7 +312,7 @@ class mainprogram:
         count = 1
         while GPIO.input(mainprogram.limitDV) == 1:
             if count <= 1500:
-                GPIO.output(mainprogram.enableAll, 1)
+                GPIO.output(mainprogram.enableAll, 0)
                 GPIO.output(mainprogram.directionDV, mainprogram.DVup)
                 GPIO.output(mainprogram.stepDV, 1)
                 time.sleep(0.01)
