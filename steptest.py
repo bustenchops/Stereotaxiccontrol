@@ -110,7 +110,7 @@ class mainprogram:
                 GPIO.output(mainprogram.stepAP, 1)
                 time.sleep(0.001)
                 GPIO.output(mainprogram.stepAP, 0)
-                time.sleep(0.01)
+                time.sleep(0.001)
                 print('step', count)
                 count += 1
 
@@ -142,7 +142,7 @@ class mainprogram:
                 GPIO.output(mainprogram.stepMV, 1)
                 time.sleep(0.001)
                 GPIO.output(mainprogram.stepMV, 0)
-                time.sleep(0.01)
+                time.sleep(0.001)
                 print('step', count)
                 count += 1
 
@@ -174,7 +174,7 @@ class mainprogram:
                 GPIO.output(mainprogram.stepDV, 1)
                 time.sleep(0.001)
                 GPIO.output(mainprogram.stepDV, 0)
-                time.sleep(0.01)
+                time.sleep(0.001)
                 print('step', count)
                 count += 1
 
