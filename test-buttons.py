@@ -62,7 +62,7 @@ class mainprogram:
 
 
     def getshiftregisterdata(self):
-
+        self.shiftvalues = []
         #get number of buttons
         x = len(mainprogram.buttonarray)
         print("button array lenght=", x)
