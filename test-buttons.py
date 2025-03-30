@@ -65,11 +65,12 @@ class mainprogram:
 
         #get number of buttons
         x = len(mainprogram.buttonarray)
+        print(x)
         #LOAD DATA
         GPIO.output(mainprogram.latchpin,GPIO.LOW)
         time.sleep(0.01)
         GPIO.output(mainprogram.latchpin,GPIO.HIGH)
-
+        self.shiftvalues = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
         #READ DATA
         for i in range(x):
             GPIO.output(mainprogram.clockpin,GPIO.LOW)
