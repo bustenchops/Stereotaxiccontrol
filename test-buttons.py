@@ -65,19 +65,19 @@ class mainprogram:
 
         #get number of buttons
         x = len(mainprogram.buttonarray)
-        print(x)
+        print("button array lenght=", x)
+        for k in range(x):
+            self.shiftvalues.append(0)
         #LOAD DATA
         GPIO.output(mainprogram.latchpin,GPIO.LOW)
-        time.sleep(0.01)
+        time.sleep(0.001)
         GPIO.output(mainprogram.latchpin,GPIO.HIGH)
-        self.shiftvalues = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
         #READ DATA
         for i in range(x):
             GPIO.output(mainprogram.clockpin,GPIO.LOW)
-            time.sleep(0.01)
             self.shiftvalues[i] = GPIO.input(mainprogram.datapin)
             GPIO.output(mainprogram.clockpin, GPIO.HIGH)
-            time.sleep(0.01)
+            time.sleep(0.001)
         return self.shiftvalues
 
 
@@ -107,7 +107,8 @@ class mainprogram:
 
         #reading the buttons
             newbuttonstate = self.getshiftregisterdata()
-            mainprogram.lastbuttonstate = self.buttonvalues(mainprogram.lastbuttonstate,newbuttonstate,mainprogram.buttonarray)
+            print(newbuttonstate)
+ #           mainprogram.lastbuttonstate = self.buttonvalues(mainprogram.lastbuttonstate,newbuttonstate,mainprogram.buttonarray)
 
 letsgo = mainprogram()
 letsgo.intializethesystem_andrun()
