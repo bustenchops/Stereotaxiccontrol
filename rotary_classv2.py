@@ -86,11 +86,11 @@ class RotaryEncoder:
             else:
                 self.direction = self.ANTICLOCKWISE
 
-        print("detected", event, )
-        if event > 0:
-            self.callback(event)
+        #print("detected", event, )
+        # if event > 0:
+        #    self.callback(event)
 
-        print(event)
+        # print(event)
 
         return
 
