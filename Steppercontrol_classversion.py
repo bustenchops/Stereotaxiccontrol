@@ -29,7 +29,7 @@ class mainprogram:
 
     #DEFINE NUMBER OF BUTTONS AND ORDER IN ARRAY
     buttonarray = ['movefast','moveslow','buttontohome','relativeALL','relativeAP','relativeMV','relativeDV','buttonaction','miscbuttonC','miscbuttonD','miscbuttonE','zerobutton','calibratebutton','miscbuttonA','miscbuttonB']
-    lastbuttonstate = [len(buttonarray)]
+    lastbuttonstate = [0 for x in range(len(buttonarray))]
 
     #BUTTON POSITION IN SHIFT REGISTER ARRAY
         # 2 position switch (3 states 1/2 and all off)
@@ -118,12 +118,10 @@ class mainprogram:
         GPIO.setup(mainprogram.clockpin,GPIO.OUT)
         GPIO.setup(mainprogram.datapin,GPIO.IN)
 
-#        GPIO.setup(mainprogram.movefast, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-#        GPIO.setup(mainprogram.moveslow, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-
-        GPIO.setup(mainprogram.emergstop, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.setup(mainprogram.misc_eventbuttonA, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.setup(mainprogram.misc_eventbuttonB, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+#   Need to test rotary encoder setup to see if Hard Wired Buttons are working
+#        GPIO.setup(mainprogram.emergstop, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+#        GPIO.setup(mainprogram.misc_eventbuttonA, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+#        GPIO.setup(mainprogram.misc_eventbuttonB, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
         #EMPTY variables to initialize
         self.quest = "none"
@@ -168,95 +166,45 @@ class mainprogram:
         mainprogram.MVfiber = self.offsetimport[7]
         mainprogram.DVfiber = self.offsetimport[8]
 
+#to use  parts of the main stereotaxic window
+    def receive_frommaincontrol(self, comingfrommainA):
+        self.sendingtomainA = comingfrommainA
+
     def getshiftregisterdata(self):
 
+        self.shiftvalues = []
         #get number of buttons
         x = len(mainprogram.buttonarray)
+        print("button array lenght=", x)
+        for k in range(x):
+            self.shiftvalues.append(0)
         #LOAD DATA
         GPIO.output(mainprogram.latchpin,GPIO.LOW)
-        time.sleep(0.01)
+        time.sleep(0.001)
         GPIO.output(mainprogram.latchpin,GPIO.HIGH)
-
         #READ DATA
         for i in range(x):
             GPIO.output(mainprogram.clockpin,GPIO.LOW)
-            time.sleep(0.01)
             self.shiftvalues[i] = GPIO.input(mainprogram.datapin)
             GPIO.output(mainprogram.clockpin, GPIO.HIGH)
-            time.sleep(0.01)
+            time.sleep(0.001)
         return self.shiftvalues
-
-
-    #Shuts down steppers regardless of what they were doing direction - restart by re-zeroing
-    def emergencystop(self):
-        GPIO.output(mainprogram.enableAll, 0)
-        print("!EMERGENCY STOP!")
-        print("Re-Zero axis to enable movement again")
-# I dont think I need a doubt check on this and sending "event" was giving an error.
-#        if event == RotaryEncoder.BUTTONDOWN:
-#            print("Re-Zero axis to enable movement again")
-#            GPIO.output(mainprogram.enableAll,0)
-#        else:
-#            return
-        return
-
-
-    #Event handling for the encoders and hard wired buttons each encoder
-    def AP_event(self,event):
-
-        if event == RotaryEncoder.CLOCKWISE:
-            self.APmove.steppgo(mainprogram.APforward,mainprogram.stepper_speed,StepperSetup.btnSteps)
-        elif event == RotaryEncoder.ANTICLOCKWISE:
-            self.APmove.steppgo(mainprogram.APback,mainprogram.stepper_speed,StepperSetup.btnSteps)
-        #This is a hard wired button note the encoder switch
-        elif event == RotaryEncoder.BUTTONDOWN:
-            mainprogram.emergencystop(self)
-        elif event == RotaryEncoder.BUTTONUP:
-            return
-        return
-
-
-    #Event handling for the encoders and hard wired buttons each encoder
-    def MV_event(self, event):
-
-        if event == RotaryEncoder.CLOCKWISE:
-            self.MVmove.steppgo(mainprogram.MVright,mainprogram.stepper_speed,StepperSetup.btnSteps)
-        elif event == RotaryEncoder.ANTICLOCKWISE:
-            self.MVmove.steppgo(mainprogram.MVleft,mainprogram.stepper_speed,StepperSetup.btnSteps)
-        elif event == RotaryEncoder.BUTTONDOWN:
-            print("event button B clicked")
-            return
-        elif event == RotaryEncoder.BUTTONUP:
-            return
-        return
-
-
-    #Event handling for the encoders and hard wired buttons each encoder
-    def DV_event(self, event):
-
-        if event == RotaryEncoder.CLOCKWISE:
-            self.DVmove.steppgo(mainprogram.DVdown,mainprogram.stepper_speed,StepperSetup.btnSteps)
-        elif event == RotaryEncoder.ANTICLOCKWISE:
-            self.DVmove.steppgo(mainprogram.DVup,mainprogram.stepper_speed,StepperSetup.btnSteps)
-        elif event == RotaryEncoder.BUTTONDOWN:
-            print("event button B clicked")
-            return
-        elif event == RotaryEncoder.BUTTONUP:
-            return
-        return
 
 
     def buttonvalues(self, lastbut, newbut, butarr):
 
         x = len(lastbut)
-
+        y = len(newbut)
+        if x != y:
+            print("the last button array and new button array are not equal")
         for i in range(x):
             if lastbut[i] != newbut[i]:
                 lastbut[i] = newbut[i]
-                print("button ", butarr[i], " state change")
+                print("button ", butarr[i], " state change", lastbut[i], ' to ', newbut[i])
 
+# note 1 is pressed and 0 is released
         # stepper_speed (pos 0 and pos 1)
-        if lastbut[0] == 1 and lastbut[1] == 1:
+        if lastbut[0] == 0 and lastbut[1] == 0:
             mainprogram.stepper_speed = mainprogram.normalspeed
         elif lastbut[0] == 0 and lastbut[1] == 1:
             mainprogram.stepper_speed = mainprogram.fastspeed
@@ -264,7 +212,7 @@ class mainprogram:
             mainprogram.stepper_speed = mainprogram.finespeed
 
         #button to home to ABS zero
-        if lastbut[2] == 0:
+        if lastbut[2] == 1:
 
             for x in range(StepperSetup.DVsteps):
                 self.DVmove.steppgo(mainprogram.DVup, 1,StepperSetup.btnSteps)
@@ -476,14 +424,67 @@ class mainprogram:
 
         return lastbut
 
-    def receive_frommainA(self, comingfrommainA):
-        self.sendingtomainA = comingfrommainA
+
+
+        # Shuts down steppers regardless of what they were doing direction - restart by re-zeroing
+    def emergencystop(self):
+        GPIO.output(mainprogram.enableAll, 0)
+        print("!EMERGENCY STOP!")
+        print("Re-Zero axis to enable movement again")
+        # I dont think I need a doubt check on this and sending "event" was giving an error.
+        #        if event == RotaryEncoder.BUTTONDOWN:
+        #            print("Re-Zero axis to enable movement again")
+        #            GPIO.output(mainprogram.enableAll,0)
+        #        else:
+        #            return
+        return
+
+    # Event handling for the encoders and hard wired buttons each encoder
+    def AP_event(self, event):
+
+        if event == RotaryEncoder.CLOCKWISE:
+            self.APmove.steppgo(mainprogram.APforward, mainprogram.stepper_speed, StepperSetup.btnSteps)
+        if event == RotaryEncoder.ANTICLOCKWISE:
+            self.APmove.steppgo(mainprogram.APback, mainprogram.stepper_speed, StepperSetup.btnSteps)
+        # This is a hard wired button note the encoder switch
+        elif event == RotaryEncoder.BUTTONDOWN:
+            mainprogram.emergencystop(self)
+        elif event == RotaryEncoder.BUTTONUP:
+            return
+        return
+
+    # Event handling for the encoders and hard wired buttons each encoder
+    def MV_event(self, event):
+        if event == RotaryEncoder.CLOCKWISE:
+            self.MVmove.steppgo(mainprogram.MVright, mainprogram.stepper_speed, StepperSetup.btnSteps)
+        elif event == RotaryEncoder.ANTICLOCKWISE:
+            self.MVmove.steppgo(mainprogram.MVleft, mainprogram.stepper_speed, StepperSetup.btnSteps)
+        elif event == RotaryEncoder.BUTTONDOWN:
+            print("event button B clicked")
+            return
+        elif event == RotaryEncoder.BUTTONUP:
+            return
+        return
+
+    # Event handling for the encoders and hard wired buttons each encoder
+    def DV_event(self, event):
+
+        if event == RotaryEncoder.CLOCKWISE:
+            self.DVmove.steppgo(mainprogram.DVdown, mainprogram.stepper_speed, StepperSetup.btnSteps)
+        elif event == RotaryEncoder.ANTICLOCKWISE:
+            self.DVmove.steppgo(mainprogram.DVup, mainprogram.stepper_speed, StepperSetup.btnSteps)
+        elif event == RotaryEncoder.BUTTONDOWN:
+            print("event button B clicked")
+            return
+        elif event == RotaryEncoder.BUTTONUP:
+            return
+        return
 
     #MAIN CODE ################################################################################################
     def intializethesystem_andrun(self):
     #question and waits for ANY user input
-        self.quest = input("Initialization Process ... anykey to continue.")
-        self.quest = input("CAUTION...Remove all attachments from frame arms! anykey to continue.")
+        self.quest = input("Initialization Process ... ENTER to continue.")
+        self.quest = input("CAUTION...Remove all attachments from frame arms! ENTER to continue.")
 
     #Zero steppers
         self.DVmove.zerostep(mainprogram.backoff, StepperSetup.btnSteps)

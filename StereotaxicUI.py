@@ -5,9 +5,9 @@ from PySide6.QtGui import (QFont)
 from PySide6.QtWidgets import (QApplication, QFrame, QLCDNumber, QMainWindow, QMenuBar, QRadioButton, QStatusBar,
                                QWidget, QLabel, QPlainTextEdit, QCheckBox, QPushButton, QListWidget,QFileDialog)
 
-#from motorcontrolclass_v2 import StepperSetup
-#from rotary_class import RotaryEncoder
-#from Steppercontrol_classversion import mainprogram
+from motorcontrolclass_v2 import StepperSetup
+from rotary_class import RotaryEncoder
+from Steppercontrol_classversion import mainprogram
 
 import os
 import sys
@@ -306,10 +306,10 @@ class MainWindow(QMainWindow):
 app = QApplication(sys.argv)
 window = MainWindow()
 
-#maininstancesend = StepperSetup()
-#maininstancesend.receive_frommain(window)
-#maininstancesend = mainprogram()
-#maininstancesendA.receive_frommainA(window)
+maininstancesendstepper = StepperSetup()
+maininstancesendstepper.receive_frommainstepper(window)
+maininstancesendcontrol = mainprogram()
+maininstancesendcontrol.receive_frommaincontrol(window)
 
 window.show()
 

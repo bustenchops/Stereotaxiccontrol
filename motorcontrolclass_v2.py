@@ -4,7 +4,7 @@ import time
 
 class StepperSetup:
 
-    btnSteps = 0.0001
+    btnSteps = 0.001
 
     APsteps = 0
     MVsteps = 0
@@ -56,7 +56,7 @@ class StepperSetup:
         GPIO.setup(self.direction, GPIO.OUT, initial=0)
         GPIO.setup(self.limit, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-    #may not need but put in in case I need to export the steps to the main program
+    #may not need but put it in case I need to export the steps to the main program
     def exportsteps(self):
         if self.axis == 1:
             return StepperSetup.APsteps
@@ -66,15 +66,15 @@ class StepperSetup:
             return StepperSetup.DVsteps
 
 
-    #receives object instance from main program so it can be utilized with this class
+    #receives object instance from cotrol  program so it can be utilized with this class APmove,MVmove and DVmove
         #Object instance calls on this function from within itself and sends itself here.
-    def receive_instance(self,maininstance):
+    def receive_instance(self, maininstance):
         self.iliketomoveit = maininstance
 
     #receives object instance from main program so it can be utilized with this class
     #Object instance calls on this function from within itself and sends itself here.
     #just to keep UIstuff apart from working stuff
-    def receive_frommain(self, comingfrommain):
+    def receive_frommainstepper(self, comingfrommain):
         self.sendingtomain = comingfrommain
 
 
@@ -107,11 +107,11 @@ class StepperSetup:
                 print("ERROR - limit reached")
 
 
-    def zerostep(self,backoff,btwnsteps):
+    def zerostep(self,backoff, btwnsteps):
 
         GPIO.output(self.enable,1)
         while GPIO.input(self.limit):
-            self.steppgo(0,1,btwnsteps)
+            self.steppgo(self.gominus,1, btwnsteps)
             if self.axis == 1:
                 StepperSetup.APsteps -= 1
             elif self.axis == 2:
@@ -119,13 +119,12 @@ class StepperSetup:
             elif self.axis == 3:
                 StepperSetup.DVsteps -= 1
 
+            GPIO.output(self.direction, self.goplus)
         for x in range(backoff):
-            GPIO.output(self.enable, 1)
-            GPIO.output(self.direction, 1)
             GPIO.output(self.step, 1)
-            time.sleep(btwnsteps)
+            time.sleep(self.btnSteps)
             GPIO.output(self.step, 0)
-            time.sleep(btwnsteps)
+            time.sleep(self.btnSteps)
 
             if self.axis == 1:
                 StepperSetup.APsteps += 1
@@ -136,7 +135,7 @@ class StepperSetup:
 
             print(f"APsteps: {StepperSetup.APsteps} MVsteps: {StepperSetup.MVsteps} DVsteps {StepperSetup.DVsteps}")
 
-        #Sets the step for that axis to 0
+        #Sets the ABS steps for that axis to 0
         if self.axis == 1:
             StepperSetup.APsteps = 0
         elif self.axis == 2:
@@ -148,9 +147,9 @@ class StepperSetup:
         self.iliketomoveit.PosRelAbsCalc()
 
 
-    def CalibrateDistance(self, calibrationsteps, rollback,btwnSteps):
+    def CalibrateDistance(self, calibrationsteps, rollback, btwnSteps):
 
-        self.calibratetemp = []
+        self.calibratetemp = [0,0,0]
         file_name = 'calibration.txt'
         file = open(file_name, 'r')
 
@@ -167,9 +166,9 @@ class StepperSetup:
         StepperSetup.DVstepdistance = float(self.calibratetemp[2])
 
         print("Current calibration values are:")
-        print("AP distance per step:", " ", StepperSetup.APstepdistance, "mm")
-        print("MV distance per step:", " ", StepperSetup.MVstepdistance, "mm")
-        print("DV distance per step:", " ", StepperSetup.DVstepdistance, "mm")
+        print("AP distance per step: ", StepperSetup.APstepdistance, "mm")
+        print("MV distance per step: ", StepperSetup.MVstepdistance, "mm")
+        print("DV distance per step: ", StepperSetup.DVstepdistance, "mm")
 
         yesno = input("Perform calibration? (y/n)")
 
@@ -182,13 +181,13 @@ class StepperSetup:
         self.DVinputend = 0
 
         if yesno == "y":
-            notation = input("!!!Make sure to remove all attachments from rig!!! any key to continue")
+            notation = input("!!!Make sure to remove all attachments from rig!!! ENTER key to continue")
             if self.axis == 1:
                 self.APinput = input("Enter the AP starting position in millimeters.")
 
                 for x in range(calibrationsteps):
                     if 0 < StepperSetup.APsteps < 6000:
-                        self.iliketomoveit.steppgo(self.goplus, 1,btwnSteps)
+                        self.iliketomoveit.steppgo(self.goplus, 1, btwnSteps)
 
                 self.APinputend = input("Enter the AP final position in millimeters.")
                 # converted to float values
