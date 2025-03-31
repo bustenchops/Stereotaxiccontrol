@@ -44,7 +44,7 @@ class RotaryEncoder:
     
         # Add event detection to the GPIO inputs
         GPIO.add_event_detect(self.pinA, GPIO.RISING, callback=self.switch_event)
-        GPIO.add_event_detect(self.pinB, GPIO.RISING, callback=self.switch_event)
+        # GPIO.add_event_detect(self.pinB, GPIO.RISING, callback=self.switch_event)
         GPIO.add_event_detect(self.button, GPIO.BOTH, callback=self.button_event, bouncetime=200)
 
         return
@@ -73,11 +73,10 @@ class RotaryEncoder:
         if delta == 1:
  
             if self.direction == self.CLOCKWISE:
-                print ("Clockwise")
                 event = self.direction
             else:
                 self.direction = self.CLOCKWISE
-    
+            print(self.direction, "  CLOCKWISE   ", self.CLOCKWISE)
         elif delta == 3:
     
             if self.direction == self.ANTICLOCKWISE:
@@ -85,7 +84,7 @@ class RotaryEncoder:
                 event = self.direction
             else:
                 self.direction = self.ANTICLOCKWISE
-
+            print(self.direction, "  ANITCLOCKWISE   ", self.ANTICLOCKWISE)
         #print("detected", event, )
         # if event > 0:
         #    self.callback(event)
