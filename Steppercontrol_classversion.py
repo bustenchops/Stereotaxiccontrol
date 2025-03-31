@@ -428,7 +428,7 @@ class mainprogram:
 
         # Shuts down steppers regardless of what they were doing direction - restart by re-zeroing
     def emergencystop(self):
-        GPIO.output(mainprogram.enableAll, 0)
+        GPIO.output(mainprogram.enableAll, 1)
         print("!EMERGENCY STOP!")
         print("Re-Zero axis to enable movement again")
         # I dont think I need a doubt check on this and sending "event" was giving an error.

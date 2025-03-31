@@ -1,6 +1,8 @@
 import RPi.GPIO as GPIO
 import time
 
+from Steppercontrol_classversion import mainprogram
+
 
 class StepperSetup:
 
@@ -81,27 +83,33 @@ class StepperSetup:
     def steppgo(self,move_direction, speed, btwnsteps):
 
         self.stepmodifier = 0
+        GPIO.output(self.enable, 0)
 
         for x in range (speed):
             if GPIO.input(self.limit):
-                GPIO.output(self.enable,1)
-                GPIO.output(self.direction,move_direction)
+                GPIO.output(self.direction,self.move_direction)
                 GPIO.output(self.step, 1)
                 time.sleep(btwnsteps)
                 GPIO.output(self.step, 0)
                 time.sleep(btwnsteps)
 
-                if move_direction == 1:
-                    self.stepmodifier = 1
-                else:
-                    self.stepmodifier = -1
 
                 if self.axis == 1:
-                    StepperSetup.APsteps += self.stepmodifier
+                    if move_direction == mainprogram.APforward:
+                        StepperSetup.APsteps += 1
+                    else:
+                        StepperSetup.APsteps -= 1
                 elif self.axis == 2:
-                    StepperSetup.MVsteps += self.stepmodifier
+                    if move_direction == mainprogram.MVright:
+                        StepperSetup.MVsteps += 1
+                    else:
+                        StepperSetup.MVsteps -= 1
                 elif self.axis == 3:
-                    StepperSetup.DVsteps += self.stepmodifier
+                    if move_direction == mainprogram.DVdown:
+                        StepperSetup.DVsteps += 1
+                    else:
+                        StepperSetup.DVsteps -= 1
+
                 self.iliketomoveit.PosRelAbsCalc()
             else:
                 print("ERROR - limit reached")
@@ -109,7 +117,7 @@ class StepperSetup:
 
     def zerostep(self,backoff, btwnsteps):
 
-        GPIO.output(self.enable,1)
+        GPIO.output(self.enable,0)
         while GPIO.input(self.limit):
             self.steppgo(self.gominus,1, btwnsteps)
             if self.axis == 1:
@@ -119,8 +127,9 @@ class StepperSetup:
             elif self.axis == 3:
                 StepperSetup.DVsteps -= 1
 
-            GPIO.output(self.direction, self.goplus)
+
         for x in range(backoff):
+            GPIO.output(self.direction, self.goplus)
             GPIO.output(self.step, 1)
             time.sleep(self.btnSteps)
             GPIO.output(self.step, 0)
@@ -274,11 +283,11 @@ class StepperSetup:
 
         StepperSetup.APcurRELdist = round(((StepperSetup.APsteps - StepperSetup.APrelpos) * StepperSetup.APstepdistance), 4)
         StepperSetup.MVcurRELdist = round(((StepperSetup.MVsteps - StepperSetup.MVrelpos) * StepperSetup.MVstepdistance), 4)
-        StepperSetup.DVcurRELdist = round(((StepperSetup.DVsteps - StepperSetup.DVrelpos) * StepperSetup.DVstepdistance), 4)
+        StepperSetup.DVcurRELdist = round(((StepperSetup.DVsteps - StepperSetup.DVrelpos) * StepperSetup.DVstepdistance * -1), 4)
 
         StepperSetup.APcurABSdist = round((StepperSetup.APsteps * StepperSetup.APstepdistance), 4)
         StepperSetup.MVcurABSdist = round((StepperSetup.MVsteps * StepperSetup.MVstepdistance), 4)
-        StepperSetup.DVcurABSdist = round((StepperSetup.MVsteps * StepperSetup.DVstepdistance), 4)
+        StepperSetup.DVcurABSdist = round((StepperSetup.DVsteps * StepperSetup.DVstepdistance * -1), 4)
 
         self.sendingtomain.updatepositionLCD(StepperSetup.APsteps,StepperSetup.MVsteps,StepperSetup.DVsteps,StepperSetup.APcurABSdist,StepperSetup.MVcurABSdist,StepperSetup.DVcurABSdist,StepperSetup.APcurRELdist,StepperSetup.MVcurRELdist,StepperSetup.DVcurRELdist)
 
