@@ -52,7 +52,7 @@ class RotaryEncoder:
     # Call back routine called by switch events
     def switch_event(self,switch):
 
-        print(f"event detected on {switch}")
+        # print(f"event detected on {switch}")
 
         if GPIO.input(self.pinA):
             self.rotary_a = 1
@@ -73,7 +73,7 @@ class RotaryEncoder:
         if delta == 1:
  
             if self.direction == self.CLOCKWISE:
-                # print "Clockwise"
+                print ("Clockwise")
                 event = self.direction
             else:
                 self.direction = self.CLOCKWISE
@@ -81,14 +81,17 @@ class RotaryEncoder:
         elif delta == 3:
     
             if self.direction == self.ANTICLOCKWISE:
-                # print "Anticlockwise"
+                print ("Anticlockwise")
                 event = self.direction
             else:
                 self.direction = self.ANTICLOCKWISE
-    
+
+        print("detected", event, )
         if event > 0:
             self.callback(event)
- 
+
+        print(event)
+
         return
 
 # Push button up event
