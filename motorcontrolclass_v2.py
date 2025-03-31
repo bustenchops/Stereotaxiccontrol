@@ -126,6 +126,8 @@ class StepperSetup:
                 StepperSetup.MVsteps -= 1
             elif self.axis == 3:
                 StepperSetup.DVsteps -= 1
+            if GPIO.imput(self.limit):
+                break
 
 
         for x in range(backoff):
