@@ -25,8 +25,9 @@ class RotaryEncoder:
     last_state = 0
     direction = 0
 
-    count = 0
-    
+    Ccount = 0
+    CCcount = 0
+
     # Initialise rotary encoder object
     def __init__(self,pinA,pinB,button,callbackdef):
 
@@ -45,8 +46,8 @@ class RotaryEncoder:
         GPIO.setup(self.button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     
         # Add event detection to the GPIO inputs
-        GPIO.add_event_detect(self.pinA, GPIO.RISING, callback=self.switch_event)
-        GPIO.add_event_detect(self.pinB, GPIO.RISING, callback=self.switch_event)
+        GPIO.add_event_detect(self.pinA, GPIO.BOTH, callback=self.switch_event)
+        GPIO.add_event_detect(self.pinB, GPIO.BOTH, callback=self.switch_event)
         GPIO.add_event_detect(self.button, GPIO.BOTH, callback=self.button_event, bouncetime=200)
 
         return
@@ -78,19 +79,23 @@ class RotaryEncoder:
                 event = self.direction
             else:
                 self.direction = self.CLOCKWISE
-            print(self.direction, "  CLOCKWISE   ", self.CLOCKWISE)
+            #print(self.direction, "  CLOCKWISE   ", self.CLOCKWISE)
         elif delta == 3:
     
             if self.direction == self.ANTICLOCKWISE:
                 event = self.direction
             else:
                 self.direction = self.ANTICLOCKWISE
-            print(self.direction, "  ANTICLOCKWISE   ", self.ANTICLOCKWISE)
+            # print(self.direction, "  ANTICLOCKWISE   ", self.ANTICLOCKWISE)
         #print("detected", event, )
         if event > 0:
+            if event == 1:
+                print('clockwise')
+            if event == 2:
+                print('counterclockwise')
         #    self.callback(event)
-            print('do something count = ',self.count)
-            self.count += 1
+            # print('do something count = ',self.count)
+            #self.count += 1
         # print(event)
 
         return
@@ -104,7 +109,7 @@ class RotaryEncoder:
             event = self.BUTTONDOWN
 
         self.callback(event)
-
+        print('button')
         return
  
 # Get a switch state
