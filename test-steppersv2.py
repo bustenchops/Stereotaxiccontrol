@@ -60,8 +60,8 @@ class mainprogram:
     rotoB_DV = 21
 
     #DEFINE STEPPER DIRECTIONS
-    APback = 0
-    APforward = 1
+    APback = 1
+    APforward = 0
     MVleft = 0
     MVright = 1
     DVup = 0
@@ -241,7 +241,7 @@ class mainprogram:
         GPIO.output(mainprogram.enableAll, 0)
 #        GPIO.output(mainprogram.directionAP, mainprogram.APforward)
 
-        while count <= 500:
+        while count <= 400:
             print("start")
             if GPIO.input(mainprogram.limitAP) == 1:
                 GPIO.output(mainprogram.directionAP, mainprogram.APforward)
@@ -258,7 +258,7 @@ class mainprogram:
         GPIO.output(mainprogram.enableAll, 0)
 
 
-        while count <= 500:
+        while count <= 400:
             if GPIO.input(mainprogram.limitAP) == 1:
                 GPIO.output(mainprogram.directionAP, mainprogram.APback)
                 GPIO.output(mainprogram.stepAP, 1)
@@ -274,7 +274,7 @@ class mainprogram:
         GPIO.output(mainprogram.enableAll, 0)
         GPIO.output(mainprogram.directionMV, mainprogram.MVleft)
 
-        while count <= 500:
+        while count <= 400:
             print("start")
             if GPIO.input(mainprogram.limitMV) == 1:
                 GPIO.output(mainprogram.stepMV, 1)
@@ -290,7 +290,7 @@ class mainprogram:
         GPIO.output(mainprogram.enableAll, 0)
         GPIO.output(mainprogram.directionMV, mainprogram.MVright)
 
-        while count <= 100:
+        while count <= 400:
             if GPIO.input(mainprogram.limitMV) == 1:
                 GPIO.output(mainprogram.stepMV, 1)
                 time.sleep(0.001)
@@ -305,7 +305,7 @@ class mainprogram:
         GPIO.output(mainprogram.enableAll, 0)
         GPIO.output(mainprogram.directionDV, mainprogram.DVup)
 
-        while count <= 100:
+        while count <= 400:
             print("start")
             if GPIO.input(mainprogram.limitDV) == 1:
                 GPIO.output(mainprogram.stepDV, 1)
@@ -321,7 +321,7 @@ class mainprogram:
         GPIO.output(mainprogram.enableAll, 0)
         GPIO.output(mainprogram.directionDV, mainprogram.DVdown)
 
-        while count <= 100:
+        while count <= 400:
             if GPIO.input(mainprogram.limitDV) == 1:
                 GPIO.output(mainprogram.stepDV, 1)
                 time.sleep(0.001)
