@@ -480,14 +480,12 @@ class mainprogram:
     def intializethesystem_andrun(self):
 
         self.incomefromencoder = mainprogram()
-        RotaryEncoder.receive_instance(self.incomefromencoder)
+#        RotaryEncoder.receive_instance(self.incomefromencoder)
 
     # INITIALIZE ENCODERS
-        self.AProto = RotaryEncoder(mainprogram.rotoA_AP, mainprogram.rotoB_AP, mainprogram.emergstop, mainprogram.AP_event)
-        self.MVroto = RotaryEncoder(mainprogram.rotoA_MV, mainprogram.rotoB_MV, mainprogram.misc_eventbuttonA,
-                                mainprogram.MV_event)
-        self.DVroto = RotaryEncoder(mainprogram.rotoA_DV, mainprogram.rotoB_DV, mainprogram.misc_eventbuttonB,
-                                mainprogram.DV_event)
+        self.AProto = RotaryEncoder(mainprogram.rotoA_AP, mainprogram.rotoB_AP, mainprogram.emergstop, self.incomefromencoder.AP_event)
+        self.MVroto = RotaryEncoder(mainprogram.rotoA_MV, mainprogram.rotoB_MV, mainprogram.misc_eventbuttonA, self.incomefromencoder.MV_event)
+        self.DVroto = RotaryEncoder(mainprogram.rotoA_DV, mainprogram.rotoB_DV, mainprogram.misc_eventbuttonB, self.incomefromencoder.DV_event)
     #question and waits for ANY user input
 
         self.quest = input("Initialization Process ... ENTER to continue.")
