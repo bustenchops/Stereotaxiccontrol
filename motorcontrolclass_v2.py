@@ -58,6 +58,7 @@ class StepperSetup:
         GPIO.setup(self.direction, GPIO.OUT, initial=0)
         GPIO.setup(self.limit, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
+
     #may not need but put it in case I need to export the steps to the main program
     def exportsteps(self):
         if self.axis == 1:
@@ -68,7 +69,7 @@ class StepperSetup:
             return StepperSetup.DVsteps
 
 
-    #receives object instance from cotrol  program so it can be utilized with this class APmove,MVmove and DVmove
+    #receives object instance from control  program so it can be utilized with this class APmove,MVmove and DVmove
         #Object instance calls on this function from within itself and sends itself here.
     def receive_instance(self, maininstance):
         self.iliketomoveit = maininstance

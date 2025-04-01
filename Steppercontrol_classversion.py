@@ -131,7 +131,6 @@ class mainprogram:
         self.MVroto = RotaryEncoder(mainprogram.rotoA_MV, mainprogram.rotoB_MV, mainprogram.misc_eventbuttonA, mainprogram.MV_event)
         self.DVroto = RotaryEncoder(mainprogram.rotoA_DV, mainprogram.rotoB_DV, mainprogram.misc_eventbuttonB, mainprogram.DV_event)
 
-
         #INITIALIZE STEPPERS
 
         self.APmove = StepperSetup(mainprogram.enableAll,mainprogram.stepAP,mainprogram.directionAP,mainprogram.limitAP,1,mainprogram.APforward,mainprogram.APback)
@@ -460,7 +459,7 @@ class mainprogram:
         elif event == RotaryEncoder.ANTICLOCKWISE:
             self.MVmove.steppgo(mainprogram.MVleft, mainprogram.stepper_speed, StepperSetup.btnSteps)
         elif event == RotaryEncoder.BUTTONDOWN:
-            print("event button B clicked")
+            print("event button A clicked")
             return
         elif event == RotaryEncoder.BUTTONUP:
             return

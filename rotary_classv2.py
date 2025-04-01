@@ -12,6 +12,8 @@
 
 import RPi.GPIO as GPIO
 
+import time
+from Steppercontrol_classversion import mainprogram
 class RotaryEncoder:
 
     CLOCKWISE=1
@@ -29,12 +31,12 @@ class RotaryEncoder:
     CCcount = 0
 
     # Initialise rotary encoder object
-    def __init__(self,pinA,pinB,button,callbackdef):
+    def __init__(self, pinA, pinB, button, callbackdef):
 
         self.pinA = pinA
         self.pinB = pinB
         self.button = button
-        self.callback = callbackdef
+        self.sendtoSteppercontrol = callbackdef
 
         GPIO.setmode(GPIO.BCM)
 
@@ -54,7 +56,7 @@ class RotaryEncoder:
 
     # Call back routine called by switch events
     def switch_event(self,switch):
-
+        self.eventtime = time.time() * 1000
         # print(f"event detected on {switch}")
 
         if GPIO.input(self.pinA):
@@ -71,28 +73,42 @@ class RotaryEncoder:
         new_state = self.rotary_a * 4 + self.rotary_b * 2 + self.rotary_c * 1
         delta = (new_state - self.last_state) % 4
         self.last_state = new_state
-        event = 0
+        self.event = 0
  
         if delta == 1:
  
             if self.direction == self.CLOCKWISE:
-                event = self.direction
+                self.event = self.direction
+                self.deltaonetime = time.time() * 1000
+                if (self.deltaonetime - self.eventtime) < 200:
+                    self.Ccount +=1
+                else:
+                    self.Ccount = 0
             else:
                 self.direction = self.CLOCKWISE
+                self.Ccount = 0
             #print(self.direction, "  CLOCKWISE   ", self.CLOCKWISE)
         elif delta == 3:
     
             if self.direction == self.ANTICLOCKWISE:
-                event = self.direction
+                self.event = self.direction
+                if (self.deltathreetime - self.eventtime) < 200:
+                    self.CCcount +=1
             else:
                 self.direction = self.ANTICLOCKWISE
+                self.CCcount = 0
             # print(self.direction, "  ANTICLOCKWISE   ", self.ANTICLOCKWISE)
         #print("detected", event, )
-        if event > 0:
-            if event == 1:
+        if self.event > 0:
+            if self.event == 1 and self.Ccount >=3:
                 print('clockwise')
-            if event == 2:
+                self.Ccount = 0
+            if self.event == 2 and self.CCcount >=3:
                 print('counterclockwise')
+                self.CCcount = 0
+
+            self.sendtoSteppercontrol(self.event)
+
         #    self.callback(event)
             # print('do something count = ',self.count)
             #self.count += 1
