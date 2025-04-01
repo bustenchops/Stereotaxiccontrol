@@ -1,7 +1,6 @@
 import time
 import RPi.GPIO as GPIO
 
-from Testfiles.steptest import Letsgonow
 from rotary_classv2 import RotaryEncoder
 
 class mainprogram:
@@ -73,7 +72,7 @@ class mainprogram:
     def __init__(self):
         #INITIALIZE PINS
 
-        print('what the fuck')
+        print('what the fuck holy shit')
         GPIO.setup(mainprogram.emergstop, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.setup(mainprogram.misc_eventbuttonA, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.setup(mainprogram.misc_eventbuttonB, GPIO.IN, pull_up_down=GPIO.PUD_UP)
