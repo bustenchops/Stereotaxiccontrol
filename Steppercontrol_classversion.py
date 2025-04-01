@@ -28,7 +28,7 @@ class mainprogram:
 
 
     #DEFINE NUMBER OF BUTTONS AND ORDER IN ARRAY
-    buttonarray = ['movefast','moveslow','buttontohome','relativeALL','relativeAP','relativeMV','relativeDV','buttonaction','miscbuttonC','miscbuttonD','miscbuttonE','zerobutton','calibratebutton','miscbuttonA','miscbuttonB']
+    buttonarray = ['moveslow','needleoffset','drilloffset','HomeToABSzero','movefast','recalibrate','relativeDV','relativeALLset','relativeAP','relativeMV','FIberOffset','HomerelativeZero','bregmahome','miscbuttonA','miscbuttonB']
     lastbuttonstate = [0 for x in range(len(buttonarray))]
 
     #BUTTON POSITION IN SHIFT REGISTER ARRAY
@@ -200,15 +200,15 @@ class mainprogram:
 
 # note 1 is pressed and 0 is released
         # stepper_speed (pos 0 and pos 1)
-        if lastbut[0] == 0 and lastbut[1] == 0:
+        if lastbut[0] == 0 and lastbut[4] == 0:
             mainprogram.stepper_speed = mainprogram.normalspeed
-        elif lastbut[0] == 0 and lastbut[1] == 1:
+        elif lastbut[0] == 1 and lastbut[4] == 0:
             mainprogram.stepper_speed = mainprogram.fastspeed
-        elif lastbut[0] == 1 and lastbut[1] == 0:
+        elif lastbut[0] == 0 and lastbut[4] == 1:
             mainprogram.stepper_speed = mainprogram.finespeed
 
         #button to home to ABS zero
-        if lastbut[2] == 1:
+        if lastbut[3] == 1:
 
             for x in range(StepperSetup.DVsteps):
                 self.DVmove.steppgo(mainprogram.DVup, 1,StepperSetup.btnSteps)
@@ -218,7 +218,7 @@ class mainprogram:
                 self.APmove.steppgo(mainprogram.APback,1,StepperSetup.btnSteps)
 
         #set relative zero for ALL
-        if lastbut[3] == 0:
+        if lastbut[7] == 0:
             StepperSetup.APrelpos = StepperSetup.APsteps
             StepperSetup.MVrelpos = StepperSetup.MVsteps
             StepperSetup.DVrelpos = StepperSetup.DVsteps
@@ -231,12 +231,12 @@ class mainprogram:
             self.DVmove.PosRelAbsCalc()
 
         #set only AP relative zero
-        if lastbut[4] == 0:
+        if lastbut[8] == 0:
             StepperSetup.APrelpos = StepperSetup.APsteps
             StepperSetup.APinitREL_holdvalue = StepperSetup.APsteps
             self.APmove.PosRelAbsCalc()
         # set only MV relative zero
-        if lastbut[5] == 0:
+        if lastbut[9] == 0:
             StepperSetup.MVrelpos = StepperSetup.MVsteps
             StepperSetup.MVinitREL_holdvalue = StepperSetup.MVsteps
             self.MVmove.PosRelAbsCalc()
@@ -247,7 +247,7 @@ class mainprogram:
             self.DVmove.PosRelAbsCalc()
 
         #button action - Home to Rel zero for AP and MV BUT DV goes all up
-        if lastbut[7] == 0:
+        if lastbut[11] == 0:
           for x in range(StepperSetup.DVsteps):
               self.DVmove.steppgo(mainprogram.DVup,mainprogram.finespeed,StepperSetup.btnSteps)
 
@@ -271,7 +271,7 @@ class mainprogram:
 
 
         #miscbuttonC - DRILL to relative zero for AP and MV BUT DV homed ABS zero but still sets the relative pos
-        if lastbut[8] == 0:
+        if lastbut[2] == 0:
             StepperSetup.APrelpos = StepperSetup.APinitREL_holdvalue
             StepperSetup.MVrelpos = StepperSetup.MVinitREL_holdvalue
             StepperSetup.DVrelpos = StepperSetup.DVinitREL_holdvalue
@@ -305,7 +305,7 @@ class mainprogram:
             self.sendingtomainA.drilloffset()
 
         #miscbuttonD - needle to relative zero for AP and MV BUT DV homed ABS zero but still sets the relative pos
-        if lastbut[9] == 0:
+        if lastbut[1] == 0:
     #        if StepperSetup.DVsteps < (StepperSetup.DVrelpos + DVneedle):
     #            shiftdistance = (StepperSetup.DVrelpos + DVneedle) - StepperSetup.DVsteps
             for x in range(StepperSetup.DVsteps):
@@ -369,8 +369,8 @@ class mainprogram:
 
             self.sendingtomainA.probeoffset()
 
-        #zero to bregma (relative) moves DV up ~10mm, positions AP and MV to relative home
-        if lastbut[11] == 0:
+        #home to bregma (relative) moves DV up ~10mm, positions AP and MV to relative home
+        if lastbut[12] == 0:
             if (StepperSetup.DVsteps > 1333):
                 for x in range(1333):
                     self.DVmove.steppgo(mainprogram.DVup, mainprogram.finespeed, StepperSetup.btnSteps)
@@ -399,7 +399,7 @@ class mainprogram:
             print("That's bregma G!")
 
         #re-calibrate button
-        if lastbut[12] == 0:
+        if lastbut[5] == 0:
 
             print("Let us re-calibrate this biz-E-ness")
             for x in range(StepperSetup.DVsteps):
