@@ -337,7 +337,7 @@ class mainprogram:
 
 #this is the executer
 Letsgonow = mainprogram()
-# RotaryEncoder.receive_instance(Letsgonow)
+#  RotaryEncoder.receive_instance(Letsgonow)
 Letsgonow.encoderinit()
 
 # INITIALIZE ENCODERS
