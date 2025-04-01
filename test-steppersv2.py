@@ -331,12 +331,12 @@ class mainprogram:
                 count += 1
     def encoderinit(self):
         self.AProto = RotaryEncoder(mainprogram.rotoA_AP, mainprogram.rotoB_AP, mainprogram.emergstop,
-                                    Letsgonow.AP_event(event))
+                                    Letsgonow.AP_event)
 
         self.MVroto = RotaryEncoder(mainprogram.rotoA_MV, mainprogram.rotoB_MV, mainprogram.misc_eventbuttonA,
-                                Letsgonow.MV_event(event))
+                                Letsgonow.MV_event)
         self.DVroto = RotaryEncoder(mainprogram.rotoA_DV, mainprogram.rotoB_DV, mainprogram.misc_eventbuttonB,
-                                Letsgonow.DV_event(event))
+                                Letsgonow.DV_event)
 
 #this is the executer
 Letsgonow = mainprogram()
