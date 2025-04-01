@@ -88,7 +88,7 @@ class StepperSetup:
 
         for x in range (speed):
             if GPIO.input(self.limit):
-                GPIO.output(self.direction,self.move_direction)
+                GPIO.output(self.direction,move_direction)
                 GPIO.output(self.step, 1)
                 time.sleep(btwnsteps)
                 GPIO.output(self.step, 0)
