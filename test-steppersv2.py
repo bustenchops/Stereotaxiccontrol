@@ -316,7 +316,7 @@ class mainprogram:
                 count += 1
 
         quest = input('Test the DV stepper 1500 steps using direction down')
-        print('direction set to', mainprogram.DVdown')
+        print('direction set to', mainprogram.DVdown)
         count = 1
         GPIO.output(mainprogram.enableAll, 0)
         GPIO.output(mainprogram.directionDV, mainprogram.DVdown)
