@@ -84,6 +84,7 @@ class RotaryEncoder:
                 self.deltaonetime = time.time() * 1000
                 if (self.deltaonetime - self.eventtime) < 200:
                     self.Ccount +=1
+                    print(self.Ccount)
                 else:
                     self.Ccount = 0
             else:
@@ -94,8 +95,10 @@ class RotaryEncoder:
     
             if self.direction == self.ANTICLOCKWISE:
                 self.event = self.direction
+                self.deltathreetime = time.time() * 1000
                 if (self.deltathreetime - self.eventtime) < 200:
                     self.CCcount +=1
+                    print(self.CCcount)
             else:
                 self.direction = self.ANTICLOCKWISE
                 self.CCcount = 0
