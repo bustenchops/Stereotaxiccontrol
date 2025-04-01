@@ -24,6 +24,8 @@ class RotaryEncoder:
     rotary_c = 0
     last_state = 0
     direction = 0
+
+    count = 0
     
     # Initialise rotary encoder object
     def __init__(self,pinA,pinB,button,callbackdef):
@@ -43,8 +45,8 @@ class RotaryEncoder:
         GPIO.setup(self.button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     
         # Add event detection to the GPIO inputs
-        GPIO.add_event_detect(self.pinA, GPIO.BOTH, callback=self.switch_event)
-        GPIO.add_event_detect(self.pinB, GPIO.BOTH, callback=self.switch_event)
+        GPIO.add_event_detect(self.pinA, GPIO.RISING, callback=self.switch_event)
+        GPIO.add_event_detect(self.pinB, GPIO.RISING, callback=self.switch_event)
         GPIO.add_event_detect(self.button, GPIO.BOTH, callback=self.button_event, bouncetime=200)
 
         return
@@ -87,7 +89,8 @@ class RotaryEncoder:
         #print("detected", event, )
         if event > 0:
         #    self.callback(event)
-            print('do somthing')
+            print('do something count = ',self.count)
+            self.count += 1
         # print(event)
 
         return

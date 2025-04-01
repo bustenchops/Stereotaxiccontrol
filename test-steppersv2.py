@@ -290,7 +290,7 @@ class mainprogram:
         GPIO.output(mainprogram.enableAll, 0)
         GPIO.output(mainprogram.directionMV, mainprogram.MVright)
 
-        while count <= 1500:
+        while count <= 100:
             if GPIO.input(mainprogram.limitMV) == 1:
                 GPIO.output(mainprogram.stepMV, 1)
                 time.sleep(0.001)
@@ -305,7 +305,7 @@ class mainprogram:
         GPIO.output(mainprogram.enableAll, 0)
         GPIO.output(mainprogram.directionDV, mainprogram.DVup)
 
-        while count <= 1500:
+        while count <= 100:
             print("start")
             if GPIO.input(mainprogram.limitDV) == 1:
                 GPIO.output(mainprogram.stepDV, 1)
@@ -321,7 +321,7 @@ class mainprogram:
         GPIO.output(mainprogram.enableAll, 0)
         GPIO.output(mainprogram.directionDV, mainprogram.DVdown)
 
-        while count <= 1500:
+        while count <= 100:
             if GPIO.input(mainprogram.limitDV) == 1:
                 GPIO.output(mainprogram.stepDV, 1)
                 time.sleep(0.001)
