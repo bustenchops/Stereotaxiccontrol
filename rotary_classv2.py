@@ -13,7 +13,6 @@
 import RPi.GPIO as GPIO
 
 import time
-from Steppercontrol_classversion import mainprogram
 class RotaryEncoder:
 
     CLOCKWISE=1

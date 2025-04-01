@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 
-from Steppercontrol_classversion import mainprogram
+#from Steppercontrol_classversion import mainprogram
 
 
 class StepperSetup:
@@ -96,17 +96,17 @@ class StepperSetup:
 
 
                 if self.axis == 1:
-                    if move_direction == mainprogram.APforward:
+                    if move_direction == self.gominus:
                         StepperSetup.APsteps += 1
                     else:
                         StepperSetup.APsteps -= 1
                 elif self.axis == 2:
-                    if move_direction == mainprogram.MVright:
+                    if move_direction == self.goplus:
                         StepperSetup.MVsteps += 1
                     else:
                         StepperSetup.MVsteps -= 1
                 elif self.axis == 3:
-                    if move_direction == mainprogram.DVdown:
+                    if move_direction == self.gominus:
                         StepperSetup.DVsteps += 1
                     else:
                         StepperSetup.DVsteps -= 1

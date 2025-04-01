@@ -133,7 +133,7 @@ class mainprogram:
 
         #INITIALIZE STEPPERS
 
-        self.APmove = StepperSetup(mainprogram.enableAll,mainprogram.stepAP,mainprogram.directionAP,mainprogram.limitAP,1,mainprogram.APforward,mainprogram.APback)
+        self.APmove = StepperSetup(mainprogram.enableAll,mainprogram.stepAP,mainprogram.directionAP,mainprogram.limitAP,1,mainprogram.APback,mainprogram.APforward)
         self.MVmove = StepperSetup(mainprogram.enableAll,mainprogram.stepMV,mainprogram.directionMV,mainprogram.limitMV,2,mainprogram.MVright,mainprogram.MVleft)
         self.DVmove = StepperSetup(mainprogram.enableAll,mainprogram.stepDV,mainprogram.directionDV,mainprogram.limitDV,3,mainprogram.DVup,mainprogram.DVdown)
 
