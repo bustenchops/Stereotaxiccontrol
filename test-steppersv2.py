@@ -83,9 +83,9 @@ class mainprogram:
         self.quest = "none"
 
         # INITIALIZE ENCODERS
-        self.AProto = RotaryEncoder(mainprogram.rotoA_AP, mainprogram.rotoB_AP, mainprogram.emergstop, mainprogram.AP_event)
-        self.MVroto = RotaryEncoder(mainprogram.rotoA_MV, mainprogram.rotoB_MV, mainprogram.misc_eventbuttonA, mainprogram.MV_event)
-        self.DVroto = RotaryEncoder(mainprogram.rotoA_DV, mainprogram.rotoB_DV, mainprogram.misc_eventbuttonB, mainprogram.DV_event)
+ #       self.AProto = RotaryEncoder(mainprogram.rotoA_AP, mainprogram.rotoB_AP, mainprogram.emergstop, Letsgonow.AP_event)
+ #       self.MVroto = RotaryEncoder(mainprogram.rotoA_MV, mainprogram.rotoB_MV, mainprogram.misc_eventbuttonA, Letsgonow.MV_event)
+ #       self.DVroto = RotaryEncoder(mainprogram.rotoA_DV, mainprogram.rotoB_DV, mainprogram.misc_eventbuttonB, Letsgonow.DV_event)
 
 
         #INITIALIZE STEPPERS
@@ -329,8 +329,21 @@ class mainprogram:
                 time.sleep(0.001)
                 print('step', count)
                 count += 1
+    def encoderinit(self):
+        self.AProto = RotaryEncoder(mainprogram.rotoA_AP, mainprogram.rotoB_AP, mainprogram.emergstop,
+                                    Letsgonow.AP_event())
+
+        self.MVroto = RotaryEncoder(mainprogram.rotoA_MV, mainprogram.rotoB_MV, mainprogram.misc_eventbuttonA,
+                                Letsgonow.MV_event())
+        self.DVroto = RotaryEncoder(mainprogram.rotoA_DV, mainprogram.rotoB_DV, mainprogram.misc_eventbuttonB,
+                                Letsgonow.DV_event())
 
 #this is the executer
 Letsgonow = mainprogram()
+# RotaryEncoder.receive_instance(Letsgonow)
+Letsgonow.encoderinit()
+
+# INITIALIZE ENCODERS
+
 Letsgonow.executerrrr()
 

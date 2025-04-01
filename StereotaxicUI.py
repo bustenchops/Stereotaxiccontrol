@@ -242,9 +242,9 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.widget)
 
 # start the threads that need to keep the buttons and such working
-#       self.threadpool = QThreadPool()
-#        self.mainthread = mainprogram()
-#        self.threadpool.start(self.mainthread.intializethesystem_andrun)
+        self.threadpool = QThreadPool()
+        self.mainthread = mainprogram()
+        self.threadpool.start(self.mainthread.intializethesystem_andrun)
 
     #grabs the plaintext from the text boxes only if the checkbox is selected
     def plaintextgrab(self):

@@ -53,6 +53,9 @@ class RotaryEncoder:
 
         return
 
+    def receive_instance(self, maininstance):
+        self.accessmainprogram = maininstance
+
     # Call back routine called by switch events
     def switch_event(self,switch):
         self.eventtime = time.time() * 1000

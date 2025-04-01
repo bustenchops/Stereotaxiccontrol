@@ -126,10 +126,7 @@ class mainprogram:
         #EMPTY variables to initialize
         self.quest = "none"
 
-        # INITIALIZE ENCODERS
-        self.AProto = RotaryEncoder(mainprogram.rotoA_AP, mainprogram.rotoB_AP, mainprogram.emergstop, mainprogram.AP_event)
-        self.MVroto = RotaryEncoder(mainprogram.rotoA_MV, mainprogram.rotoB_MV, mainprogram.misc_eventbuttonA, mainprogram.MV_event)
-        self.DVroto = RotaryEncoder(mainprogram.rotoA_DV, mainprogram.rotoB_DV, mainprogram.misc_eventbuttonB, mainprogram.DV_event)
+# encoders were here
 
         #INITIALIZE STEPPERS
 
@@ -481,9 +478,23 @@ class mainprogram:
 
     #MAIN CODE ################################################################################################
     def intializethesystem_andrun(self):
+
+        self.incomefromencoder = mainprogram()
+        RotaryEncoder.receive_instance(self.incomefromencoder)
+
+    # INITIALIZE ENCODERS
+        self.AProto = RotaryEncoder(mainprogram.rotoA_AP, mainprogram.rotoB_AP, mainprogram.emergstop, mainprogram.AP_event)
+        self.MVroto = RotaryEncoder(mainprogram.rotoA_MV, mainprogram.rotoB_MV, mainprogram.misc_eventbuttonA,
+                                mainprogram.MV_event)
+        self.DVroto = RotaryEncoder(mainprogram.rotoA_DV, mainprogram.rotoB_DV, mainprogram.misc_eventbuttonB,
+                                mainprogram.DV_event)
     #question and waits for ANY user input
+
         self.quest = input("Initialization Process ... ENTER to continue.")
         self.quest = input("CAUTION...Remove all attachments from frame arms! ENTER to continue.")
+
+
+
 
     #Zero steppers
         self.DVmove.zerostep(mainprogram.backoff, StepperSetup.btnSteps)
