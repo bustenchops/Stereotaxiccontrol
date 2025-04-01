@@ -106,13 +106,14 @@ class RotaryEncoder:
         #print("detected", event, )
         if self.event > 0:
             if self.event == 1 and self.Ccount >=3:
-                print('clockwise')
+                print('ACTION clockwise')
                 self.Ccount = 0
+                self.sendtoSteppercontrol(self.event)
             if self.event == 2 and self.CCcount >=3:
-                print('counterclockwise')
+                print('ACTION counterclockwise')
                 self.CCcount = 0
+                self.sendtoSteppercontrol(self.event)
 
-            self.sendtoSteppercontrol(self.event)
 
         #    self.callback(event)
             # print('do something count = ',self.count)
