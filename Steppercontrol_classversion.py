@@ -127,17 +127,8 @@ class mainprogram:
         self.quest = "none"
 
 # encoders were here
+#stepper init was here
 
-        #INITIALIZE STEPPERS
-
-        self.APmove = StepperSetup(mainprogram.enableAll,mainprogram.stepAP,mainprogram.directionAP,mainprogram.limitAP,1,mainprogram.APback,mainprogram.APforward)
-        self.MVmove = StepperSetup(mainprogram.enableAll,mainprogram.stepMV,mainprogram.directionMV,mainprogram.limitMV,2,mainprogram.MVright,mainprogram.MVleft)
-        self.DVmove = StepperSetup(mainprogram.enableAll,mainprogram.stepDV,mainprogram.directionDV,mainprogram.limitDV,3,mainprogram.DVup,mainprogram.DVdown)
-
-        #send to motorcontrol
-        self.APmove.receive_instance(self.APmove)
-        self.MVmove.receive_instance(self.MVmove)
-        self.DVmove.receive_instance(self.DVmove)
 
 #Import the offsets
         self.offsetimport = []
@@ -479,8 +470,20 @@ class mainprogram:
     #MAIN CODE ################################################################################################
     def intializethesystem_andrun(self):
 
+        #this gets used when initializing the encoders so the encoder can send the resutls back to this class
         self.incomefromencoder = mainprogram()
 #        RotaryEncoder.receive_instance(self.incomefromencoder)
+
+        #INITIALIZE STEPPERS
+
+        self.APmove = StepperSetup(mainprogram.enableAll,mainprogram.stepAP,mainprogram.directionAP,mainprogram.limitAP,1,mainprogram.APback,mainprogram.APforward, self.sendingtomainA)
+        self.MVmove = StepperSetup(mainprogram.enableAll,mainprogram.stepMV,mainprogram.directionMV,mainprogram.limitMV,2,mainprogram.MVright,mainprogram.MVleft, self.sendingtomainA)
+        self.DVmove = StepperSetup(mainprogram.enableAll,mainprogram.stepDV,mainprogram.directionDV,mainprogram.limitDV,3,mainprogram.DVup,mainprogram.DVdown, self.sendingtomainA)
+
+        #send to motorcontrol
+        self.APmove.receive_instance(self.APmove)
+        self.MVmove.receive_instance(self.MVmove)
+        self.DVmove.receive_instance(self.DVmove)
 
     # INITIALIZE ENCODERS
         self.AProto = RotaryEncoder(mainprogram.rotoA_AP, mainprogram.rotoB_AP, mainprogram.emergstop, self.incomefromencoder.AP_event)

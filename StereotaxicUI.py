@@ -306,8 +306,8 @@ class MainWindow(QMainWindow):
 app = QApplication(sys.argv)
 window = MainWindow()
 
-maininstancesendstepper = StepperSetup()
-maininstancesendstepper.receive_frommainstepper(window)
+#maininstancesendstepper = StepperSetup(1,1,1,1,1,1,1)
+#maininstancesendstepper.receive_frommainstepper(window)
 maininstancesendcontrol = mainprogram()
 maininstancesendcontrol.receive_frommaincontrol(window)
 

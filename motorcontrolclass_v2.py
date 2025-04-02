@@ -33,7 +33,7 @@ class StepperSetup:
     DVcurRELdist = float(0)
 
 
-    def __init__(self,enablepin,steppin,directionpin,limitpin,Axis,Plusdir,Minusdir):
+    def __init__(self,enablepin,steppin,directionpin,limitpin,Axis,Plusdir,Minusdir,tosendtoUI):
         self.enable = enablepin
         self.step = steppin
         self.direction = directionpin
@@ -48,6 +48,7 @@ class StepperSetup:
         self.gominus = Minusdir
             # NOTE: placeholder to import object instances from main program
         self.iliketomoveit = "none"
+        self.sendtoUI = tosendtoUI
 
         # setup GPIO
         GPIO.setwarnings(False)
