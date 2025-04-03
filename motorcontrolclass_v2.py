@@ -119,9 +119,10 @@ class StepperSetup:
 
 
     def zerostep(self,backoff, btwnsteps):
-        print('zero step called', self.axis)
+        print('zero step called')
         GPIO.output(self.enable,0)
         while GPIO.input(self.limit):
+            print(self.axis)
             self.steppgo(self.gominus,1, btwnsteps)
             if self.axis == 1:
                 StepperSetup.APsteps -= 1
