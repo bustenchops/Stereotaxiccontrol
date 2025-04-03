@@ -5,8 +5,8 @@ from PySide6.QtGui import (QFont)
 from PySide6.QtWidgets import (QApplication, QFrame, QLCDNumber, QMainWindow, QMenuBar, QRadioButton, QStatusBar,
                                QWidget, QLabel, QPlainTextEdit, QCheckBox, QPushButton, QListWidget,QFileDialog)
 
-from motorcontrolclass_v2 import StepperSetup
-from rotary_class import RotaryEncoder
+#from motorcontrolclass_v2 import StepperSetup
+#from rotary_class import RotaryEncoder
 from Steppercontrol_classversion import mainprogram
 
 import os
