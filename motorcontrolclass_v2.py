@@ -133,22 +133,24 @@ class StepperSetup:
                 self.steppgo(self.goplus, 1, btwnsteps)
                 StepperSetup.DVsteps -= 1
             if GPIO.input(self.limit) != True:
+                GPIO.output(self.enable, 1)
                 break
 
 
         for x in range(backoff):
-            GPIO.output(self.direction, self.goplus)
+            if self.axis == 1:
+                GPIO.output(self.direction, self.gominus)
+                StepperSetup.APsteps += 1
+            elif self.axis == 2:
+                GPIO.output(self.direction, self.goplus)
+                StepperSetup.MVsteps += 1
+            elif self.axis == 3:
+                GPIO.output(self.direction, self.gominus)
+                StepperSetup.DVsteps += 1
             GPIO.output(self.step, 1)
             time.sleep(self.btnSteps)
             GPIO.output(self.step, 0)
             time.sleep(self.btnSteps)
-
-            if self.axis == 1:
-                StepperSetup.APsteps += 1
-            elif self.axis == 2:
-                StepperSetup.MVsteps += 1
-            elif self.axis == 3:
-                StepperSetup.DVsteps += 1
 
 #            print(f"APsteps: {StepperSetup.APsteps} MVsteps: {StepperSetup.MVsteps} DVsteps {StepperSetup.DVsteps}")
 
