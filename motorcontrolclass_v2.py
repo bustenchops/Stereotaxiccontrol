@@ -163,23 +163,29 @@ class StepperSetup:
             StepperSetup.DVsteps = 0
 
         print(f"Zeroed: APsteps: {StepperSetup.APsteps} MVsteps: {StepperSetup.MVsteps} DVsteps {StepperSetup.DVsteps}")
+
         self.iliketomoveit.PosRelAbsCalc()
+        # shut down steppers so they cool
+        GPIO.output(self.enable,1)
+        print('stepper zeroed and shut down')
 
 
     def CalibrateDistance(self, calibrationsteps, rollback, btwnSteps):
-
+        print('start calibration steps:',calibrationsteps, 'backoff:',rollback, )
+        print('open file')
         self.calibratetemp = [0,0,0]
         file_name = 'calibration.txt'
         file = open(file_name, 'r')
-
+        print ('file openned')
         while True:
+            print('reading')
             line = file.readline()
             if not line:
                 break
             self.calibratetemp.append(line.strip())
 
         file.close()
-
+        print('file closed')
         StepperSetup.APstepdistance = float(self.calibratetemp[0])
         StepperSetup.MVstepdistance = float(self.calibratetemp[1])
         StepperSetup.DVstepdistance = float(self.calibratetemp[2])
