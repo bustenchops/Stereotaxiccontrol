@@ -10,7 +10,7 @@ class mainprogram:
 
     #Variables that may need tweaking
     calibrationsteps = 4000
-    backoff = 150
+    backoff = 2000
 
     #OFFSETS FOR THE DRILL, Syringe, Needle (minus values is back, left or up)
     APDRILL = 0
