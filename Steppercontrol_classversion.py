@@ -487,7 +487,7 @@ class mainprogram:
         print('send the instance to the motorcontrol class')
 
     # INITIALIZE ENCODERS
-        self.AProto = RotaryEncoder(mainprogram.rotoA_AP, mainprogram.rotoB_AP, mainprogram.emergstop, self.APmove)
+        self.AProto = RotaryEncoder(mainprogram.rotoA_AP, mainprogram.rotoB_AP, mainprogram.emergstop, self.incomefromencoder.MV_event)
         self.MVroto = RotaryEncoder(mainprogram.rotoA_MV, mainprogram.rotoB_MV, mainprogram.misc_eventbuttonA, self.incomefromencoder.MV_event)
         self.DVroto = RotaryEncoder(mainprogram.rotoA_DV, mainprogram.rotoB_DV, mainprogram.misc_eventbuttonB, self.incomefromencoder.DV_event)
         print('if shits got this far YAY! and the encoders are started...maybe')
