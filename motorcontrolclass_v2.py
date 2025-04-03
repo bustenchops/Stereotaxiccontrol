@@ -118,7 +118,7 @@ class StepperSetup:
                 print("ERROR - limit reached")
 
 
-    def zerostep(self,backoff, btwnsteps):
+    def zerostep(self, backoff, btwnsteps):
         print('zero step called')
         GPIO.output(self.enable,0)
         while GPIO.input(self.limit):
