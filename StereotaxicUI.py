@@ -241,10 +241,8 @@ class MainWindow(QMainWindow):
         self.statusbar = QStatusBar()
         self.setCentralWidget(self.widget)
 
-# start the threads that need to keep the buttons and such working
-        self.threadpool = QThreadPool()
-        self.mainthread = mainprogram()
-        self.threadpool.start(self.mainthread.intializethesystem_andrun)
+#THREAD POOL WAS HERE
+
 
     #grabs the plaintext from the text boxes only if the checkbox is selected
     def plaintextgrab(self):
@@ -309,7 +307,13 @@ window = MainWindow()
 #maininstancesendstepper = StepperSetup(1,1,1,1,1,1,1)
 #maininstancesendstepper.receive_frommainstepper(window)
 maininstancesendcontrol = mainprogram()
+
+# start the threads that need to keep the buttons and such working
+threadpool = QThreadPool()
+threadpool.start(maininstancesendcontrol.intializethesystem_andrun)
+
 maininstancesendcontrol.receive_frommaincontrol(window)
+
 
 window.show()
 
