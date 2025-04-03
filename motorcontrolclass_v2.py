@@ -122,13 +122,15 @@ class StepperSetup:
         print('zero step called')
         GPIO.output(self.enable,0)
         while GPIO.input(self.limit):
-            print(self.axis)
-            self.steppgo(self.gominus,1, btwnsteps)
+    #        print(self.axis)
             if self.axis == 1:
+                self.steppgo(self.goplus, 1, btwnsteps)
                 StepperSetup.APsteps -= 1
             elif self.axis == 2:
+                self.steppgo(self.gominus, 1, btwnsteps)
                 StepperSetup.MVsteps -= 1
             elif self.axis == 3:
+                self.steppgo(self.goplus, 1, btwnsteps)
                 StepperSetup.DVsteps -= 1
             if GPIO.input(self.limit) != True:
                 break
@@ -148,7 +150,7 @@ class StepperSetup:
             elif self.axis == 3:
                 StepperSetup.DVsteps += 1
 
-            print(f"APsteps: {StepperSetup.APsteps} MVsteps: {StepperSetup.MVsteps} DVsteps {StepperSetup.DVsteps}")
+#            print(f"APsteps: {StepperSetup.APsteps} MVsteps: {StepperSetup.MVsteps} DVsteps {StepperSetup.DVsteps}")
 
         #Sets the ABS steps for that axis to 0
         if self.axis == 1:
