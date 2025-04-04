@@ -180,14 +180,15 @@ class StepperSetup:
 
         file_name = 'Calibration.txt'
         file = open(file_name, 'r')
-        print ('file openned')
-        self.loopcount = len(self.calibratetemp)
+        print ('file open')
+        print (self.loopcount)
         while True:
             print('reading')
+            print(self.loopcount)
             line = file.readline()
             if not line:
                 break
-            self.calibratetemp[self.loopcount] = (line.strip())
+            self.calibratetemp[self.loopcount] = line.strip()
             self.loopcount += 1
 
         file.close()
