@@ -299,11 +299,11 @@ class StepperSetup:
 
     def PosRelAbsCalc(self):
 
-        StepperSetup.APcurRELdist = round(((StepperSetup.APsteps - StepperSetup.APrelpos) * StepperSetup.APstepdistance), 4)
+        StepperSetup.APcurRELdist = round(((StepperSetup.APsteps - StepperSetup.APrelpos) * StepperSetup.APstepdistance * -1), 4)
         StepperSetup.MVcurRELdist = round(((StepperSetup.MVsteps - StepperSetup.MVrelpos) * StepperSetup.MVstepdistance), 4)
         StepperSetup.DVcurRELdist = round(((StepperSetup.DVsteps - StepperSetup.DVrelpos) * StepperSetup.DVstepdistance * -1), 4)
 
-        StepperSetup.APcurABSdist = round((StepperSetup.APsteps * StepperSetup.APstepdistance), 4)
+        StepperSetup.APcurABSdist = round((StepperSetup.APsteps * StepperSetup.APstepdistance * -1), 4)
         StepperSetup.MVcurABSdist = round((StepperSetup.MVsteps * StepperSetup.MVstepdistance), 4)
         StepperSetup.DVcurABSdist = round((StepperSetup.DVsteps * StepperSetup.DVstepdistance * -1), 4)
 
