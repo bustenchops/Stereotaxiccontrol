@@ -116,7 +116,7 @@ class StepperSetup:
                     else:
                         StepperSetup.DVsteps -= 1
 
-                self.iliketomoveit.PosRelAbsCalc()
+                # self.iliketomoveit.PosRelAbsCalc()
             else:
                 print("ERROR - limit reached")
 
@@ -125,6 +125,7 @@ class StepperSetup:
         print('zero step called')
         GPIO.output(self.enable,0)
         while GPIO.input(self.limit):
+
     #        print(self.axis)
             if self.axis == 1:
                 self.steppgo(self.gominus, 1, btwnsteps)
@@ -133,9 +134,11 @@ class StepperSetup:
                 self.steppgo(self.gominus, 1, btwnsteps)
                 StepperSetup.MVsteps -= 1
             elif self.axis == 3:
+                print(self.limit)
                 self.steppgo(self.goplus, 1, btwnsteps)
                 StepperSetup.DVsteps -= 1
             if GPIO.input(self.limit) != True:
+                print('limit triggered')
                 break
 
 
