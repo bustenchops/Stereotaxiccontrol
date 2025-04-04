@@ -187,7 +187,7 @@ class StepperSetup:
             StepperSetup.DVsteps = 0
 
         print(f"Zeroed: APsteps: {StepperSetup.APsteps} MVsteps: {StepperSetup.MVsteps} DVsteps {StepperSetup.DVsteps}")
-
+        time.sleep(0.225)
         self.iliketomoveit.PosRelAbsCalc()
         # shut down steppers so they cool
         GPIO.output(self.enable,1)
@@ -376,7 +376,7 @@ class StepperSetup:
         StepperSetup.DVcurABSdist = round((StepperSetup.DVsteps * StepperSetup.DVstepdistance * -1), 4)
 
         self.delayupdate = time.time() * 1000
-        if (self.delayupdate - self.updatedelay) >= 100:
+        if (self.delayupdate - self.updatedelay) >= 200:
             self.updatedelay = self.delayupdate
             self.sendtoUI.updatepositionLCD(StepperSetup.APsteps,StepperSetup.MVsteps,StepperSetup.DVsteps,StepperSetup.APcurABSdist,StepperSetup.MVcurABSdist,StepperSetup.DVcurABSdist,StepperSetup.APcurRELdist,StepperSetup.MVcurRELdist,StepperSetup.DVcurRELdist)
 
