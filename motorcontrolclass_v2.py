@@ -170,6 +170,7 @@ class StepperSetup:
         self.iliketomoveit.PosRelAbsCalc()
         # shut down steppers so they cool
         GPIO.output(self.enable,1)
+        self.lastenablestate = 1
         #print('stepper zeroed and shut down')
 
 
