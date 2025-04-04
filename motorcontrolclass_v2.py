@@ -214,7 +214,7 @@ class StepperSetup:
 
                 for x in range(calibrationsteps):
                     if 0 < StepperSetup.APsteps < 6000:
-                        self.iliketomoveit.steppgo(self.goplus, 1, btwnSteps)
+                        self.iliketomoveit.steppgo(self.gominus, 1, btwnSteps)
 
                 self.APinputend = input("Enter the AP final position in millimeters.")
                 # converted to float values
