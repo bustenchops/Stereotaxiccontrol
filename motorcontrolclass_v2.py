@@ -47,6 +47,7 @@ class StepperSetup:
             # NOTE plus and minus direction relative to stereo coordinates
         self.goplus = Plusdir
         self.gominus = Minusdir
+        self.lastenablestate = 0
             # NOTE: placeholder to import object instances from main program
         self.iliketomoveit = "none"
         self.sendtoUI = tosendtoUI
@@ -86,7 +87,9 @@ class StepperSetup:
     def steppgo(self,move_direction, speed, btwnsteps):
 
         self.stepmodifier = 0
-        GPIO.output(self.enable, 0)
+
+        if self.lastenablestate == 1:
+            GPIO.output(self.enable, 0)
 
         for x in range (speed):
             if GPIO.input(self.limit):
