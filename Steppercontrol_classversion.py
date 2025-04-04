@@ -502,15 +502,18 @@ class mainprogram:
 
     #Zero steppers
         print('calling zero function')
+        print('DV')
         self.DVmove.zerostep(mainprogram.backoff, StepperSetup.btnSteps)
+        print('AP')
         self.APmove.zerostep(mainprogram.backoff, StepperSetup.btnSteps)
+        print('MV')
         self.MVmove.zerostep(mainprogram.backoff, StepperSetup.btnSteps)
 
     #calibration routine
         print('calling the calibration routine')
-        self.APmove.CalibrateDistance(mainprogram.calibrationsteps, mainprogram.backoff, StepperSetup.btnSteps)
-        self.MVmove.CalibrateDistance(mainprogram.calibrationsteps, mainprogram.backoff, StepperSetup.btnSteps)
-        self.DVmove.CalibrateDistance(mainprogram.calibrationsteps, mainprogram.backoff, StepperSetup.btnSteps)
+#        self.APmove.CalibrateDistance(mainprogram.calibrationsteps, mainprogram.backoff, StepperSetup.btnSteps)
+#        self.MVmove.CalibrateDistance(mainprogram.calibrationsteps, mainprogram.backoff, StepperSetup.btnSteps)
+#        self.DVmove.CalibrateDistance(mainprogram.calibrationsteps, mainprogram.backoff, StepperSetup.btnSteps)
 
         while mainprogram.keepalive:
 
