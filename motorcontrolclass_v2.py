@@ -322,6 +322,7 @@ class StepperSetup:
                 #file.close()
 
                 self.exportcalibrationfile(file_name)
+                self.importcalibrationfile(file_name)
 
                 print("NEW calibration values are:")
                 print("MV distance per step:", " ", StepperSetup.MVstepdistance, "mm")
@@ -375,7 +376,7 @@ class StepperSetup:
         StepperSetup.DVcurABSdist = round((StepperSetup.DVsteps * StepperSetup.DVstepdistance * -1), 4)
 
         self.delayupdate = time.time() * 1000
-        if (self.delayupdate - self.updatedelay) >= 25:
+        if (self.delayupdate - self.updatedelay) >= 100:
             self.updatedelay = self.delayupdate
             self.sendtoUI.updatepositionLCD(StepperSetup.APsteps,StepperSetup.MVsteps,StepperSetup.DVsteps,StepperSetup.APcurABSdist,StepperSetup.MVcurABSdist,StepperSetup.DVcurABSdist,StepperSetup.APcurRELdist,StepperSetup.MVcurRELdist,StepperSetup.DVcurRELdist)
 
