@@ -6,7 +6,7 @@ import time
 
 class StepperSetup:
 
-    btnSteps = 0.001
+    btnSteps = 0.003
 
     APsteps = 0
     MVsteps = 0
@@ -51,6 +51,7 @@ class StepperSetup:
             # NOTE: placeholder to import object instances from main program
         self.iliketomoveit = "none"
         self.sendtoUI = tosendtoUI
+        self.calibratetemp = [0,0,0]
 
         # setup GPIO
         GPIO.setwarnings(False)
@@ -176,16 +177,18 @@ class StepperSetup:
 
     def CalibrateDistance(self, calibrationsteps, rollback, btwnSteps):
         print('open file')
-        self.calibratetemp = []
+
         file_name = 'Calibration.txt'
         file = open(file_name, 'r')
         print ('file openned')
+        self.loopcount = len(self.calibratetemp)
         while True:
             print('reading')
             line = file.readline()
             if not line:
                 break
-            self.calibratetemp.append(line.strip())
+            self.calibratetemp[self.loopcount] = (line.strip())
+            self.loopcount += 1
 
         file.close()
         print('file closed')
@@ -254,12 +257,12 @@ class StepperSetup:
                 StepperSetup.MVstepdistance = (flMVinputend - flMVinput) / calibrationsteps
 
                 # write values to file
-                calibratetemp = [StepperSetup.APstepdistance, StepperSetup.MVstepdistance, StepperSetup.DVstepdistance]
+                self.calibratetemp = [StepperSetup.APstepdistance, StepperSetup.MVstepdistance, StepperSetup.DVstepdistance]
                 # Open the file in write mode
                 with open(file_name, "w") as file:
                     # Write each variable to the file in Pine Script format
-                    for x, value in enumerate(calibratetemp):
-                        varvalue = calibratetemp[x]
+                    for x, value in enumerate(self.calibratetemp):
+                        varvalue = self.calibratetemp[x]
                         file.write(f"{varvalue}\n")
                 file.close()
 
@@ -282,12 +285,12 @@ class StepperSetup:
                 StepperSetup.DVstepdistance = (flDVinput - flDVinputend) / calibrationsteps
 
                 # write values to file
-                calibratetemp = [StepperSetup.APstepdistance, StepperSetup.MVstepdistance, StepperSetup.DVstepdistance]
+                self.calibratetemp = [StepperSetup.APstepdistance, StepperSetup.MVstepdistance, StepperSetup.DVstepdistance]
                 # Open the file in write mode
                 with open(file_name, "w") as file:
                     # Write each variable to the file in Pine Script format
-                    for x, value in enumerate(calibratetemp):
-                        varvalue = calibratetemp[x]
+                    for x, value in enumerate(self.calibratetemp):
+                        varvalue = self.calibratetemp[x]
                         file.write(f"{varvalue}\n")
                 file.close()
 
