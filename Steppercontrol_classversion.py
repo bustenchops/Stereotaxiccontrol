@@ -98,8 +98,8 @@ class mainprogram:
     # DVrelOffset= 0
 
     #DEFINE STEPPER DIRECTIONS
-    APback = 0
-    APforward = 1
+    APback = 1
+    APforward = 0
     MVleft = 0
     MVright = 1
     DVup = 0
