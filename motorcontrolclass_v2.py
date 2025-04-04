@@ -6,7 +6,7 @@ import time
 
 class StepperSetup:
 
-    btnSteps = 0.003
+    btnSteps = 0.002
 
     APsteps = 0
     MVsteps = 0
