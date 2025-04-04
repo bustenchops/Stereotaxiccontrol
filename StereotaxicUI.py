@@ -3,7 +3,7 @@
 from PySide6.QtCore import (QRect, QThreadPool)
 from PySide6.QtGui import (QFont)
 from PySide6.QtWidgets import (QApplication, QFrame, QLCDNumber, QMainWindow, QMenuBar, QRadioButton, QStatusBar,
-                               QWidget, QLabel, QPlainTextEdit, QCheckBox, QPushButton, QListWidget,QFileDialog)
+                               QWidget, QLabel, QPlainTextEdit, QCheckBox, QPushButton, QListWidget,QFileDialog,QMessageBox)
 
 #from motorcontrolclass_v2 import StepperSetup
 #from rotary_class import RotaryEncoder

@@ -329,7 +329,7 @@ class MainWindow(QMainWindow):
         if button == QMessageBox.StandardButton.Ok:
             answer = 'y'
             print("Yes!")
-            return answerc
+            return answer
 
 
 app = QApplication(sys.argv)
