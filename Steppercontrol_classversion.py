@@ -508,9 +508,9 @@ class mainprogram:
 
     #calibration routine
         print('calling the calibration routine')
-#        self.APmove.CalibrateDistance(mainprogram.calibrationsteps, mainprogram.backoff, StepperSetup.btnSteps)
-#        self.MVmove.CalibrateDistance(mainprogram.calibrationsteps, mainprogram.backoff, StepperSetup.btnSteps)
-#        self.DVmove.CalibrateDistance(mainprogram.calibrationsteps, mainprogram.backoff, StepperSetup.btnSteps)
+        self.APmove.CalibrateDistance(mainprogram.calibrationsteps, mainprogram.backoff, StepperSetup.btnSteps)
+        self.MVmove.CalibrateDistance(mainprogram.calibrationsteps, mainprogram.backoff, StepperSetup.btnSteps)
+        self.DVmove.CalibrateDistance(mainprogram.calibrationsteps, mainprogram.backoff, StepperSetup.btnSteps)
 
         while mainprogram.keepalive:
 
