@@ -3,6 +3,8 @@ import RPi.GPIO as GPIO
 
 from motorcontrolclass_v2 import StepperSetup
 from rotary_classv2 import RotaryEncoder
+import tkinter as tk
+from tkinter import simpledialog
 
 class mainprogram:
     #Main while loop condition
@@ -467,6 +469,25 @@ class mainprogram:
             return
         return
 
+    def get_user_input(self,giventitle,givenprompt):
+        # Create the root window
+        root = tk.Tk()
+        root.withdraw()  # Hide the root window
+
+        # Prompt the user for input
+        user_input = simpledialog.askstring(title=giventitle, prompt=givenprompt)
+
+        # Print the user input
+        if user_input is not None:
+            print(f"User input: {user_input}")
+            return user_input
+
+        else:
+            print("No input provided")
+
+        # Destroy the root window
+        root.destroy()
+
     #MAIN CODE ################################################################################################
     def intializethesystem_andrun(self):
         #print('shits on fire yo')
@@ -494,10 +515,10 @@ class mainprogram:
 
     #question and waits for ANY user input
 
-        self.quest = input("Initialization Process ... ENTER to continue.")
-        self.quest = input("CAUTION...Remove all attachments from frame arms! ENTER to continue.")
-
-
+    #    self.quest = input("Initialization Process ... ENTER to continue.")
+    #    self.quest = input("CAUTION...Remove all attachments from frame arms! ENTER to continue.")
+        self.quest = self.get_user_input('MESSAGE:','Initialization Process ... ENTER to continue')
+        self.quest = self.get_user_input('MESSAGE:','CAUTION...Remove all attachments from frame arms! ENTER to continue.')
 
 
     #Zero steppers
