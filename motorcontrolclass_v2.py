@@ -223,9 +223,10 @@ class StepperSetup:
                 flAPinputend = float(self.APinputend)
                 # calculated distance moved per step
                 StepperSetup.APstepdistance = (flAPinputend - flAPinput) / calibrationsteps
-
+                print("send to file step distance", StepperSetup.APstepdistance)
                 # write values to file
                 self.calibratetemp = [StepperSetup.APstepdistance, StepperSetup.MVstepdistance, StepperSetup.DVstepdistance]
+                print(self.calibratetemp)
                 # Open the file in write mode
                 with open(file_name, "w") as file:
                     # Write each variable to the file in Pine Script format
