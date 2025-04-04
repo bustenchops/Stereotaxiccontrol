@@ -128,13 +128,15 @@ class StepperSetup:
 
     #        print(self.axis)
             if self.axis == 1:
+                print(GPIO.input(self.limit))
                 self.steppgo(self.gominus, 1, btwnsteps)
                 StepperSetup.APsteps -= 1
             elif self.axis == 2:
+                print(GPIO.input(self.limit))
                 self.steppgo(self.gominus, 1, btwnsteps)
                 StepperSetup.MVsteps -= 1
             elif self.axis == 3:
-                print(self.limit)
+                print(GPIO.input(self.limit))
                 self.steppgo(self.goplus, 1, btwnsteps)
                 StepperSetup.DVsteps -= 1
             if GPIO.input(self.limit) != True:
