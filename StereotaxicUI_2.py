@@ -190,22 +190,22 @@ class MainWindow(QMainWindow):
 
         self.radiolabel = QLabel("Current Offset", self.widget)
         self.radiolabel.setObjectName(u"DVlabelmanual")
-        self.radiolabel.setGeometry(QRect(652, 140, 111, 16))
+        self.radiolabel.setGeometry(QRect(652, 50, 111, 16))
         self.radiolabel.setFont(radiobuttonfont)
 
         self.drilloffsetcheck = QRadioButton("Drill", self.widget)
         self.drilloffsetcheck.setObjectName(u"drillradio")
-        self.drilloffsetcheck.setGeometry(QRect(662, 170, 92, 20))
+        self.drilloffsetcheck.setGeometry(QRect(662, 80, 92, 20))
         self.drilloffsetcheck.setFont(radiobuttonfont)
 
         self.needleoffsetcheck = QRadioButton("Syringe", self.widget)
         self.needleoffsetcheck.setObjectName(u"needleradio")
-        self.needleoffsetcheck.setGeometry(QRect(662, 200, 92, 20))
+        self.needleoffsetcheck.setGeometry(QRect(662, 110, 92, 20))
         self.needleoffsetcheck.setFont(radiobuttonfont)
 
         self.fiberoffsetcheck = QRadioButton("Probe", self.widget)
         self.fiberoffsetcheck.setObjectName(u"proberadio")
-        self.fiberoffsetcheck.setGeometry(QRect(662, 230, 92, 20))
+        self.fiberoffsetcheck.setGeometry(QRect(662, 140, 92, 20))
         self.fiberoffsetcheck.setFont(radiobuttonfont)
 
         self.checkBox = QCheckBox("Make it so", self.widget)
