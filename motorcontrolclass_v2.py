@@ -136,7 +136,6 @@ class StepperSetup:
                 self.steppgo(self.goplus, 1, btwnsteps)
                 StepperSetup.DVsteps -= 1
             if GPIO.input(self.limit) != True:
-                GPIO.output(self.enable, 1)
                 break
 
 

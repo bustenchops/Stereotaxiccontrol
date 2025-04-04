@@ -98,8 +98,8 @@ class mainprogram:
     # DVrelOffset= 0
 
     #DEFINE STEPPER DIRECTIONS
-    APback = 1
-    APforward = 0
+    APback = 0
+    APforward = 1
     MVleft = 0
     MVright = 1
     DVup = 0
@@ -502,11 +502,8 @@ class mainprogram:
 
     #Zero steppers
         print('calling zero function')
-        print('DV')
         self.DVmove.zerostep(mainprogram.backoff, StepperSetup.btnSteps)
-        print('AP')
         self.APmove.zerostep(mainprogram.backoff, StepperSetup.btnSteps)
-        print('MV')
         self.MVmove.zerostep(mainprogram.backoff, StepperSetup.btnSteps)
 
     #calibration routine
