@@ -124,7 +124,7 @@ class StepperSetup:
         while GPIO.input(self.limit):
     #        print(self.axis)
             if self.axis == 1:
-                self.steppgo(self.goplus, 1, btwnsteps)
+                self.steppgo(self.gominus, 1, btwnsteps)
                 StepperSetup.APsteps -= 1
             elif self.axis == 2:
                 self.steppgo(self.gominus, 1, btwnsteps)
@@ -139,7 +139,7 @@ class StepperSetup:
 
         for x in range(backoff):
             if self.axis == 1:
-                GPIO.output(self.direction, self.gominus)
+                GPIO.output(self.direction, self.goplus)
                 StepperSetup.APsteps += 1
             elif self.axis == 2:
                 GPIO.output(self.direction, self.goplus)
