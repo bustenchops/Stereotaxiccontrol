@@ -307,6 +307,7 @@ class MainWindow(QMainWindow):
             self,
             windialog,
             fullmsg,
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
         )
         if button == QMessageBox.StandardButton.Yes:
             answer = 'y'
@@ -323,6 +324,7 @@ class MainWindow(QMainWindow):
             self,
             windialog,
             fullmsg,
+            QMessageBox.StandardButton.Ok
         )
         if button == QMessageBox.StandardButton.Ok:
             answer = 'y'
