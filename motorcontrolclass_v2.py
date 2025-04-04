@@ -116,7 +116,7 @@ class StepperSetup:
                     else:
                         StepperSetup.DVsteps -= 1
 
-                # self.iliketomoveit.PosRelAbsCalc()
+                self.iliketomoveit.PosRelAbsCalc()
             else:
                 print("ERROR - limit reached")
 
@@ -128,19 +128,15 @@ class StepperSetup:
 
     #        print(self.axis)
             if self.axis == 1:
-                print(GPIO.input(self.limit))
                 self.steppgo(self.gominus, 1, btwnsteps)
                 StepperSetup.APsteps -= 1
             elif self.axis == 2:
-                print(GPIO.input(self.limit))
                 self.steppgo(self.gominus, 1, btwnsteps)
                 StepperSetup.MVsteps -= 1
             elif self.axis == 3:
-                print(GPIO.input(self.limit))
                 self.steppgo(self.goplus, 1, btwnsteps)
                 StepperSetup.DVsteps -= 1
             if GPIO.input(self.limit) != True:
-                print('limit triggered')
                 break
 
 
@@ -178,10 +174,9 @@ class StepperSetup:
 
 
     def CalibrateDistance(self, calibrationsteps, rollback, btwnSteps):
-        print('start calibration steps:',calibrationsteps, 'backoff:',rollback, )
         print('open file')
-        self.calibratetemp = [0,0,0]
-        file_name = 'calibration.txt'
+        self.calibratetemp = []
+        file_name = 'Calibration.txt'
         file = open(file_name, 'r')
         print ('file openned')
         while True:
