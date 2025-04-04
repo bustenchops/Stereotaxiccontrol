@@ -255,7 +255,7 @@ class MainWindow(QMainWindow):
             self.checkBox.setChecked(False)
 
     def updatepositionLCD(self, stepAP, stepMV, stepDV, ABS_AP, ABS_MV, ABS_DV, REL_AP, REL_MV, REL_DV):
-        print("lcds should update")
+        # print("lcds should update")
         self.APstepLCD.display(stepAP)
         self.MVstepLCD.display(stepMV)
         self.DVstepLCD.display(stepDV)
