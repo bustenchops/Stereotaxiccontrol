@@ -51,7 +51,6 @@ class StepperSetup:
             # NOTE: placeholder to import object instances from main program
         self.iliketomoveit = "none"
         self.sendtoUI = tosendtoUI
-        self.calibratetemp = [0,0,0]
 
         # setup GPIO
         GPIO.setwarnings(False)
@@ -177,19 +176,16 @@ class StepperSetup:
 
     def CalibrateDistance(self, calibrationsteps, rollback, btwnSteps):
         print('open file')
-
+        self.calibratetemp = []
         file_name = 'Calibration.txt'
         file = open(file_name, 'r')
         print ('file open')
-        print (self.loopcount)
         while True:
             print('reading')
-            print(self.loopcount)
             line = file.readline()
             if not line:
                 break
-            self.calibratetemp[self.loopcount] = line.strip()
-            self.loopcount += 1
+            self.calibratetemp.append(line.strip())
 
         file.close()
         print('file closed')
@@ -300,7 +296,7 @@ class StepperSetup:
                 print(f"Variable has been written to {file_name}")
 
             # Zero again
-            self.iliketomoveit.zerostep(rollback)
+            self.iliketomoveit.zerostep(rollback, StepperSetup.btnSteps)
 
 
     def PosRelAbsCalc(self):
