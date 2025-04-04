@@ -330,38 +330,6 @@ class MainWindow(QMainWindow):
             print("Yes!")
             return answer
 
-    def infoboxquestion(self,text):
-        print('i tried and failed')
-
-class InfoDialog(QDialog):
-    def __init__(self):
-        super().__init__()
-        self.setWindowTitle("Enter Information")
-
-        # Layout
-        layout = QVBoxLayout()
-
-        # Label
-        self.label = QLabel("Please enter your information:")
-        layout.addWidget(self.label)
-
-        # Line Edit
-        self.line_edit = QLineEdit()
-        layout.addWidget(self.line_edit)
-
-        # Button
-        self.button = QPushButton("Submit")
-        self.button.clicked.connect(self.submit_info)
-        layout.addWidget(self.button)
-
-        self.setLayout(layout)
-
-    def submit_info(self):
-        user_input = self.line_edit.text()
-        print(f"User entered: {user_input}")
-        self.accept()
-
-
 app = QApplication(sys.argv)
 window = MainWindow()
 

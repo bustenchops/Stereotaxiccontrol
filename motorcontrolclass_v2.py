@@ -1,8 +1,8 @@
 import RPi.GPIO as GPIO
 import time
 
-#from Steppercontrol_classversion import mainprogram
-
+import tkinter as tk
+from tkinter import simpledialog
 
 class StepperSetup:
 
@@ -75,6 +75,7 @@ class StepperSetup:
 
     #receives object instance from control  program so it can be utilized with this class APmove,MVmove and DVmove
         #Object instance calls on this function from within itself and sends itself here.
+
     def receive_instance(self, maininstance):
         self.iliketomoveit = maininstance
 
@@ -84,6 +85,24 @@ class StepperSetup:
     #def receive_frommainstepper(self, comingfrommain):
     #    self.sendingtomain = comingfrommain
 
+    def get_user_input(self,giventitle,givenprompt):
+        # Create the root window
+        root = tk.Tk()
+        root.withdraw()  # Hide the root window
+
+        # Prompt the user for input
+        user_input = simpledialog.askstring(title="Input", prompt="Please enter your input:")
+
+        # Print the user input
+        if user_input is not None:
+            print(f"User input: {user_input}")
+            return user_input
+
+        else:
+            print("No input provided")
+
+        # Destroy the root window
+        root.destroy()
 
     def steppgo(self,move_direction, speed, btwnsteps):
 
@@ -221,9 +240,8 @@ class StepperSetup:
         #print("DV distance per step: ", StepperSetup.DVstepdistance, "mm")
         self.importcalibrationfile()
 
-        yesno = self.sendtoUI.yesnowindow('Calibration:','Do you wish to re-calibrate the axis?')
-
         # yesno = input("Perform calibration? (y/n)")
+        yesno = self.get_user_input('Calibration:','Perform re-calibration on axis?')
 
         #init the input variables
         self.APinput = 0
