@@ -213,7 +213,7 @@ class StepperSetup:
                 self.APinput = input("Enter the AP starting position in millimeters.")
 
                 for x in range(calibrationsteps):
-                    if 0 >= StepperSetup.APsteps < 6000:
+                    if 0 <= StepperSetup.APsteps < 6000:
                         self.iliketomoveit.steppgo(self.gominus, 1, btwnSteps)
 
                 self.APinputend = input("Enter the AP final position in millimeters.")
@@ -241,7 +241,7 @@ class StepperSetup:
                 self.MVinput = input("Enter the MV starting position in millimeters.")
 
                 for x in range(calibrationsteps):
-                    if 0 < StepperSetup.MVsteps < 6000:
+                    if 0 <= StepperSetup.MVsteps < 6000:
                         self.iliketomoveit.steppgo(self.goplus, 1,btwnSteps)
 
                 self.MVinputend = input("Enter the MV final position in millimeters.")
@@ -269,7 +269,7 @@ class StepperSetup:
                 self.DVinput = input("Enter the DV starting position in millimeters.")
 
                 for x in range(calibrationsteps):
-                    if 0 < StepperSetup.DVsteps < 6000:
+                    if 0 <= StepperSetup.DVsteps < 6000:
                         self.iliketomoveit.steppgo(self.gominus, 1,btwnSteps)
 
                 self.DVinputend = input("Enter the DV final position in millimeters.")
