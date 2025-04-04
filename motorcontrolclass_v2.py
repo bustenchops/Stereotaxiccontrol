@@ -228,28 +228,9 @@ class StepperSetup:
         #print('open file')
         #self.calibratetemp = []
         file_name = 'Calibration.txt'
-        #file = open(file_name, 'r')
-        #print ('file open')
-        #while True:
-        #    print('reading')
-        #    line = file.readline()
-        #    if not line:
-        #        break
-        #    self.calibratetemp.append(line.strip())
 
-        #file.close()
-        #print('file closed')
-        #StepperSetup.APstepdistance = float(self.calibratetemp[0])
-        #StepperSetup.MVstepdistance = float(self.calibratetemp[1])
-        #StepperSetup.DVstepdistance = float(self.calibratetemp[2])
-
-        #print("Current calibration values are:")
-        #print("AP distance per step: ", StepperSetup.APstepdistance, "mm")
-        #print("MV distance per step: ", StepperSetup.MVstepdistance, "mm")
-        #print("DV distance per step: ", StepperSetup.DVstepdistance, "mm")
         self.importcalibrationfile(file_name)
 
-        # yesno = input("Perform calibration? (y/n)")
         yesno = self.get_user_input('Calibration:','Perform re-calibration on axis? (y/n)')
 
         #init the input variables
@@ -261,16 +242,14 @@ class StepperSetup:
         self.DVinputend = 0
 
         if yesno == "y":
-            #notation = input("!!!Make sure to remove all attachments from rig!!! ENTER key to continue")
+
             notation = self.get_user_input('MESSAGE:','!!!Make sure to remove all attachments from rig!!! ENTER key to continue')
             if self.axis == 1:
-                #self.APinput = input("Enter the AP starting position in millimeters.")
                 self.APinput = self.get_user_input('INPUT:','Enter the AP starting position in millimeters.')
                 for x in range(calibrationsteps):
                     if 0 <= StepperSetup.APsteps < 6000:
                         self.iliketomoveit.steppgo(self.gominus, 1, btwnSteps)
 
-                #self.APinputend = input("Enter the AP final position in millimeters.")
                 self.APinputend = self.get_user_input('INPUT:', 'Enter the AP final position in millimeters.')
                 # converted to float values
                 flAPinput = float(self.APinput)
@@ -285,16 +264,6 @@ class StepperSetup:
 
                 self.exportcalibrationfile(file_name)
 
-                #with open(file_name, "w") as file:
-                    # Write each variable to the file in Pine Script format
-                #    for x, value in enumerate(self.calibratetemp):
-                #        varvalue = self.calibratetemp[x]
-                #        file.write(f"{varvalue}\n")
-                #file.close()
-
-                print("NEW calibration values are:")
-                print("AP distance per step:", " ", StepperSetup.APstepdistance, "mm")
-                print(f"Variable has been written to {file_name}")
 
             elif self.axis == 2:
                 # self.MVinput = input("Enter the MV starting position in millimeters.")
@@ -313,20 +282,8 @@ class StepperSetup:
 
                 # write values to file
                 self.calibratetemp = [StepperSetup.APstepdistance, StepperSetup.MVstepdistance, StepperSetup.DVstepdistance]
-                # Open the file in write mode
-                #with open(file_name, "w") as file:
-                    # Write each variable to the file in Pine Script format
-                #    for x, value in enumerate(self.calibratetemp):
-                #        varvalue = self.calibratetemp[x]
-                #        file.write(f"{varvalue}\n")
-                #file.close()
 
                 self.exportcalibrationfile(file_name)
-                self.importcalibrationfile(file_name)
-
-                print("NEW calibration values are:")
-                print("MV distance per step:", " ", StepperSetup.MVstepdistance, "mm")
-                print(f"Variable has been written to {file_name}")
 
             elif self.axis == 3:
                 #self.DVinput = input("Enter the DV starting position in millimeters.")
@@ -347,15 +304,9 @@ class StepperSetup:
 
                 # write values to file
                 self.calibratetemp = [StepperSetup.APstepdistance, StepperSetup.MVstepdistance, StepperSetup.DVstepdistance]
-                # Open the file in write mode
-                #with open(file_name, "w") as file:
-                    # Write each variable to the file in Pine Script format
-                #    for x, value in enumerate(self.calibratetemp):
-                #        varvalue = self.calibratetemp[x]
-                #        file.write(f"{varvalue}\n")
-                #file.close()
 
                 self.exportcalibrationfile(file_name)
+                self.importcalibrationfile(file_name)
 
                 print("NEW calibration values are:")
                 print("DV distance per step:", " ", StepperSetup.DVstepdistance, "mm")
