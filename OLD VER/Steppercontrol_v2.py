@@ -1,6 +1,4 @@
-import sys
 import time
-from os.path import relpath
 import RPi.GPIO as GPIO
 from motorcontrolclass_v2 import StepperSetup
 from rotary_class import RotaryEncoder

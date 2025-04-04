@@ -3,7 +3,7 @@
 from PySide6.QtCore import (QRect, QThreadPool)
 from PySide6.QtGui import (QFont)
 from PySide6.QtWidgets import (QApplication, QFrame, QLCDNumber, QMainWindow, QMenuBar, QRadioButton, QStatusBar,
-                               QWidget, QLabel, QPlainTextEdit, QCheckBox, QPushButton, QListWidget,QFileDialog,QMessageBox,QDialog)
+                               QWidget, QLabel, QPlainTextEdit, QCheckBox, QPushButton, QListWidget,QFileDialog,QMessageBox)
 
 #from motorcontrolclass_v2 import StepperSetup
 #from rotary_class import RotaryEncoder
@@ -300,67 +300,6 @@ class MainWindow(QMainWindow):
 
     def probeoffset(self):
         self.fiberoffsetcheck.toggle()
-
-    def yesnowindow(self, windialog, fullmsg):
-        button = QMessageBox.question(
-            self,
-            windialog,
-            fullmsg,
-            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
-        )
-        if button == QMessageBox.StandardButton.Yes:
-            answer = 'y'
-            print("Yes!")
-            return answer
-
-        else:
-            answer = 'n'
-            print("No!")
-            return answer
-
-    def okwindow(self, windialog, fullmsg):
-        button = QMessageBox.information(
-            self,
-            windialog,
-            fullmsg,
-            QMessageBox.StandardButton.Ok
-        )
-        if button == QMessageBox.StandardButton.Ok:
-            answer = 'y'
-            print("Yes!")
-            return answer
-
-    def infoboxquestion(self,text):
-        print('i tried and failed')
-
-class InfoDialog(QDialog):
-    def __init__(self):
-        super().__init__()
-        self.setWindowTitle("Enter Information")
-
-        # Layout
-        layout = QVBoxLayout()
-
-        # Label
-        self.label = QLabel("Please enter your information:")
-        layout.addWidget(self.label)
-
-        # Line Edit
-        self.line_edit = QLineEdit()
-        layout.addWidget(self.line_edit)
-
-        # Button
-        self.button = QPushButton("Submit")
-        self.button.clicked.connect(self.submit_info)
-        layout.addWidget(self.button)
-
-        self.setLayout(layout)
-
-    def submit_info(self):
-        user_input = self.line_edit.text()
-        print(f"User entered: {user_input}")
-        self.accept()
-
 
 app = QApplication(sys.argv)
 window = MainWindow()

@@ -34,6 +34,7 @@ class StepperSetup:
 
 
     def __init__(self,enablepin,steppin,directionpin,limitpin,Axis,Plusdir,Minusdir,tosendtoUI):
+        print('setting up a stepper')
         self.enable = enablepin
         self.step = steppin
         self.direction = directionpin
@@ -46,9 +47,7 @@ class StepperSetup:
             # NOTE plus and minus direction relative to stereo coordinates
         self.goplus = Plusdir
         self.gominus = Minusdir
-
         self.lastenablestate = 0
-
             # NOTE: placeholder to import object instances from main program
         self.iliketomoveit = "none"
         self.sendtoUI = tosendtoUI
@@ -174,19 +173,22 @@ class StepperSetup:
         self.lastenablestate = 1
         #print('stepper zeroed and shut down')
 
-    def importcalibrationfile(self):
+
+    def CalibrateDistance(self, calibrationsteps, rollback, btwnSteps):
+        #print('open file')
         self.calibratetemp = []
         file_name = 'Calibration.txt'
         file = open(file_name, 'r')
-
+        #print ('file open')
         while True:
+        #    print('reading')
             line = file.readline()
             if not line:
                 break
             self.calibratetemp.append(line.strip())
 
         file.close()
-
+        #print('file closed')
         StepperSetup.APstepdistance = float(self.calibratetemp[0])
         StepperSetup.MVstepdistance = float(self.calibratetemp[1])
         StepperSetup.DVstepdistance = float(self.calibratetemp[2])
@@ -196,34 +198,7 @@ class StepperSetup:
         print("MV distance per step: ", StepperSetup.MVstepdistance, "mm")
         print("DV distance per step: ", StepperSetup.DVstepdistance, "mm")
 
-    def CalibrateDistance(self, calibrationsteps, rollback, btwnSteps):
-        #print('open file')
-        #self.calibratetemp = []
-        #file_name = 'Calibration.txt'
-        #file = open(file_name, 'r')
-        #print ('file open')
-        #while True:
-        #    print('reading')
-        #    line = file.readline()
-        #    if not line:
-        #        break
-        #    self.calibratetemp.append(line.strip())
-
-        #file.close()
-        #print('file closed')
-        #StepperSetup.APstepdistance = float(self.calibratetemp[0])
-        #StepperSetup.MVstepdistance = float(self.calibratetemp[1])
-        #StepperSetup.DVstepdistance = float(self.calibratetemp[2])
-
-        #print("Current calibration values are:")
-        #print("AP distance per step: ", StepperSetup.APstepdistance, "mm")
-        #print("MV distance per step: ", StepperSetup.MVstepdistance, "mm")
-        #print("DV distance per step: ", StepperSetup.DVstepdistance, "mm")
-        self.importcalibrationfile()
-
-        yesno = self.sendtoUI.yesnowindow('Calibration:','Do you wish to re-calibrate the axis?')
-
-        # yesno = input("Perform calibration? (y/n)")
+        yesno = input("Perform calibration? (y/n)")
 
         #init the input variables
         self.APinput = 0

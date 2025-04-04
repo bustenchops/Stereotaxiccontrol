@@ -2,8 +2,6 @@ import time
 import RPi.GPIO as GPIO
 
 
-from rotary_class import RotaryEncoder
-
 class mainprogram:
     #Main while loop condition
     keepalive = True
