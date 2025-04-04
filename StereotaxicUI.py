@@ -304,8 +304,7 @@ class MainWindow(QMainWindow):
 app = QApplication(sys.argv)
 window = MainWindow()
 
-#maininstancesendstepper = StepperSetup(1,1,1,1,1,1,1)
-#maininstancesendstepper.receive_frommainstepper(window)
+
 maininstancesendcontrol = mainprogram()
 
 # start the threads that need to keep the buttons and such working

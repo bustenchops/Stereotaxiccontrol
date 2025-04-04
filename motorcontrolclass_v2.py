@@ -80,8 +80,8 @@ class StepperSetup:
     #receives object instance from main program so it can be utilized with this class
     #Object instance calls on this function from within itself and sends itself here.
     #just to keep UIstuff apart from working stuff
-    def receive_frommainstepper(self, comingfrommain):
-        self.sendingtomain = comingfrommain
+    #def receive_frommainstepper(self, comingfrommain):
+    #    self.sendingtomain = comingfrommain
 
 
     def steppgo(self,move_direction, speed, btwnsteps):
@@ -122,7 +122,7 @@ class StepperSetup:
 
 
     def zerostep(self, backoff, btwnsteps):
-        print('zero step called')
+        #print('zero step called')
         GPIO.output(self.enable,0)
         while GPIO.input(self.limit):
 
@@ -170,7 +170,7 @@ class StepperSetup:
         self.iliketomoveit.PosRelAbsCalc()
         # shut down steppers so they cool
         GPIO.output(self.enable,1)
-        print('stepper zeroed and shut down')
+        #print('stepper zeroed and shut down')
 
 
     def CalibrateDistance(self, calibrationsteps, rollback, btwnSteps):

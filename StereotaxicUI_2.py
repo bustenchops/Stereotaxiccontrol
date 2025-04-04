@@ -3,7 +3,7 @@
 from PySide6.QtCore import (QRect, QThreadPool)
 from PySide6.QtGui import (QFont)
 from PySide6.QtWidgets import (QApplication, QFrame, QLCDNumber, QMainWindow, QMenuBar, QRadioButton, QStatusBar,
-                               QWidget, QLabel, QPlainTextEdit, QCheckBox, QPushButton, QListWidget,QFileDialog)
+                               QWidget, QLabel, QPlainTextEdit, QCheckBox, QPushButton, QListWidget,QFileDialog, QMessageBox)
 
 #from motorcontrolclass_v2 import StepperSetup
 #from rotary_class import RotaryEncoder
@@ -301,6 +301,34 @@ class MainWindow(QMainWindow):
 
     def probeoffset(self):
         self.fiberoffsetcheck.toggle()
+
+    def yesnowindow(self, windialog, fullmsg):
+        button = QMessageBox.question(
+            self,
+            windialog,
+            fullmsg,
+        )
+        if button == QMessageBox.StandardButton.Yes:
+            answer = 'y'
+            print("Yes!")
+            return answer
+
+        else:
+            answer = 'n'
+            print("No!")
+            return answer
+
+    def okwindow(self, windialog, fullmsg):
+        button = QMessageBox.information(
+            self,
+            windialog,
+            fullmsg,
+        )
+        if button == QMessageBox.StandardButton.Ok:
+            answer = 'y'
+            print("Yes!")
+            return answer
+
 
 app = QApplication(sys.argv)
 window = MainWindow()
