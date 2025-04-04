@@ -175,20 +175,20 @@ class StepperSetup:
 
 
     def CalibrateDistance(self, calibrationsteps, rollback, btwnSteps):
-        print('open file')
+        #print('open file')
         self.calibratetemp = []
         file_name = 'Calibration.txt'
         file = open(file_name, 'r')
-        print ('file open')
+        #print ('file open')
         while True:
-            print('reading')
+        #    print('reading')
             line = file.readline()
             if not line:
                 break
             self.calibratetemp.append(line.strip())
 
         file.close()
-        print('file closed')
+        #print('file closed')
         StepperSetup.APstepdistance = float(self.calibratetemp[0])
         StepperSetup.MVstepdistance = float(self.calibratetemp[1])
         StepperSetup.DVstepdistance = float(self.calibratetemp[2])
