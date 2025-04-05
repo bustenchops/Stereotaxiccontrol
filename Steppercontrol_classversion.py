@@ -544,7 +544,7 @@ class mainprogram:
         testcount = 100
         for x in range(testcount):
             print('moving')
-            self.iliketomoveit.steppgo(self.goplus, 1, StepperSetup.btnSteps)
+            self.APmove.steppgo(self.goplus, 1, StepperSetup.btnSteps)
 
         while mainprogram.keepalive:
 
