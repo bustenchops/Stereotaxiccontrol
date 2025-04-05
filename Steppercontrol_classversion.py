@@ -506,8 +506,8 @@ class mainprogram:
     def initializeencoders(self):
         # INITIALIZE ENCODERS
         print('encoders init')
-        self.AProto = RotaryEncoder(mainprogram.rotoA_AP, mainprogram.rotoB_AP, mainprogram.emergstop, self.incomefromencoder.MV_event)
-        self.MVroto = RotaryEncoder(mainprogram.rotoA_MV, mainprogram.rotoB_MV, mainprogram.misc_eventbuttonA, self.incomefromencoder.MV_event)
+        self.AProto = RotaryEncoder(mainprogram.rotoA_AP, mainprogram.rotoB_AP, mainprogram.emergstop, self.incomefromencoder.AP_event)
+        self.MVroto = RotaryEncoder(mainprogram.rotoA_MV, mainprogram.rotoB_MV, mainprogram.misc_eventbuttonA, self.incomefromencoder2.MV_event)
         self.DVroto = RotaryEncoder(mainprogram.rotoA_DV, mainprogram.rotoB_DV, mainprogram.misc_eventbuttonB, self.incomefromencoder.DV_event)
         #print('if shits got this far YAY! and the encoders are started...maybe')
 
@@ -531,18 +531,19 @@ class mainprogram:
         self.MVmove.CalibrateDistance(mainprogram.calibrationsteps, mainprogram.backoff, StepperSetup.btnSteps)
         self.DVmove.CalibrateDistance(mainprogram.calibrationsteps, mainprogram.backoff, StepperSetup.btnSteps)
 
+    def loopthisshit(self,mainprogshit):
+        self.whatthefuck = mainprogshit
 
     #MAIN CODE ################################################################################################
     def intializethesystem_andrun(self):
         #print('shits on fire yo')
         #this gets used when initializing the encoders so the encoder can send the results back to this class
         self.incomefromencoder = mainprogram()
+        self.incomefromencoder2 = mainprogram.loopthisshit(self.MVove)
         self.initializesteppers()
         self.initializeencoders()
         #self.calibratethings()
-        for x in range(100):
-            print(x)
-            self.APmove.steppgo(1,1,0.002)
+
 
 #        RotaryEncoder.receive_instance(self.incomefromencoder)
 
