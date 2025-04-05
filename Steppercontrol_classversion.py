@@ -535,11 +535,14 @@ class mainprogram:
     #MAIN CODE ################################################################################################
     def intializethesystem_andrun(self):
         #print('shits on fire yo')
-        #this gets used when initializing the encoders so the encoder can send the resutls back to this class
+        #this gets used when initializing the encoders so the encoder can send the results back to this class
         self.incomefromencoder = mainprogram()
         self.initializesteppers()
         self.initializeencoders()
-        self.calibratethings()
+        #self.calibratethings()
+        for x in range(100)
+            print(x)
+            self.APmove.randomtest()
 
 #        RotaryEncoder.receive_instance(self.incomefromencoder)
 

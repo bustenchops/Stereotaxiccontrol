@@ -224,6 +224,8 @@ class StepperSetup:
                 file.write(f"{varvalue}\n")
         file.close()
 
+    def randomtest(self):
+        print('this is random')
 
     def CalibrateDistance(self, calibrationsteps, rollback, btwnSteps):
         #print('open file')
