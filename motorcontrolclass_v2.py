@@ -138,6 +138,7 @@ class StepperSetup:
                         StepperSetup.DVsteps -= 1
 
                 self.iliketomoveit.PosRelAbsCalc()
+
             else:
                 print("ERROR - limit reached")
 
@@ -187,7 +188,7 @@ class StepperSetup:
             StepperSetup.DVsteps = 0
 
         print(f"Zeroed: APsteps: {StepperSetup.APsteps} MVsteps: {StepperSetup.MVsteps} DVsteps {StepperSetup.DVsteps}")
-        time.sleep(0.225)
+        time.sleep(0.200)
         self.iliketomoveit.PosRelAbsCalc()
         # shut down steppers so they cool
         GPIO.output(self.enable,1)
@@ -250,6 +251,8 @@ class StepperSetup:
                     if 0 <= StepperSetup.APsteps < 6000:
                         self.iliketomoveit.steppgo(self.gominus, 1, btwnSteps)
 
+                print(
+                    f"Current: APsteps: {StepperSetup.APsteps} MVsteps: {StepperSetup.MVsteps} DVsteps {StepperSetup.DVsteps}")
                 self.APinputend = self.get_user_input('INPUT:', 'Enter the AP final position in millimeters.')
                 # converted to float values
                 flAPinput = float(self.APinput)
@@ -272,7 +275,8 @@ class StepperSetup:
                     if 0 <= StepperSetup.MVsteps < 6000:
                         self.iliketomoveit.steppgo(self.goplus, 1,btwnSteps)
 
-                #self.MVinputend = input("Enter the MV final position in millimeters.")
+                print(
+                    f"Current: APsteps: {StepperSetup.APsteps} MVsteps: {StepperSetup.MVsteps} DVsteps {StepperSetup.DVsteps}")
                 self.MVinputend = self.get_user_input('INPUT:', 'Enter the MV final position in millimeters.')
                 # converted to float values
                 flMVinput = float(self.MVinput)
@@ -286,7 +290,7 @@ class StepperSetup:
                 self.exportcalibrationfile(file_name)
 
             elif self.axis == 3:
-                #self.DVinput = input("Enter the DV starting position in millimeters.")
+
                 self.DVinput = self.get_user_input('INPUT:', 'Enter the DV starting position in millimeters.')
 
                 for x in range(calibrationsteps):
@@ -294,6 +298,8 @@ class StepperSetup:
                         self.iliketomoveit.steppgo(self.gominus, 1,btwnSteps)
 
                 #self.DVinputend = input("Enter the DV final position in millimeters.")
+                print(
+                    f"Current: APsteps: {StepperSetup.APsteps} MVsteps: {StepperSetup.MVsteps} DVsteps {StepperSetup.DVsteps}")
                 self.DVinputend = self.get_user_input('INPUT:', 'Enter the DV final position in millimeters.')
 
                 # converted to float values
