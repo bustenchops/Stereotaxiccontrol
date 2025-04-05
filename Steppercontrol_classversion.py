@@ -506,9 +506,15 @@ class mainprogram:
     def initializeencoders(self):
         # INITIALIZE ENCODERS
         print('encoders init')
-        self.AProto = RotaryEncoder(mainprogram.rotoA_AP, mainprogram.rotoB_AP, mainprogram.emergstop, self.incomefromencoder.AP_event)
-        self.MVroto = RotaryEncoder(mainprogram.rotoA_MV, mainprogram.rotoB_MV, mainprogram.misc_eventbuttonA, self.incomefromencoder2.MV_event)
-        self.DVroto = RotaryEncoder(mainprogram.rotoA_DV, mainprogram.rotoB_DV, mainprogram.misc_eventbuttonB, self.incomefromencoder.DV_event)
+        #changed to send reference to main instance?
+        #self.AProto = RotaryEncoder(mainprogram.rotoA_AP, mainprogram.rotoB_AP, mainprogram.emergstop, self.incomefromencoder.AP_event)
+        #self.MVroto = RotaryEncoder(mainprogram.rotoA_MV, mainprogram.rotoB_MV, mainprogram.misc_eventbuttonA, self.incomefromencoder.MV_event)
+        #self.DVroto = RotaryEncoder(mainprogram.rotoA_DV, mainprogram.rotoB_DV, mainprogram.misc_eventbuttonB, self.incomefromencoder.DV_event)
+
+        self.AProto = RotaryEncoder(mainprogram.rotoA_AP, mainprogram.rotoB_AP, mainprogram.emergstop, self.whatthefuck.AP_event)
+        self.MVroto = RotaryEncoder(mainprogram.rotoA_MV, mainprogram.rotoB_MV, mainprogram.misc_eventbuttonA, self.whatthefuck.MV_event)
+        self.DVroto = RotaryEncoder(mainprogram.rotoA_DV, mainprogram.rotoB_DV, mainprogram.misc_eventbuttonB, self.whatthefuck.DV_event)
+
         #print('if shits got this far YAY! and the encoders are started...maybe')
 
     #question and waits for ANY user input
@@ -539,7 +545,7 @@ class mainprogram:
         #print('shits on fire yo')
         #this gets used when initializing the encoders so the encoder can send the results back to this class
         self.incomefromencoder = mainprogram()
-        self.incomefromencoder2 = mainprogram.loopthisshit(self.MVove)
+        #self.incomefromencoder2 = mainprogram.loopthisshit(self.MVove)
         self.initializesteppers()
         self.initializeencoders()
         #self.calibratethings()

@@ -339,7 +339,8 @@ maininstancesendcontrol = mainprogram()
 # start the threads that need to keep the buttons and such working
 threadpool = QThreadPool()
 threadpool.start(maininstancesendcontrol.intializethesystem_andrun)
-
+#added to hopefully get encoders to work
+maininstancesendcontrol.loopthisshit(maininstancesendcontrol)
 maininstancesendcontrol.receive_frommaincontrol(window)
 
 
