@@ -540,7 +540,7 @@ class mainprogram:
         # self.calibratethings()
 #        RotaryEncoder.receive_instance(self.incomefromencoder)
         testcount = 100
-        for x in testcount:
+        for x in range(testcount):
             self.iliketomoveit.steppgo(self.goplus, 1, StepperSetup.btnSteps)
 
         while mainprogram.keepalive:
