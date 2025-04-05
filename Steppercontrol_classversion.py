@@ -542,7 +542,7 @@ class mainprogram:
         #self.calibratethings()
         for x in range(100):
             print(x)
-            self.APmove.randomtest()
+            self.APmove.steppgo(1,1,0.002)
 
 #        RotaryEncoder.receive_instance(self.incomefromencoder)
 
