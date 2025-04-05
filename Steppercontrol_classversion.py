@@ -540,12 +540,11 @@ class mainprogram:
         self.initializesteppers()
         self.initializeencoders()
         # self.calibratethings()
+        for x in range(100):
+            print(x)
+            self.DVmove.steppgo(1,1,0.002)
 #        RotaryEncoder.receive_instance(self.incomefromencoder)
-        self.testcounte = 100
-        for h in range(self.testcounte):
-            print(h)
-            print('moving')
-            self.DVmove.steppgo(1, 1, 0.002)
+
 
         while mainprogram.keepalive:
 
