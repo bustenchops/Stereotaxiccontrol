@@ -492,6 +492,7 @@ class mainprogram:
 
         #INITIALIZE STEPPERS
     def initializesteppers(self):
+        print('steppers init')
         self.APmove = StepperSetup(mainprogram.enableAll,mainprogram.stepAP,mainprogram.directionAP,mainprogram.limitAP,1,mainprogram.APback,mainprogram.APforward, self.sendingtomainA)
         self.MVmove = StepperSetup(mainprogram.enableAll,mainprogram.stepMV,mainprogram.directionMV,mainprogram.limitMV,2,mainprogram.MVright,mainprogram.MVleft, self.sendingtomainA)
         self.DVmove = StepperSetup(mainprogram.enableAll,mainprogram.stepDV,mainprogram.directionDV,mainprogram.limitDV,3,mainprogram.DVup,mainprogram.DVdown, self.sendingtomainA)
@@ -504,6 +505,7 @@ class mainprogram:
 
     def initializeencoders(self):
         # INITIALIZE ENCODERS
+        print('encoders init')
         self.AProto = RotaryEncoder(mainprogram.rotoA_AP, mainprogram.rotoB_AP, mainprogram.emergstop, self.incomefromencoder.MV_event)
         self.MVroto = RotaryEncoder(mainprogram.rotoA_MV, mainprogram.rotoB_MV, mainprogram.misc_eventbuttonA, self.incomefromencoder.MV_event)
         self.DVroto = RotaryEncoder(mainprogram.rotoA_DV, mainprogram.rotoB_DV, mainprogram.misc_eventbuttonB, self.incomefromencoder.DV_event)
@@ -541,6 +543,7 @@ class mainprogram:
 #        RotaryEncoder.receive_instance(self.incomefromencoder)
         testcount = 100
         for x in range(testcount):
+            print('moving')
             self.iliketomoveit.steppgo(self.goplus, 1, StepperSetup.btnSteps)
 
         while mainprogram.keepalive:
