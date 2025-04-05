@@ -445,8 +445,10 @@ class mainprogram:
     # Event handling for the encoders and hard wired buttons each encoder
     def MV_event(self, event):
         if event == RotaryEncoder.CLOCKWISE:
+            print('test clockwise')
             self.MVmove.steppgo(mainprogram.MVright, mainprogram.stepper_speed, StepperSetup.btnSteps)
         elif event == RotaryEncoder.ANTICLOCKWISE:
+            print('test anticlock')
             self.MVmove.steppgo(mainprogram.MVleft, mainprogram.stepper_speed, StepperSetup.btnSteps)
         elif event == RotaryEncoder.BUTTONDOWN:
             print("event button A clicked")
@@ -488,15 +490,8 @@ class mainprogram:
         # Destroy the root window
         root.destroy()
 
-    #MAIN CODE ################################################################################################
-    def intializethesystem_andrun(self):
-        #print('shits on fire yo')
-        #this gets used when initializing the encoders so the encoder can send the resutls back to this class
-        self.incomefromencoder = mainprogram()
-#        RotaryEncoder.receive_instance(self.incomefromencoder)
-
         #INITIALIZE STEPPERS
-
+    def initializesteppers(self):
         self.APmove = StepperSetup(mainprogram.enableAll,mainprogram.stepAP,mainprogram.directionAP,mainprogram.limitAP,1,mainprogram.APback,mainprogram.APforward, self.sendingtomainA)
         self.MVmove = StepperSetup(mainprogram.enableAll,mainprogram.stepMV,mainprogram.directionMV,mainprogram.limitMV,2,mainprogram.MVright,mainprogram.MVleft, self.sendingtomainA)
         self.DVmove = StepperSetup(mainprogram.enableAll,mainprogram.stepDV,mainprogram.directionDV,mainprogram.limitDV,3,mainprogram.DVup,mainprogram.DVdown, self.sendingtomainA)
@@ -507,14 +502,15 @@ class mainprogram:
         self.DVmove.receive_instance(self.DVmove)
         #print('send the instance to the motorcontrol class')
 
-    # INITIALIZE ENCODERS
+    def initializeencoders(self):
+        # INITIALIZE ENCODERS
         self.AProto = RotaryEncoder(mainprogram.rotoA_AP, mainprogram.rotoB_AP, mainprogram.emergstop, self.incomefromencoder.MV_event)
         self.MVroto = RotaryEncoder(mainprogram.rotoA_MV, mainprogram.rotoB_MV, mainprogram.misc_eventbuttonA, self.incomefromencoder.MV_event)
         self.DVroto = RotaryEncoder(mainprogram.rotoA_DV, mainprogram.rotoB_DV, mainprogram.misc_eventbuttonB, self.incomefromencoder.DV_event)
         #print('if shits got this far YAY! and the encoders are started...maybe')
 
     #question and waits for ANY user input
-
+    def calibratethings(self):
     #    self.quest = input("Initialization Process ... ENTER to continue.")
     #    self.quest = input("CAUTION...Remove all attachments from frame arms! ENTER to continue.")
         self.quest = self.get_user_input('MESSAGE:','Initialization Process ... ENTER to continue')
@@ -532,6 +528,18 @@ class mainprogram:
         self.APmove.CalibrateDistance(mainprogram.calibrationsteps, mainprogram.backoff, StepperSetup.btnSteps)
         self.MVmove.CalibrateDistance(mainprogram.calibrationsteps, mainprogram.backoff, StepperSetup.btnSteps)
         self.DVmove.CalibrateDistance(mainprogram.calibrationsteps, mainprogram.backoff, StepperSetup.btnSteps)
+
+
+    #MAIN CODE ################################################################################################
+    def intializethesystem_andrun(self):
+        #print('shits on fire yo')
+        #this gets used when initializing the encoders so the encoder can send the resutls back to this class
+        self.incomefromencoder = mainprogram()
+        self.initializesteppers()
+        self.initializeencoders()
+        # self.calibratethings()
+#        RotaryEncoder.receive_instance(self.incomefromencoder)
+
 
         while mainprogram.keepalive:
 
