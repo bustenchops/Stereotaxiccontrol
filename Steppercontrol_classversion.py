@@ -540,7 +540,7 @@ class mainprogram:
         self.initializesteppers()
         self.initializeencoders()
         #self.calibratethings()
-        for x in range(100)
+        for x in range(100):
             print(x)
             self.APmove.randomtest()
 
