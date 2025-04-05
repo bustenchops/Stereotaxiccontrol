@@ -541,8 +541,9 @@ class mainprogram:
         self.initializeencoders()
         # self.calibratethings()
 #        RotaryEncoder.receive_instance(self.incomefromencoder)
-        testcount = 100
-        for x in range(testcount):
+        self.testcounte = 100
+        for h in range(self.testcounte):
+            print(h)
             print('moving')
             self.APmove.steppgo(self.goplus, 1, StepperSetup.btnSteps)
 
