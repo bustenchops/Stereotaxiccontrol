@@ -47,7 +47,7 @@ class StepperSetup:
         self.goplus = Plusdir
         self.gominus = Minusdir
 
-        self.lastenablestate = 0
+        self.lastenablestate = 1
 
             # NOTE: placeholder to import object instances from main program
         self.iliketomoveit = "none"
@@ -107,10 +107,9 @@ class StepperSetup:
 
     def steppgo(self,move_direction, speed, btwnsteps):
 
-        self.stepmodifier = 0
-
         if self.lastenablestate == 1:
             GPIO.output(self.enable, 0)
+
 
         for x in range (speed):
             if GPIO.input(self.limit):
