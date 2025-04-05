@@ -539,10 +539,8 @@ class mainprogram:
         self.incomefromencoder = mainprogram()
         self.initializesteppers()
         self.initializeencoders()
-        # self.calibratethings()
-        for x in range(100):
-            print(x)
-            self.DVmove.steppgo(1,1,0.002)
+        self.calibratethings()
+
 #        RotaryEncoder.receive_instance(self.incomefromencoder)
 
 
