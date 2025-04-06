@@ -323,7 +323,6 @@ class MainWindow(QMainWindow):
         self.fiberoffsetcheck.toggle()
 
 
-
 app = QApplication(sys.argv)
 window = MainWindow()
 
