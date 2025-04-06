@@ -333,10 +333,11 @@ class StepperSetup:
         StepperSetup.MVcurABSdist = round((StepperSetup.MVsteps * StepperSetup.MVstepdistance), 4)
         StepperSetup.DVcurABSdist = round((StepperSetup.DVsteps * StepperSetup.DVstepdistance * -1), 4)
 
-        self.delayupdate = time.time() * 1000
-        if (self.delayupdate - self.updatedelay) >= 200:
-            self.updatedelay = self.delayupdate
-            self.sendtoUI.updatepositionLCD(StepperSetup.APsteps,StepperSetup.MVsteps,StepperSetup.DVsteps,StepperSetup.APcurABSdist,StepperSetup.MVcurABSdist,StepperSetup.DVcurABSdist,StepperSetup.APcurRELdist,StepperSetup.MVcurRELdist,StepperSetup.DVcurRELdist)
+        #self.delayupdate = time.time() * 1000
+        #if (self.delayupdate - self.updatedelay) >= 200:
+        #    self.updatedelay = self.delayupdate
+        self.sendtoUI.updatepositionLCD(StepperSetup.APsteps,StepperSetup.MVsteps,StepperSetup.DVsteps,StepperSetup.APcurABSdist,StepperSetup.MVcurABSdist,StepperSetup.DVcurABSdist,StepperSetup.APcurRELdist,StepperSetup.MVcurRELdist,StepperSetup.DVcurRELdist)
 
-        # print(f"Absolute position-|AP: {StepperSetup.APcurABSdist} | MV: {StepperSetup.MVcurABSdist} | DV: {StepperSetup.DVcurABSdist}")
-        # print(f"Relative position-|AP: {StepperSetup.APcurRELdist} | MV: {StepperSetup.MVcurRELdist} | DV: {StepperSetup.DVcurRELdist}")
+        print(f"APsteps: {StepperSetup.APsteps} MVsteps: {StepperSetup.MVsteps} DVsteps {StepperSetup.DVsteps}")
+        print(f"Absolute position-|AP: {StepperSetup.APcurABSdist} | MV: {StepperSetup.MVcurABSdist} | DV: {StepperSetup.DVcurABSdist}")
+        print(f"Relative position-|AP: {StepperSetup.APcurRELdist} | MV: {StepperSetup.MVcurRELdist} | DV: {StepperSetup.DVcurRELdist}")
