@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from PySide6.QtCore import (QRect, QThreadPool)
+from PySide6.QtCore import (QRect, QThreadPool,Slot)
 from PySide6.QtGui import (QFont)
 from PySide6.QtWidgets import (QApplication, QFrame, QLCDNumber, QMainWindow, QMenuBar, QRadioButton, QStatusBar,
                                QWidget, QLabel, QPlainTextEdit, QCheckBox, QPushButton, QListWidget,QFileDialog,QMessageBox,QDialog)
@@ -241,10 +241,44 @@ class MainWindow(QMainWindow):
         self.statusbar = QStatusBar()
         self.setCentralWidget(self.widget)
 
-#THREAD POOL WAS HERE
+#SLOTS of inputs
+    @Slot(float)
+    def updateAPstepLCD(self, stepAP):
+        self.APstepLCD.display(stepAP)
 
+    @Slot(float)
+    def updateMVstepLCD(self, stepMV):
+        self.MVstepLCD.display(stepMV)
 
-    #grabs the plaintext from the text boxes only if the checkbox is selected
+    @Slot(float)
+    def updateDVstepLCD(self, stepDV):
+        self.DVstepLCD.display(stepDV)
+
+    @Slot(float)
+    def updateAPabsposLCD(self, ABS_AP):
+        self.APABSposLCD.display(ABS_AP)
+
+    @Slot(float)
+    def updateMVabsposLCD(self, ABS_MV):
+        self.MVABSposLCD.display(ABS_MV)
+
+    @Slot(float)
+    def updateDVabsposLCD(self, ABS_DV):
+        self.DVABSposLCD.display(ABS_DV)
+
+    @Slot(float)
+    def updateAPrelposLCD(self, REL_AP):
+        self.APRelposLCD.display(REL_AP)
+
+    @Slot(float)
+    def updateMVrelposLCD(self, REL_MV):
+        self.MVRelposLCD.display(REL_MV)
+
+    @Slot(float)
+    def updateDVrelposLCD(self, REL_DV):
+        self.DVRelposLCD.display(REL_DV)
+
+#grabs the plaintext from the text boxes only if the checkbox is selected
     def plaintextgrab(self):
         APcooord = self.APmanualenter.toPlainText()
         MVcooord = self.MVmanualenter.toPlainText()
@@ -254,21 +288,7 @@ class MainWindow(QMainWindow):
             # RUN THE FUNCTION  TO DO THE CALC AND MOVE
             self.checkBox.setChecked(False)
 
-    def updatepositionLCD(self, stepAP, stepMV, stepDV, ABS_AP, ABS_MV, ABS_DV, REL_AP, REL_MV, REL_DV):
-        # print("lcds should update")
-        self.APstepLCD.display(stepAP)
-        self.MVstepLCD.display(stepMV)
-        self.DVstepLCD.display(stepDV)
-        self.APABSposLCD.display(ABS_AP)
-        self.MVABSposLCD.display(ABS_MV)
-        self.DVABSposLCD.display(ABS_DV)
-        self.APRelposLCD.display(REL_AP)
-        self.MVRelposLCD.display(REL_MV)
-        self.DVRelposLCD.display(REL_DV)
-
-#    def copy_folder_from_onedrive(self):
-#       os.system('rclone copy onedrive:scans D:/aa')
-
+#select a TXT file to load and preloads the targets
     def choseafile(self):
         print("click load file")
         file_dialog = QFileDialog(self)
@@ -283,15 +303,16 @@ class MainWindow(QMainWindow):
             for line in lines:
                 self.listWidget.addItem(line.strip())
 
+#loads the coordinates from the list to the text boxes
     def selectlistcoordinates(self):
         selected_items = self.listWidget.selectedItems()
         selected_text = selected_items[0].text()
-        # Assuming the format is "Item,Value,Extra"
         name, APlist, MVlist, DVlist = selected_text.split(' ')
         self.APmanualenter.setPlainText(APlist)
         self.MVmanualenter.setPlainText(MVlist)
         self.DVmanualenter.setPlainText(DVlist)
 
+#controls the toggles for the drill, needle and probe
     def drilloffset(self):
         self.drilloffsetcheck.toggle()
 
@@ -301,34 +322,7 @@ class MainWindow(QMainWindow):
     def probeoffset(self):
         self.fiberoffsetcheck.toggle()
 
-    def yesnowindow(self, windialog, fullmsg):
-        button = QMessageBox.question(
-            self,
-            windialog,
-            fullmsg,
-            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
-        )
-        if button == QMessageBox.StandardButton.Yes:
-            answer = 'y'
-            print("Yes!")
-            return answer
 
-        else:
-            answer = 'n'
-            print("No!")
-            return answer
-
-    def okwindow(self, windialog, fullmsg):
-        button = QMessageBox.information(
-            self,
-            windialog,
-            fullmsg,
-            QMessageBox.StandardButton.Ok
-        )
-        if button == QMessageBox.StandardButton.Ok:
-            answer = 'y'
-            print("Yes!")
-            return answer
 
 app = QApplication(sys.argv)
 window = MainWindow()
