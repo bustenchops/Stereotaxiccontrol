@@ -112,28 +112,35 @@ class threadedcontrols:
             # print('zero step called')
             GPIO.output(var_list.enableAll, 0)
             if axis == 1:
+                print('AP zeroing')
                 while GPIO.input(var_list.limitAP):
                     var_list.APmove.steppgo(var_list.APback, var_list.finespeed, btwnsteps)
                     if GPIO.input(var_list.limitAP) != True:
                         print('zero while loop limit')
                         break
+                print('run backoff')
+                var_list.APmove.backoffafterzero(var_list.backoff,var_list.finespeed,var_list.btnSteps)
             elif axis == 2:
+                print('ML zeroing')
                 while GPIO.input(var_list.limitML):
                     var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, btwnsteps)
                     if GPIO.input(var_list.limitML) != True:
                         print('zero while loop limit')
                         break
+                print('run backoff')
+                var_list.MLmove.backoffafterzero(var_list.backoff, var_list.finespeed, var_list.btnSteps)
             elif axis == 3:
+                print('DV zeroing')
                 while GPIO.input(var_list.limitDV):
                     var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, btwnsteps)
                     if GPIO.input(var_list.limitDV) != True:
                         print('zero while loop limit')
                         break
+                print('run backoff')
+                var_list.DVmove.backoffafterzero(var_list.backoff, var_list.finespeed, var_list.btnSteps)
 
-            print('run backoff')
-            var_list.APmove.backoffafterzero(var_list.backoff,var_list.finespeed,var_list.btnSteps)
-            var_list.MLmove.backoffafterzero(var_list.backoff, var_list.finespeed, var_list.btnSteps)
-            var_list.DVmove.backoffafterzero(var_list.backoff, var_list.finespeed, var_list.btnSteps)
+
+
 
             if axis == 1:
                 var_list.APsteps = 0
