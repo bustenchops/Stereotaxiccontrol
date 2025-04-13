@@ -2,7 +2,7 @@ import time
 import RPi.GPIO as GPIO
 
 
-from rotary_classv2 import RotaryEncoder
+from RotatryEnocderv1 import RotaryEncoder
 
 class mainprogram:
     #Main while loop condition
