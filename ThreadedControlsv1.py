@@ -114,20 +114,23 @@ class threadedcontrols:
             if axis == 1:
                 while GPIO.input(var_list.limitAP):
                     var_list.APmove.steppgo(var_list.APback, var_list.finespeed, btwnsteps)
-                    if not GPIO.input(var_list.limitAP):
-
+                    if GPIO.input(var_list.limitAP) != True:
+                        print('zero while loop limit')
                         break
             elif axis == 2:
                 while GPIO.input(var_list.limitML):
                     var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, btwnsteps)
-                    if not GPIO.input(var_list.limitML):
+                    if GPIO.input(var_list.limitAP) != True:
+                        print('zero while loop limit')
                         break
             elif axis == 3:
                 while GPIO.input(var_list.limitDV):
                     var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, btwnsteps)
-                    if not GPIO.input(var_list.limitDV):
+                    if GPIO.input(var_list.limitAP) != True:
+                        print('zero while loop limit')
                         break
 
+            print('run backoff')
             var_list.APmove.backoffafterzero(var_list.backoff,var_list.finespeed,var_list.btnSteps)
             var_list.MLmove.backoffafterzero(var_list.backoff, var_list.finespeed, var_list.btnSteps)
             var_list.DVmove.backoffafterzero(var_list.backoff, var_list.finespeed, var_list.btnSteps)
