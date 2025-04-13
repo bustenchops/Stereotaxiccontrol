@@ -248,7 +248,9 @@ class MainWindow(QMainWindow):
 #SLOTS of inputs
     @Slot(int)
     def updateAPstepLCD(self, stepAP):
+        print('updated AP steps')
         self.APstepLCD.display(stepAP)
+        return
 
     @Slot(int)
     def updateMLstepLCD(self, stepML):
@@ -260,7 +262,9 @@ class MainWindow(QMainWindow):
 
     @Slot(float)
     def updateAPabsposLCD(self, ABS_AP):
+        print('updated AP ABS')
         self.APABSposLCD.display(ABS_AP)
+        return
 
     @Slot(float)
     def updateMLabsposLCD(self, ABS_ML):
@@ -272,7 +276,9 @@ class MainWindow(QMainWindow):
 
     @Slot(float)
     def updateAPrelposLCD(self, REL_AP):
+        print('updated AP REL')
         self.APRelposLCD.display(REL_AP)
+        return
 
     @Slot(float)
     def updateMLrelposLCD(self, REL_ML):

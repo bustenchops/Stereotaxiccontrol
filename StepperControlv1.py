@@ -94,9 +94,10 @@ class Steppercontrol:
         print('doing calculations')
         if self.axis == 1:
             print('AP')
-            var_list.APcurRELdist = round(
-                ((var_list.APsteps - var_list.APrelpos) * var_list.APstepdistance * -1), 4)
+            var_list.APcurRELdist = round(((var_list.APsteps - var_list.APrelpos) * var_list.APstepdistance * -1), 4)
             var_list.APcurABSdist = round((var_list.APsteps * var_list.APstepdistance * -1), 4)
+            print(var_list.APcurRELdist)
+            print(var_list.APcurABSdist)
             self.sendtoUI.updateAPstepLCD(var_list.APsteps)
             self.sendtoUI.updateAPabsposLCD(var_list.APcurABSdist)
             self.sendtoUI.updateAPrelposLCD(var_list.APcurRELdist)
