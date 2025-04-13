@@ -139,9 +139,6 @@ class threadedcontrols:
                 print('run backoff')
                 var_list.DVmove.backoffafterzero(var_list.backoff, var_list.finespeed, var_list.btnSteps)
 
-
-
-
             if axis == 1:
                 var_list.APsteps = 0
                 var_list.APmove.PosRelAbsCalc()
@@ -156,7 +153,7 @@ class threadedcontrols:
                 f"Zeroed: APsteps: {var_list.APsteps} MVsteps: {var_list.MVsteps} DVsteps {var_list.DVsteps}")
             time.sleep(0.200)
             GPIO.output(var_list.enableAll, 1)
-            self.lastenablestate = 1
+            var_list.lastenablestate = 1
 
 
     def importcalibrationfile(self, filenameis):

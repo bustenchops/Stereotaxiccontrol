@@ -18,7 +18,7 @@ class Steppercontrol:
             # NOTE plus and minus direction relative to stereo coordinates
         self.goplus = Plusdir
         self.gominus = Minusdir
-        self.lastenablestate = 1
+        var_list.lastenablestate = 1
         self.sendtoUI = Stepcon_sendtoUI
 
         # setup GPIO
@@ -32,7 +32,7 @@ class Steppercontrol:
 
     def steppgo(self,move_direction, speed, btwnsteps):
 
-        if self.lastenablestate == 1:
+        if var_list.lastenablestate == 1:
             GPIO.output(self.enable, 0)
 
         for x in range (speed):
@@ -62,7 +62,7 @@ class Steppercontrol:
                 break
 
     def backoffafterzero(self, backoff, speed, btwnsteps):
-        if self.lastenablestate == 1:
+        if var_list.lastenablestate == 1:
             GPIO.output(self.enable, 0)
 
         if self.axis == 1:
