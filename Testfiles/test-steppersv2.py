@@ -82,9 +82,9 @@ class mainprogram:
         self.quest = "none"
 
         # INITIALIZE ENCODERS
- #       self.AProto = RotaryEncoder(mainprogram.rotoA_AP, mainprogram.rotoB_AP, mainprogram.emergstop, Letsgonow.AP_event)
- #       self.MVroto = RotaryEncoder(mainprogram.rotoA_MV, mainprogram.rotoB_MV, mainprogram.misc_eventbuttonA, Letsgonow.MV_event)
- #       self.DVroto = RotaryEncoder(mainprogram.rotoA_DV, mainprogram.rotoB_DV, mainprogram.misc_eventbuttonB, Letsgonow.DV_event)
+ #       self.AProto = RotaryEncoder(buttonprogram.rotoA_AP, buttonprogram.rotoB_AP, buttonprogram.emergstop, Letsgonow.AP_event)
+ #       self.MVroto = RotaryEncoder(buttonprogram.rotoA_MV, buttonprogram.rotoB_MV, buttonprogram.misc_eventbuttonA, Letsgonow.MV_event)
+ #       self.DVroto = RotaryEncoder(buttonprogram.rotoA_DV, buttonprogram.rotoB_DV, buttonprogram.misc_eventbuttonB, Letsgonow.DV_event)
 
 
         #INITIALIZE STEPPERS
@@ -152,7 +152,7 @@ class mainprogram:
 # I dont think I need a doubt check on this and sending "event" was giving an error.
 #        if event == RotaryEncoder.BUTTONDOWN:
 #            print("Re-Zero axis to enable movement again")
-#            GPIO.output(mainprogram.enableAll,0)
+#            GPIO.output(buttonprogram.enableAll,0)
 #        else:
 #            return
         return
@@ -239,7 +239,7 @@ class mainprogram:
         print('direction set to', mainprogram.APforward)
         count = 1
         GPIO.output(mainprogram.enableAll, 0)
-#        GPIO.output(mainprogram.directionAP, mainprogram.APforward)
+#        GPIO.output(buttonprogram.directionAP, buttonprogram.APforward)
 
         while count <= 400:
             print("start")

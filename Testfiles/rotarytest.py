@@ -153,7 +153,7 @@ class mainprogram:
 # I dont think I need a doubt check on this and sending "event" was giving an error.
 #        if event == RotaryEncoder.BUTTONDOWN:
 #            print("Re-Zero axis to enable movement again")
-#            GPIO.output(mainprogram.enableAll,0)
+#            GPIO.output(buttonprogram.enableAll,0)
 #        else:
 #            return
         return

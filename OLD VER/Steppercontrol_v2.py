@@ -1,6 +1,6 @@
 import time
 import RPi.GPIO as GPIO
-from motorcontrolclass_v2 import StepperSetup
+from StepperControlv1 import StepperSetup
 from rotary_class import RotaryEncoder
 
 #Main while loop condition

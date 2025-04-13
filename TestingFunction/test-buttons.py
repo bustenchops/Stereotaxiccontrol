@@ -108,7 +108,7 @@ class mainprogram:
         #reading the buttons
             newbuttonstate = self.getshiftregisterdata()
             print(newbuttonstate)
- #           mainprogram.lastbuttonstate = self.buttonvalues(mainprogram.lastbuttonstate,newbuttonstate,mainprogram.buttonarray)
+ #           buttonprogram.lastbuttonstate = self.buttonvalues(buttonprogram.lastbuttonstate,newbuttonstate,buttonprogram.buttonarray)
 
 letsgo = mainprogram()
 letsgo.intializethesystem_andrun()

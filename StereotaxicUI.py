@@ -1,24 +1,28 @@
 # -*- coding: utf-8 -*-
-
-from PySide6.QtCore import (QRect, QThreadPool,Slot)
+import sys
+from PySide6.QtCore import (QRect, QThreadPool, Slot, QObject, Signal, QThread)
 from PySide6.QtGui import (QFont)
 from PySide6.QtWidgets import (QApplication, QFrame, QLCDNumber, QMainWindow, QMenuBar, QRadioButton, QStatusBar,
-                               QWidget, QLabel, QPlainTextEdit, QCheckBox, QPushButton, QListWidget,QFileDialog,QMessageBox,QDialog)
+                               QWidget, QLabel, QPlainTextEdit, QCheckBox, QPushButton, QListWidget,QFileDialog)
 
-#from motorcontrolclass_v2 import StepperSetup
-#from rotary_class import RotaryEncoder
-from Steppercontrol_classversion import mainprogram
+from StepperControlv1 import Steppercontrol
+from Buttonclassv1 import buttonprogram
+from ThreadedControlsv1 import threadedcontrols
+from VariableList import var_list
 
-import os
-import sys
+
+
 
 
 class MainWindow(QMainWindow):
 
+
+
     def __init__(self):
         super().__init__()
+        self.stepperstepsper = None
 
-#        os.system('rclone copy onedrive:'Usask Job/Targetlists' /home/bustenchops/Stereotaxiccontrol/TargetLists')
+#Setup GUI LAYOUT
 
         self.setObjectName(u"MainWindow")
         self.resize(800, 480)
@@ -34,14 +38,14 @@ class MainWindow(QMainWindow):
         self.APstepLCD.setDigitCount(7)
         self.APstepLCD.setProperty(u"value", 888.888)
 
-        self.MVstepLCD = QLCDNumber(self.widget)
-        self.MVstepLCD.setObjectName(u"MVstepLCD")
-        self.MVstepLCD.setGeometry(QRect(340, 37, 131, 61))
-        self.MVstepLCD.setFrameShape(QFrame.Shape.StyledPanel)
-        self.MVstepLCD.setFrameShadow(QFrame.Shadow.Raised)
-        self.MVstepLCD.setLineWidth(1)
-        self.MVstepLCD.setDigitCount(7)
-        self.MVstepLCD.setProperty(u"value", 888.888)
+        self.MLstepLCD = QLCDNumber(self.widget)
+        self.MLstepLCD.setObjectName(u"MLstepLCD")
+        self.MLstepLCD.setGeometry(QRect(340, 37, 131, 61))
+        self.MLstepLCD.setFrameShape(QFrame.Shape.StyledPanel)
+        self.MLstepLCD.setFrameShadow(QFrame.Shadow.Raised)
+        self.MLstepLCD.setLineWidth(1)
+        self.MLstepLCD.setDigitCount(7)
+        self.MLstepLCD.setProperty(u"value", 888.888)
 
         self.DVstepLCD = QLCDNumber(self.widget)
         self.DVstepLCD.setObjectName(u"DVstepLCD")
@@ -61,14 +65,14 @@ class MainWindow(QMainWindow):
         self.APABSposLCD.setDigitCount(7)
         self.APABSposLCD.setProperty(u"value", 888.888)
 
-        self.MVABSposLCD = QLCDNumber(self.widget)
-        self.MVABSposLCD.setObjectName(u"MVABSposLCD")
-        self.MVABSposLCD.setGeometry(QRect(340, 107, 131, 61))
-        self.MVABSposLCD.setFrameShape(QFrame.Shape.StyledPanel)
-        self.MVABSposLCD.setFrameShadow(QFrame.Shadow.Raised)
-        self.MVABSposLCD.setLineWidth(1)
-        self.MVABSposLCD.setDigitCount(7)
-        self.MVABSposLCD.setProperty(u"value", 888.888)
+        self.MLABSposLCD = QLCDNumber(self.widget)
+        self.MLABSposLCD.setObjectName(u"MLABSposLCD")
+        self.MLABSposLCD.setGeometry(QRect(340, 107, 131, 61))
+        self.MLABSposLCD.setFrameShape(QFrame.Shape.StyledPanel)
+        self.MLABSposLCD.setFrameShadow(QFrame.Shadow.Raised)
+        self.MLABSposLCD.setLineWidth(1)
+        self.MLABSposLCD.setDigitCount(7)
+        self.MLABSposLCD.setProperty(u"value", 888.888)
 
         self.DVABSposLCD = QLCDNumber(self.widget)
         self.DVABSposLCD.setObjectName(u"DVABSposLCD")
@@ -88,14 +92,14 @@ class MainWindow(QMainWindow):
         self.APRelposLCD.setDigitCount(7)
         self.APRelposLCD.setProperty(u"value", 888.888)
 
-        self.MVRelposLCD = QLCDNumber(self.widget)
-        self.MVRelposLCD.setObjectName(u"MVRelposLCD")
-        self.MVRelposLCD.setGeometry(QRect(340, 177, 131, 61))
-        self.MVRelposLCD.setFrameShape(QFrame.Shape.StyledPanel)
-        self.MVRelposLCD.setFrameShadow(QFrame.Shadow.Raised)
-        self.MVRelposLCD.setLineWidth(1)
-        self.MVRelposLCD.setDigitCount(7)
-        self.MVRelposLCD.setProperty(u"value", 888.888)
+        self.MLRelposLCD = QLCDNumber(self.widget)
+        self.MLRelposLCD.setObjectName(u"MLRelposLCD")
+        self.MLRelposLCD.setGeometry(QRect(340, 177, 131, 61))
+        self.MLRelposLCD.setFrameShape(QFrame.Shape.StyledPanel)
+        self.MLRelposLCD.setFrameShadow(QFrame.Shadow.Raised)
+        self.MLRelposLCD.setLineWidth(1)
+        self.MLRelposLCD.setDigitCount(7)
+        self.MLRelposLCD.setProperty(u"value", 888.888)
 
         self.DVRelposLCD = QLCDNumber(self.widget)
         self.DVRelposLCD.setObjectName(u"DVRelposLCD")
@@ -115,10 +119,10 @@ class MainWindow(QMainWindow):
         self.APlabel.setGeometry(QRect(220, -3, 41, 41))
         self.APlabel.setFont(toplabelfont)
 
-        self.MVlabel = QLabel("MV", self.widget)
-        self.MVlabel.setObjectName(u"MVlabel")
-        self.MVlabel.setGeometry(QRect(390, -3, 41, 41))
-        self.MVlabel.setFont(toplabelfont)
+        self.MLlabel = QLabel("ML", self.widget)
+        self.MLlabel.setObjectName(u"MLlabel")
+        self.MLlabel.setGeometry(QRect(390, -3, 41, 41))
+        self.MLlabel.setFont(toplabelfont)
 
         self.DVlabel = QLabel("DV", self.widget)
         self.DVlabel.setObjectName(u"DVlabel")
@@ -157,10 +161,10 @@ class MainWindow(QMainWindow):
         self.APmanualenter.setGeometry(QRect(420, 260, 91, 40))
         self.APmanualenter.setFont(manualenterfont)
 
-        self.MVmanualenter = QPlainTextEdit(self.widget)
-        self.MVmanualenter.setObjectName(u"MVmanualenter")
-        self.MVmanualenter.setGeometry(QRect(420, 310, 91, 40))
-        self.MVmanualenter.setFont(manualenterfont)
+        self.MLmanualenter = QPlainTextEdit(self.widget)
+        self.MLmanualenter.setObjectName(u"MLmanualenter")
+        self.MLmanualenter.setGeometry(QRect(420, 310, 91, 40))
+        self.MLmanualenter.setFont(manualenterfont)
 
         self.DVmanualenter = QPlainTextEdit(self.widget)
         self.DVmanualenter.setObjectName(u"DVmanualenter")
@@ -172,10 +176,10 @@ class MainWindow(QMainWindow):
         self.APlabel.setGeometry(QRect(370, 260, 41, 40))
         self.APlabel.setFont(toplabelfont)
 
-        self.MVlabel = QLabel("MV", self.widget)
-        self.MVlabel.setObjectName(u"MVlabelmanual")
-        self.MVlabel.setGeometry(QRect(370, 310, 41, 40))
-        self.MVlabel.setFont(toplabelfont)
+        self.MLlabel = QLabel("ML", self.widget)
+        self.MLlabel.setObjectName(u"MLlabelmanual")
+        self.MLlabel.setGeometry(QRect(370, 310, 41, 40))
+        self.MLlabel.setFont(toplabelfont)
 
         self.DVlabel = QLabel("DV", self.widget)
         self.DVlabel.setObjectName(u"DVlabelmanual")
@@ -242,15 +246,15 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.widget)
 
 #SLOTS of inputs
-    @Slot(float)
+    @Slot(int)
     def updateAPstepLCD(self, stepAP):
         self.APstepLCD.display(stepAP)
 
-    @Slot(float)
-    def updateMVstepLCD(self, stepMV):
-        self.MVstepLCD.display(stepMV)
+    @Slot(int)
+    def updateMLstepLCD(self, stepML):
+        self.MLstepLCD.display(stepML)
 
-    @Slot(float)
+    @Slot(int)
     def updateDVstepLCD(self, stepDV):
         self.DVstepLCD.display(stepDV)
 
@@ -259,8 +263,8 @@ class MainWindow(QMainWindow):
         self.APABSposLCD.display(ABS_AP)
 
     @Slot(float)
-    def updateMVabsposLCD(self, ABS_MV):
-        self.MVABSposLCD.display(ABS_MV)
+    def updateMLabsposLCD(self, ABS_ML):
+        self.MLABSposLCD.display(ABS_ML)
 
     @Slot(float)
     def updateDVabsposLCD(self, ABS_DV):
@@ -271,24 +275,26 @@ class MainWindow(QMainWindow):
         self.APRelposLCD.display(REL_AP)
 
     @Slot(float)
-    def updateMVrelposLCD(self, REL_MV):
-        self.MVRelposLCD.display(REL_MV)
+    def updateMLrelposLCD(self, REL_ML):
+        self.MLRelposLCD.display(REL_ML)
 
     @Slot(float)
     def updateDVrelposLCD(self, REL_DV):
         self.DVRelposLCD.display(REL_DV)
 
 #grabs the plaintext from the text boxes only if the checkbox is selected
+    @Slot()
     def plaintextgrab(self):
         APcooord = self.APmanualenter.toPlainText()
-        MVcooord = self.MVmanualenter.toPlainText()
+        MLcooord = self.MLmanualenter.toPlainText()
         DVcooord = self.DVmanualenter.toPlainText()
         if self.checkBox.isChecked():
-            print(f"I want to go to AP:{APcooord}, MV:{MVcooord}, DV:{DVcooord}")
+            print(f"I want to go to AP:{APcooord}, ML:{MLcooord}, DV:{DVcooord}")
             # RUN THE FUNCTION  TO DO THE CALC AND MOVE
             self.checkBox.setChecked(False)
 
 #select a TXT file to load and preloads the targets
+    @Slot()
     def choseafile(self):
         print("click load file")
         file_dialog = QFileDialog(self)
@@ -304,38 +310,264 @@ class MainWindow(QMainWindow):
                 self.listWidget.addItem(line.strip())
 
 #loads the coordinates from the list to the text boxes
+    @Slot()
     def selectlistcoordinates(self):
         selected_items = self.listWidget.selectedItems()
         selected_text = selected_items[0].text()
-        name, APlist, MVlist, DVlist = selected_text.split(' ')
+        name, APlist, MLlist, DVlist = selected_text.split(' ')
         self.APmanualenter.setPlainText(APlist)
-        self.MVmanualenter.setPlainText(MVlist)
+        self.MLmanualenter.setPlainText(MLlist)
         self.DVmanualenter.setPlainText(DVlist)
 
 #controls the toggles for the drill, needle and probe
+    @Slot()
     def drilloffset(self):
         self.drilloffsetcheck.toggle()
 
+    @Slot()
     def needleoffset(self):
         self.needleoffsetcheck.toggle()
 
+    @Slot()
     def probeoffset(self):
         self.fiberoffsetcheck.toggle()
 
+# incoming button commands
+    @Slot(int)
+    def currentspeed(self, stepsper):
+        self.stepperstepsper = stepsper
+
+    @Slot
+    def thread_start(self, calledfunction):
+        self.thread = buttonthreads(calledfunction)
+        self.thread.donesignal.signal_finished.connect(self.on_thread_finished)
+        self.thread.start()
+
+    @Slot
+    def on_thread_finished(self):
+        self.thread.quit()
+        print('thread is finished')
+
+#INITIALIZE STEPPERS
+    def initializesteppers(self):
+        print('steppers initialize')
+        var_list.APmove = Steppercontrol(var_list.enableAll,var_list.stepAP,var_list.directionAP,var_list.limitAP,1,var_list.APback,var_list.APforward, window)
+        var_list.MLmove = Steppercontrol(var_list.enableAll,var_list.stepML,var_list.directionML,var_list.limitML,2,var_list.MLright,var_list.MLleft, window)
+        var_list.DVmove = Steppercontrol(var_list.enableAll,var_list.stepDV,var_list.directionDV,var_list.limitDV,3,var_list.DVup,var_list.DVdown, window)
+        print('steppers are a go')
+
+
+class MySignals(QObject):
+    signal_finished = Signal()
+    signal_int = Signal(int)
+
+
+class buttonthreads(QThread):
+    donesignal = MySignals()
+
+    def __int__(self, function):
+        super().__init__()
+        self.function = function
+
+    def run(self):
+        self.function()
+        self.donesignal.signal_finished.emit()
+
+    def hometoABSzero(self):
+        print('home the ABS zero - UI speaking')
+        for x in range(var_list.DVsteps):
+            var_list.DVmove.steppgo(var_list.DVup, 1, var_list.btnSteps)
+        for x in range(var_list.MLsteps):
+            var_list.MLmove.steppgo(var_list.MLleft, 1, var_list.btnSteps)
+        for x in range(var_list.APsteps):
+            var_list.APmove.steppgo(var_list.APback, 1, var_list.btnSteps)
+
+    def setrelforall(self):
+        print('set relative for ALL - UI speaking')
+        var_list.APrelpos = var_list.APsteps
+        var_list.MLrelpos = var_list.MLsteps
+        var_list.DVrelpos = var_list.DVsteps
+        var_list.APinitREL_holdvalue = var_list.APsteps
+        var_list.MLinitREL_holdvalue = var_list.MLsteps
+        var_list.DVinitREL_holdvalue = var_list.DVsteps
+
+        var_list.APmove.PosRelAbsCalc()
+        var_list.MLmove.PosRelAbsCalc()
+        var_list.DVmove.PosRelAbsCalc()
+
+    def setrelforAP(self):
+        print('set relative for AP - UI speaking')
+        var_list.APrelpos = var_list.APsteps
+        var_list.APinitREL_holdvalue = var_list.APsteps
+        var_list.APmove.PosRelAbsCalc()
+
+    def setrelforML(self):
+        print('set relative for ML - UI speaking')
+        var_list.MVrelpos = var_list.MLsteps
+        var_list.MVinitREL_holdvalue = var_list.MLsteps
+        var_list.MLmove.PosRelAbsCalc()
+
+    def setrelforDV(self):
+        print('set relative for DV - UI speaking')
+        var_list.DVrelpos = var_list.DVsteps
+        var_list.DVinitREL_holdvalue = var_list.DVsteps
+        var_list.DVmove.PosRelAbsCalc()
+
+    def upDVrelhomeAP_ML(self):
+        print('AP and ML homed DVup - UI speaking')
+        for x in range(var_list.DVsteps):
+            var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+
+        if var_list.MLrelpos > var_list.MLsteps:
+            shiftdistance = var_list.MLrelpos - var_list.MLsteps
+            for x in range(shiftdistance):
+                var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
+        elif var_list.MLsteps > var_list.MLrelpos:
+            shiftdistance = var_list.MLsteps - var_list.MLrelpos
+            for x in range(shiftdistance):
+                var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
+
+        if var_list.APsteps < var_list.APrelpos:
+            shiftdistance = var_list.APrelpos - var_list.APsteps
+            for x in range(shiftdistance):
+                var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
+        elif var_list.APsteps > var_list.APrelpos:
+            shiftdistance = var_list.APsteps - var_list.APrelpos
+            for x in range(shiftdistance):
+                var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
+
+    def drillmovetooffset(self):
+        print('offset set to DRILL')
+
+        var_list.APrelpos = var_list.APinitREL_holdvalue
+        var_list.MVrelpos = var_list.MLinitREL_holdvalue
+        var_list.DVrelpos = var_list.DVinitREL_holdvalue
+
+        for x in range(var_list.DVsteps):
+            var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+            self.setrelforDV()
+        if var_list.MLsteps < (var_list.MLrelpos + var_list.MLDRILL):
+            shiftdistance = (var_list.MLrelpos + var_list.MLDRILL) - var_list.MLsteps
+            for x in range(shiftdistance):
+                var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
+            self.setrelforML()
+        elif var_list.MLsteps > (var_list.DVrelpos + var_list.MLDRILL):
+            shiftdistance = var_list.MLsteps - (var_list.MLrelpos + var_list.MLDRILL)
+            for x in range(shiftdistance):
+                var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
+            self.setrelforML()
+        if var_list.APsteps < (var_list.APrelpos + var_list.APDRILL):
+            shiftdistance = (var_list.APrelpos + var_list.APDRILL) - var_list.APsteps
+            for x in range(shiftdistance):
+                var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
+            self.setrelforAP()
+        elif var_list.APsteps > (var_list.APrelpos + var_list.APDRILL):
+            shiftdistance = var_list.APsteps - (var_list.APrelpos + var_list.APDRILL)
+            for x in range(shiftdistance):
+                var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
+            self.setrelforAP()
+
+    def needlemovetooffset(self):
+        print('offset set to Needle')
+        for x in range(var_list.DVsteps):
+            var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+        var_list.DVrelpos = var_list.DVrelpos + var_list.DVneedle
+        self.setrelforDV()
+        if var_list.MLsteps < (var_list.MLrelpos + var_list.MLneedle):
+            shiftdistance = (var_list.MLrelpos + var_list.MLneedle) - var_list.MLsteps
+            for x in range(shiftdistance):
+                var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
+            self.setrelforML()
+        elif var_list.MLsteps > (var_list.MLrelpos + var_list.MLneedle):
+            shiftdistance = var_list.MLsteps - (var_list.MLrelpos + var_list.MLneedle)
+            for x in range(shiftdistance):
+                var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
+            self.setrelforML()
+        if var_list.APsteps < (var_list.APrelpos + var_list.APneedle):
+            shiftdistance = (var_list.APrelpos + var_list.APneedle) - var_list.APsteps
+            for x in range(shiftdistance):
+                var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
+            self.setrelforAP()
+        elif var_list.APsteps > (var_list.APrelpos + var_list.APneedle):
+            shiftdistance = var_list.APsteps - (var_list.APrelpos + var_list.APneedle)
+            for x in range(shiftdistance):
+                var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
+            self.setrelforAP()
+
+    def fibermovetooffset(self):
+        print('offset set to Fiber')
+        for x in range(var_list.DVsteps):
+            var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+        var_list.DVrelpos = var_list.DVrelpos + var_list.DVfiber
+        self.setrelforDV()
+        if var_list.MLsteps < (var_list.MLrelpos + var_list.MLfiber):
+            shiftdistance = (var_list.MLrelpos + var_list.MLfiber) - var_list.MLsteps
+            for x in range(shiftdistance):
+                var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
+            self.setrelforML()
+        elif var_list.MLsteps > (var_list.MLrelpos + var_list.MLfiber):
+            shiftdistance = var_list.MLsteps - (var_list.MLrelpos + var_list.MLfiber)
+            for x in range(shiftdistance):
+                var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
+            self.setrelforML()
+        if var_list.APsteps < (var_list.APrelpos + var_list.APfiber):
+            shiftdistance = (var_list.APrelpos + var_list.APfiber) - var_list.APsteps
+            for x in range(shiftdistance):
+                var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
+            self.setrelforAP()
+        elif var_list.APsteps > (var_list.APrelpos + var_list.APfiber):
+            shiftdistance = var_list.APsteps - (var_list.APrelpos + var_list.APfiber)
+            for x in range(shiftdistance):
+                var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
+            self.setrelforAP()
+
+    def bregmahome(self):
+        print('offset set to Fiber')
+        if (var_list.DVsteps > 1333):
+            for x in range(1333):
+                var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+        else:
+            for x in range(var_list.DVsteps):
+                var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+
+        if var_list.APrelpos > var_list.APsteps:
+            APdiff = var_list.APrelpos - var_list.APsteps
+            for x in range(APdiff):
+                var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
+        else:
+            APdiff = var_list.APsteps - var_list.APrelpos
+            for x in range(APdiff):
+                var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
+
+        if var_list.MLrelpos > var_list.MLsteps:
+            MVdiff = var_list.MLrelpos - var_list.MLsteps
+            for x in range(MVdiff):
+                var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
+        else:
+            MVdiff = var_list.MLsteps - var_list.MLrelpos
+            for x in range(MVdiff):
+                var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
+
+    def recalibrateaxis(self):
+        print('recalibration')
+        controlthread.calibratethings()
+
+#######program code############
 
 app = QApplication(sys.argv)
 window = MainWindow()
 
+MainWindow.initializesteppers()
 
-maininstancesendcontrol = mainprogram()
+mainbuttonthread = buttonprogram(window)
+#mainbuttonthread.sendtoUI(window)
+controlthread = threadedcontrols(window)
+#controlthread.sendtoUI(window)
 
-# start the threads that need to keep the buttons and such working
+#Start Threads
 threadpool = QThreadPool()
-threadpool.start(maininstancesendcontrol.intializethesystem_andrun)
-#added to hopefully get encoders to work
-maininstancesendcontrol.loopthisshit(maininstancesendcontrol)
-maininstancesendcontrol.receive_frommaincontrol(window)
-
+threadpool.start(mainbuttonthread.runbuttonthread)
+threadpool.start(controlthread.runcontrolthread)
 
 window.show()
 

@@ -1,7 +1,7 @@
 import time
 import RPi.GPIO as GPIO
 
-from motorcontrolclass_v2 import StepperSetup
+from StepperControlv1 import StepperSetup
 from rotary_classv2 import RotaryEncoder
 
 class mainprogram:
@@ -119,9 +119,9 @@ class mainprogram:
         GPIO.setup(mainprogram.datapin,GPIO.IN)
 
 #   Need to test rotary encoder setup to see if Hard Wired Buttons are working
-#        GPIO.setup(mainprogram.emergstop, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-#        GPIO.setup(mainprogram.misc_eventbuttonA, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-#        GPIO.setup(mainprogram.misc_eventbuttonB, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+#        GPIO.setup(buttonprogram.emergstop, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+#        GPIO.setup(buttonprogram.misc_eventbuttonA, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+#        GPIO.setup(buttonprogram.misc_eventbuttonB, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
         #EMPTY variables to initialize
         self.quest = "none"
@@ -421,7 +421,7 @@ class mainprogram:
         # I dont think I need a doubt check on this and sending "event" was giving an error.
         #        if event == RotaryEncoder.BUTTONDOWN:
         #            print("Re-Zero axis to enable movement again")
-        #            GPIO.output(mainprogram.enableAll,0)
+        #            GPIO.output(buttonprogram.enableAll,0)
         #        else:
         #            return
         return

@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 
-#from Steppercontrol_classversion import mainprogram
+#from Steppercontrol_classversion import buttonprogram
 
 
 class StepperSetup:

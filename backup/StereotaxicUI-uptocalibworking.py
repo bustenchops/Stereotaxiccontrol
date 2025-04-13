@@ -7,7 +7,7 @@ from PySide6.QtWidgets import (QApplication, QFrame, QLCDNumber, QMainWindow, QM
 
 #from motorcontrolclass_v2 import StepperSetup
 #from rotary_class import RotaryEncoder
-from Steppercontrol_classversion import mainprogram
+from ThreadedControlsv1 import mainprogram
 
 import os
 import sys
