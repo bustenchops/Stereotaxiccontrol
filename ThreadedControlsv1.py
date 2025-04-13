@@ -120,13 +120,13 @@ class threadedcontrols:
             elif axis == 2:
                 while GPIO.input(var_list.limitML):
                     var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, btwnsteps)
-                    if GPIO.input(var_list.limitAP) != True:
+                    if GPIO.input(var_list.limitML) != True:
                         print('zero while loop limit')
                         break
             elif axis == 3:
                 while GPIO.input(var_list.limitDV):
                     var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, btwnsteps)
-                    if GPIO.input(var_list.limitAP) != True:
+                    if GPIO.input(var_list.limitDV) != True:
                         print('zero while loop limit')
                         break
 
