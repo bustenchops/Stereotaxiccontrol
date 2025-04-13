@@ -62,8 +62,9 @@ class Steppercontrol:
                 break
 
     def PosRelAbsCalc(self):
-
+        print('doing calculations')
         if self.axis == 1:
+            print('AP')
             var_list.APcurRELdist = round(
                 ((var_list.APsteps - var_list.APrelpos) * var_list.APstepdistance * -1), 4)
             var_list.APcurABSdist = round((var_list.APsteps * var_list.APstepdistance * -1), 4)
@@ -72,6 +73,7 @@ class Steppercontrol:
             self.sendtoUI.updateAPrelposLCD(var_list.APcurRELdist)
 
         if self.axis == 2:
+            print('ML')
             var_list.MLcurRELdist = round(
                 ((var_list.MLsteps - var_list.MLrelpos) * var_list.MLstepdistance), 4)
             var_list.MLcurABSdist = round((var_list.MLsteps * var_list.MLstepdistance), 4)
@@ -80,6 +82,7 @@ class Steppercontrol:
             self.sendtoUI.updateMLrelposLCD(var_list.MLcurRELdist)
 
         if self.axis == 3:
+            print('DV')
             var_list.DVcurRELdist = round(
                 ((var_list.DVsteps - var_list.DVrelpos) * var_list.DVstepdistance * -1), 4)
             var_list.DVcurABSdist = round((var_list.DVsteps * var_list.DVstepdistance * -1), 4)
