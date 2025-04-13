@@ -254,10 +254,12 @@ class MainWindow(QMainWindow):
 
     @Slot(int)
     def updateMLstepLCD(self, stepML):
+        print('updated ML steps')
         self.MLstepLCD.display(stepML)
 
     @Slot(int)
     def updateDVstepLCD(self, stepDV):
+        print('updated DV steps')
         self.DVstepLCD.display(stepDV)
 
     @Slot(float)
@@ -268,10 +270,12 @@ class MainWindow(QMainWindow):
 
     @Slot(float)
     def updateMLabsposLCD(self, ABS_ML):
+        print('updated ML ABS')
         self.MLABSposLCD.display(ABS_ML)
 
     @Slot(float)
     def updateDVabsposLCD(self, ABS_DV):
+        print('updated DV ABS')
         self.DVABSposLCD.display(ABS_DV)
 
     @Slot(float)
@@ -282,10 +286,12 @@ class MainWindow(QMainWindow):
 
     @Slot(float)
     def updateMLrelposLCD(self, REL_ML):
+        print('updated ML REL')
         self.MLRelposLCD.display(REL_ML)
 
     @Slot(float)
     def updateDVrelposLCD(self, REL_DV):
+        print('updated DV REL')
         self.DVRelposLCD.display(REL_DV)
 
 #grabs the plaintext from the text boxes only if the checkbox is selected

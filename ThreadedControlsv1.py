@@ -1,5 +1,6 @@
 import time
 import RPi.GPIO as GPIO
+from win32comext.shell.demos.viewstate import template_pb
 
 from VariableList import var_list
 from RotatryEnocderv1 import RotaryEncoder
@@ -50,8 +51,10 @@ class threadedcontrols:
 
         if event == RotaryEncoder.CLOCKWISE:
             var_list.APmove.steppgo(var_list.APforward, var_list.stepper_speed, var_list.btnSteps)
+            var_list.APmove.PosRelAbsCalc()
         if event == RotaryEncoder.ANTICLOCKWISE:
             var_list.APmove.steppgo(var_list.APback, var_list.stepper_speed, var_list.btnSteps)
+            var_list.APmove.PosRelAbsCalc()
         # This is a hard wired button note the encoder switch
         elif event == RotaryEncoder.BUTTONDOWN:
             self.emergencystop()
@@ -64,9 +67,11 @@ class threadedcontrols:
         if event == RotaryEncoder.CLOCKWISE:
             print('test clockwise')
             var_list.MLmove.steppgo(var_list.MLright, var_list.stepper_speed, var_list.btnSteps)
+            var_list.MLmove.PosRelAbsCalc()
         elif event == RotaryEncoder.ANTICLOCKWISE:
             print('test anticlock')
             var_list.MLmove.steppgo(var_list.MLleft, var_list.stepper_speed, var_list.btnSteps)
+            var_list.MLmove.PosRelAbsCalc()
         elif event == RotaryEncoder.BUTTONDOWN:
             print("event button A clicked")
             return
@@ -79,8 +84,10 @@ class threadedcontrols:
 
         if event == RotaryEncoder.CLOCKWISE:
             var_list.DVmove.steppgo(var_list.DVdown, var_list.stepper_speed, var_list.btnSteps)
+            var_list.DVmove.PosRelAbsCalc()
         elif event == RotaryEncoder.ANTICLOCKWISE:
             var_list.DVmove.steppgo(var_list.DVup, var_list.stepper_speed, var_list.btnSteps)
+            var_list.DVmove.PosRelAbsCalc()
         elif event == RotaryEncoder.BUTTONDOWN:
             print("event button B clicked")
             return
@@ -274,7 +281,10 @@ class threadedcontrols:
 
         self.importcalibrationfile(var_list.calibfilename)
 # calibrate steppers if needed
-        yesno = self.get_user_input('Current Calibration:', f"AP dist per step: {var_list.APstepdistance}, ML dist per step: {var_list.MLstepdistance}, DCV dist per step: {var_list.DVstepdistance}. Proceed with calibration? (y/n) ")
+        tempAP = round(var_list.APstepdistance, 5)
+        tempML = round(var_list.MLstepdistance, 5)
+        tempDV = round(var_list.DVstepdistance, 5)
+        yesno = self.get_user_input('Current Calibration:', f"AP: {tempAP}, ML: {tempML}, DV: {tempDV}. Proceed with calibration? (y/n)")
         if yesno == "y":
             self.CalibrateDistance(1, var_list.calibfilename, var_list.calibrationsteps, var_list.backoff, var_list.btnSteps)
             self.CalibrateDistance(2, var_list.calibfilename, var_list.calibrationsteps, var_list.backoff, var_list.btnSteps)
