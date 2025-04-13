@@ -557,7 +557,7 @@ class buttonthreads(QThread):
 app = QApplication(sys.argv)
 window = MainWindow()
 
-MainWindow.initializesteppers()
+window.initializesteppers()
 
 mainbuttonthread = buttonprogram(window)
 #mainbuttonthread.sendtoUI(window)
