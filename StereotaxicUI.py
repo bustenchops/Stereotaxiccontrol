@@ -337,13 +337,13 @@ class MainWindow(QMainWindow):
     def currentspeed(self, stepsper):
         self.stepperstepsper = stepsper
 
-    @Slot
+    @Slot(str)
     def thread_start(self, calledfunction):
         self.thread = buttonthreads(calledfunction)
         self.thread.donesignal.signal_finished.connect(self.on_thread_finished)
         self.thread.start()
 
-    @Slot
+    @Slot()
     def on_thread_finished(self):
         self.thread.quit()
         print('thread is finished')
