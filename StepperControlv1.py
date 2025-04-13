@@ -61,6 +61,32 @@ class Steppercontrol:
                 print("ERROR - limit reached")
                 break
 
+    def backoffafterzero(self, backoff, speed, btwnsteps):
+        if self.lastenablestate == 1:
+            GPIO.output(self.enable, 0)
+
+        if self.axis == 1:
+            print('backoff AP')
+            GPIO.output(self.direction, var_list.APforward)
+            GPIO.output(self.step, 1)
+            time.sleep(btwnsteps)
+            GPIO.output(self.step, 0)
+            time.sleep(btwnsteps)
+        elif self.axis == 2:
+            print('backoff ML')
+            GPIO.output(self.direction, var_list.MLright)
+            GPIO.output(self.step, 1)
+            time.sleep(btwnsteps)
+            GPIO.output(self.step, 0)
+            time.sleep(btwnsteps)
+        elif self.axis == 3:
+            print('backoff DV')
+            GPIO.output(self.direction, var_list.DVdown)
+            GPIO.output(self.step, 1)
+            time.sleep(btwnsteps)
+            GPIO.output(self.step, 0)
+            time.sleep(btwnsteps)
+
     def PosRelAbsCalc(self):
         print('doing calculations')
         if self.axis == 1:
