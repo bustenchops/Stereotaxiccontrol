@@ -18,7 +18,7 @@ class buttonprogram:
         self.shiftvalues = []
         #get number of buttons
         x = len(var_list.buttonarray)
-        print("button array length=", x)
+    #    print("button array length=", x)
         for k in range(x):
             self.shiftvalues.append(0)
         #LOAD DATA
