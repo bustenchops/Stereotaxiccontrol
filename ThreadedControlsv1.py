@@ -1,6 +1,6 @@
 import time
 import RPi.GPIO as GPIO
-from win32comext.shell.demos.viewstate import template_pb
+# from win32comext.shell.demos.viewstate import template_pb
 
 from VariableList import var_list
 from RotatryEnocderv1 import RotaryEncoder
