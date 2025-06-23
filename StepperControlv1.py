@@ -12,7 +12,7 @@ class Steppercontrol:
         self.limit = limitpin
             # Axis defined:
             # AP = 1
-            # MV = 2
+            # ML = 2
             # DV = 3
         self.axis = Axis
             # NOTE plus and minus direction relative to stereo coordinates

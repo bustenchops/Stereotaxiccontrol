@@ -1,6 +1,5 @@
 import time
 import RPi.GPIO as GPIO
-# from win32comext.shell.demos.viewstate import template_pb
 
 from VariableList import var_list
 from RotatryEnocderv1 import RotaryEncoder
@@ -27,15 +26,15 @@ class threadedcontrols:
             self.offsetimport.append(line.strip())
         file.close()
         var_list.APDRILL = self.offsetimport[0]
-        var_list.MVDRILL = self.offsetimport[1]
+        var_list.MLDRILL = self.offsetimport[1]
         var_list.DVDRILL = self.offsetimport[2]
 
         var_list.APneedle = self.offsetimport[3]
-        var_list.MVneedle = self.offsetimport[4]
+        var_list.MLneedle = self.offsetimport[4]
         var_list.DVneedle = self.offsetimport[5]
 
         var_list.APfiber = self.offsetimport[6]
-        var_list.MVfiber = self.offsetimport[7]
+        var_list.MLfiber = self.offsetimport[7]
         var_list.DVfiber = self.offsetimport[8]
 
 
@@ -63,7 +62,7 @@ class threadedcontrols:
         return
 
 # Event handling for the encoders and hard wired buttons each encoder
-    def MV_event(self, event):
+    def ML_event(self, event):
         if event == RotaryEncoder.CLOCKWISE:
             print('test clockwise')
             var_list.MLmove.steppgo(var_list.MLright, var_list.stepper_speed, var_list.btnSteps)
@@ -151,13 +150,13 @@ class threadedcontrols:
             var_list.APmove.PosRelAbsCalc()
             print('sent to calculationville')
         elif axis == 2:
-            var_list.MVsteps = 0
+            var_list.MLsteps = 0
             var_list.MLmove.PosRelAbsCalc()
         elif axis == 3:
             var_list.DVsteps = 0
             var_list.DVmove.PosRelAbsCalc()
         print('should report the step values now')
-        # print(f"Zeroed: APsteps: {var_list.APsteps} MVsteps: {var_list.MVsteps} DVsteps {var_list.DVsteps}")
+        # print(f"Zeroed: APsteps: {var_list.APsteps} MLsteps: {var_list.MLsteps} DVsteps {var_list.DVsteps}")
         time.sleep(0.200)
         print('disable steppers')
         GPIO.output(var_list.enableAll, 1)
@@ -182,7 +181,7 @@ class threadedcontrols:
 
         print("Current calibration values are:")
         print("AP distance per step: ", var_list.APstepdistance, "mm")
-        print("MV distance per step: ", var_list.MLstepdistance, "mm")
+        print("ML distance per step: ", var_list.MLstepdistance, "mm")
         print("DV distance per step: ", var_list.DVstepdistance, "mm")
 
 
@@ -233,7 +232,7 @@ class threadedcontrols:
                 self.MLinputend = self.get_user_input('INPUT:', 'Enter the ML final position in millimeters.')
                 flMLinput = float(self.MLinput)
                 flMLinputend = float(self.MLinputend)
-                var_list.MVstepdistance = (flMLinputend - flMLinput) / calibrationsteps
+                var_list.MLstepdistance = (flMLinputend - flMLinput) / calibrationsteps
                 print("send to file ML step distance", var_list.MLstepdistance)
                 self.calibratetemp = [var_list.APstepdistance, var_list.MLstepdistance,
                                       var_list.DVstepdistance]
@@ -264,7 +263,7 @@ class threadedcontrols:
         self.importcalibrationfile(self.file_name)
         print("NEW calibration values are:")
         print("AP distance per step:", " ", var_list.DVstepdistance, "mm")
-        print("MV distance per step:", " ", var_list.DVstepdistance, "mm")
+        print("ML distance per step:", " ", var_list.DVstepdistance, "mm")
         print("DV distance per step:", " ", var_list.DVstepdistance, "mm")
         print(f"Variable has been written to {self.tempfilename}")
 
@@ -299,7 +298,7 @@ class threadedcontrols:
 # INITIALIZE ENCODERS
         print('encoders init')
         self.AProto = RotaryEncoder(var_list.rotoA_AP, var_list.rotoB_AP, var_list.emergstop, self.AP_event)
-        self.MVroto = RotaryEncoder(var_list.rotoA_ML, var_list.rotoB_ML, var_list.misc_eventbuttonA, self.MV_event)
+        self.MLroto = RotaryEncoder(var_list.rotoA_ML, var_list.rotoB_ML, var_list.misc_eventbuttonA, self.ML_event)
         self.DVroto = RotaryEncoder(var_list.rotoA_DV, var_list.rotoB_DV, var_list.misc_eventbuttonB, self.DV_event)
 
         self.calibratethings()

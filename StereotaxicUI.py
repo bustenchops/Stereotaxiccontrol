@@ -418,8 +418,8 @@ class buttonthreads(QThread):
 
     def setrelforML(self):
         print('set relative for ML - UI speaking')
-        var_list.MVrelpos = var_list.MLsteps
-        var_list.MVinitREL_holdvalue = var_list.MLsteps
+        var_list.MLrelpos = var_list.MLsteps
+        var_list.MLinitREL_holdvalue = var_list.MLsteps
         var_list.MLmove.PosRelAbsCalc()
 
     def setrelforDV(self):
@@ -455,7 +455,7 @@ class buttonthreads(QThread):
         print('offset set to DRILL')
 
         var_list.APrelpos = var_list.APinitREL_holdvalue
-        var_list.MVrelpos = var_list.MLinitREL_holdvalue
+        var_list.MLrelpos = var_list.MLinitREL_holdvalue
         var_list.DVrelpos = var_list.DVinitREL_holdvalue
 
         for x in range(var_list.DVsteps):
@@ -555,12 +555,12 @@ class buttonthreads(QThread):
                 var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
 
         if var_list.MLrelpos > var_list.MLsteps:
-            MVdiff = var_list.MLrelpos - var_list.MLsteps
-            for x in range(MVdiff):
+            MLdiff = var_list.MLrelpos - var_list.MLsteps
+            for x in range(MLdiff):
                 var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
         else:
-            MVdiff = var_list.MLsteps - var_list.MLrelpos
-            for x in range(MVdiff):
+            MLdiff = var_list.MLsteps - var_list.MLrelpos
+            for x in range(MLdiff):
                 var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
 
     def recalibrateaxis(self):
