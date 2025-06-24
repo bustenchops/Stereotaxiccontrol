@@ -59,7 +59,7 @@ class var_list:
 #DEFINE STEPPER SPEEDS - number of steps per call (should be fine, medium, coarse but its already written)
     finespeed = 1
     normalspeed = 10
-    fastspeed = 100
+    fastspeed = 50
 
 #stepper_speed initializes as 1 BUT changes according to the state of the speed switch
     stepper_speed = finespeed
