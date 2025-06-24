@@ -120,5 +120,5 @@ class Steppercontrol:
             var_list.DVcurABSdist = round((var_list.DVsteps * var_list.DVstepdistance * -1), 4)
             # self.sendtoUI.updateDVstepLCD(var_list.DVsteps)
             # self.sendtoUI.updateDVabsposLCD(var_list.DVcurABSdist)
-            # self.sendtoUI.updateMLrelposLCD(var_list.DVcurRELdist)
+            # self.sendtoUI.updateDVrelposLCD(var_list.DVcurRELdist)
             self.sendtoUI.updateDVstepLCD(var_list.DVsteps, var_list.DVcurABSdist, var_list.DVcurRELdist)
