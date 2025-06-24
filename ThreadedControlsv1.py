@@ -262,8 +262,8 @@ class threadedcontrols:
         self.tempfilename = filename
         self.importcalibrationfile(self.file_name)
         print("NEW calibration values are:")
-        print("AP distance per step:", " ", var_list.DVstepdistance, "mm")
-        print("ML distance per step:", " ", var_list.DVstepdistance, "mm")
+        print("AP distance per step:", " ", var_list.APstepdistance, "mm")
+        print("ML distance per step:", " ", var_list.MLstepdistance, "mm")
         print("DV distance per step:", " ", var_list.DVstepdistance, "mm")
         print(f"Variable has been written to {self.tempfilename}")
 

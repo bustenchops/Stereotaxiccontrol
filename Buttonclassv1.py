@@ -51,20 +51,23 @@ class buttonprogram:
             if var_list.stepper_speed != var_list.normalspeed:
                 var_list.stepper_speed = var_list.normalspeed
                 print('switch set to: ',var_list.normalspeed)
+                self.sendtoUI.currentspeed(var_list.stepper_speed)
         elif lastbut[var_list.movefast] == 1 and lastbut[var_list.moveslow] == 0:
             if var_list.stepper_speed != var_list.fastspeed:
                 var_list.stepper_speed = var_list.fastspeed
                 print('switch set to: ', var_list.fastspeed)
+                self.sendtoUI.currentspeed(var_list.stepper_speed)
         elif lastbut[var_list.movefast] == 0 and lastbut[var_list.moveslow] == 1:
             if var_list.stepper_speed != var_list.finespeed:
                 var_list.stepper_speed = var_list.finespeed
                 print('switch set to: ', var_list.finespeed)
+                self.sendtoUI.currentspeed(var_list.stepper_speed)
         else:
             print('switch not working right')
 
     #button to home to ABS zero
         if lastbut[var_list.homeABSzero] == 1:
-            print('ABS steps HOME')
+            print('HOME to ABS Zero')
             self.sendtoUI.thread_start('hometoABSzero')
 
     #set relative zero for ALL
@@ -136,5 +139,3 @@ class buttonprogram:
         #reading the buttons
             newbuttonstate = self.getshiftregisterdata()
             var_list.lastbuttonstate = self.buttonvalues(var_list.lastbuttonstate, newbuttonstate, var_list.buttonarray)
-
-

@@ -90,7 +90,6 @@ class Steppercontrol:
                 GPIO.output(self.step, 0)
                 time.sleep(btwnsteps)
 
-# NOTE trying to send all three posrelabdcalcs at once rather than 3 individual.
     def PosRelAbsCalc(self):
         print('doing calculations')
         if self.axis == 1:
