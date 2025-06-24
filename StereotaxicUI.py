@@ -213,7 +213,7 @@ class MainWindow(QMainWindow):
 
         self.checkBox = QCheckBox("Make it so", self.widget)
         self.checkBox.setObjectName(u"engagecheckbox")
-        self.checkBox.setGeometry(QRect(545, 270, 98, 20))
+        self.checkBox.setGeometry(QRect(540, 270, 98, 20))
         self.checkBox.setFont(radiobuttonfont)
 
         self.armcoordinatebutton = QPushButton("Arm Coordinates", self.widget)
@@ -346,7 +346,7 @@ class MainWindow(QMainWindow):
 
 # incoming button commands
     @Slot(int)
-    def currentspeed(self, stepsper):
+    def currentspeed(self, stepsper): #not used yet but plan is to put it in the interface
         self.stepperstepsper = stepsper
 
     @Slot(str)
