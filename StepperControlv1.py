@@ -101,7 +101,7 @@ class Steppercontrol:
             # self.sendtoUI.updateAPstepLCD(var_list.APsteps)
             # self.sendtoUI.updateAPabsposLCD(var_list.APcurABSdist)
             # self.sendtoUI.updateAPrelposLCD(var_list.APcurRELdist)
-            self.sendtoUI.updateAPstepLCD(var_list.APsteps, var_list.APcurABSdist, var_list.APcurRELdist)
+            self.sendtoUI.updateAPLCD(var_list.APsteps, var_list.APcurABSdist, var_list.APcurRELdist)
 
         if self.axis == 2:
             print('ML')
@@ -111,7 +111,7 @@ class Steppercontrol:
             # self.sendtoUI.updateMLstepLCD(var_list.MLsteps)
             # self.sendtoUI.updateMLabsposLCD(var_list.MLcurABSdist)
             # self.sendtoUI.updateMLrelposLCD(var_list.MLcurRELdist)
-            self.sendtoUI.updateMLstepLCD(var_list.MLsteps, var_list.MLcurABSdist, var_list.MLcurRELdist)
+            self.sendtoUI.updateMLLCD(var_list.MLsteps, var_list.MLcurABSdist, var_list.MLcurRELdist)
 
         if self.axis == 3:
             print('DV')
@@ -121,4 +121,4 @@ class Steppercontrol:
             # self.sendtoUI.updateDVstepLCD(var_list.DVsteps)
             # self.sendtoUI.updateDVabsposLCD(var_list.DVcurABSdist)
             # self.sendtoUI.updateDVrelposLCD(var_list.DVcurRELdist)
-            self.sendtoUI.updateDVstepLCD(var_list.DVsteps, var_list.DVcurABSdist, var_list.DVcurRELdist)
+            self.sendtoUI.updateDVLCD(var_list.DVsteps, var_list.DVcurABSdist, var_list.DVcurRELdist)
