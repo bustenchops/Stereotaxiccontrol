@@ -43,7 +43,7 @@ class Steppercontrol:
             elif self.axis == 3:
                 self.zerolimit = var_list.DVsteps
 
-            if GPIO.input(self.limit) and self.zerolimit > -1:
+            if GPIO.input(self.limit) and self.zerolimit >= 0:
                 GPIO.output(self.direction,move_direction)
                 GPIO.output(self.step, 1)
                 time.sleep(btwnsteps)
