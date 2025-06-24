@@ -67,7 +67,7 @@ class buttonprogram:
 
     #button to home to ABS zero
         if lastbut[var_list.homeABSzero] == 1:
-            print('ABS steps HOME')
+            print('HOME to ABS Zero')
             self.sendtoUI.thread_start('hometoABSzero')
 
     #set relative zero for ALL
@@ -139,5 +139,3 @@ class buttonprogram:
         #reading the buttons
             newbuttonstate = self.getshiftregisterdata()
             var_list.lastbuttonstate = self.buttonvalues(var_list.lastbuttonstate, newbuttonstate, var_list.buttonarray)
-
-
