@@ -255,16 +255,16 @@ class MainWindow(QMainWindow):
 
     def updateMLLCD(self, stepML,ABS_ML,REL_ML):
         print('updated ML steps')
-        self.APstepLCD.display(stepML)
-        self.APABSposLCD.display(ABS_ML)
-        self.APRelposLCD.display(REL_ML)
+        self.MLstepLCD.display(stepML)
+        self.MLABSposLCD.display(ABS_ML)
+        self.MLRelposLCD.display(REL_ML)
         return
 
     def updateDVLCD(self, stepDV,ABS_DV,REL_DV):
         print('updated DV steps')
-        self.APstepLCD.display(stepDV)
-        self.APABSposLCD.display(ABS_DV)
-        self.APRelposLCD.display(REL_DV)
+        self.DVstepLCD.display(stepDV)
+        self.DVABSposLCD.display(ABS_DV)
+        self.DVRelposLCD.display(REL_DV)
         return
 
 
