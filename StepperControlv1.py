@@ -36,14 +36,14 @@ class Steppercontrol:
             GPIO.output(self.enable, 0)
 
         for x in range (speed):
-            if self.axis == 1:
-                self.zerolimit = var_list.APsteps
-            elif self.axis == 2:
-                self.zerolimit = var_list.MLsteps
-            elif self.axis == 3:
-                self.zerolimit = var_list.DVsteps
+            # if self.axis == 1:
+            #     self.zerolimit = var_list.APsteps
+            # elif self.axis == 2:
+            #     self.zerolimit = var_list.MLsteps
+            # elif self.axis == 3:
+            #     self.zerolimit = var_list.DVsteps
 
-            if GPIO.input(self.limit) and self.zerolimit >= 0:
+            if GPIO.input(self.limit):
                 GPIO.output(self.direction,move_direction)
                 GPIO.output(self.step, 1)
                 time.sleep(btwnsteps)

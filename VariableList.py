@@ -67,9 +67,9 @@ class var_list:
 #FROM StepperControl class *********************************************************
     btnSteps = 0.002
 
-    APsteps = -30000
-    MLsteps = -30000
-    DVsteps = -30000
+    APsteps = 0
+    MLsteps = 0
+    DVsteps = 0
 
     APrelpos = 0
     MLrelpos = 0
