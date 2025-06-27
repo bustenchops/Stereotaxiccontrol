@@ -16,8 +16,6 @@ from VariableList import var_list
 
 class MainWindow(QMainWindow):
 
-
-
     def __init__(self):
         super().__init__()
         self.stepperstepsper = None
@@ -266,62 +264,6 @@ class MainWindow(QMainWindow):
         self.DVABSposLCD.display(ABS_DV)
         self.DVRelposLCD.display(REL_DV)
         return
-
-
-#SLOTS of inputs commented out to try all three in one
-    # @Slot(int)
-    # def updateAPstepLCD(self, stepAP):
-    #     print('updated AP steps')
-    #     self.APstepLCD.display(stepAP)
-    #     return
-    #
-    # @Slot(int)
-    # def updateMLstepLCD(self, stepML):
-    #     print('updated ML steps')
-    #     self.MLstepLCD.display(stepML)
-    #     return
-    #
-    # @Slot(int)
-    # def updateDVstepLCD(self, stepDV):
-    #     print('updated DV steps')
-    #     self.DVstepLCD.display(stepDV)
-    #     return
-    #
-    # @Slot(float)
-    # def updateAPabsposLCD(self, ABS_AP):
-    #     print('updated AP ABS')
-    #     self.APABSposLCD.display(ABS_AP)
-    #     return
-    #
-    # @Slot(float)
-    # def updateMLabsposLCD(self, ABS_ML):
-    #     print('updated ML ABS')
-    #     self.MLABSposLCD.display(ABS_ML)
-    #     return
-    #
-    # @Slot(float)
-    # def updateDVabsposLCD(self, ABS_DV):
-    #     print('updated DV ABS')
-    #     self.DVABSposLCD.display(ABS_DV)
-    #     return
-    #
-    # @Slot(float)
-    # def updateAPrelposLCD(self, REL_AP):
-    #     print('updated AP REL')
-    #     self.APRelposLCD.display(REL_AP)
-    #     return
-    #
-    # @Slot(float)
-    # def updateMLrelposLCD(self, REL_ML):
-    #     print('updated ML REL')
-    #     self.MLRelposLCD.display(REL_ML)
-    #     return
-    #
-    # @Slot(float)
-    # def updateDVrelposLCD(self, REL_DV):
-    #     print('updated DV REL')
-    #     self.DVRelposLCD.display(REL_DV)
-    #     return
 
 #grabs the plaintext from the text boxes only if the checkbox is selected
     @Slot()
