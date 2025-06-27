@@ -124,8 +124,10 @@ class RotaryEncoder:
 
         if GPIO.input(self.button):
             event = self.BUTTONUP
+            print('release')
         else:
             event = self.BUTTONDOWN
+            print('press')
         print('button pressed')
         self.sendtoThreadedControl(self.event)
 
