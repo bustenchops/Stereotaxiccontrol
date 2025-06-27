@@ -211,7 +211,7 @@ class MainWindow(QMainWindow):
 
         self.checkBox = QCheckBox("Make it so", self.widget)
         self.checkBox.setObjectName(u"engagecheckbox")
-        self.checkBox.setGeometry(QRect(540, 270, 98, 20))
+        self.checkBox.setGeometry(QRect(530, 270, 98, 20))
         self.checkBox.setFont(radiobuttonfont)
 
         self.armcoordinatebutton = QPushButton("Arm Coordinates", self.widget)
