@@ -32,41 +32,44 @@ class Steppercontrol:
 
     def steppgo(self,move_direction, speed, btwnsteps):
 
-        if var_list.lastenablestate == 1:
-            GPIO.output(self.enable, 0)
+        if var_list.emergencystopflag == 0:
+            if var_list.lastenablestate == 1:
+                GPIO.output(self.enable, 0)
 
-        for x in range (speed):
-            # if self.axis == 1:
-            #     self.zerolimit = var_list.APsteps
-            # elif self.axis == 2:
-            #     self.zerolimit = var_list.MLsteps
-            # elif self.axis == 3:
-            #     self.zerolimit = var_list.DVsteps
+            for x in range (speed):
+                # if self.axis == 1:
+                #     self.zerolimit = var_list.APsteps
+                # elif self.axis == 2:
+                #     self.zerolimit = var_list.MLsteps
+                # elif self.axis == 3:
+                #     self.zerolimit = var_list.DVsteps
 
-            if GPIO.input(self.limit):
-                GPIO.output(self.direction,move_direction)
-                GPIO.output(self.step, 1)
-                time.sleep(btwnsteps)
-                GPIO.output(self.step, 0)
-                time.sleep(btwnsteps)
-                if self.axis == 1:
-                    if move_direction == self.gominus:
-                        var_list.APsteps += 1
-                    else:
-                        var_list.APsteps -= 1
-                elif self.axis == 2:
-                    if move_direction == self.goplus:
-                        var_list.MLsteps += 1
-                    else:
-                        var_list.MLsteps -= 1
-                elif self.axis == 3:
-                    if move_direction == self.gominus:
-                        var_list.DVsteps += 1
-                    else:
-                        var_list.DVsteps -= 1
+                if GPIO.input(self.limit):
+                    GPIO.output(self.direction,move_direction)
+                    GPIO.output(self.step, 1)
+                    time.sleep(btwnsteps)
+                    GPIO.output(self.step, 0)
+                    time.sleep(btwnsteps)
+                    if self.axis == 1:
+                        if move_direction == self.gominus:
+                            var_list.APsteps += 1
+                        else:
+                            var_list.APsteps -= 1
+                    elif self.axis == 2:
+                        if move_direction == self.goplus:
+                            var_list.MLsteps += 1
+                        else:
+                            var_list.MLsteps -= 1
+                    elif self.axis == 3:
+                        if move_direction == self.gominus:
+                            var_list.DVsteps += 1
+                        else:
+                            var_list.DVsteps -= 1
+                else:
+                    print("ERROR - limit reached")
+                    break
             else:
-                print("ERROR - limit reached")
-                break
+                print("Emergency Stopped - Cannot move until re-zeroed")
 
     def backoffafterzero(self, backoff, speed, btwnsteps):
         if var_list.lastenablestate == 1:

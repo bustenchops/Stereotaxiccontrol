@@ -41,6 +41,7 @@ class threadedcontrols:
 # Shuts down steppers regardless of what they were doing direction - restart by re-zeroing
     def emergencystop(self):
         GPIO.output(var_list.enableAll, 1)
+        var_list.emergencystopflag = 1
         print("!EMERGENCY STOP!")
         print("Re-Zero axis to enable movement again")
         return

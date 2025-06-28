@@ -133,3 +133,4 @@ class var_list:
     calibfilename = 'Calibration.txt'
 
     lastenablestate = 1
+    emergencystopflag = 0
