@@ -322,6 +322,7 @@ class MainWindow(QMainWindow):
 
     @Slot(str)
     def thread_start(self, calledfunction):
+        print('start button thread')
         self.thread = buttonthreads(calledfunction)
         self.thread.donesignal.signal_finished.connect(self.on_thread_finished)
         self.thread.start()
@@ -344,19 +345,24 @@ class MainWindow(QMainWindow):
 
 
 class MySignals(QObject):
+    print('this is mysignals for signal finished')
     signal_finished = Signal()
     signal_int = Signal(int)
 
 
 class buttonthreads(QThread):
+    print('called buttonthreads thread and started')
     donesignal = MySignals()
-
+    print('created MySignals')
     def __int__(self, function):
         super().__init__()
         self.function = function
+        print('self.function assigned')
 
     def run(self):
+        print('run')
         self.function()
+        print('self.function called', self.function)
         self.donesignal.signal_finished.emit()
 
     def hometoABSzero(self):
