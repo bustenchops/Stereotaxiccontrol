@@ -58,6 +58,7 @@ class threadedcontrols:
         # This is a hard wired button note the encoder switch
         elif event == RotaryEncoder.BUTTONDOWN:
             self.emergencystop()
+            return
         elif event == RotaryEncoder.BUTTONUP:
             return
         return
@@ -162,6 +163,7 @@ class threadedcontrols:
         print('disable steppers')
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
+        var_list.emergencystopflag = 0
 
 
     def importcalibrationfile(self, filenameis):
