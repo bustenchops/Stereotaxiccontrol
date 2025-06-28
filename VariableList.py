@@ -134,3 +134,4 @@ class var_list:
 
     lastenablestate = 1
     emergencystopflag = 0
+    zeroingtrigger = 0

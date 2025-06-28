@@ -32,17 +32,22 @@ class Steppercontrol:
 
     def steppgo(self,move_direction, speed, btwnsteps):
 
-        if var_list.emergencystopflag == 0:
+        if self.axis == 1:
+            if var_list.APsteps-var_list.stepper_speed < 0 and var_list.zeroingtrigger == 1:
+                self.zerolimit = 0
+        elif self.axis == 2:
+            if var_list.MLsteps - var_list.stepper_speed < 0 and var_list.zeroingtrigger == 1:
+                self.zerolimit = 0
+        elif self.axis == 3:
+            if var_list.DVsteps - var_list.stepper_speed < 0 and var_list.zeroingtrigger == 1:
+                self.zerolimit = 0
+
+        if var_list.emergencystopflag == 0 and self.zerolimit > 0:
+            print('stopflagecleared and serolimit cleared')
             if var_list.lastenablestate == 1:
                 GPIO.output(self.enable, 0)
 
             for x in range (speed):
-                # if self.axis == 1:
-                #     self.zerolimit = var_list.APsteps
-                # elif self.axis == 2:
-                #     self.zerolimit = var_list.MLsteps
-                # elif self.axis == 3:
-                #     self.zerolimit = var_list.DVsteps
 
                 if GPIO.input(self.limit):
                     GPIO.output(self.direction,move_direction)
@@ -55,16 +60,19 @@ class Steppercontrol:
                             var_list.APsteps += 1
                         else:
                             var_list.APsteps -= 1
+                        var_list.APmove.PosRelAbsCalc() #added so I can remove elsewhere
                     elif self.axis == 2:
                         if move_direction == self.goplus:
                             var_list.MLsteps += 1
                         else:
                             var_list.MLsteps -= 1
+                        var_list.MLmove.PosRelAbsCalc() #added so I can remove elsewhere
                     elif self.axis == 3:
                         if move_direction == self.gominus:
                             var_list.DVsteps += 1
                         else:
                             var_list.DVsteps -= 1
+                        var_list.DVmove.PosRelAbsCalc() #added so I can remove elsewhere
                 else:
                     print("ERROR - limit reached")
                     break

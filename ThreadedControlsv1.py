@@ -51,10 +51,10 @@ class threadedcontrols:
 
         if event == RotaryEncoder.CLOCKWISE:
             var_list.APmove.steppgo(var_list.APforward, var_list.stepper_speed, var_list.btnSteps)
-            var_list.APmove.PosRelAbsCalc()
+            # var_list.APmove.PosRelAbsCalc()
         if event == RotaryEncoder.ANTICLOCKWISE:
             var_list.APmove.steppgo(var_list.APback, var_list.stepper_speed, var_list.btnSteps)
-            var_list.APmove.PosRelAbsCalc()
+            # var_list.APmove.PosRelAbsCalc()
         # This is a hard wired button note the encoder switch
         elif event == RotaryEncoder.BUTTONDOWN:
             self.emergencystop()
@@ -68,11 +68,11 @@ class threadedcontrols:
         if event == RotaryEncoder.CLOCKWISE:
             print('test clockwise')
             var_list.MLmove.steppgo(var_list.MLright, var_list.stepper_speed, var_list.btnSteps)
-            var_list.MLmove.PosRelAbsCalc()
+            # var_list.MLmove.PosRelAbsCalc()
         elif event == RotaryEncoder.ANTICLOCKWISE:
             print('test anticlock')
             var_list.MLmove.steppgo(var_list.MLleft, var_list.stepper_speed, var_list.btnSteps)
-            var_list.MLmove.PosRelAbsCalc()
+            # var_list.MLmove.PosRelAbsCalc()
         elif event == RotaryEncoder.BUTTONDOWN:
             print("event button A clicked")
             return
@@ -85,10 +85,10 @@ class threadedcontrols:
 
         if event == RotaryEncoder.CLOCKWISE:
             var_list.DVmove.steppgo(var_list.DVdown, var_list.stepper_speed, var_list.btnSteps)
-            var_list.DVmove.PosRelAbsCalc()
+            # var_list.DVmove.PosRelAbsCalc()
         elif event == RotaryEncoder.ANTICLOCKWISE:
             var_list.DVmove.steppgo(var_list.DVup, var_list.stepper_speed, var_list.btnSteps)
-            var_list.DVmove.PosRelAbsCalc()
+            # var_list.DVmove.PosRelAbsCalc()
         elif event == RotaryEncoder.BUTTONDOWN:
             print("event button B clicked")
             return
@@ -118,6 +118,8 @@ class threadedcontrols:
 
     def zerosteppers(self, axis, backoff, btwnsteps):
         # print('zero step called')
+        var_list.zeroingtrigger = 0
+        var_list.emergencystopflag = 0
         GPIO.output(var_list.enableAll, 0)
         if axis == 1:
             print('AP zeroing')
@@ -163,8 +165,7 @@ class threadedcontrols:
         print('disable steppers')
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
-        var_list.emergencystopflag = 0
-
+        var_list.zeroingtrigger = 1
 
     def importcalibrationfile(self, filenameis):
         self.calibratetemp = []
@@ -211,7 +212,7 @@ class threadedcontrols:
                 for x in range(calibrationsteps):
                     if 0 <= var_list.APsteps < 6000:
                         var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, btwnSteps)
-                        var_list.APmove.PosRelAbsCalc()
+                        # var_list.APmove.PosRelAbsCalc()
                 self.APinputend = self.get_user_input('INPUT:', 'Enter the AP final position in millimeters.')
                 flAPinput = float(self.APinput)
                 flAPinputend = float(self.APinputend)
@@ -231,7 +232,7 @@ class threadedcontrols:
                 for x in range(calibrationsteps):
                     if 0 <= var_list.MLsteps < 6000:
                         var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, btwnSteps)
-                        var_list.MLmove.PosRelAbsCalc()
+                        # var_list.MLmove.PosRelAbsCalc()
                 self.MLinputend = self.get_user_input('INPUT:', 'Enter the ML final position in millimeters.')
                 flMLinput = float(self.MLinput)
                 flMLinputend = float(self.MLinputend)
@@ -251,7 +252,7 @@ class threadedcontrols:
                 for x in range(calibrationsteps):
                     if 0 <= var_list.DVsteps < 6000:
                         var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, btwnSteps)
-                        var_list.DVmove.PosRelAbsCalc()
+                        # var_list.DVmove.PosRelAbsCalc()
                 self.DVinputend = self.get_user_input('INPUT:', 'Enter the DV final position in millimeters.')
                 flDVinput = float(self.DVinput)
                 flDVinputend = float(self.DVinputend)
