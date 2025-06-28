@@ -123,13 +123,14 @@ class RotaryEncoder:
     def button_event(self, button):
 
         if GPIO.input(self.button):
-            event = self.BUTTONUP
+            self.event = self.BUTTONUP
             print('release')
         else:
-            event = self.BUTTONDOWN
+            self.event = self.BUTTONDOWN
             print('press')
-        print('button pressed')
-        self.sendtoThreadedControl(self.event)
+            self.sendtoThreadedControl(self.event)
+        # print('button pressed')
+        # self.sendtoThreadedControl(self.event)
 
         return
 
