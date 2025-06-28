@@ -163,6 +163,7 @@ class threadedcontrols:
         print('disable steppers')
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
+        var_list.emergencystopflag = 1
 
 
     def importcalibrationfile(self, filenameis):
