@@ -68,58 +68,58 @@ class buttonprogram:
                 #button to home to ABS zero
                 if lastbut[var_list.homeABSzero] == 1:
                     print('HOME to ABS Zero')
-                    self.sendtoUI.thread_start('hometoABSzero')
+                    self.hometoABSzero()
 
                 #set relative zero for ALL
                 if lastbut[var_list.relativeALL] == 1:
                     print('set relative positions form all three')
-                    self.sendtoUI.thread_start('setrelforall')
+                    self.setrelforall()
                         # and then update LCDS
 
                 #set only AP relative zero
                 if lastbut[var_list.relativeAP] == 1:
                     print('set relative AP')
-                    self.sendtoUI.thread_start('setrelforAP')
+                    self.setrelforAP()
 
                 # set only ML relative zero
                 if lastbut[var_list.relativeML] == 1:
                     print('set relative ML')
-                    self.sendtoUI.thread_start('setrelforML')
+                    self.setrelforML()
 
                 # set only DV relative zero
                 if lastbut[var_list.relativeDV] == 1:
                     print('set relative DV')
-                    self.sendtoUI.thread_start('setrelforDV')
+                    self.setrelforDV()
 
                 #button action - Home to Rel zero for AP and ML BUT DV goes all up
                 if lastbut[var_list.homeRELzero] == 1:
                     print('DV up AP and ML homed to rel')
-                    self.sendtoUI.thread_start('upDVrelhomeAP_ML')
+                    self.upDVrelhomeAP_ML()
 
                 #miscbuttonC - DRILL to relative zero for AP and ML BUT DV homed ABS zero but still sets the relative pos
                 if lastbut[var_list.drilloff] == 1:
                     print('Drill offset start thread')
-                    self.sendtoUI.thread_start('drillmovetooffset')
+                    self.drillmovetooffset()
 
                 #miscbuttonD - needle to relative zero for AP and ML BUT DV homed ABS zero but still sets the relative pos
                 if lastbut[var_list.needleoff] == 1:
                     print('Needle offset start thread')
-                    self.sendtoUI.thread_start('needlemovetooffset')
+                    self.needlemovetooffset()
 
                 #miscbuttonE - fiber to relative zero for AP and ML BUT DV homed ABS zero but still sets the relative pos
                 if lastbut[var_list.fiberoff] == 1:
                     print('Fiber offset start thread')
-                    self.sendtoUI.thread_start('fibermovetooffset')
+                    self.fibermovetooffset()
 
                 #home to bregma (relative) moves DV up ~10mm, positions AP and ML to relative home
                 if lastbut[var_list.bregmahome] == 1:
                     print("That's bregma G!")
-                    self.sendtoUI.thread_start('bregmahome')
+                    self.bregmahome()
 
                 #re-calibrate button
                 if lastbut[var_list.recalibrate] == 1:
                     print("Trying to recalibrate")
-                    self.sendtoUI.thread_start('recalibrateaxis')
+                    self.sendtoUI.recalibrateaxis()
 
                 #miscbuttonA - unused
                 if lastbut[var_list.miscbuttonA] == 1:

@@ -76,8 +76,10 @@ class Steppercontrol:
                 else:
                     print("ERROR - limit reached")
                     break
+
         else:
             print("Emergency Stopped - Cannot move until re-zeroed")
+        self.zerolimit = 1
 
     def backoffafterzero(self, backoff, speed, btwnsteps):
         if var_list.lastenablestate == 1:
