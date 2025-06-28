@@ -58,6 +58,7 @@ class threadedcontrols:
         # This is a hard wired button note the encoder switch
         elif event == RotaryEncoder.BUTTONDOWN:
             self.emergencystop()
+            return
         elif event == RotaryEncoder.BUTTONUP:
             return
         return
