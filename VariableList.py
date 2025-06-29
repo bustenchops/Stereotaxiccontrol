@@ -13,15 +13,17 @@ class var_list:
 # OFFSETS FOR THE DRILL, Syringe, Needle (minus values is back, left or up)
     APDRILL = 0
     MLDRILL = 0
-    DVDRILL = -1333
+    DVDRILL = 0
 
-    APfiber = 0
-    MLfiber = 0
-    DVfiber = 0
+    APneedle = -1333
+    MLneedle = -2666
+    DVneedle = -1333
 
-    APneedle = 0
-    MLneedle = 0
-    DVneedle = 0
+    APfiber = 600
+    MLfiber = 600
+    DVfiber = -1333
+
+
 
 # DEFINE NUMBER OF BUTTONS AND ORDER IN ARRAY
     buttonarray = ['moveslow', 'needleoffset', 'drilloffset', 'HomeToABSzero', 'movefast', 'recalibrate', 'relativeDV',
