@@ -199,6 +199,9 @@ class buttonprogram:
             var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
         for x in range(var_list.APsteps):
             var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
+        var_list.APmove.PosRelAbsCalc()
+        var_list.MLmove.PosRelAbsCalc()
+        var_list.DVmove.PosRelAbsCalc()
 
     def upDVrelhomeAP_ML(self):
         print('AP and ML homed DVup - from buttonthread')
@@ -222,6 +225,9 @@ class buttonprogram:
             shiftdistance = var_list.APsteps - var_list.APrelpos
             for x in range(shiftdistance):
                 var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
+        var_list.APmove.PosRelAbsCalc()
+        var_list.MLmove.PosRelAbsCalc()
+        var_list.DVmove.PosRelAbsCalc()
 
     def drillmovetooffset(self):
         print('offset set to DRILL')
@@ -254,6 +260,9 @@ class buttonprogram:
                 var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
             self.setrelforAP()
         self.sendtoUI.drilloffset()
+        var_list.APmove.PosRelAbsCalc()
+        var_list.MLmove.PosRelAbsCalc()
+        var_list.DVmove.PosRelAbsCalc()
 
     def needlemovetooffset(self):
         print('offset set to Needle')
@@ -287,6 +296,9 @@ class buttonprogram:
                 var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
             self.setrelforAP()
         self.sendtoUI.needleoffset
+        var_list.APmove.PosRelAbsCalc()
+        var_list.MLmove.PosRelAbsCalc()
+        var_list.DVmove.PosRelAbsCalc()
 
     def fibermovetooffset(self):
         print('offset set to Fiber')
@@ -319,6 +331,9 @@ class buttonprogram:
             for x in range(shiftdistance):
                 var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
             self.setrelforAP()
+        var_list.APmove.PosRelAbsCalc()
+        var_list.MLmove.PosRelAbsCalc()
+        var_list.DVmove.PosRelAbsCalc()
 
     def bregmahome(self):
         print('goto bregma but lift 1.0cm ~1333 steps')
@@ -346,6 +361,9 @@ class buttonprogram:
             MLdiff = var_list.MLsteps - var_list.MLrelpos
             for x in range(MLdiff):
                 var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
+        var_list.APmove.PosRelAbsCalc()
+        var_list.MLmove.PosRelAbsCalc()
+        var_list.DVmove.PosRelAbsCalc()
 
     #MAIN CODE ################################################################################################
     def runbuttonthread(self):
