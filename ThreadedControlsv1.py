@@ -118,7 +118,6 @@ class threadedcontrols:
 
     def zerosteppers(self, axis, backoff, btwnsteps):
         # print('zero step called')
-        var_list.zerotrigger = 1
         var_list.emergencystopflag = 0
         GPIO.output(var_list.enableAll, 0)
         if axis == 1:
@@ -165,7 +164,7 @@ class threadedcontrols:
         print('disable steppers')
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
-        var_list.zerotrigger = 0
+
 
     def importcalibrationfile(self, filenameis):
         self.calibratetemp = []
