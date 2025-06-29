@@ -33,17 +33,20 @@ class Steppercontrol:
     def steppgo(self,move_direction, speed, btwnsteps):
 
         if self.axis == 1:
-            if var_list.APsteps-var_list.stepper_speed < 0 and var_list.zeroingtrigger == 1:
+            if var_list.APsteps-var_list.stepper_speed < 0 and var_list.zerotrigger == 1:
                 self.zerolimit = 0
+                print('negative movement and zero tigger hit')
         elif self.axis == 2:
-            if var_list.MLsteps - var_list.stepper_speed < 0 and var_list.zeroingtrigger == 1:
+            if var_list.MLsteps - var_list.stepper_speed < 0 and var_list.zerotrigger == 1:
                 self.zerolimit = 0
+                print('negative movement and zero tigger hit')
         elif self.axis == 3:
-            if var_list.DVsteps - var_list.stepper_speed < 0 and var_list.zeroingtrigger == 1:
+            if var_list.DVsteps - var_list.stepper_speed < 0 and var_list.zerotrigger == 1:
                 self.zerolimit = 0
+                print('negative movement and zero tigger hit')
 
         if var_list.emergencystopflag == 0 and self.zerolimit > 0:
-            print('stopflagecleared and serolimit cleared')
+            print('stopflagecleared and zerolimit cleared')
             if var_list.lastenablestate == 1:
                 GPIO.output(self.enable, 0)
 
@@ -79,6 +82,7 @@ class Steppercontrol:
 
         else:
             print("Emergency Stopped - Cannot move until re-zeroed")
+
         self.zerolimit = 1
 
     def backoffafterzero(self, backoff, speed, btwnsteps):
