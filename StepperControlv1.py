@@ -50,19 +50,16 @@ class Steppercontrol:
                             var_list.APsteps += 1
                         else:
                             var_list.APsteps -= 1
-                        var_list.APmove.PosRelAbsCalc() #added so I can remove elsewhere
                     elif self.axis == 2:
                         if move_direction == self.goplus:
                             var_list.MLsteps += 1
                         else:
                             var_list.MLsteps -= 1
-                        var_list.MLmove.PosRelAbsCalc() #added so I can remove elsewhere
                     elif self.axis == 3:
                         if move_direction == self.gominus:
                             var_list.DVsteps += 1
                         else:
                             var_list.DVsteps -= 1
-                        var_list.DVmove.PosRelAbsCalc() #added so I can remove elsewhere
                 else:
                     print("ERROR - limit reached")
                     break

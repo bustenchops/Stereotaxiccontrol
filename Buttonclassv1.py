@@ -44,26 +44,26 @@ class buttonprogram:
 
                 print("button ", butarr[i], " state change", lastbut[i], ' to ', newbut[i])
 
-                #Speed switch (steps per rotation)
-                    # note 1 is pressed and 0 is released
-                    # stepper_speed (pos 0 and pos 1)
-                if lastbut[var_list.movefast] == 0 and lastbut[var_list.moveslow] == 0:
-                    if var_list.stepper_speed != var_list.normalspeed:
-                        var_list.stepper_speed = var_list.normalspeed
-                        print('switch set to: ',var_list.normalspeed)
-                        self.sendtoUI.currentspeed(var_list.stepper_speed)
-                elif lastbut[var_list.movefast] == 1 and lastbut[var_list.moveslow] == 0:
-                    if var_list.stepper_speed != var_list.fastspeed:
-                        var_list.stepper_speed = var_list.fastspeed
-                        print('switch set to: ', var_list.fastspeed)
-                        self.sendtoUI.currentspeed(var_list.stepper_speed)
-                elif lastbut[var_list.movefast] == 0 and lastbut[var_list.moveslow] == 1:
-                    if var_list.stepper_speed != var_list.finespeed:
-                        var_list.stepper_speed = var_list.finespeed
-                        print('switch set to: ', var_list.finespeed)
-                        self.sendtoUI.currentspeed(var_list.stepper_speed)
-                    else:
-                        print('switch not working right')
+                # #Speed switch (steps per rotation)
+                #     # note 1 is pressed and 0 is released
+                #     # stepper_speed (pos 0 and pos 1)
+                # if lastbut[var_list.movefast] == 0 and lastbut[var_list.moveslow] == 0:
+                #     if var_list.stepper_speed != var_list.normalspeed:
+                #         var_list.stepper_speed = var_list.normalspeed
+                #         print('switch set to: ',var_list.normalspeed)
+                #         self.sendtoUI.currentspeed(var_list.stepper_speed)
+                # elif lastbut[var_list.movefast] == 1 and lastbut[var_list.moveslow] == 0:
+                #     if var_list.stepper_speed != var_list.fastspeed:
+                #         var_list.stepper_speed = var_list.fastspeed
+                #         print('switch set to: ', var_list.fastspeed)
+                #         self.sendtoUI.currentspeed(var_list.stepper_speed)
+                # elif lastbut[var_list.movefast] == 0 and lastbut[var_list.moveslow] == 1:
+                #     if var_list.stepper_speed != var_list.finespeed:
+                #         var_list.stepper_speed = var_list.finespeed
+                #         print('switch set to: ', var_list.finespeed)
+                #         self.sendtoUI.currentspeed(var_list.stepper_speed)
+                #     else:
+                #         print('switch not working right')
 
                 #button to home to ABS zero
                 if lastbut[var_list.homeABSzero] == 1:
@@ -72,7 +72,7 @@ class buttonprogram:
 
                 #set relative zero for ALL
                 if lastbut[var_list.relativeALL] == 1:
-                    print('set relative positions form all three')
+                    print('set relative positions for all three')
                     self.setrelforall()
                         # and then update LCDS
 
@@ -131,6 +131,27 @@ class buttonprogram:
 
                 lastbut[i] = newbut[i]
 
+        # Speed switch (steps per rotation)
+        # note 1 is pressed and 0 is released
+        # stepper_speed (pos 0 and pos 1)
+        if lastbut[var_list.movefast] == 0 and lastbut[var_list.moveslow] == 0:
+            if var_list.stepper_speed != var_list.normalspeed:
+                var_list.stepper_speed = var_list.normalspeed
+                print('switch set to: ', var_list.normalspeed)
+                self.sendtoUI.currentspeed(var_list.stepper_speed)
+        elif lastbut[var_list.movefast] == 1 and lastbut[var_list.moveslow] == 0:
+            if var_list.stepper_speed != var_list.fastspeed:
+                var_list.stepper_speed = var_list.fastspeed
+                print('switch set to: ', var_list.fastspeed)
+                self.sendtoUI.currentspeed(var_list.stepper_speed)
+        elif lastbut[var_list.movefast] == 0 and lastbut[var_list.moveslow] == 1:
+            if var_list.stepper_speed != var_list.finespeed:
+                var_list.stepper_speed = var_list.finespeed
+                print('switch set to: ', var_list.finespeed)
+                self.sendtoUI.currentspeed(var_list.stepper_speed)
+            else:
+                print('switch not working right')
+
         return lastbut
 
 #Button executes
@@ -180,7 +201,7 @@ class buttonprogram:
             var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
 
     def upDVrelhomeAP_ML(self):
-        print('AP and ML homed DVup - UI speaking')
+        print('AP and ML homed DVup - from buttonthread')
         for x in range(var_list.DVsteps):
             var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
 
