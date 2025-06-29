@@ -33,7 +33,7 @@ class Steppercontrol:
     def steppgo(self,move_direction, speed, btwnsteps):
 
         if var_list.emergencystopflag == 0:
-            print('stopflagecleared and zerolimit cleared')
+            #print('stopflagecleared and zerolimit cleared')
             if var_list.lastenablestate == 1:
                 GPIO.output(self.enable, 0)
 
