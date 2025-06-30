@@ -163,7 +163,6 @@ class threadedcontrols:
         print('should report the step values now')
         print('advancing AP')
 
-
         # print(f"Zeroed: APsteps: {var_list.APsteps} MLsteps: {var_list.MLsteps} DVsteps {var_list.DVsteps}")
         time.sleep(0.200)
         print('disable steppers')
