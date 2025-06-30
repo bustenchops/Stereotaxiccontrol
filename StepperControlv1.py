@@ -51,7 +51,7 @@ class Steppercontrol:
                         else:
                             var_list.APsteps -= 1
                     elif self.axis == 2:
-                        if move_direction == self.goplus:
+                        if move_direction == self.gominus:
                             var_list.MLsteps += 1
                         else:
                             var_list.MLsteps -= 1
@@ -113,8 +113,8 @@ class Steppercontrol:
         if self.axis == 2:
             print('ML')
             var_list.MLcurRELdist = round(
-                ((var_list.MLsteps - var_list.MLrelpos) * var_list.MLstepdistance), 4)
-            var_list.MLcurABSdist = round((var_list.MLsteps * var_list.MLstepdistance), 4)
+                ((var_list.MLsteps - var_list.MLrelpos) * var_list.MLstepdistance * -1), 4)
+            var_list.MLcurABSdist = round((var_list.MLsteps * var_list.MLstepdistance * -1), 4)
             # self.sendtoUI.updateMLstepLCD(var_list.MLsteps)
             # self.sendtoUI.updateMLabsposLCD(var_list.MLcurABSdist)
             # self.sendtoUI.updateMLrelposLCD(var_list.MLcurRELdist)
