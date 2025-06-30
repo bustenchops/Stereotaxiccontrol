@@ -98,6 +98,7 @@ class var_list:
 #Variables that may need tweaking
     calibrationsteps = 4000
     backoff = 200
+    APadvance = 7400
 
 #DEFINE STEPPER CONTROL PINS
     enableAll = 2
@@ -125,8 +126,8 @@ class var_list:
     rotoB_DV = 21
 
 #DEFINE STEPPER DIRECTIONS
-    APback = 0
-    APforward = 1
+    APback = 1
+    APforward = 0
     MLleft = 1
     MLright = 0
     DVup = 0

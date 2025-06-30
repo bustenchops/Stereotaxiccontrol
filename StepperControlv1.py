@@ -45,13 +45,15 @@ class Steppercontrol:
                     time.sleep(btwnsteps)
                     GPIO.output(self.step, 0)
                     time.sleep(btwnsteps)
+
+                    #NOTE: the goplus and do minus reflect which direction results in a positive step count
                     if self.axis == 1:
                         if move_direction == self.gominus:
                             var_list.APsteps += 1
                         else:
                             var_list.APsteps -= 1
                     elif self.axis == 2:
-                        if move_direction == self.gominus:
+                        if move_direction == self.goplus:
                             var_list.MLsteps += 1
                         else:
                             var_list.MLsteps -= 1
