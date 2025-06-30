@@ -83,7 +83,7 @@ class Steppercontrol:
         elif self.axis == 2:
             print('backoff ML')
             for x in range(backoff):
-                GPIO.output(self.direction, var_list.MLright)
+                GPIO.output(self.direction, var_list.MLleft)
                 GPIO.output(self.step, 1)
                 time.sleep(btwnsteps)
                 GPIO.output(self.step, 0)
