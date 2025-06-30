@@ -67,7 +67,7 @@ class var_list:
     stepper_speed = finespeed
 
 #FROM StepperControl class *********************************************************
-    btnSteps = 0.002
+    btnSteps = 0.001
 
     APsteps = 0
     MLsteps = 0

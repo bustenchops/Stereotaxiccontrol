@@ -47,6 +47,7 @@ class Steppercontrol:
                     time.sleep(btwnsteps)
 
                     #NOTE: the goplus and gominus reflect which direction results in a positive step count
+                    #NOTE: the goplus and gominus reflect which direction results in a positive step count
                     if self.axis == 1:
                         if move_direction == self.gominus:
                             var_list.APsteps += 1
@@ -99,7 +100,10 @@ class Steppercontrol:
                 GPIO.output(self.step, 0)
                 time.sleep(btwnsteps)
 
-    def APadvanceafterbackoff(self):
+    def APadvanceafterbackoff(self, speed, btwnsteps):
+        if var_list.lastenablestate == 1:
+            GPIO.output(self.enable, 0)
+
         for x in range(var_list.APadvance):
             GPIO.output(self.direction, var_list.APback)
             GPIO.output(self.step, 1)

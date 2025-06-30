@@ -160,7 +160,7 @@ class threadedcontrols:
             var_list.DVmove.PosRelAbsCalc()
         print('should report the step values now')
         print('advancing AP')
-        var_list.APmove.APadvanceafterbackoff()
+        var_list.APmove.APadvanceafterbackoff(var_list.finespeed, var_list.btnSteps)
         var_list.APmove.PosRelAbsCalc()
         # print(f"Zeroed: APsteps: {var_list.APsteps} MLsteps: {var_list.MLsteps} DVsteps {var_list.DVsteps}")
         time.sleep(0.200)
