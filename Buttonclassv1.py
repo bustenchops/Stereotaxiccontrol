@@ -119,7 +119,7 @@ class buttonprogram:
                 #re-calibrate button
                 if lastbut[var_list.recalibrate] == 1:
                     print("Trying to recalibrate")
-                    self.sendtoUI.recalibrateaxis()
+                    self.sendtoUI.uitest()
 
                 #miscbuttonA - unused
                 if lastbut[var_list.miscbuttonA] == 1:
@@ -199,17 +199,25 @@ class buttonprogram:
             var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
         for x in range(var_list.APsteps):
             var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
+        var_list.APmove.PosRelAbsCalc()
+        var_list.MLmove.PosRelAbsCalc()
+        var_list.DVmove.PosRelAbsCalc()
 
     def upDVrelhomeAP_ML(self):
         print('AP and ML homed DVup - from buttonthread')
         for x in range(var_list.DVsteps):
             var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
 
+        print(var_list.MLrelpos,"ML relative")
+        print(var_list.MLsteps,"ML steps")
+
         if var_list.MLrelpos > var_list.MLsteps:
+            print('go left')
             shiftdistance = var_list.MLrelpos - var_list.MLsteps
             for x in range(shiftdistance):
                 var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
         elif var_list.MLsteps > var_list.MLrelpos:
+            print('go right')
             shiftdistance = var_list.MLsteps - var_list.MLrelpos
             for x in range(shiftdistance):
                 var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
@@ -222,6 +230,10 @@ class buttonprogram:
             shiftdistance = var_list.APsteps - var_list.APrelpos
             for x in range(shiftdistance):
                 var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
+
+        var_list.APmove.PosRelAbsCalc()
+        var_list.MLmove.PosRelAbsCalc()
+        var_list.DVmove.PosRelAbsCalc()
 
     def drillmovetooffset(self):
         print('offset set to DRILL')
@@ -254,6 +266,9 @@ class buttonprogram:
                 var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
             self.setrelforAP()
         self.sendtoUI.drilloffset()
+        var_list.APmove.PosRelAbsCalc()
+        var_list.MLmove.PosRelAbsCalc()
+        var_list.DVmove.PosRelAbsCalc()
 
     def needlemovetooffset(self):
         print('offset set to Needle')
@@ -287,6 +302,9 @@ class buttonprogram:
                 var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
             self.setrelforAP()
         self.sendtoUI.needleoffset
+        var_list.APmove.PosRelAbsCalc()
+        var_list.MLmove.PosRelAbsCalc()
+        var_list.DVmove.PosRelAbsCalc()
 
     def fibermovetooffset(self):
         print('offset set to Fiber')
@@ -319,6 +337,9 @@ class buttonprogram:
             for x in range(shiftdistance):
                 var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
             self.setrelforAP()
+        var_list.APmove.PosRelAbsCalc()
+        var_list.MLmove.PosRelAbsCalc()
+        var_list.DVmove.PosRelAbsCalc()
 
     def bregmahome(self):
         print('goto bregma but lift 1.0cm ~1333 steps')
@@ -329,23 +350,36 @@ class buttonprogram:
             for x in range(var_list.DVsteps):
                 var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
 
+        print(var_list.APrelpos,"APRelative")
+        print(var_list.APsteps,"APsteps")
+
         if var_list.APrelpos > var_list.APsteps:
             APdiff = var_list.APrelpos - var_list.APsteps
+            print('forward')
             for x in range(APdiff):
                 var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
         else:
             APdiff = var_list.APsteps - var_list.APrelpos
+            print('backward')
             for x in range(APdiff):
                 var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
 
+        print(var_list.MLrelpos,"mlRelative")
+        print(var_list.MLsteps,"mlsteps")
+
         if var_list.MLrelpos > var_list.MLsteps:
             MLdiff = var_list.MLrelpos - var_list.MLsteps
+            print('left')
             for x in range(MLdiff):
                 var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
         else:
             MLdiff = var_list.MLsteps - var_list.MLrelpos
+            print('right')
             for x in range(MLdiff):
                 var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
+        var_list.APmove.PosRelAbsCalc()
+        var_list.MLmove.PosRelAbsCalc()
+        var_list.DVmove.PosRelAbsCalc()
 
     #MAIN CODE ################################################################################################
     def runbuttonthread(self):

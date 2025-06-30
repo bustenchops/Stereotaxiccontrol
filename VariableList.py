@@ -26,8 +26,8 @@ class var_list:
 
 
 # DEFINE NUMBER OF BUTTONS AND ORDER IN ARRAY
-    buttonarray = ['moveslow', 'needleoffset', 'drilloffset', 'HomeToABSzero', 'movefast', 'recalibrate', 'relativeDV',
-                   'relativeALLset', 'relativeAP', 'relativeML', 'FiberOffset', 'HomerelativeZero', 'bregmahome',
+    buttonarray = ['moveslow', 'needleoffset', 'drilloffset', 'HomeToABSzero', 'movefast', 'recalibrate', 'bregmahome',
+                   'relativeAP', 'HomerelativeZero', 'relativeALLset', 'FiberOffset', 'relativeML', 'relativeDV' ,
                    'miscbuttonA', 'miscbuttonB']
     lastbuttonstate = [0 for x in range(len(buttonarray))]
 
@@ -38,13 +38,13 @@ class var_list:
     homeABSzero = 3
     movefast = 4
     recalibrate = 5
-    relativeDV = 6
-    relativeALL = 7
-    relativeAP = 8
-    relativeML = 9
+    bregmahome = 6
+    relativeAP = 7
+    homeRELzero = 8
+    relativeALL = 9
     fiberoff = 10
-    homeRELzero = 11
-    bregmahome = 12
+    relativeML = 11
+    relativeDV = 12
     miscbuttonA = 13
     miscbuttonB = 14
 
