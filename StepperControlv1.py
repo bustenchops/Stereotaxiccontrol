@@ -76,8 +76,8 @@ class Steppercontrol:
 
         if self.axis == 1:
             print('backoff AP')
-            for x in range(backoff):
-                GPIO.output(self.direction, var_list.APforward)
+            for x in range(var_list.APadvance):
+                GPIO.output(self.direction, var_list.APback)
                 GPIO.output(self.step, 1)
                 time.sleep(btwnsteps)
                 GPIO.output(self.step, 0)
@@ -99,12 +99,13 @@ class Steppercontrol:
                 GPIO.output(self.step, 0)
                 time.sleep(btwnsteps)
 
+
     def PosRelAbsCalc(self):
         print('doing calculations')
         if self.axis == 1:
             print('AP')
-            var_list.APcurRELdist = round(((var_list.APsteps - var_list.APrelpos) * var_list.APstepdistance * -1), 4)
-            var_list.APcurABSdist = round((var_list.APsteps * var_list.APstepdistance * -1), 4)
+            var_list.APcurRELdist = round(((var_list.APsteps - var_list.APrelpos) * var_list.APstepdistance), 4)
+            var_list.APcurABSdist = round((var_list.APsteps * var_list.APstepdistance), 4)
             print(var_list.APcurRELdist)
             print(var_list.APcurABSdist)
             # self.sendtoUI.updateAPstepLCD(var_list.APsteps)
