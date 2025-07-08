@@ -215,7 +215,7 @@ class threadedcontrols:
                 self.APinput = self.get_user_input('INPUT:', 'Enter the AP starting position in millimeters.')
                 for x in range(calibrationsteps):
                     if 0 <= var_list.APsteps < 6000:
-                        var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, btwnSteps)
+                        var_list.APmove.steppgo(var_list.APback, var_list.finespeed, btwnSteps)
                         var_list.APmove.PosRelAbsCalc()
                 self.APinputend = self.get_user_input('INPUT:', 'Enter the AP final position in millimeters.')
                 flAPinput = float(self.APinput)
