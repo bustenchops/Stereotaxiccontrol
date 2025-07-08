@@ -357,12 +357,12 @@ class buttonprogram:
             APdiff = var_list.APrelpos - var_list.APsteps
             print('forward')
             for x in range(APdiff):
-                var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
+                var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
         else:
             APdiff = var_list.APsteps - var_list.APrelpos
             print('backward')
             for x in range(APdiff):
-                var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
+                var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
 
         print(var_list.MLrelpos,"mlRelative")
         print(var_list.MLsteps,"mlsteps")
