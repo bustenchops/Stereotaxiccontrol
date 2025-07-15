@@ -122,10 +122,11 @@ class threadedcontrols:
         GPIO.output(var_list.enableAll, 0)
         if axis == 1:
             print('AP zeroing')
-            while GPIO.input(var_list.limitAP):
+            # while GPIO.input(var_list.limitAP):
+            while True:
                 var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, btwnsteps)
                 if GPIO.input(var_list.limitAP) != True:
-                    print('zero while loop limit')
+                    print('AP limit triggered')
                     break
             print('run backoff')
             var_list.APmove.backoffafterzero(backoff,var_list.finespeed,var_list.btnSteps)
