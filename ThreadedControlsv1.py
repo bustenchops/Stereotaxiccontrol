@@ -153,7 +153,7 @@ class threadedcontrols:
             var_list.APsteps = 0
             var_list.APmove.PosRelAbsCalc()
             var_list.APmove.APadvanceafterbackoff(var_list.finespeed, var_list.btnSteps)
-            var_list.APsteps = var_list.APadvance
+            # var_list.APsteps = var_list.APadvance
             var_list.APmove.PosRelAbsCalc()
             print('sent to calculationville')
         elif axis == 2:
