@@ -123,7 +123,7 @@ class threadedcontrols:
         if axis == 1:
             print('AP zeroing')
             while GPIO.input(var_list.limitAP):
-                var_list.APmove.steppgo(var_list.APback, var_list.finespeed, btwnsteps)
+                var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, btwnsteps)
                 if GPIO.input(var_list.limitAP) != True:
                     print('zero while loop limit')
                     break
