@@ -111,6 +111,28 @@ class Steppercontrol:
             GPIO.output(self.step, 0)
             time.sleep(btwnsteps)
 
+    def DVadvanceafterbackoff(self, speed, btwnsteps):
+        if var_list.lastenablestate == 1:
+            GPIO.output(self.enable, 0)
+
+        for x in range(var_list.DVadvance):
+            GPIO.output(self.direction, var_list.DVdown)
+            GPIO.output(self.step, 1)
+            time.sleep(btwnsteps)
+            GPIO.output(self.step, 0)
+            time.sleep(btwnsteps)
+
+    def MLadvanceafterbackoff(self, speed, btwnsteps):
+        if var_list.lastenablestate == 1:
+            GPIO.output(self.enable, 0)
+
+        for x in range(var_list.MLadvance):
+            GPIO.output(self.direction, var_list.MLleft)
+            GPIO.output(self.step, 1)
+            time.sleep(btwnsteps)
+            GPIO.output(self.step, 0)
+            time.sleep(btwnsteps)
+
 
 
     def PosRelAbsCalc(self):

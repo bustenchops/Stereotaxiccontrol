@@ -43,7 +43,7 @@ class threadedcontrols:
         GPIO.output(var_list.enableAll, 1)
         var_list.emergencystopflag = 1
         print("!EMERGENCY STOP!")
-        print("Re-Zero axis to enable movement again")
+        print("Re-calibrate axis to enable movement again")
         return
 
 # Event handling for the encoders and hard wired buttons each encoder
@@ -157,9 +157,13 @@ class threadedcontrols:
             print('sent to calculationville')
         elif axis == 2:
             var_list.MLsteps = 0
+            var_list.MLmove.MLadvanceafterbackoff(var_list.finespeed, var_list.btnSteps)
+            var_list.MLsteps = var_list.MLadvance
             var_list.MLmove.PosRelAbsCalc()
         elif axis == 3:
             var_list.DVsteps = 0
+            var_list.DVmove.DVadvanceafterbackoff(var_list.finespeed, var_list.btnSteps)
+            var_list.DVsteps = var_list.DVadvance
             var_list.DVmove.PosRelAbsCalc()
         print('should report the step values now')
         print('advancing AP')
@@ -281,6 +285,8 @@ class threadedcontrols:
         self.quest = self.get_user_input('MESSAGE:','Initialization Process ... ENTER to continue')
         self.quest = self.get_user_input('MESSAGE:','CAUTION...Remove all attachments from frame arms! ENTER to continue.')
 
+        var_list.emergencystopflag = 0
+        GPIO.output(var_list.enableAll, 0)
 #Zero all steppers
         self.zerosteppers(1,var_list.backoff, var_list.btnSteps)
         self.zerosteppers(2,var_list.backoff, var_list.btnSteps)

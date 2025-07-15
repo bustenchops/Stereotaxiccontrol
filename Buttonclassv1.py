@@ -127,6 +127,7 @@ class buttonprogram:
                     print('unused button A')
                     self.sendtoUI.uitest()
 
+
                 #miscbuttonB - unused
                 if lastbut[var_list.miscbuttonB] == 1:
                     print('unused button B')
@@ -198,7 +199,8 @@ class buttonprogram:
         for x in range(var_list.DVsteps):
             var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
         for x in range(var_list.MLsteps):
-            var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
+            var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
+            var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
         for x in range(var_list.APsteps):
             var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
         var_list.APmove.PosRelAbsCalc()
