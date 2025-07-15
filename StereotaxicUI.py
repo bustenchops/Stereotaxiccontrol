@@ -327,7 +327,7 @@ class MainWindow(QMainWindow):
     def recalibrateaxis(self):
         print('recalibration')
         self.recalibrateall = threadedcontrols(window)
-        controlthread.calibratethings()
+        threadpool.start(self.recalibrateall.calibratethings)
 
 #INITIALIZE STEPPERS
     def initializesteppers(self):

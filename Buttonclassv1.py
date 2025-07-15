@@ -120,10 +120,12 @@ class buttonprogram:
                 if lastbut[var_list.recalibrate] == 1:
                     print("Trying to recalibrate")
                     self.sendtoUI.uitest()
+                    self.esndtoUI.recalibrateaxis()
 
                 #miscbuttonA - unused
                 if lastbut[var_list.miscbuttonA] == 1:
                     print('unused button A')
+                    self.sendtoUI.uitest()
 
                 #miscbuttonB - unused
                 if lastbut[var_list.miscbuttonB] == 1:
