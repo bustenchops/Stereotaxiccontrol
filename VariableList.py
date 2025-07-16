@@ -11,17 +11,18 @@ class var_list:
 
 
 # OFFSETS FOR THE DRILL, Syringe, Needle (minus values is back, left or up)
-    APDRILL = 0
-    MLDRILL = 0
-    DVDRILL = 0
+# in mm using the drill as 0
+    APDRILL = float(0)
+    MLDRILL = float(0)
+    DVDRILL = float(-0.5)
 
-    APneedle = -1333
-    MLneedle = -2666
-    DVneedle = -1333
+    APneedle = float(11.39)
+    MLneedle = float(31.97)
+    DVneedle = float(-0.5)
 
-    APfiber = 600
-    MLfiber = 600
-    DVfiber = -1333
+    APfiber = float(-5.64)
+    MLfiber = float(31.59)
+    DVfiber = float(-0.5)
 
 
 
