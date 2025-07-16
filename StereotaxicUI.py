@@ -276,7 +276,8 @@ class MainWindow(QMainWindow):
         DVcooord = self.DVmanualenter.toPlainText()
         if self.checkBox.isChecked():
             print(f"I want to go to AP:{APcooord}, ML:{MLcooord}, DV:{DVcooord}")
-            # RUN THE FUNCTION  TO DO THE CALC AND MOVE - MANUALMOVE
+            self.gototargetnow = threadedcontrols(window)
+            threadpool.start(self.gototargetnow.movetoTargetList(APcooord,MLcooord,DVcooord))
             self.checkBox.setChecked(False)
 
 #select a TXT file to load and preloads the targets
