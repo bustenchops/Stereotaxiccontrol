@@ -131,6 +131,7 @@ class buttonprogram:
                 #miscbuttonB - unused
                 if lastbut[var_list.miscbuttonB] == 1:
                     print('unused button B')
+                    self.sendtoUI.uitest()
 
                 lastbut[i] = newbut[i]
 
