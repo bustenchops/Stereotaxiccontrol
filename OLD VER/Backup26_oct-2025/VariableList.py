@@ -12,21 +12,19 @@ class var_list:
 
 # OFFSETS FOR THE DRILL, Syringe, Needle (minus values is back, left or up)
 # in mm using the drill as 0
+    APDRILL = float(0)
+    MLDRILL = float(0)
+    DVDRILL = float(-0.5)
 
-    DrillAPmm = float(0)
-    DrillMLmm = float(0)
-    DrillDVmm = float(0.2)
+    APneedle = float(11.39)
+    MLneedle = float(31.97)
+    DVneedle = float(-0.5)
 
-    NeedleAPmm = float(11.1)
-    NeedleMLmm = float(31.22)
-    NeedleDVmm = float(5)
+    APfiber = float(-5.64)
+    MLfiber = float(31.59)
+    DVfiber = float(-0.5)
 
-    FiberAPmm = float(-5.069)
-    FiberMLmm = float(31.22)
-    FiberDVmm = float(1.1)
 
-# variable to let program know which offset of toggled on. 1-drill,2-syringe,3-probe
-    TOGGLEoff = 1
 
 # DEFINE NUMBER OF BUTTONS AND ORDER IN ARRAY
     buttonarray = ['moveslow', 'needleoffset', 'drilloffset', 'HomeToABSzero', 'movefast', 'recalibrate', 'bregmahome',
@@ -84,7 +82,7 @@ class var_list:
     MLinitREL_holdvalue = 0
     APinitREL_holdvalue = 0
 
-    APstepdistance = float(0.006725)
+    APstepdistance = float(0.00625)
     MLstepdistance = float(0.0075)
     DVstepdistance = float(0.0075)
 
@@ -101,19 +99,12 @@ class var_list:
 #Variables that may need tweaking
     calibrationsteps = 4000
     backoff = 200
-    APadvance = 8500
-    DVadvance = 400
-    MLadvance = 400
-
-    APworking = 6400
-    MLworking = 6070
-    DVworking = 3990
-
-    DVup_bregramhome = 670 #about 0.5cm
-
-# how many steps DV goes up and then back when changing the offsets to avoid scrapping the skull
-    DVup_OffsetSafety = 670 #about 0.5cm
-
+    APadvance = 500
+# 7400
+    DVadvance = 500
+#100
+    MLadvance = 500
+# 3600
 
 #DEFINE STEPPER CONTROL PINS
     enableAll = 2
@@ -148,10 +139,8 @@ class var_list:
     DVup = 0
     DVdown = 1
 
-    calibfilename = 'CalibrationRH.txt'
+    calibfilename = 'Calibration.txt'
 
     lastenablestate = 1
     emergencystopflag = 0
 
-
-# concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)
