@@ -198,10 +198,13 @@ class buttonprogram:
         print('home the ABS zero - fromButtonthread')
         for x in range(var_list.DVsteps):
             var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+        print('DV done')
         for x in range(var_list.MLsteps):
             var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
+        print('ML done')
         for x in range(var_list.APsteps):
             var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
+        print('AP done')
         var_list.APmove.PosRelAbsCalc()
         var_list.MLmove.PosRelAbsCalc()
         var_list.DVmove.PosRelAbsCalc()
