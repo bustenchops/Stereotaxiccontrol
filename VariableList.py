@@ -99,9 +99,12 @@ class var_list:
 #Variables that may need tweaking
     calibrationsteps = 4000
     backoff = 200
-    APadvance = 7400
-    DVadvance = 100
-    MLadvance = 3600
+    APadvance = 500
+# 7400
+    DVadvance = 500
+#100
+    MLadvance = 500
+# 3600
 
 #DEFINE STEPPER CONTROL PINS
     enableAll = 2
