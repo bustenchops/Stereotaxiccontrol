@@ -98,7 +98,7 @@ class var_list:
 
 #Variables that may need tweaking
     calibrationsteps = 4000
-    backoff = 200
+    backoff = 300
     APadvance = 500
 # 7400
     DVadvance = 500
