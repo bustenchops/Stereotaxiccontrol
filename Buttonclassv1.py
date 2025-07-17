@@ -285,8 +285,9 @@ class buttonprogram:
         print('reset hold values')
         for x in range(var_list.DVsteps):
             var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+        print('moved DV moved to ABS 0')
         var_list.DVrelpos = var_list.DVrelpos + var_list.DVneedle
-        print('moved DV and set DVrelpos')
+        print('set DVrelpos')
         # self.setrelforDV()
         if var_list.MLsteps < (var_list.MLrelpos + var_list.MLneedle):
             print('if ML1')
