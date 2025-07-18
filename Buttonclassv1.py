@@ -44,27 +44,6 @@ class buttonprogram:
 
                 print("button ", butarr[i], " state change", lastbut[i], ' to ', newbut[i])
 
-                # #Speed switch (steps per rotation)
-                #     # note 1 is pressed and 0 is released
-                #     # stepper_speed (pos 0 and pos 1)
-                # if lastbut[var_list.movefast] == 0 and lastbut[var_list.moveslow] == 0:
-                #     if var_list.stepper_speed != var_list.normalspeed:
-                #         var_list.stepper_speed = var_list.normalspeed
-                #         print('switch set to: ',var_list.normalspeed)
-                #         self.sendtoUI.currentspeed(var_list.stepper_speed)
-                # elif lastbut[var_list.movefast] == 1 and lastbut[var_list.moveslow] == 0:
-                #     if var_list.stepper_speed != var_list.fastspeed:
-                #         var_list.stepper_speed = var_list.fastspeed
-                #         print('switch set to: ', var_list.fastspeed)
-                #         self.sendtoUI.currentspeed(var_list.stepper_speed)
-                # elif lastbut[var_list.movefast] == 0 and lastbut[var_list.moveslow] == 1:
-                #     if var_list.stepper_speed != var_list.finespeed:
-                #         var_list.stepper_speed = var_list.finespeed
-                #         print('switch set to: ', var_list.finespeed)
-                #         self.sendtoUI.currentspeed(var_list.stepper_speed)
-                #     else:
-                #         print('switch not working right')
-
                 #button to home to ABS zero
                 if lastbut[var_list.homeABSzero] == 1:
                     print('HOME to ABS Zero')
@@ -243,143 +222,18 @@ class buttonprogram:
 
     def drillmovetooffset(self):
         print('offset set to DRILL')
-
-        self.drillAPstep = var_list.APDRILL / var_list.APstepdistance
-        self.drillMLstep = var_list.MLDRILL / var_list.MLstepdistance
-        self.drillDVstep = var_list.DVDRILL / var_list.DVstepdistance
-        self.drillAPstep_int = int(self.drillAPstep)
-        self.drillMLstep_int = int(self.drillMLstep)
-        self.drillDVstep_int = int(self.drillDVstep)
-
-        var_list.APrelpos = var_list.APinitREL_holdvalue
-        var_list.MLrelpos = var_list.MLinitREL_holdvalue
-        var_list.DVrelpos = var_list.DVinitREL_holdvalue
-
-        for x in range(self.drillDVstep_int):
-            var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
-        #    self.setrelforDV()
-        var_list.DVrelpos = var_list.DVrelpos + self.drillDVstep_int
-        if var_list.MLsteps < (var_list.MLrelpos + self.drillMLstep_int):
-            shiftdistance = (var_list.MLrelpos + self.drillMLstep_int) - var_list.MLsteps
-            for x in range(shiftdistance):
-                var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
-            # self.setrelforML()
-            var_list.MLrelpos = var_list.MLrelpos + self.drillMLstep_int
-        elif var_list.MLsteps > (var_list.MLrelpos + self.drillMLstep_int):
-            shiftdistance = var_list.MLsteps - (var_list.MLrelpos + self.drillMLstep_int)
-            for x in range(shiftdistance):
-                var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
-            # self.setrelforML()
-            var_list.MLrelpos = var_list.MLrelpos + self.drillMLstep_int
-        if var_list.APsteps < (var_list.APrelpos + self.drillAPstep_int):
-            shiftdistance = (var_list.APrelpos + self.drillAPstep_int) - var_list.APsteps
-            for x in range(shiftdistance):
-                var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
-            # self.setrelforAP()
-            var_list.APrelpos = var_list.APrelpos + self.drillAPstep_int
-        elif var_list.APsteps > (var_list.APrelpos + self.drillAPstep_int):
-            shiftdistance = var_list.APsteps - (var_list.APrelpos + self.drillAPstep_int)
-            for x in range(shiftdistance):
-                var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
-            # self.setrelforAP()
-            var_list.APrelpos = var_list.APrelpos + self.drillAPstep_int
+        self.sendtoUI.uitest()
         self.sendtoUI.drilloffset()
-        var_list.APmove.PosRelAbsCalc()
-        var_list.MLmove.PosRelAbsCalc()
-        var_list.DVmove.PosRelAbsCalc()
 
     def needlemovetooffset(self):
         print('offset set to Needle')
-
-        self.needleAPstep = var_list.APneedle/ var_list.APstepdistance
-        self.needleMLstep = var_list.MLneedle / var_list.MLstepdistance
-        self.needleDVstep = var_list.DVneedle / var_list.DVstepdistance
-        self.needleAPstep_int = int(self.needleAPstep)
-        self.needleMLstep_int = int(self.needleMLstep)
-        self.needleDVstep_int = int(self.needleDVstep)
-
-        var_list.APrelpos = var_list.APinitREL_holdvalue
-        var_list.MLrelpos = var_list.MLinitREL_holdvalue
-        var_list.DVrelpos = var_list.DVinitREL_holdvalue
-
-        for x in range(self.needleDVstep_int):
-            var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
-        var_list.DVrelpos = var_list.DVrelpos + self.needleAPstep_int
-            # self.setrelforDV()
-        if var_list.MLsteps < (var_list.MLrelpos + self.needleMLstep_int):
-            shiftdistance = (var_list.MLrelpos + self.needleMLstep_int) - var_list.MLsteps
-            for x in range(shiftdistance):
-                var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
-            self.setrelforML()
-            var_list.MLrelpos = var_list.MLrelpos + self.needleMLstep_int
-        elif var_list.MLsteps > (var_list.MLrelpos + self.needleMLstep_int):
-            shiftdistance = var_list.MLsteps - (var_list.MLrelpos + self.needleMLstep_int)
-            for x in range(shiftdistance):
-                var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
-            # self.setrelforML()
-            var_list.MLrelpos = var_list.MLrelpos + self.needleMLstep_int
-        if var_list.APsteps < (var_list.APrelpos + self.needleAPstep_int):
-            shiftdistance = (var_list.APrelpos + self.needleAPstep_int) - var_list.APsteps
-            for x in range(shiftdistance):
-                var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
-            # self.setrelforAP()
-            var_list.APrelpos = var_list.APrelpos + self.needleAPstep_int
-        elif var_list.APsteps > (var_list.APrelpos + self.needleAPstep_int):
-            shiftdistance = var_list.APsteps - (var_list.APrelpos + self.needleAPstep_int)
-            for x in range(shiftdistance):
-                var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
-            # self.setrelforAP()
-            var_list.APrelpos = var_list.APrelpos + self.needleAPstep_int
+        self.sendtoUI.uitest()
         self.sendtoUI.needleoffset()
-        var_list.APmove.PosRelAbsCalc()
-        var_list.MLmove.PosRelAbsCalc()
-        var_list.DVmove.PosRelAbsCalc()
 
     def fibermovetooffset(self):
         print('offset set to Fiber')
-
-        self.fiberAPstep = var_list.APfiber / var_list.APstepdistance
-        self.fiberMLstep = var_list.MLfiber / var_list.MLstepdistance
-        self.fiberDVstep = var_list.DVfiber / var_list.DVstepdistance
-        self.fiberAPstep_int = int(self.fiberAPstep)
-        self.fiberMLstep_int = int(self.fiberMLstep)
-        self.fiberDVstep_int = int(self.fiberDVstep)
-
-        var_list.APrelpos = var_list.APinitREL_holdvalue
-        var_list.MLrelpos = var_list.MLinitREL_holdvalue
-        var_list.DVrelpos = var_list.DVinitREL_holdvalue
-
-        for x in range(self.fiberDVstep_int):
-            var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
-        var_list.DVrelpos = var_list.DVrelpos + self.fiberDVstep_int
-        # self.setrelforDV()
-        if var_list.MLsteps < (var_list.MLrelpos + self.fiberMLstep_int):
-            shiftdistance = (var_list.MLrelpos + self.fiberMLstep_int) - var_list.MLsteps
-            for x in range(shiftdistance):
-                var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
-            # self.setrelforML()
-            var_list.MLrelpos = var_list.MLrelpos + self.fiberMLstep_int
-        elif var_list.MLsteps > (var_list.MLrelpos + self.fiberMLstep_int):
-            shiftdistance = var_list.MLsteps - (var_list.MLrelpos + self.fiberMLstep_int)
-            for x in range(shiftdistance):
-                var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
-            # self.setrelforML()
-            var_list.MLrelpos = var_list.MLrelpos + self.fiberMLstep_int
-        if var_list.APsteps < (var_list.APrelpos + self.fiberAPstep_int):
-            shiftdistance = (var_list.APrelpos + self.fiberAPstep_int) - var_list.APsteps
-            for x in range(shiftdistance):
-                var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
-            # self.setrelforAP()
-            var_list.APrelpos = var_list.APrelpos + self.fiberAPstep_int
-        elif var_list.APsteps > (var_list.APrelpos + self.fiberAPstep_int):
-            shiftdistance = var_list.APsteps - (var_list.APrelpos + self.fiberAPstep_int)
-            for x in range(shiftdistance):
-                var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
-            # self.setrelforAP()
-            var_list.APrelpos = var_list.APrelpos + self.fiberAPstep_int
-        var_list.APmove.PosRelAbsCalc()
-        var_list.MLmove.PosRelAbsCalc()
-        var_list.DVmove.PosRelAbsCalc()
+        self.sendtoUI.uitest()
+        self.sendtoUI.probeoffset()
 
     def bregmahome(self):
         print('goto bregma but lift 1.0cm ~1333 steps')
