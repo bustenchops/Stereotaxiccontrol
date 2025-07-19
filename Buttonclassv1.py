@@ -278,31 +278,32 @@ class buttonprogram:
     def sendtoworking(self):
         print('this is sendtoworking')
 
+        self.MLstepdiff = abs(var_list.MLsteps - var_list.MLworking)
+        self.APstepdiff = abs(var_list.APsteps - var_list.APworking)
+        self.DVstepdiff = abs(var_list.DVsteps - var_list.DVworking)
+        print('ml',self.MLstepdiff,'ap',self.APstepdiff,'dv',self.DVstepdiff)
+
         print(var_list.MLsteps,"MLsteps")
         print(var_list.MLworking,"MLworking")
 
         if var_list.MLsteps > var_list.MLworking:
             print('left')
-            self.MLstepdiff = var_list.MLsteps - var_list.MLadvance
             for x in range(self.MLstepdiff):
                 var_list.MLmove(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
-        elif var_list.MLsteps < var_list.MLadvance:
+        elif var_list.MLsteps < var_list.MLworking:
             print('right')
-            self.MLstepdiff = var_list.MLadvance - var_list.MLsteps
             for x in range(self.MLstepdiff):
                 var_list.MLmove(var_list.MLright, var_list.finespeed, var_list.btnSteps)
 
         print(var_list.APsteps,"APsteps")
         print(var_list.APworking,"APworking")
 
-        if var_list.APsteps > var_list.APadvance:
+        if var_list.APsteps > var_list.APworking:
             print('back')
-            self.APstepdiff = var_list.APsteps - var_list.APadvance
             for x in range(self.APstepdiff):
                 var_list.APmove(var_list.APback, var_list.finespeed, var_list.btnSteps)
-        elif var_list.APsteps < var_list.APadvance:
+        elif var_list.APsteps < var_list.APworking:
             print('forward')
-            self.APstepdiff = var_list.APadvance - var_list.APsteps
             for x in range(self.APstepdiff):
                 var_list.APmove(var_list.APforward, var_list.finespeed, var_list.btnSteps)
 
@@ -311,12 +312,10 @@ class buttonprogram:
 
         if var_list.DVsteps > var_list.DVworking:
             print('up')
-            self.DVstepdiff = var_list.DVsteps - var_list.DVadvance
             for x in range(self.DVstepdiff):
                 var_list.DVmove(var_list.DVup, var_list.finespeed, var_list.btnSteps)
-        elif var_list.DVsteps < var_list.DVadvance:
+        elif var_list.DVsteps < var_list.DVworking:
             print('down')
-            self.DVstepdiff = var_list.DVadvance - var_list.DVsteps
             for x in range(self.DVstepdiff):
                 var_list.DVmove(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
 
