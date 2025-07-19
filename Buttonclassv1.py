@@ -181,7 +181,6 @@ class buttonprogram:
             var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
         for x in range(var_list.MLsteps):
             var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
-            var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
         for x in range(var_list.APsteps):
             var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
         var_list.APmove.PosRelAbsCalc()
@@ -222,6 +221,9 @@ class buttonprogram:
         var_list.APmove.PosRelAbsCalc()
         var_list.MLmove.PosRelAbsCalc()
         var_list.DVmove.PosRelAbsCalc()
+
+        GPIO.output(var_list.enableAll, 1)
+        var_list.lastenablestate = 1
 
     def drillmovetooffset(self):
         print('offset set to DRILL')
