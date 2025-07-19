@@ -105,7 +105,7 @@ class var_list:
 
     APworking = 2000
     MLworking = 2000
-    DVworking = 50
+    DVworking = 1000
 
 #DEFINE STEPPER CONTROL PINS
     enableAll = 2
