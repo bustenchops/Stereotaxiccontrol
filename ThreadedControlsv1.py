@@ -285,62 +285,69 @@ class threadedcontrols:
         self.intAPtar = int(APtar)
         self.intMLtar = int(MLtar)
         self.intDVtar = int(DVtar)
+
+        print('currently at')
+        print(var_list.APcurRELdist)
+        print(var_list.MLcurRELdist)
+        print(var_list.DVcurRELdist)
+
         self.relAPdiff = self.intAPtar - var_list.APcurRELdist
         self.relMLdiff = self.intMLtar - var_list.MLcurRELdist
         self.relDVdiff = self.intDVtar - var_list.DVcurRELdist
 
-        self.instepsAP = self.relAPdiff / var_list.APsteps
-        self.instepsML = self.relMLdiff / var_list.MLsteps
-        self.instepsDV = self.relDVdiff * var_list.DVsteps
+        print('difference')
+        print(self.relAPdiff)
+        print(self.relMLdiff)
+        print(self.relDVdiff)
+
+        self.instepsAP = self.relAPdiff / var_list.APstepdistance
+        self.instepsML = self.relMLdiff / var_list.MLstepdistance
+        self.instepsDV = self.relDVdiff / var_list.DVstepdistance
 
         self.instepsAP_int = int(self.instepsAP)
         self.instepsML_int = int(self.instepsML)
         self.instepsDV_int = int(self.instepsDV)
 
+        print('steps needed')
         print(self.instepsAP_int)
         print(self.instepsML_int)
         print(self.instepsDV_int)
 
 
         if var_list.APcurRELdist > self.intAPtar:
-            print('ap trying1')
+            print('ap trying forward')
             #for x in range(self.instepsAP_int):
             #    var_list.APmove.steppgo(var_list.APforward, var_list.stepper_speed, var_list.btnSteps)
-        else:
-            print('not not forward')
-        if var_list.APcurRELdist < self.intAPtar:
-            print('ap trying')
+        elif var_list.APcurRELdist < self.intAPtar:
+            print('ap tryingback')
             #for x in range(self.instepsAP_int):
             #    var_list.APmove.steppgo(var_list.APback, var_list.stepper_speed, var_list.btnSteps)
         else:
-            print('not back')
+            print('AP not moving')
 
         if var_list.MLcurRELdist > self.intMLtar:
-            print('ML trying')
+            print('ML trying left')
             #for x in range(self.instepsML_int):
             #    var_list.MLmove.steppgo(var_list.MLleft, var_list.stepper_speed, var_list.btnSteps)
-        else:
             print('ML not left')
-        if var_list.MLcurRELdist < self.intMLtar:
-            print('ML trying')
+        elif var_list.MLcurRELdist < self.intMLtar:
+            print('ML trying vright')
             #for x in range(self.instepsML_int):
             #    var_list.MLmove.steppgo(var_list.MLright, var_list.stepper_speed, var_list.btnSteps)
         else:
-            print('not not right')
+            print('ML not moving')
 
         if var_list.DVcurRELdist > self.intDVtar:
-            print('DV trying')
+            print('DV tryingv up')
             #for x in range(self.instepsDV_int):
             #    var_list.MLmove.steppgo(var_list.DVup, var_list.stepper_speed, var_list.btnSteps)
-        else:
-            print('not not up')
 
-        if var_list.DVcurRELdist < self.intDVtar:
-            print('DV trying')
+        elif var_list.DVcurRELdist < self.intDVtar:
+            print('DV trying down')
             #for x in range(self.instepsDV_int):
             #    var_list.MLmove.steppgo(var_list.DVdown, var_list.stepper_speed, var_list.btnSteps)
         else:
-            print('not not down')
+            print('DV not moving')
 
         var_list.APmove.PosRelAbsCalc()
         var_list.MLmove.PosRelAbsCalc()
