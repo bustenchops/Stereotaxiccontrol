@@ -188,6 +188,9 @@ class buttonprogram:
         var_list.MLmove.PosRelAbsCalc()
         var_list.DVmove.PosRelAbsCalc()
 
+        GPIO.output(var_list.enableAll, 1)
+        var_list.lastenablestate = 1
+
     def upDVrelhomeAP_ML(self):
         print('AP and ML homed DVup - from buttonthread')
         for x in range(var_list.DVsteps):
@@ -274,6 +277,9 @@ class buttonprogram:
         var_list.APmove.PosRelAbsCalc()
         var_list.MLmove.PosRelAbsCalc()
         var_list.DVmove.PosRelAbsCalc()
+
+        GPIO.output(var_list.enableAll, 1)
+        var_list.lastenablestate = 1
 
     def sendtoworking(self):
         print('this is sendtoworking')
