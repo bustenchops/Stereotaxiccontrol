@@ -317,35 +317,35 @@ class threadedcontrols:
         if var_list.APcurRELdist > self.intAPtar:
             print('ap trying forward')
             for x in range(self.instepsAP_int):
-                var_list.APmove.steppgo(var_list.APforward, var_list.stepper_speed, var_list.btnSteps)
+                var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
         elif var_list.APcurRELdist < self.intAPtar:
             print('ap tryingback')
             for x in range(self.instepsAP_int):
-                var_list.APmove.steppgo(var_list.APback, var_list.stepper_speed, var_list.btnSteps)
+                var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
         else:
             print('AP not moving')
 
         if var_list.MLcurRELdist > self.intMLtar:
             print('ML trying left')
             for x in range(self.instepsML_int):
-                var_list.MLmove.steppgo(var_list.MLleft, var_list.stepper_speed, var_list.btnSteps)
+                var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
             print('ML not left')
         elif var_list.MLcurRELdist < self.intMLtar:
             print('ML trying right')
             for x in range(self.instepsML_int):
-                var_list.MLmove.steppgo(var_list.MLright, var_list.stepper_speed, var_list.btnSteps)
+                var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
         else:
             print('ML not moving')
 
         if var_list.DVcurRELdist > self.intDVtar:
             print('DV trying down')
             for x in range(self.instepsDV_int):
-                var_list.MLmove.steppgo(var_list.DVdown, var_list.stepper_speed, var_list.btnSteps)
+                var_list.MLmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
 
         elif var_list.DVcurRELdist < self.intDVtar:
             print('DV trying up')
             for x in range(self.instepsDV_int):
-                var_list.MLmove.steppgo(var_list.DVup, var_list.stepper_speed, var_list.btnSteps)
+                var_list.MLmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
         else:
             print('DV not moving')
 
