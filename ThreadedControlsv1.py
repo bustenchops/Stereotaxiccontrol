@@ -297,24 +297,24 @@ class threadedcontrols:
         self.instepsML_int = int(self.instepsML)
         self.instepsDV_int = int(self.instepsDV)
 
-        if var_list.APcurRELdist > APtar:
+        if var_list.APcurRELdist > self.intAPtar:
             for x in range(self.instepsAP_int):
                 var_list.APmove.steppgo(var_list.APforward, var_list.stepper_speed, var_list.btnSteps)
-        if var_list.APcurRELdist < APtar:
+        if var_list.APcurRELdist < self.intAPtar:
             for x in range(self.instepsAP_int):
                 var_list.APmove.steppgo(var_list.APback, var_list.stepper_speed, var_list.btnSteps)
 
-        if var_list.MLcurRELdist > MLtar:
+        if var_list.MLcurRELdist > self.intMLtar:
             for x in range(self.instepsML_int):
                 var_list.MLmove.steppgo(var_list.MLleft, var_list.stepper_speed, var_list.btnSteps)
-        if var_list.MLcurRELdist < MLtar:
+        if var_list.MLcurRELdist < self.intMLtar:
             for x in range(self.instepsML_int):
                 var_list.MLmove.steppgo(var_list.MLright, var_list.stepper_speed, var_list.btnSteps)
 
-        if var_list.DVcurRELdist > DVtar:
+        if var_list.DVcurRELdist > self.intDVtar:
             for x in range(self.instepsDV_int):
                 var_list.MLmove.steppgo(var_list.DVup, var_list.stepper_speed, var_list.btnSteps)
-        if var_list.DVcurRELdist < DVtar:
+        if var_list.DVcurRELdist < self.intDVtar:
             for x in range(self.instepsDV_int):
                 var_list.MLmove.steppgo(var_list.DVdown, var_list.stepper_speed, var_list.btnSteps)
 
