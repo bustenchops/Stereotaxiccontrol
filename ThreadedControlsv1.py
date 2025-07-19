@@ -340,12 +340,12 @@ class threadedcontrols:
         if var_list.DVcurRELdist > self.intDVtar:
             print('DV trying down')
             for x in range(self.instepsDV_int):
-                var_list.MLmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
+                var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
 
         elif var_list.DVcurRELdist < self.intDVtar:
             print('DV trying up')
             for x in range(self.instepsDV_int):
-                var_list.MLmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+                var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
         else:
             print('DV not moving')
 
