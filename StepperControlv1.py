@@ -46,26 +46,51 @@ class Steppercontrol:
                     GPIO.output(self.step, 0)
                     time.sleep(btwnsteps)
 
-                    #NOTE: the goplus and gominus reflect which direction results in a positive step count
-                    #NOTE: the goplus and gominus reflect which direction results in a positive step count
+
                     if self.axis == 1:
-                        if move_direction == self.gominus:
+                        if move_direction == self.gominus: #AP steps up and AP measure goes up
                             var_list.APsteps += 1
                         else:
                             var_list.APsteps -= 1
                     elif self.axis == 2:
-                        if move_direction == self.goplus:
+                        if move_direction == self.goplus: #MV steps up and MV measure goes minus
                             var_list.MLsteps += 1
                         else:
                             var_list.MLsteps -= 1
                     elif self.axis == 3:
-                        if move_direction == self.goplus:
+                        if move_direction == self.goplus: #DV steps up and DV measure goes minus
                             var_list.DVsteps += 1
                         else:
                             var_list.DVsteps -= 1
                 else:
                     print("ERROR - limit reached")
-                    break
+
+                    if self.axis == 1:
+                        if move_direction == self.gominus:  # AP steps up and AP measure goes up
+                            GPIO.output(self.direction, move_direction)
+                            GPIO.output(self.step, 1)
+                            time.sleep(btwnsteps)
+                            GPIO.output(self.step, 0)
+                            time.sleep(btwnsteps)
+
+                            var_list.APsteps += 1
+                    elif self.axis == 2:
+                        if move_direction == self.goplus:  # MV steps up and MV measure goes minus
+                            GPIO.output(self.direction, move_direction)
+                            GPIO.output(self.step, 1)
+                            time.sleep(btwnsteps)
+                            GPIO.output(self.step, 0)
+                            time.sleep(btwnsteps)
+
+                            var_list.MLsteps += 1
+                    elif self.axis == 3:
+                        if move_direction == self.goplus:  # DV steps up and DV measure goes minus
+                            GPIO.output(self.direction, move_direction)
+                            GPIO.output(self.step, 1)
+                            time.sleep(btwnsteps)
+                            GPIO.output(self.step, 0)
+                            time.sleep(btwnsteps)
+                            var_list.DVsteps += 1
 
         else:
             print("Emergency Stopped - Cannot move until re-zeroed")
