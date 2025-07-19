@@ -282,9 +282,12 @@ class threadedcontrols:
 
     def movetoTargetList(self, APtar, MLtar, DVtar):
         print('moving to target list')
-        self.relAPdiff = APtar - var_list.APcurRELdist
-        self.relMLdiff = MLtar - var_list.MLcurRELdist
-        self.relDVdiff = DVtar - var_list.DVcurRELdist
+        self.intAPtar = int(APtar)
+        self.intMLtar = int(MLtar)
+        self.intDVtar = int(DVtar)
+        self.relAPdiff = self.intAPtar - var_list.APcurRELdist
+        self.relMLdiff = self.intMLtar - var_list.MLcurRELdist
+        self.relDVdiff = self.intDVtar - var_list.DVcurRELdist
 
         self.instepsAP = self.relAPdiff / var_list.APsteps
         self.instepsML = self.relMLdiff / var_list.MLsteps
