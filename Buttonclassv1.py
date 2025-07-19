@@ -133,8 +133,8 @@ class buttonprogram:
                 var_list.stepper_speed = var_list.finespeed
                 print('switch set to: ', var_list.finespeed)
                 self.sendtoUI.currentspeed(var_list.stepper_speed)
-            else:
-                print('switch not working right')
+        else:
+            print('switch not working right')
 
         return lastbut
 
