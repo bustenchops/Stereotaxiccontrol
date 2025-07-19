@@ -289,11 +289,11 @@ class buttonprogram:
         if var_list.MLsteps > var_list.MLworking:
             print('left')
             for x in range(self.MLstepdiff):
-                var_list.MLmove(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
+                var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
         elif var_list.MLsteps < var_list.MLworking:
             print('right')
             for x in range(self.MLstepdiff):
-                var_list.MLmove(var_list.MLright, var_list.finespeed, var_list.btnSteps)
+                var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
 
         print(var_list.APsteps,"APsteps")
         print(var_list.APworking,"APworking")
@@ -301,11 +301,11 @@ class buttonprogram:
         if var_list.APsteps > var_list.APworking:
             print('back')
             for x in range(self.APstepdiff):
-                var_list.APmove(var_list.APback, var_list.finespeed, var_list.btnSteps)
+                var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
         elif var_list.APsteps < var_list.APworking:
             print('forward')
             for x in range(self.APstepdiff):
-                var_list.APmove(var_list.APforward, var_list.finespeed, var_list.btnSteps)
+                var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
 
         print(var_list.DVsteps,"DVsteps")
         print(var_list.DVworking,"DVworking")
@@ -313,11 +313,11 @@ class buttonprogram:
         if var_list.DVsteps > var_list.DVworking:
             print('up')
             for x in range(self.DVstepdiff):
-                var_list.DVmove(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+                var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
         elif var_list.DVsteps < var_list.DVworking:
             print('down')
             for x in range(self.DVstepdiff):
-                var_list.DVmove(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
+                var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
 
         var_list.APmove.PosRelAbsCalc()
         var_list.MLmove.PosRelAbsCalc()
