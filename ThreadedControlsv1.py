@@ -291,9 +291,9 @@ class threadedcontrols:
         print(var_list.MLcurRELdist)
         print(var_list.DVcurRELdist)
 
-        self.relAPdiff = self.intAPtar - var_list.APcurRELdist
-        self.relMLdiff = self.intMLtar - var_list.MLcurRELdist
-        self.relDVdiff = self.intDVtar - var_list.DVcurRELdist
+        self.relAPdiff = abs(self.intAPtar - var_list.APcurRELdist)
+        self.relMLdiff = abs(self.intMLtar - var_list.MLcurRELdist)
+        self.relDVdiff = abs(self.intDVtar - var_list.DVcurRELdist)
 
         print('difference')
         print(self.relAPdiff)
