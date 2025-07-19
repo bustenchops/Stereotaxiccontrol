@@ -95,7 +95,7 @@ class Steppercontrol:
         else:
             print("Emergency Stopped - Cannot move until re-zeroed")
 
-
+# to clear the limit switch and zeros
     def backoffafterzero(self, backoff, speed, btwnsteps):
         if var_list.lastenablestate == 1:
             GPIO.output(self.enable, 0)
@@ -125,6 +125,7 @@ class Steppercontrol:
                 GPIO.output(self.step, 0)
                 time.sleep(btwnsteps)
 
+#at calibration further advances the steps so there is a bit of working room
     def APadvanceafterbackoff(self, speed, btwnsteps):
         if var_list.lastenablestate == 1:
             GPIO.output(self.enable, 0)
