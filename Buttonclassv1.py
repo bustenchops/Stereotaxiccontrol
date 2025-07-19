@@ -323,6 +323,9 @@ class buttonprogram:
         var_list.MLmove.PosRelAbsCalc()
         var_list.DVmove.PosRelAbsCalc()
 
+        GPIO.output(var_list.enableAll, 1)
+        var_list.lastenablestate = 1
+
     #MAIN CODE ################################################################################################
     def runbuttonthread(self):
 
