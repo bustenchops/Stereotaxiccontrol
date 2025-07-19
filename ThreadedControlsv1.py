@@ -353,6 +353,9 @@ class threadedcontrols:
         var_list.MLmove.PosRelAbsCalc()
         var_list.DVmove.PosRelAbsCalc()
 
+        GPIO.output(var_list.enableAll, 1)
+
+
 # question and waits for user input
     def calibratethings(self):
         self.quest = self.get_user_input('MESSAGE:','Initialization Process ... ENTER to continue')
