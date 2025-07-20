@@ -330,8 +330,13 @@ class MainWindow(QMainWindow):
         #self.recalibrateall = threadedcontrols(window)
         #threadpool.start(self.recalibrateall.zerosteppers)
         controlthread.zerosteppers(3, var_list.backoff, var_list.btnSteps)
+        var_list.DVmove.backoffafterzero(var_list.backoff, var_list.finespeed, var_list.btnSteps)
+
         controlthread.zerosteppers(1,var_list.backoff, var_list.btnSteps)
+        var_list.APmove.backoffafterzero(var_list.backoff, var_list.finespeed, var_list.btnSteps)
+
         controlthread.zerosteppers(2, var_list.backoff, var_list.btnSteps)
+        var_list.MLmove.backoffafterzero(var_list.backoff, var_list.finespeed, var_list.btnSteps)
 
 
 #INITIALIZE STEPPERS

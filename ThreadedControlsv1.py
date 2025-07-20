@@ -361,7 +361,7 @@ class threadedcontrols:
 # question and waits for user input
     def calibratethings(self):
         print('starting calibration thread')
-        self.quest = self.get_user_input('MESSAGE:','Initialization Process ... ENTER to continue')
+        #self.quest = self.get_user_input('MESSAGE:','Initialization Process ... ENTER to continue')
         self.quest = self.get_user_input('MESSAGE:','CAUTION...Remove all attachments from frame arms! ENTER to continue.')
 
         var_list.emergencystopflag = 0
