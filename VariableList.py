@@ -117,7 +117,7 @@ class var_list:
 
     FiberAPmm = -11.39
     FiberMLmm = -31.97
-    FiberDVmm = 5
+    FiberDVmm = 0
 
 #DEFINE STEPPER CONTROL PINS
     enableAll = 2
