@@ -283,9 +283,9 @@ class threadedcontrols:
 
     def movetoTargetList(self, APtar, MLtar, DVtar):
         print('moving to target list')
-        self.intAPtar = int(APtar)
-        self.intMLtar = int(MLtar)
-        self.intDVtar = int(DVtar)
+        self.intAPtar = float(APtar)
+        self.intMLtar = float(MLtar)
+        self.intDVtar = float(DVtar)
 
         print('currently at')
         print(var_list.APcurRELdist)
