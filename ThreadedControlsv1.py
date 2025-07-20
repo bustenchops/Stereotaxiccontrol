@@ -118,7 +118,7 @@ class threadedcontrols:
 
 
     def zerosteppers(self, axis, backoff, btwnsteps):
-        # print('zero step called')
+        print('zero steppers called')
         var_list.emergencystopflag = 0
         GPIO.output(var_list.enableAll, 0)
         if axis == 1:
