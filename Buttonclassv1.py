@@ -303,9 +303,9 @@ class buttonprogram:
             self.ML_Noffsetcalc = int(var_list.NeedleMLmm / var_list.MLstepdistance)
             self.DV_Noffsetcalc = int(var_list.NeedleDVmm / var_list.DVstepdistance)
 
-            print(self.AP_Noffsetcalc)
-            print(self.ML_Noffsetcalc)
-            print(self.DV_Noffsetcalc)
+            print(self.AP_Noffsetcalc,'AP calc')
+            print(self.ML_Noffsetcalc,'ML calc')
+            print(self.DV_Noffsetcalc,'DV calc')
             print(var_list.TOGGLEoff, 'toggle')
 
             self.DVdifferential = var_list.DVrelpos - self.DV_Noffsetcalc
@@ -371,9 +371,9 @@ class buttonprogram:
             self.ML_Foffsetcalc = int(var_list.NeedleMLmm / var_list.MLstepdistance)
             self.DV_Foffsetcalc = int(var_list.NeedleDVmm / var_list.DVstepdistance)
 
-            print(self.AP_Foffsetcalc)
-            print(self.ML_Foffsetcalc)
-            print(self.DV_Foffsetcalc)
+            print(self.AP_Foffsetcalc,'APcalc')
+            print(self.ML_Foffsetcalc,'Mlcalc')
+            print(self.DV_Foffsetcalc,"DVcalc")
             print(var_list.TOGGLEoff, 'toggle')
 
 
