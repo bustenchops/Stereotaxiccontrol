@@ -25,7 +25,7 @@ class var_list:
     FiberMLmm = float(31.59)
     FiberDVmm = float(0.1)
 
-TOGGLEoff = 1
+    TOGGLEoff = 1
 
 # DEFINE NUMBER OF BUTTONS AND ORDER IN ARRAY
     buttonarray = ['moveslow', 'needleoffset', 'drilloffset', 'HomeToABSzero', 'movefast', 'recalibrate', 'bregmahome',
