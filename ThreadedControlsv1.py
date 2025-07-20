@@ -393,4 +393,8 @@ class threadedcontrols:
         self.MLroto = RotaryEncoder(var_list.rotoA_ML, var_list.rotoB_ML, var_list.misc_eventbuttonA, self.ML_event)
         self.DVroto = RotaryEncoder(var_list.rotoA_DV, var_list.rotoB_DV, var_list.misc_eventbuttonB, self.DV_event)
 
+
+        print('sent drill toggle')
+        self.sendtoUI.drilloffset()
+
         self.calibratethings()
