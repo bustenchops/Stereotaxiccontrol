@@ -327,9 +327,9 @@ class MainWindow(QMainWindow):
 # To send the recalibration to the control thread
     def recalibrateaxis(self):
         print('recalibration')
-        # self.recalibrateall = threadedcontrols(window)
-        # threadpool.start(self.recalibrateall.calibratethings)
-        controlthread.calibratethings()
+        self.recalibrateall = threadedcontrols(window)
+        threadpool.start(self.recalibrateall.zerosteppers())
+        #controlthread.calibratethings()
 
 #INITIALIZE STEPPERS
     def initializesteppers(self):
