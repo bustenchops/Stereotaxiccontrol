@@ -107,6 +107,18 @@ class var_list:
     MLworking = 2000
     DVworking = 1000
 
+    DVup_bregramhome = 1333 #about 1cm
+    DVup_OffsetSafety = 1333 #about 1cm
+
+        #Note these are with the drill zeroed
+    NeedleAPmm = 5.64
+    NeedleMLmm = -31.59
+    NeedleDVmm = 0
+
+    FiberAPmm = -11.39
+    FiberMLmm = -31.97
+    FiberDVmm = 5
+
 #DEFINE STEPPER CONTROL PINS
     enableAll = 2
 
