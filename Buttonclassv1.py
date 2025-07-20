@@ -148,9 +148,7 @@ class buttonprogram:
 
         if var_list.TOGGLEoff == 1:
             var_list.APinitREL_holdvalue = var_list.APsteps
-        if var_list.TOGGLEoff == 1:
             var_list.MLinitREL_holdvalue = var_list.MLsteps
-        if var_list.TOGGLEoff == 1:
             var_list.DVinitREL_holdvalue = var_list.DVsteps
 
         var_list.APmove.PosRelAbsCalc()
@@ -245,6 +243,8 @@ class buttonprogram:
             self.MLdifferential = abs(var_list.MLsteps - var_list.MLrelpos)
             self.APdifferential = abs(var_list.APsteps - var_list.APrelpos)
 
+            print(var_list.TOGGLEoff, 'toggle')
+
             for x in range(var_list.DVup_OffsetSafety):
                 var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
 
@@ -272,6 +272,10 @@ class buttonprogram:
             for x in range(var_list.DVup_OffsetSafety):
                 var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
 
+            var_list.APrelpos = var_list.APsteps
+            var_list.MLrelpos = var_list.MLsteps
+            var_list.DVrelpos = var_list.DVsteps
+
             var_list.APmove.PosRelAbsCalc()
             var_list.MLmove.PosRelAbsCalc()
             var_list.DVmove.PosRelAbsCalc()
@@ -294,6 +298,11 @@ class buttonprogram:
             self.AP_Noffsetcalc = int(var_list.NeedleAPmm / var_list.APstepdistance)
             self.ML_Noffsetcalc = int(var_list.NeedleMLmm / var_list.MLstepdistance)
             self.DV_Noffsetcalc = int(var_list.NeedleDVmm / var_list.DVstepdistance)
+
+            print(self.AP_Noffsetcalc)
+            print(self.ML_Noffsetcalc)
+            print(self.DV_Noffsetcalc)
+            print(var_list.TOGGLEoff, 'toggle')
 
             self.DVdifferential = var_list.DVrelpos - self.DV_Noffsetcalc
             self.DVup = abs(var_list.DVsteps - (self.DVdifferential))
@@ -327,6 +336,10 @@ class buttonprogram:
             for x in range(var_list.DVup_OffsetSafety):
                 var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
 
+            var_list.APrelpos = var_list.APsteps
+            var_list.MLrelpos = var_list.MLsteps
+            var_list.DVrelpos = var_list.DVsteps
+
             var_list.APmove.PosRelAbsCalc()
             var_list.MLmove.PosRelAbsCalc()
             var_list.DVmove.PosRelAbsCalc()
@@ -349,6 +362,12 @@ class buttonprogram:
             self.AP_Foffsetcalc = int(var_list.NeedleAPmm / var_list.APstepdistance)
             self.ML_Foffsetcalc = int(var_list.NeedleMLmm / var_list.MLstepdistance)
             self.DV_Foffsetcalc = int(var_list.NeedleDVmm / var_list.DVstepdistance)
+
+            print(self.AP_Foffsetcalc)
+            print(self.ML_Foffsetcalc)
+            print(self.DV_Foffsetcalc)
+            print(var_list.TOGGLEoff, 'toggle')
+
 
             self.DVdifferential = var_list.DVrelpos + self.DV_Foffsetcalc
             self.DVup = abs(var_list.DVsteps - (self.DVdifferential))
@@ -381,6 +400,10 @@ class buttonprogram:
 
             for x in range(var_list.DVup_OffsetSafety):
                 var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
+
+            var_list.APrelpos = var_list.APsteps
+            var_list.MLrelpos = var_list.MLsteps
+            var_list.DVrelpos = var_list.DVsteps
 
             var_list.APmove.PosRelAbsCalc()
             var_list.MLmove.PosRelAbsCalc()
