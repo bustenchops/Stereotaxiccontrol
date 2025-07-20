@@ -12,19 +12,20 @@ class var_list:
 
 # OFFSETS FOR THE DRILL, Syringe, Needle (minus values is back, left or up)
 # in mm using the drill as 0
-    APDRILL = float(0)
-    MLDRILL = float(0)
-    DVDRILL = float(-0.5)
 
-    APneedle = float(11.39)
-    MLneedle = float(31.97)
-    DVneedle = float(-0.5)
+    DrillAPmm = float(0)
+    DrillMLmm = float(0)
+    DrillDVmm = float(0.1)
 
-    APfiber = float(-5.64)
-    MLfiber = float(31.59)
-    DVfiber = float(-0.5)
+    NeedleAPmm = float(11.39)
+    NeedleMLmm = float(31.97)
+    NeedleDVmm = float(0.1)
 
+    FiberAPmm = float(-5.64)
+    FiberMLmm = float(31.59)
+    FiberDVmm = float(0.1)
 
+TOGGLEoff = 1
 
 # DEFINE NUMBER OF BUTTONS AND ORDER IN ARRAY
     buttonarray = ['moveslow', 'needleoffset', 'drilloffset', 'HomeToABSzero', 'movefast', 'recalibrate', 'bregmahome',
@@ -107,17 +108,9 @@ class var_list:
     MLworking = 2000
     DVworking = 1000
 
-    DVup_bregramhome = 1333 #about 1cm
-    DVup_OffsetSafety = 1333 #about 1cm
+    DVup_bregramhome = 670 #about 0.5cm
+    DVup_OffsetSafety = 670 #about 0.5cm
 
-        #Note these are with the drill zeroed
-    NeedleAPmm = 5.64
-    NeedleMLmm = -31.59
-    NeedleDVmm = 0
-
-    FiberAPmm = -11.39
-    FiberMLmm = -31.97
-    FiberDVmm = 0
 
 #DEFINE STEPPER CONTROL PINS
     enableAll = 2
