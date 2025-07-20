@@ -225,7 +225,7 @@ class threadedcontrols:
                 self.APinputend = self.get_user_input('INPUT:', 'Enter the AP final position in millimeters.')
                 flAPinput = float(self.APinput)
                 flAPinputend = float(self.APinputend)
-                var_list.APstepdistance = (flAPinput - flAPinputend) / calibrationsteps
+                var_list.APstepdistance = (flAPinputend -flAPinput) / calibrationsteps
                 print("send to file AP step distance", var_list.APstepdistance)
                 self.calibratetemp = [var_list.APstepdistance, var_list.MLstepdistance,
                                       var_list.DVstepdistance]

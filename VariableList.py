@@ -83,7 +83,7 @@ class var_list:
     MLinitREL_holdvalue = 0
     APinitREL_holdvalue = 0
 
-    APstepdistance = float(0.00625)
+    APstepdistance = float(0.006725)
     MLstepdistance = float(0.0075)
     DVstepdistance = float(0.0075)
 
