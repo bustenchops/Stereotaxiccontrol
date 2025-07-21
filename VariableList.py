@@ -17,13 +17,13 @@ class var_list:
     DrillMLmm = float(0)
     DrillDVmm = float(0.1)
 
-    NeedleAPmm = float(11.39)
-    NeedleMLmm = float(31.97)
-    NeedleDVmm = float(0.1)
+    NeedleAPmm = float(11.1)
+    NeedleMLmm = float(31.22)
+    NeedleDVmm = float(5)
 
-    FiberAPmm = float(-5.64)
-    FiberMLmm = float(31.59)
-    FiberDVmm = float(0.1)
+    FiberAPmm = float(-5.069)
+    FiberMLmm = float(31.22)
+    FiberDVmm = float(1.1)
 
     TOGGLEoff = 1
 
