@@ -100,13 +100,13 @@ class var_list:
 #Variables that may need tweaking
     calibrationsteps = 4000
     backoff = 200
-    APadvance = 400
+    APadvance = 8500
     DVadvance = 400
     MLadvance = 400
 
-    APworking = 4000
-    MLworking = 4000
-    DVworking = 3000
+    APworking = 6400
+    MLworking = 6070
+    DVworking = 3990
 
     DVup_bregramhome = 670 #about 0.5cm
     DVup_OffsetSafety = 670 #about 0.5cm
