@@ -367,9 +367,9 @@ class buttonprogram:
             var_list.MLrelpos = var_list.MLinitREL_holdvalue
             var_list.DVrelpos = var_list.DVinitREL_holdvalue
 
-            self.AP_Foffsetcalc = int(var_list.NeedleAPmm / var_list.APstepdistance)
-            self.ML_Foffsetcalc = int(var_list.NeedleMLmm / var_list.MLstepdistance)
-            self.DV_Foffsetcalc = int(var_list.NeedleDVmm / var_list.DVstepdistance)
+            self.AP_Foffsetcalc = int(var_list.FiberAPmm / var_list.APstepdistance)
+            self.ML_Foffsetcalc = int(var_list.FiberMLmm / var_list.MLstepdistance)
+            self.DV_Foffsetcalc = int(var_list.FiberDVmm / var_list.DVstepdistance)
 
             print(self.AP_Foffsetcalc,'APcalc')
             print(self.ML_Foffsetcalc,'Mlcalc')
