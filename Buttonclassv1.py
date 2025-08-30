@@ -519,6 +519,10 @@ class buttonprogram:
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
 
+# concept and code created by Kirk Mulatz
+
+
+
     #MAIN CODE ################################################################################################
     def runbuttonthread(self):
 
