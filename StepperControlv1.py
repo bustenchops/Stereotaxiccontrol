@@ -193,5 +193,4 @@ class Steppercontrol:
             # self.sendtoUI.updateDVrelposLCD(var_list.DVcurRELdist)
             self.sendtoUI.updateDVLCD(var_list.DVsteps, var_list.DVcurABSdist, var_list.DVcurRELdist)
 
-
-    #
+# concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)

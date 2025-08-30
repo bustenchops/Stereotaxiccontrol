@@ -348,7 +348,7 @@ class MainWindow(QMainWindow):
 
 
 
-
+# concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)
 
 #######program code############
 

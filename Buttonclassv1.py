@@ -519,7 +519,7 @@ class buttonprogram:
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
 
-# concept and code created by Kirk Mulatz
+# concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)
 
 
 

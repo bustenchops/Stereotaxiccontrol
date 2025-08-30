@@ -2,7 +2,7 @@ import time
 import RPi.GPIO as GPIO
 
 from VariableList import var_list
-from RotatryEnocderv1 import RotaryEncoder
+from RotatryEncoderv1 import RotaryEncoder
 import tkinter as tk
 from tkinter import simpledialog
 
@@ -399,3 +399,5 @@ class threadedcontrols:
         self.sendtoUI.drilloffset()
 
         self.calibratethings()
+
+# concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)
