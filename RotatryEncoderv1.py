@@ -8,7 +8,7 @@
 #
 # This class uses standard rotary encoder with push switch
 #
-#
+# Some modification to made by Kirk Mulatz - to adapt it for use in this scenario
 
 import RPi.GPIO as GPIO
 
