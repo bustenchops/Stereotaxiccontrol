@@ -48,17 +48,17 @@ class Steppercontrol:
 
 
                     if self.axis == 1:
-                        if move_direction == self.gominus: #AP steps up and AP measure goes up
+                        if move_direction == self.gominus: #AP steps up and AP measure on the frame goes up
                             var_list.APsteps += 1
                         else:
                             var_list.APsteps -= 1
                     elif self.axis == 2:
-                        if move_direction == self.goplus: #MV steps up and MV measure goes minus
+                        if move_direction == self.goplus: #MV steps up and MV measure on the frame goes minus
                             var_list.MLsteps += 1
                         else:
                             var_list.MLsteps -= 1
                     elif self.axis == 3:
-                        if move_direction == self.goplus: #DV steps up and DV measure goes minus
+                        if move_direction == self.goplus: #DV steps up and DV measure on the frame goes minus
                             var_list.DVsteps += 1
                         else:
                             var_list.DVsteps -= 1

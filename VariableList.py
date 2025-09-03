@@ -15,7 +15,7 @@ class var_list:
 
     DrillAPmm = float(0)
     DrillMLmm = float(0)
-    DrillDVmm = float(0.1)
+    DrillDVmm = float(0.2)
 
     NeedleAPmm = float(11.1)
     NeedleMLmm = float(31.22)
@@ -25,6 +25,7 @@ class var_list:
     FiberMLmm = float(31.22)
     FiberDVmm = float(1.1)
 
+# variable to let program know which offset of toggled on. 1-drill,2-syringe,3-probe
     TOGGLEoff = 1
 
 # DEFINE NUMBER OF BUTTONS AND ORDER IN ARRAY
@@ -109,6 +110,8 @@ class var_list:
     DVworking = 3990
 
     DVup_bregramhome = 670 #about 0.5cm
+
+# how many steps DV goes up and then back when changing the offsets to avoid scrapping the skull
     DVup_OffsetSafety = 670 #about 0.5cm
 
 

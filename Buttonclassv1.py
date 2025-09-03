@@ -90,9 +90,9 @@ class buttonprogram:
                     print('Fiber offset start thread')
                     self.fibermovetooffset()
 
-                #home to bregma (relative) moves DV up ~10mm, positions AP and ML to relative home
+                #home to bregma (relative) moves DV up by value in variable list, positions AP and ML to relative home
                 if lastbut[var_list.bregmahome] == 1:
-                    print("Home to Bregma (DV up 10mm)")
+                    print("Home to Bregma (DV up buy set value)")
                     self.bregmahome()
 
                 #re-calibrate button
@@ -421,7 +421,7 @@ class buttonprogram:
             var_list.TOGGLEoff = 3
 
     def bregmahome(self):
-        print('goto bregma but lift 1.0cm ~1333 steps')
+        print('goto bregma but lift DV up by value in variable list')
         if (var_list.DVsteps > var_list.DVup_bregramhome):
             for x in range(var_list.DVup_bregramhome):
                 var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
