@@ -44,7 +44,7 @@ class threadedcontrols:
         var_list.lastenablestate = 1
         var_list.emergencystopflag = 1
         print("!EMERGENCY STOP!")
-        print("Re-calibrate axis to enable movement again")
+        print("Re-zero axis to enable movement again")
         return
 
 # Event handling for the encoders and hard wired buttons each encoder
@@ -58,6 +58,7 @@ class threadedcontrols:
             var_list.APmove.PosRelAbsCalc()
         # This is a hard wired button note the encoder switch
         elif event == RotaryEncoder.BUTTONDOWN:
+            print('emergency stop clicked')
             self.emergencystop()
             return
         elif event == RotaryEncoder.BUTTONUP:
@@ -67,15 +68,15 @@ class threadedcontrols:
 # Event handling for the encoders and hard wired buttons each encoder
     def ML_event(self, event):
         if event == RotaryEncoder.CLOCKWISE:
-            print('test clockwise')
+            #print('test clockwise')
             var_list.MLmove.steppgo(var_list.MLright, var_list.stepper_speed, var_list.btnSteps)
             var_list.MLmove.PosRelAbsCalc()
         elif event == RotaryEncoder.ANTICLOCKWISE:
-            print('test anticlock')
+            #print('test anticlock')
             var_list.MLmove.steppgo(var_list.MLleft, var_list.stepper_speed, var_list.btnSteps)
             var_list.MLmove.PosRelAbsCalc()
         elif event == RotaryEncoder.BUTTONDOWN:
-            print("event button A clicked")
+            print("hardwired event button A clicked")
             return
         elif event == RotaryEncoder.BUTTONUP:
             return
@@ -91,7 +92,7 @@ class threadedcontrols:
             var_list.DVmove.steppgo(var_list.DVup, var_list.stepper_speed, var_list.btnSteps)
             var_list.DVmove.PosRelAbsCalc()
         elif event == RotaryEncoder.BUTTONDOWN:
-            print("event button B clicked")
+            print("hardwired event button B clicked")
             return
         elif event == RotaryEncoder.BUTTONUP:
             return
@@ -128,25 +129,25 @@ class threadedcontrols:
                 if GPIO.input(var_list.limitAP) != True:
                     print('AP limit triggered')
                     break
-            print('run backoff')
+            print('run AP backoff')
             var_list.APmove.backoffafterzero(backoff,var_list.finespeed,var_list.btnSteps)
         elif axis == 2:
             print('ML zeroing')
             while GPIO.input(var_list.limitML):
                 var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, btwnsteps)
                 if GPIO.input(var_list.limitML) != True:
-                    print('zero while loop limit')
+                    print('ML limit triggered')
                     break
-            print('run backoff')
+            print('run ML backoff')
             var_list.MLmove.backoffafterzero(backoff, var_list.finespeed, var_list.btnSteps)
         elif axis == 3:
             print('DV zeroing')
             while GPIO.input(var_list.limitDV):
                 var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, btwnsteps)
                 if GPIO.input(var_list.limitDV) != True:
-                    print('zero while loop limit')
+                    print('DV limit triggered')
                     break
-            print('run backoff')
+            print('run DV backoff')
             var_list.DVmove.backoffafterzero(backoff, var_list.finespeed, var_list.btnSteps)
 
         if axis == 1:
@@ -155,19 +156,20 @@ class threadedcontrols:
             var_list.APmove.APadvanceafterbackoff(var_list.finespeed, var_list.btnSteps)
             var_list.APsteps = var_list.APadvance
             var_list.APmove.PosRelAbsCalc()
-            print('sent to calculationville')
+            print('AP sent to for calculation')
         elif axis == 2:
             var_list.MLsteps = 0
             var_list.MLmove.MLadvanceafterbackoff(var_list.finespeed, var_list.btnSteps)
             var_list.MLsteps = var_list.MLadvance
             var_list.MLmove.PosRelAbsCalc()
+            print('ML sent to for calculation')
         elif axis == 3:
             var_list.DVsteps = 0
             var_list.DVmove.DVadvanceafterbackoff(var_list.finespeed, var_list.btnSteps)
             var_list.DVsteps = var_list.DVadvance
             var_list.DVmove.PosRelAbsCalc()
-        print('should report the step values now')
-        print('advancing AP')
+            print('DV sent to for calculation')
+        print('Zero values should be displayed')
 
         # print(f"Zeroed: APsteps: {var_list.APsteps} MLsteps: {var_list.MLsteps} DVsteps {var_list.DVsteps}")
         time.sleep(0.200)
@@ -316,35 +318,34 @@ class threadedcontrols:
 
 
         if var_list.APcurRELdist > self.intAPtar:
-            print('ap trying forward')
+            print('AP forward')
             for x in range(self.instepsAP_int):
                 var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
         elif var_list.APcurRELdist < self.intAPtar:
-            print('ap tryingback')
+            print('AP back')
             for x in range(self.instepsAP_int):
                 var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
         else:
             print('AP not moving')
 
         if var_list.MLcurRELdist > self.intMLtar:
-            print('ML trying left')
+            print('ML left')
             for x in range(self.instepsML_int):
                 var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
-            print('ML not left')
         elif var_list.MLcurRELdist < self.intMLtar:
-            print('ML trying right')
+            print('ML right')
             for x in range(self.instepsML_int):
                 var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
         else:
             print('ML not moving')
 
         if var_list.DVcurRELdist > self.intDVtar:
-            print('DV trying down')
+            print('DV down')
             for x in range(self.instepsDV_int):
                 var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
 
         elif var_list.DVcurRELdist < self.intDVtar:
-            print('DV trying up')
+            print('DV up')
             for x in range(self.instepsDV_int):
                 var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
         else:
@@ -395,7 +396,7 @@ class threadedcontrols:
         self.DVroto = RotaryEncoder(var_list.rotoA_DV, var_list.rotoB_DV, var_list.misc_eventbuttonB, self.DV_event)
 
 
-        print('sent drill toggle')
+        print('Set Drill toggle')
         self.sendtoUI.drilloffset()
 
         self.calibratethings()

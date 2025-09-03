@@ -38,7 +38,7 @@ class buttonprogram:
         x = len(lastbut)
         y = len(newbut)
         if x != y:
-            print("the last button array and new button array are not equal")
+            print("Button Array detected state change")
         for i in range(x):
             if lastbut[i] != newbut[i]:
 
@@ -92,18 +92,18 @@ class buttonprogram:
 
                 #home to bregma (relative) moves DV up ~10mm, positions AP and ML to relative home
                 if lastbut[var_list.bregmahome] == 1:
-                    print("That's bregma G!")
+                    print("Home to Bregma (DV up 10mm)")
                     self.bregmahome()
 
                 #re-calibrate button
                 if lastbut[var_list.recalibrate] == 1:
-                    print("Trying to recalibrate")
+                    print("Re-Zero the steppers")
                     self.sendtoUI.uitest()
                     self.sendtoUI.recalibrateaxis()
 
                 #miscbuttonA - unused
                 if lastbut[var_list.miscbuttonA] == 1:
-                    print('unused button A')
+                    print('misc Button A')
                     self.sendtoUI.uitest()
 
 
@@ -121,20 +121,20 @@ class buttonprogram:
         if lastbut[var_list.movefast] == 0 and lastbut[var_list.moveslow] == 0:
             if var_list.stepper_speed != var_list.normalspeed:
                 var_list.stepper_speed = var_list.normalspeed
-                print('switch set to: ', var_list.normalspeed)
+                print('Speed set to: ', var_list.normalspeed)
                 self.sendtoUI.currentspeed(var_list.stepper_speed)
         elif lastbut[var_list.movefast] == 1 and lastbut[var_list.moveslow] == 0:
             if var_list.stepper_speed != var_list.fastspeed:
                 var_list.stepper_speed = var_list.fastspeed
-                print('switch set to: ', var_list.fastspeed)
+                print('Speed set to: ', var_list.fastspeed)
                 self.sendtoUI.currentspeed(var_list.stepper_speed)
         elif lastbut[var_list.movefast] == 0 and lastbut[var_list.moveslow] == 1:
             if var_list.stepper_speed != var_list.finespeed:
                 var_list.stepper_speed = var_list.finespeed
-                print('switch set to: ', var_list.finespeed)
+                print('Speed set to: ', var_list.finespeed)
                 self.sendtoUI.currentspeed(var_list.stepper_speed)
         else:
-            print('switch not working right')
+            print('speedswitch not working right')
 
         return lastbut
 
@@ -156,28 +156,28 @@ class buttonprogram:
         var_list.DVmove.PosRelAbsCalc()
 
     def setrelforAP(self):
-        print('set relative for AP - fromButtonthread')
+        print('set relative for AP')
         var_list.APrelpos = var_list.APsteps
         if var_list.TOGGLEoff == 1:
             var_list.APinitREL_holdvalue = var_list.APsteps
         var_list.APmove.PosRelAbsCalc()
 
     def setrelforML(self):
-        print('set relative for ML - fromButtonthread')
+        print('set relative for ML')
         var_list.MLrelpos = var_list.MLsteps
         if var_list.TOGGLEoff == 1:
             var_list.MLinitREL_holdvalue = var_list.MLsteps
         var_list.MLmove.PosRelAbsCalc()
 
     def setrelforDV(self):
-        print('set relative for DV - fromButtonthread')
+        print('set relative for DV')
         var_list.DVrelpos = var_list.DVsteps
         if var_list.TOGGLEoff == 1:
             var_list.DVinitREL_holdvalue = var_list.DVsteps
         var_list.DVmove.PosRelAbsCalc()
 
     def hometoABSzero(self):
-        print('home the ABS zero - fromButtonthread')
+        print('home the ABS zero')
         for x in range(var_list.DVsteps):
             var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
         for x in range(var_list.MLsteps):
@@ -192,20 +192,15 @@ class buttonprogram:
         var_list.lastenablestate = 1
 
     def upDVrelhomeAP_ML(self):
-        print('AP and ML homed DVup - from buttonthread')
+        print('relative home AP and ML homed DVup')
         for x in range(var_list.DVsteps):
             var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
 
-        print(var_list.MLrelpos,"ML relative")
-        print(var_list.MLsteps,"ML steps")
-
         if var_list.MLrelpos > var_list.MLsteps:
-            print('go left')
             shiftdistance = var_list.MLrelpos - var_list.MLsteps
             for x in range(shiftdistance):
                 var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
         elif var_list.MLsteps > var_list.MLrelpos:
-            print('go right')
             shiftdistance = var_list.MLsteps - var_list.MLrelpos
             for x in range(shiftdistance):
                 var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
@@ -227,9 +222,9 @@ class buttonprogram:
         var_list.lastenablestate = 1
 
     def drillmovetooffset(self):
-        print('offset set to DRILL')
-        self.sendtoUI.uitest()
-        print('sent drill toggle')
+        #print('offset set to DRILL')
+        #self.sendtoUI.uitest()
+        print('Move to drill offset')
         self.sendtoUI.drilloffset()
 
         if var_list.TOGGLEoff != 1:
@@ -289,9 +284,9 @@ class buttonprogram:
             var_list.TOGGLEoff = 1
 
     def needlemovetooffset(self):
-        print('offset set to Needle')
-        self.sendtoUI.uitest()
-        print('sent needle toggle')
+        # print('offset set to Needle')
+        # self.sendtoUI.uitest()
+        print('Move to Syringe Offset')
         self.sendtoUI.needleoffset()
 
         if var_list.TOGGLEoff != 2:
@@ -357,9 +352,9 @@ class buttonprogram:
             var_list.TOGGLEoff = 2
 
     def fibermovetooffset(self):
-        print('offset set to Fiber')
-        self.sendtoUI.uitest()
-        print('sent fiber toggle')
+        # print('offset set to Fiber')
+        # self.sendtoUI.uitest()
+        print('Move to Probe offset')
         self.sendtoUI.probeoffset()
 
         if var_list.TOGGLEoff != 3:

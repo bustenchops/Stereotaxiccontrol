@@ -33,7 +33,7 @@ class Steppercontrol:
     def steppgo(self,move_direction, speed, btwnsteps):
 
         if var_list.emergencystopflag == 0:
-            #print('stopflagecleared and zerolimit cleared')
+            #print('stop flag cleared and zero limit cleared')
             if var_list.lastenablestate == 1:
                 GPIO.output(self.enable, 0)
 
@@ -101,7 +101,7 @@ class Steppercontrol:
             GPIO.output(self.enable, 0)
 
         if self.axis == 1:
-            print('backoff AP')
+            print('backoff AP:',backoff,' steps')
             for x in range(backoff):
                 GPIO.output(self.direction, var_list.APback)
                 GPIO.output(self.step, 1)
@@ -109,7 +109,7 @@ class Steppercontrol:
                 GPIO.output(self.step, 0)
                 time.sleep(btwnsteps)
         elif self.axis == 2:
-            print('backoff ML')
+            print('backoff ML',backoff,' steps')
             for x in range(backoff):
                 GPIO.output(self.direction, var_list.MLleft)
                 GPIO.output(self.step, 1)
@@ -117,7 +117,7 @@ class Steppercontrol:
                 GPIO.output(self.step, 0)
                 time.sleep(btwnsteps)
         elif self.axis == 3:
-            print('backoff DV')
+            print('backoff DV',backoff,' steps')
             for x in range(backoff):
                 GPIO.output(self.direction, var_list.DVdown)
                 GPIO.output(self.step, 1)
@@ -161,9 +161,9 @@ class Steppercontrol:
 
 
     def PosRelAbsCalc(self):
-        print('doing calculations')
+        print('doing position calculation')
         if self.axis == 1:
-            print('AP')
+            print('AP calculation')
             var_list.APcurRELdist = round(((var_list.APsteps - var_list.APrelpos) * var_list.APstepdistance), 3)
             var_list.APcurABSdist = round((var_list.APsteps * var_list.APstepdistance), 3)
             # print(var_list.APcurRELdist)
@@ -174,7 +174,7 @@ class Steppercontrol:
             self.sendtoUI.updateAPLCD(var_list.APsteps, var_list.APcurABSdist, var_list.APcurRELdist)
 
         if self.axis == 2:
-            print('ML')
+            print('ML calculation')
             var_list.MLcurRELdist = round(
                 ((var_list.MLsteps - var_list.MLrelpos) * var_list.MLstepdistance * -1), 3)
             var_list.MLcurABSdist = round((var_list.MLsteps * var_list.MLstepdistance * -1), 3)
@@ -184,7 +184,7 @@ class Steppercontrol:
             self.sendtoUI.updateMLLCD(var_list.MLsteps, var_list.MLcurABSdist, var_list.MLcurRELdist)
 
         if self.axis == 3:
-            print('DV')
+            print('DV calculation')
             var_list.DVcurRELdist = round(
                 ((var_list.DVsteps - var_list.DVrelpos) * var_list.DVstepdistance * -1), 3)
             var_list.DVcurABSdist = round((var_list.DVsteps * var_list.DVstepdistance * -1), 3)

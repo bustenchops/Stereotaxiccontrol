@@ -275,7 +275,7 @@ class MainWindow(QMainWindow):
         MLcooord = self.MLmanualenter.toPlainText()
         DVcooord = self.DVmanualenter.toPlainText()
         if self.checkBox.isChecked():
-            print(f"I want to go to AP:{APcooord}, ML:{MLcooord}, DV:{DVcooord}")
+            print(f"Grad text to go to AP:{APcooord}, ML:{MLcooord}, DV:{DVcooord}")
             #self.gototargetnow = threadedcontrols(window)
             #threadpool.start(self.gototargetnow.movetoTargetList(APcooord,MLcooord,DVcooord))
             controlthread.movetoTargetList(APcooord,MLcooord,DVcooord)
@@ -340,9 +340,9 @@ class MainWindow(QMainWindow):
         #the plusdir and minusdir reflect the direction the arm moves when the steps advance
         print("AP start")
         var_list.APmove = Steppercontrol(var_list.enableAll,var_list.stepAP,var_list.directionAP,var_list.limitAP,1,var_list.APforward,var_list.APback, window)
-        print('AP fin, ML start')
+        print('AP finished, ML start')
         var_list.MLmove = Steppercontrol(var_list.enableAll,var_list.stepML,var_list.directionML,var_list.limitML,2,var_list.MLleft,var_list.MLright, window)
-        print('ML finish DV start')
+        print('ML finished, DV start')
         var_list.DVmove = Steppercontrol(var_list.enableAll,var_list.stepDV,var_list.directionDV,var_list.limitDV,3,var_list.DVdown,var_list.DVup, window)
         print('steppers are a go')
 
