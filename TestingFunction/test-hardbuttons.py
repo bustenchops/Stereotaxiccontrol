@@ -85,7 +85,6 @@ class mainprogram:
     #         newbuttonstate = self.getshiftregisterdata()
     #         print(newbuttonstate)
 #
-#
 # letsgo = mainprogram()
 # letsgo.intializethesystem_andrun()
 
