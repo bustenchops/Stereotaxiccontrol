@@ -63,9 +63,10 @@ class mainprogram:
     #MAIN CODE ################################################################################################
     def intializethesystem_andrun(self):
         while mainprogram.keepalive:
-            emerginput = GPIO.input(mainprogram.emergstop)
-            hardA = GPIO.input(mainprogram.misc_eventbuttonA)
-            hardB = GPIO.input(mainprogram.misc_eventbuttonB)
+            emerginput = str(GPIO.input(mainprogram.emergstop))
+            hardA = str(GPIO.input(mainprogram.misc_eventbuttonA))
+            hardB = str(GPIO.input(mainprogram.misc_eventbuttonB))
+
             print('emerg=' + emerginput + '  hardA=' + hardA + '  hardB=' + hardB)
 
 
