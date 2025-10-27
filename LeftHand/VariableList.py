@@ -29,37 +29,32 @@ class var_list:
     TOGGLEoff = 1
 
 # DEFINE NUMBER OF BUTTONS AND ORDER IN ARRAY
-    buttonarray = ['movefast', 'bregmahome', 'relativeML', 'relativeAP', 'moveslow', 'HomeToABSzero', 'recalibrate', 'miscbuttonA', 'miscbuttonB', 'FiberOffset', 'needleoffset', 'drilloffset',
-                    'relativeALLset', 'HomerelativeZero'
-                    ]
+    buttonarray = ['moveslow', 'needleoffset', 'drilloffset', 'HomeToABSzero', 'movefast', 'recalibrate', 'bregmahome',
+                   'relativeAP', 'HomerelativeZero', 'relativeALLset', 'FiberOffset', 'relativeML', 'relativeDV' ,
+                   'miscbuttonA', 'miscbuttonB']
     lastbuttonstate = [0 for x in range(len(buttonarray))]
 
 # BUTTON POSITION IN SHIFT REGISTER ARRAY
-    movefast = 1
-    bregmahome = 2
-    relativeML = 3
-    relativeAP = 4
-    moveslow = 5
-    homeABSzero = 6
-    recalibrate = 7
-    miscbuttonA = 8
-    miscbuttonB = 9
+    moveslow = 0
+    needleoff = 1
+    drilloff = 2
+    homeABSzero = 3
+    movefast = 4
+    recalibrate = 5
+    bregmahome = 6
+    relativeAP = 7
+    homeRELzero = 8
+    relativeALL = 9
     fiberoff = 10
-    needleoff = 11
-    drilloff = 12
-    relativeDV = 13
-    relativeALL = 14
-    homeRELzero = 15
-
-
-
-
-
+    relativeML = 11
+    relativeDV = 12
+    miscbuttonA = 13
+    miscbuttonB = 14
 
 #DEFINE EMERGENCY STOP and hard wired buttons
-    emergstop = 11
+    emergstop = 26
     misc_eventbuttonA = 10
-    misc_eventbuttonB = 26
+    misc_eventbuttonB = 11
 
 #DEFINE SHIFT REGISTER PINS
     latchpin = 18
