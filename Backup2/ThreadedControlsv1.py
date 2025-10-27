@@ -25,17 +25,17 @@ class threadedcontrols:
                 break
             self.offsetimport.append(line.strip())
         file.close()
-        var_list.DrillAPmm = float(self.offsetimport[0])
-        var_list.DrillMLmm = float(self.offsetimport[1])
-        var_list.DrillDVmm = float(self.offsetimport[2])
+        var_list.APDRILL = self.offsetimport[0]
+        var_list.MLDRILL = self.offsetimport[1]
+        var_list.DVDRILL = self.offsetimport[2]
 
-        var_list.NeedleAPmm = float(self.offsetimport[3])
-        var_list.NeedleMLmm = float(self.offsetimport[4])
-        var_list.NeedleDVmm = float(self.offsetimport[5])
+        var_list.APneedle = self.offsetimport[3]
+        var_list.MLneedle = self.offsetimport[4]
+        var_list.DVneedle = self.offsetimport[5]
 
-        var_list.FiberAPmm = float(self.offsetimport[6])
-        var_list.FiberMLmm = float(self.offsetimport[7])
-        var_list.FiberDVmm = float(self.offsetimport[8])
+        var_list.APfiber = self.offsetimport[6]
+        var_list.MLfiber = self.offsetimport[7]
+        var_list.DVfiber = self.offsetimport[8]
 
 
 # Shuts down steppers regardless of what they were doing direction - restart by re-zeroing

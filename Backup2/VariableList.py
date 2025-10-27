@@ -149,7 +149,6 @@ class var_list:
     DVdown = 1
 
     calibfilename = 'Calibration.txt'
-    offsetfilename = 'offsets.txt'
 
     lastenablestate = 1
     emergencystopflag = 0
