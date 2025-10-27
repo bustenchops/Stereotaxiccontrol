@@ -58,33 +58,39 @@ class mainprogram:
         self.quest = "none"
 
 
-    def getshiftregisterdata(self):
-        self.shiftvalues = []
-        #get number of buttons
-        x = len(mainprogram.buttonarray)
-        print("button array lenght=", x)
-        for k in range(x):
-            self.shiftvalues.append(0)
-        #LOAD DATA
-        GPIO.output(mainprogram.latchpin,GPIO.LOW)
-        time.sleep(0.001)
-        GPIO.output(mainprogram.latchpin,GPIO.HIGH)
-        #READ DATA
-        for i in range(x):
-            GPIO.output(mainprogram.clockpin,GPIO.LOW)
-            self.shiftvalues[i] = GPIO.input(mainprogram.datapin)
-            GPIO.output(mainprogram.clockpin, GPIO.HIGH)
-            time.sleep(0.001)
-        return self.shiftvalues
+    # def getshiftregisterdata(self):
+    #     self.shiftvalues = []
+    #     #get number of buttons
+    #     x = len(mainprogram.buttonarray)
+    #     print("button array lenght=", x)
+    #     for k in range(x):
+    #         self.shiftvalues.append(0)
+    #     #LOAD DATA
+    #     GPIO.output(mainprogram.latchpin,GPIO.LOW)
+    #     time.sleep(0.001)
+    #     GPIO.output(mainprogram.latchpin,GPIO.HIGH)
+    #     #READ DATA
+    #     for i in range(x):
+    #         GPIO.output(mainprogram.clockpin,GPIO.LOW)
+    #         self.shiftvalues[i] = GPIO.input(mainprogram.datapin)
+    #         GPIO.output(mainprogram.clockpin, GPIO.HIGH)
+    #         time.sleep(0.001)
+    #     return self.shiftvalues
 
     #MAIN CODE ################################################################################################
-    def intializethesystem_andrun(self):
-        while mainprogram.keepalive:
+    # def intializethesystem_andrun(self):
+    #     while mainprogram.keepalive:
+    #
+    #     #reading the buttons
+    #         newbuttonstate = self.getshiftregisterdata()
+    #         print(newbuttonstate)
+#
+#
+# letsgo = mainprogram()
+# letsgo.intializethesystem_andrun()
 
-        #reading the buttons
-            newbuttonstate = self.getshiftregisterdata()
-            print(newbuttonstate)
-
-
-letsgo = mainprogram()
-letsgo.intializethesystem_andrun()
+emerginput = GPIO.input(mainprogram.emergstop)
+hardA = GPIO.input(mainprogram.miscbuttonA)
+hardB = GPIO.input(mainprogram.miscbuttonB)
+while true:
+    print('emerg=' + emerginput + '  hardA=' + hardA + '  hardB=' + hardB)
