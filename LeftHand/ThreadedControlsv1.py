@@ -17,7 +17,7 @@ class threadedcontrols:
 
 #Import the offset values from file
         self.offsetimport = []
-        self.importfile_name = var_list.offsetfilename
+        self.importfile_name = 'offsets.txt'
         file = open(self.importfile_name, 'r')
         while True:
             line = file.readline()
