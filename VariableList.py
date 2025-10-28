@@ -29,9 +29,10 @@ class var_list:
     TOGGLEoff = 1
 
 # DEFINE NUMBER OF BUTTONS AND ORDER IN ARRAY
-    buttonarray = ['movefast', 'bregmahome', 'relativeML', 'relativeAP', 'moveslow', 'HomeToABSzero', 'recalibrate', 'miscbuttonA', 'miscbuttonB', 'FiberOffset', 'needleoffset', 'drilloffset',
-                    'relativeALLset', 'HomerelativeZero'
-                    ]
+    buttonarray = ['movefast', 'bregmahome', 'relativeML', 'relativeAP', 'moveslow', 'HomeToABSzero', 'recalibrate',
+                   'miscbuttonA', 'miscbuttonB', 'FiberOffset', 'needleoffset', 'drilloffset', 'relactiveDV'
+                   'relativeALLset', 'HomerelativeZero'
+                   ]
     lastbuttonstate = [0 for x in range(len(buttonarray))]
 
 # BUTTON POSITION IN SHIFT REGISTER ARRAY

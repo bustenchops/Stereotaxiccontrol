@@ -7,7 +7,7 @@ class mainprogram:
 
     # DEFINE NUMBER OF BUTTONS AND ORDER IN ARRAY
     buttonarray = ['movefast', 'bregmahome', 'relativeML', 'relativeAP', 'moveslow', 'HomeToABSzero', 'recalibrate',
-                   'miscbuttonA', 'miscbuttonB', 'FiberOffset', 'needleoffset', 'drilloffset',
+                   'miscbuttonA', 'miscbuttonB', 'FiberOffset', 'needleoffset', 'drilloffset', 'relactiveDV'
                    'relativeALLset', 'HomerelativeZero'
                    ]
     lastbuttonstate = [0 for x in range(len(buttonarray))]
@@ -86,10 +86,6 @@ class mainprogram:
         #reading the buttons
             newbuttonstate = self.getshiftregisterdata()
             print(newbuttonstate)
-            for x in newbuttonstate:
-                if x == 1:
-                    buttonitis = mainprogram.buttonarray[x]
-                    print('button for '+buttonitis+' is pressed')
 
 
 
