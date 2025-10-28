@@ -1,6 +1,5 @@
 import time
 import RPi.GPIO as GPIO
-
 from rotary_classv2 import RotaryEncoder
 
 class mainprogram:
@@ -22,28 +21,28 @@ class mainprogram:
     directionAP = 3
     stepAP = 4
 
-    directionMV = 17
-    stepMV = 27
+    directionML = 17
+    stepML = 27
 
     directionDV = 5
     stepDV = 6
 
     #DEFINE LIMIT SWITCH PINS
     limitAP = 22
-    limitMV = 13
+    limitML = 13
     limitDV = 19
 
     #OFFSETS FOR THE DRILL, Syringe, Needle (minus values is back, left or up)
     APDRILL = 0
-    MVDRILL = 0
+    MLDRILL = 0
     DVDRILL = -1333
 
     APfiber = 0
-    MVfiber = 0
+    MLfiber = 0
     DVfiber = 0
 
     APneedle = 0
-    MVneedle = 0
+    MLneedle = 0
     DVneedle = 0
     #DEFINE EMERGENCY STOP and hard wired buttons
     emergstop = 11
@@ -54,16 +53,16 @@ class mainprogram:
     #DEFINE ROTARY ENCODER PINS
     rotoA_AP = 25
     rotoB_AP =  8
-    rotoA_MV = 12
-    rotoB_MV = 16
+    rotoA_ML = 12
+    rotoB_ML = 16
     rotoA_DV = 20
     rotoB_DV = 21
 
     #DEFINE STEPPER DIRECTIONS
     APback = 1
     APforward = 0
-    MVleft = 0
-    MVright = 1
+    MLleft = 0
+    MLright = 1
     DVup = 0
     DVdown = 1
 
@@ -72,18 +71,17 @@ class mainprogram:
     def __init__(self):
         #INITIALIZE PINS
 
-        print('init hardwired buttons')
+        print('initialize hardwired buttons')
         GPIO.setup(mainprogram.emergstop, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.setup(mainprogram.misc_eventbuttonA, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.setup(mainprogram.misc_eventbuttonB, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        print('done')
 
-        #EMPTY variables to initialize
-        self.shiftvalues = []
         self.quest = "none"
 
         # INITIALIZE ENCODERS
  #       self.AProto = RotaryEncoder(buttonprogram.rotoA_AP, buttonprogram.rotoB_AP, buttonprogram.emergstop, Letsgonow.AP_event)
- #       self.MVroto = RotaryEncoder(buttonprogram.rotoA_MV, buttonprogram.rotoB_MV, buttonprogram.misc_eventbuttonA, Letsgonow.MV_event)
+ #       self.MLroto = RotaryEncoder(buttonprogram.rotoA_ML, buttonprogram.rotoB_ML, buttonprogram.misc_eventbuttonA, Letsgonow.ML_event)
  #       self.DVroto = RotaryEncoder(buttonprogram.rotoA_DV, buttonprogram.rotoB_DV, buttonprogram.misc_eventbuttonB, Letsgonow.DV_event)
 
 
@@ -94,18 +92,17 @@ class mainprogram:
         GPIO.setup(mainprogram.stepAP, GPIO.OUT, initial=0)
         GPIO.setup(mainprogram.directionAP, GPIO.OUT, initial=0)
         GPIO.setup(mainprogram.limitAP, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        print(mainprogram.limitAP)
-        testss = GPIO.input(mainprogram.limitAP)
-        print(testss)
+        print('setup AP stepper')
 
-        GPIO.setup(mainprogram.stepMV, GPIO.OUT, initial=0)
-        GPIO.setup(mainprogram.directionMV, GPIO.OUT, initial=0)
-        GPIO.setup(mainprogram.limitMV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(mainprogram.stepML, GPIO.OUT, initial=0)
+        GPIO.setup(mainprogram.directionML, GPIO.OUT, initial=0)
+        GPIO.setup(mainprogram.limitML, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        print('setup ML stepper')
 
         GPIO.setup(mainprogram.stepDV, GPIO.OUT, initial=0)
         GPIO.setup(mainprogram.directionDV, GPIO.OUT, initial=0)
         GPIO.setup(mainprogram.limitDV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-
+        print('setup DV stepper')
 
 
 
@@ -139,12 +136,12 @@ class mainprogram:
 
 
     #Event handling for the encoders and hard wired buttons each encoder
-    def MV_event(self, event):
+    def ML_event(self, event):
 
         if event == RotaryEncoder.CLOCKWISE:
-            print('MV clockwise')
+            print('ML clockwise')
         elif event == RotaryEncoder.ANTICLOCKWISE:
-            print('MV counterclock')
+            print('ML counterclock')
         elif event == RotaryEncoder.BUTTONDOWN:
             print("event 1st misc buttonclicked")
             return
@@ -170,12 +167,12 @@ class mainprogram:
     def executerrrr(self):
         quest=input('TEST limitswitches - any key to cont')
         stateAP = GPIO.input(mainprogram.limitAP)
-        stateMV = GPIO.input(mainprogram.limitMV)
+        stateML = GPIO.input(mainprogram.limitML)
         stateDV = GPIO.input(mainprogram.limitDV)
 
-        while GPIO.input(mainprogram.limitAP) == 1 or GPIO.input(mainprogram.limitMV) == 1:
+        while GPIO.input(mainprogram.limitAP) == 1 or GPIO.input(mainprogram.limitML) == 1:
             newAP = GPIO.input(mainprogram.limitAP)
-            newMV = GPIO.input(mainprogram.limitMV)
+            newML = GPIO.input(mainprogram.limitML)
             newDV = GPIO.input(mainprogram.limitDV)
 
             if newAP != stateAP:
@@ -185,13 +182,13 @@ class mainprogram:
                     print('AP limit reached:', GPIO.input(mainprogram.limitAP))
                 stateAP = newAP
 
-            if newMV != stateMV:
-                if GPIO.input(mainprogram.limitMV) == 0:
-                    print('MV limit reached', GPIO.input(mainprogram.limitMV))
-                if GPIO.input(mainprogram.limitMV) == 1:
-                    print('MV limit reached', GPIO.input(mainprogram.limitMV))
+            if newML != stateML:
+                if GPIO.input(mainprogram.limitML) == 0:
+                    print('ML limit reached', GPIO.input(mainprogram.limitML))
+                if GPIO.input(mainprogram.limitML) == 1:
+                    print('ML limit reached', GPIO.input(mainprogram.limitML))
 
-                stateMV = newMV
+                stateML = newML
 
             if newDV != stateDV:
                 if GPIO.input(mainprogram.limitDV) == 0:
@@ -233,38 +230,38 @@ class mainprogram:
                 print('step', count)
                 count += 1
 
-        quest = input('Test the MV stepper 1500 steps using direction left')
-        print('direction set to', mainprogram.MVleft)
+        quest = input('Test the ML stepper 1500 steps using direction left')
+        print('direction set to', mainprogram.MLleft)
         count = 1
         GPIO.output(mainprogram.enableAll, 0)
-        GPIO.output(mainprogram.directionMV, mainprogram.MVleft)
+        GPIO.output(mainprogram.directionML, mainprogram.MLleft)
 
         while count <= 400:
             print("start")
-            if GPIO.input(mainprogram.limitMV) == 1:
-                GPIO.output(mainprogram.stepMV, 1)
+            if GPIO.input(mainprogram.limitML) == 1:
+                GPIO.output(mainprogram.stepML, 1)
                 time.sleep(0.001)
-                GPIO.output(mainprogram.stepMV, 0)
+                GPIO.output(mainprogram.stepML, 0)
                 time.sleep(0.001)
                 print('step', count)
                 count += 1
 
-        quest = input('Test the MV stepper 1500 steps using direction right')
-        print('direction set to', mainprogram.MVright)
+        quest = input('Test the ML stepper 1500 steps using direction right')
+        print('direction set to', mainprogram.MLright)
         count = 1
         GPIO.output(mainprogram.enableAll, 0)
-        GPIO.output(mainprogram.directionMV, mainprogram.MVright)
+        GPIO.output(mainprogram.directionML, mainprogram.MLright)
 
         while count <= 400:
-            if GPIO.input(mainprogram.limitMV) == 1:
-                GPIO.output(mainprogram.stepMV, 1)
+            if GPIO.input(mainprogram.limitML) == 1:
+                GPIO.output(mainprogram.stepML, 1)
                 time.sleep(0.001)
-                GPIO.output(mainprogram.stepMV, 0)
+                GPIO.output(mainprogram.stepML, 0)
                 time.sleep(0.001)
                 print('step', count)
                 count += 1
 
-        quest = input('Test the MV stepper 1500 steps using direction up')
+        quest = input('Test the ML stepper 1500 steps using direction up')
         print('direction set to', mainprogram.DVup)
         count = 1
         GPIO.output(mainprogram.enableAll, 0)
@@ -296,7 +293,7 @@ class mainprogram:
                 count += 1
     def encoderinit(self):
         self.AProto = RotaryEncoder(mainprogram.rotoA_AP, mainprogram.rotoB_AP, mainprogram.emergstop,Letsgonow.AP_event)
-        self.MVroto = RotaryEncoder(mainprogram.rotoA_MV, mainprogram.rotoB_MV, mainprogram.misc_eventbuttonA,Letsgonow.MV_event)
+        self.MLroto = RotaryEncoder(mainprogram.rotoA_ML, mainprogram.rotoB_ML, mainprogram.misc_eventbuttonA,Letsgonow.ML_event)
         self.DVroto = RotaryEncoder(mainprogram.rotoA_DV, mainprogram.rotoB_DV, mainprogram.misc_eventbuttonB,Letsgonow.DV_event)
 
 #this is the executer
