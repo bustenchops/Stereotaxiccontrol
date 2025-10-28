@@ -5,27 +5,29 @@ class mainprogram:
     #Main while loop condition
     keepalive = True
 
-    #DEFINE NUMBER OF BUTTONS AND ORDER IN ARRAY
-    buttonarray = ['movefast','moveslow','buttontohome','relativeALL','relativeAP','relativeMV','relativeDV','buttonaction','miscbuttonC','miscbuttonD','miscbuttonE','zerobutton','calibratebutton','miscbuttonA','miscbuttonB']
-    lastbuttonstate = [len(buttonarray)]
+    # DEFINE NUMBER OF BUTTONS AND ORDER IN ARRAY
+    buttonarray = ['movefast', 'bregmahome', 'relativeML', 'relativeAP', 'moveslow', 'HomeToABSzero', 'recalibrate',
+                   'miscbuttonA', 'miscbuttonB', 'FiberOffset', 'needleoffset', 'drilloffset',
+                   'relativeALLset', 'HomerelativeZero'
+                   ]
+    lastbuttonstate = [0 for x in range(len(buttonarray))]
 
-    #BUTTON POSITION IN SHIFT REGISTER ARRAY
-        # 2 position switch (3 states 1/2 and all off)
-    movefast = 0
-    moveslow = 1
-    buttontohome = 2
-    relativeALL = 3
+    # BUTTON POSITION IN SHIFT REGISTER ARRAY
+    movefast = 1
+    bregmahome = 2
+    relativeML = 3
     relativeAP = 4
-    relativeMV = 5
-    relativeDV = 6
-    buttonaction = 7
-    miscbuttonC = 8
-    miscbuttonD = 9
-    miscbuttonE = 10
-    zerobutton = 11
-    calibratebutton = 12
-    miscbuttonA = 13
-    miscbuttonB = 14
+    moveslow = 5
+    homeABSzero = 6
+    recalibrate = 7
+    miscbuttonA = 8
+    miscbuttonB = 9
+    fiberoff = 10
+    needleoff = 11
+    drilloff = 12
+    relativeDV = 13
+    relativeALL = 14
+    homeRELzero = 15
 
 
     # setup GPIO
