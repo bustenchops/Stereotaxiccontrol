@@ -87,42 +87,37 @@ class mainprogram:
 
         #INITIALIZE STEPPERS
 
-
+        print('setup AP stepper')
         GPIO.setup(mainprogram.enableAll, GPIO.OUT, initial=1)
         GPIO.setup(mainprogram.stepAP, GPIO.OUT, initial=0)
         GPIO.setup(mainprogram.directionAP, GPIO.OUT, initial=0)
         GPIO.setup(mainprogram.limitAP, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        print('setup AP stepper')
+        print('done')
 
+        print('setup ML stepper')
         GPIO.setup(mainprogram.stepML, GPIO.OUT, initial=0)
         GPIO.setup(mainprogram.directionML, GPIO.OUT, initial=0)
         GPIO.setup(mainprogram.limitML, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        print('setup ML stepper')
+        print('done')
 
+        print('setup DV stepper')
         GPIO.setup(mainprogram.stepDV, GPIO.OUT, initial=0)
         GPIO.setup(mainprogram.directionDV, GPIO.OUT, initial=0)
         GPIO.setup(mainprogram.limitDV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        print('setup DV stepper')
+        print('done')
 
 
 
-    #Shuts down steppers regardless of what they were doing direction - restart by re-zeroing
+    #Shuts down steppers regardless of what they were doing - restart by re-zeroing
     def emergencystop(self):
         GPIO.output(mainprogram.enableAll, 1)
         print("!EMERGENCY STOP!")
         print("Re-Zero axis to enable movement again")
-# I dont think I need a doubt check on this and sending "event" was giving an error.
-#        if event == RotaryEncoder.BUTTONDOWN:
-#            print("Re-Zero axis to enable movement again")
-#            GPIO.output(buttonprogram.enableAll,0)
-#        else:
-#            return
         return
 
 
     #Event handling for the encoders and hard wired buttons each encoder
     def AP_event(self, event):
-
         if event == RotaryEncoder.CLOCKWISE:
             print('AP clockwise')
         elif event == RotaryEncoder.ANTICLOCKWISE:
@@ -137,7 +132,6 @@ class mainprogram:
 
     #Event handling for the encoders and hard wired buttons each encoder
     def ML_event(self, event):
-
         if event == RotaryEncoder.CLOCKWISE:
             print('ML clockwise')
         elif event == RotaryEncoder.ANTICLOCKWISE:
@@ -152,7 +146,6 @@ class mainprogram:
 
     #Event handling for the encoders and hard wired buttons each encoder
     def DV_event(self, event):
-
         if event == RotaryEncoder.CLOCKWISE:
             print('DV clockwise')
         elif event == RotaryEncoder.ANTICLOCKWISE:
@@ -187,7 +180,6 @@ class mainprogram:
                     print('ML limit reached', GPIO.input(mainprogram.limitML))
                 if GPIO.input(mainprogram.limitML) == 1:
                     print('ML limit reached', GPIO.input(mainprogram.limitML))
-
                 stateML = newML
 
             if newDV != stateDV:
@@ -197,7 +189,7 @@ class mainprogram:
                     print('DV limit reached', GPIO.input(mainprogram.limitDV))
                 stateDV = newDV
 
-        quest = input('Test the AP stepper 1500 steps using direction forward')
+        quest = input('Test the AP stepper 400 steps using direction forward')
         print('direction set to', mainprogram.APforward)
         count = 1
         GPIO.output(mainprogram.enableAll, 0)
@@ -214,7 +206,7 @@ class mainprogram:
                 print('step', count)
                 count += 1
 
-        quest = input('Test the AP stepper 1500 steps using direction back')
+        quest = input('Test the AP stepper 400 steps using direction back')
         print('direction set to', mainprogram.APback)
         count = 1
         GPIO.output(mainprogram.enableAll, 0)
@@ -230,7 +222,7 @@ class mainprogram:
                 print('step', count)
                 count += 1
 
-        quest = input('Test the ML stepper 1500 steps using direction left')
+        quest = input('Test the ML stepper 400 steps using direction left')
         print('direction set to', mainprogram.MLleft)
         count = 1
         GPIO.output(mainprogram.enableAll, 0)
@@ -246,7 +238,7 @@ class mainprogram:
                 print('step', count)
                 count += 1
 
-        quest = input('Test the ML stepper 1500 steps using direction right')
+        quest = input('Test the ML stepper 400 steps using direction right')
         print('direction set to', mainprogram.MLright)
         count = 1
         GPIO.output(mainprogram.enableAll, 0)
@@ -261,7 +253,7 @@ class mainprogram:
                 print('step', count)
                 count += 1
 
-        quest = input('Test the ML stepper 1500 steps using direction up')
+        quest = input('Test the ML stepper 400 steps using direction up')
         print('direction set to', mainprogram.DVup)
         count = 1
         GPIO.output(mainprogram.enableAll, 0)
@@ -277,7 +269,7 @@ class mainprogram:
                 print('step', count)
                 count += 1
 
-        quest = input('Test the DV stepper 1500 steps using direction down')
+        quest = input('Test the DV stepper 400 steps using direction down')
         print('direction set to', mainprogram.DVdown)
         count = 1
         GPIO.output(mainprogram.enableAll, 0)
@@ -291,17 +283,17 @@ class mainprogram:
                 time.sleep(0.001)
                 print('step', count)
                 count += 1
+
     def encoderinit(self):
+        print('initialize encoders')
         self.AProto = RotaryEncoder(mainprogram.rotoA_AP, mainprogram.rotoB_AP, mainprogram.emergstop,Letsgonow.AP_event)
         self.MLroto = RotaryEncoder(mainprogram.rotoA_ML, mainprogram.rotoB_ML, mainprogram.misc_eventbuttonA,Letsgonow.ML_event)
         self.DVroto = RotaryEncoder(mainprogram.rotoA_DV, mainprogram.rotoB_DV, mainprogram.misc_eventbuttonB,Letsgonow.DV_event)
+        print('done')
 
-#this is the executer
+
 Letsgonow = mainprogram()
 #  RotaryEncoder.receive_instance(Letsgonow)
 Letsgonow.encoderinit()
-
-# INITIALIZE ENCODERS
-
 Letsgonow.executerrrr()
 
