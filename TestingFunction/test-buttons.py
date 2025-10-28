@@ -7,7 +7,7 @@ class mainprogram:
 
     # DEFINE NUMBER OF BUTTONS AND ORDER IN ARRAY
     buttonarray = ['movefast', 'bregmahome', 'relativeML', 'relativeAP', 'moveslow', 'HomeToABSzero', 'recalibrate',
-                   'miscbuttonA', 'miscbuttonB', 'FiberOffset', 'needleoffset', 'drilloffset', 'relactiveDV', 'relativeALLset', 'HomerelativeZero'
+                   'miscbuttonA', 'presetworking', 'FiberOffset', 'needleoffset', 'drilloffset', 'relactiveDV', 'relativeALLset', 'HomerelativeZero'
                    ]
     lastbuttonstate = [0 for x in range(len(buttonarray))]
 
