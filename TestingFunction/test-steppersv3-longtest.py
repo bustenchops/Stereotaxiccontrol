@@ -50,13 +50,13 @@ class mainprogram:
     misc_eventbuttonB = 26
 
 
-    #DEFINE ROTARY ENCODER PINS
+    # DEFINE ROTARY ENCODER PINS
     rotoA_AP = 25
-    rotoB_AP =  8
-    rotoA_ML = 12
-    rotoB_ML = 16
-    rotoA_DV = 20
-    rotoB_DV = 21
+    rotoB_AP = 8
+    rotoA_ML = 20
+    rotoB_ML = 21
+    rotoA_DV = 16
+    rotoB_DV = 12
 
     #DEFINE STEPPER DIRECTIONS
     APback = 1

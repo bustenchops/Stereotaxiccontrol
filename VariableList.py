@@ -103,7 +103,7 @@ class var_list:
 
 #FROM Threadedcontrol class *********************************************************
 
-#Variables that may need tweaking
+#Variables that may need tweaking (Quarter step)
     calibrationsteps = 4000
     backoff = 200
     APadvance = 8500
@@ -115,9 +115,24 @@ class var_list:
     DVworking = 3990
 
     DVup_bregramhome = 670 #about 0.5cm
-
 # how many steps DV goes up and then back when changing the offsets to avoid scrapping the skull
     DVup_OffsetSafety = 670 #about 0.5cm
+
+#Variables that may need tweaking (Eighth step)
+    # calibrationsteps = 8000
+    # backoff = 400
+    # APadvance = 1700
+    # DVadvance = 800
+    # MLadvance = 800
+    #
+    # APworking = 12800
+    # MLworking = 12140
+    # DVworking = 7980
+    #
+    # DVup_bregramhome = 1340 #about 0.5cm
+# how many steps DV goes up and then back when changing the offsets to avoid scrapping the skull
+#     DVup_OffsetSafety = 1340 #about 0.5cm
+
 
 
 #DEFINE STEPPER CONTROL PINS
@@ -140,10 +155,10 @@ class var_list:
 #DEFINE ROTARY ENCODER PINS
     rotoA_AP = 25
     rotoB_AP =  8
-    rotoA_ML = 12
-    rotoB_ML = 16
-    rotoA_DV = 20
-    rotoB_DV = 21
+    rotoA_ML = 20
+    rotoB_ML = 21
+    rotoA_DV = 16
+    rotoB_DV = 12
 
 #DEFINE STEPPER DIRECTIONS
     APback = 1
