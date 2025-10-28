@@ -159,6 +159,7 @@ class mainprogram:
 
     def executerrrr(self):
         quest=input('TEST limitswitches - any key to cont')
+        print('starting limitswitch test')
         stateAP = GPIO.input(mainprogram.limitAP)
         stateML = GPIO.input(mainprogram.limitML)
         stateDV = GPIO.input(mainprogram.limitDV)
