@@ -84,6 +84,11 @@ class mainprogram:
         #reading the buttons
             newbuttonstate = self.getshiftregisterdata()
             print(newbuttonstate)
+            for x in newbuttonstate:
+                if x == 1:
+                    buttonitis = mainprogram.buttonarray[x]
+                    print('button for '+buttonitis+' is pressed')
+
 
 
 letsgo = mainprogram()
