@@ -72,7 +72,7 @@ class mainprogram:
     def __init__(self):
         #INITIALIZE PINS
 
-        print('what the fuck holy shit')
+        print('init hardwired buttons')
         GPIO.setup(mainprogram.emergstop, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.setup(mainprogram.misc_eventbuttonA, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.setup(mainprogram.misc_eventbuttonB, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -106,41 +106,6 @@ class mainprogram:
         GPIO.setup(mainprogram.directionDV, GPIO.OUT, initial=0)
         GPIO.setup(mainprogram.limitDV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-#Import the offsets
-        self.offsetimport = []
-        self.importfile_name = 'offsets.txt'
-
-        file = open(self.importfile_name, 'r')
-
-        while True:
-            line = file.readline()
-            if not line:
-                break
-            self.offsetimport.append(line.strip())
-
-        file.close()
-        mainprogram.APDRILL = self.offsetimport[0]
-        mainprogram.MVDRILL = self.offsetimport[1]
-        mainprogram.DVDRILL = self.offsetimport[2]
-
-        mainprogram.APneedle = self.offsetimport[3]
-        mainprogram.MVneedle = self.offsetimport[4]
-        mainprogram.DVneedle = self.offsetimport[5]
-
-        mainprogram.APfiber = self.offsetimport[6]
-        mainprogram.MVfiber = self.offsetimport[7]
-        mainprogram.DVfiber = self.offsetimport[8]
-
-        print('offset values')
-        print(mainprogram.APDRILL)
-        print(mainprogram.MVDRILL)
-        print(mainprogram.DVDRILL)
-        print(mainprogram.APneedle)
-        print(mainprogram.MVneedle)
-        print(mainprogram.MVneedle)
-        print(mainprogram.APfiber)
-        print(mainprogram.MVfiber)
-        print(mainprogram.DVfiber)
 
 
 
