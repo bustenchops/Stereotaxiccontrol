@@ -255,7 +255,7 @@ class mainprogram:
                 print('step', count)
                 count += 1
 
-        quest = input('Test the ML stepper 400 steps using direction up')
+        quest = input('Test the DV stepper 400 steps using direction up')
         print('direction set to', mainprogram.DVup)
         count = 1
         GPIO.output(mainprogram.enableAll, 0)
