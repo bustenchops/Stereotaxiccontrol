@@ -35,26 +35,21 @@ class var_list:
     lastbuttonstate = [0 for x in range(len(buttonarray))]
 
 # BUTTON POSITION IN SHIFT REGISTER ARRAY
-    movefast = 1
-    bregmahome = 2
-    relativeML = 3
-    relativeAP = 4
-    moveslow = 5
-    homeABSzero = 6
-    recalibrate = 7
-    miscbuttonA = 8
-    miscbuttonB = 9
-    fiberoff = 10
-    needleoff = 11
-    drilloff = 12
-    relativeDV = 13
-    relativeALL = 14
-    homeRELzero = 15
-
-
-
-
-
+    movefast = 0
+    bregmahome = 1
+    relativeML = 2
+    relativeAP = 3
+    moveslow = 4
+    homeABSzero = 5
+    recalibrate = 6
+    miscbuttonA = 7
+    miscbuttonB = 8
+    fiberoff = 9
+    needleoff = 10
+    drilloff = 11
+    relativeDV = 12
+    relativeALL = 13
+    homeRELzero = 14
 
 #DEFINE EMERGENCY STOP and hard wired buttons
     emergstop = 11
@@ -103,7 +98,7 @@ class var_list:
 
 #FROM Threadedcontrol class *********************************************************
 
-#Variables that may need tweaking (Quarter step)
+#Variables that may need tweaking
     calibrationsteps = 4000
     backoff = 200
     APadvance = 8500
@@ -115,24 +110,9 @@ class var_list:
     DVworking = 3990
 
     DVup_bregramhome = 670 #about 0.5cm
+
 # how many steps DV goes up and then back when changing the offsets to avoid scrapping the skull
     DVup_OffsetSafety = 670 #about 0.5cm
-
-#Variables that may need tweaking (Eighth step)
-    # calibrationsteps = 8000
-    # backoff = 400
-    # APadvance = 1700
-    # DVadvance = 800
-    # MLadvance = 800
-    #
-    # APworking = 12800
-    # MLworking = 12140
-    # DVworking = 7980
-    #
-    # DVup_bregramhome = 1340 #about 0.5cm
-# how many steps DV goes up and then back when changing the offsets to avoid scrapping the skull
-#     DVup_OffsetSafety = 1340 #about 0.5cm
-
 
 
 #DEFINE STEPPER CONTROL PINS
