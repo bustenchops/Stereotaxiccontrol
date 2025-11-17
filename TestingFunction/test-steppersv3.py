@@ -44,13 +44,13 @@ class mainprogram:
     APneedle = 0
     MLneedle = 0
     DVneedle = 0
-    #DEFINE EMERGENCY STOP and hard wired buttons
+    #DEFINE EMERGENCY STOP and hard wired buttons  (NOTE:  may need to change to match actual)
     emergstop = 11
     misc_eventbuttonA = 10
     misc_eventbuttonB = 26
 
 
-    #DEFINE ROTARY ENCODER PINS
+    #DEFINE ROTARY ENCODER PINS (NOTE:  may need to change to match actual)
     rotoA_AP = 25
     rotoB_AP =  8
     rotoA_ML = 12
