@@ -1,7 +1,7 @@
 import time
 import RPi.GPIO as GPIO
 
-from StepperControlv1 import StepperSetup
+from RightHand.StepperControlv1 import StepperSetup
 from rotary_classv2 import RotaryEncoder
 
 class mainprogram:
