@@ -143,8 +143,8 @@ class var_list:
 #DEFINE STEPPER DIRECTIONS
     APback = 0
     APforward = 1
-    MLleft = 0
-    MLright = 1
+    MLleft = 1
+    MLright = 0
     DVup = 0
     DVdown = 1
 
