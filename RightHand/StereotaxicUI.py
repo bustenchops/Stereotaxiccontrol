@@ -365,7 +365,7 @@ controlthread = threadedcontrols(window)
 #Start Threads
 threadpool = QThreadPool()
 threadpool.start(mainbuttonthread.runbuttonthread)
-threadpool.start(controlthread.runcontrolthread)
+#threadpool.start(controlthread.runcontrolthread)
 
 window.show()
 
