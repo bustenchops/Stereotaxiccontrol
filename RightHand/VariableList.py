@@ -140,8 +140,8 @@ class var_list:
     rotoA_DV = 16
     rotoB_DV = 12
 
-#DEFINE STEPPER DIRECTIONS.
-    APback = 1
+#DEFINE STEPPER DIRECTIONS
+    APback = 0
     APforward = 1
     MLleft = 0
     MLright = 1
