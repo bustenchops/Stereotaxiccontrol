@@ -191,13 +191,13 @@ class mainprogram:
                     print('DV limit reached', GPIO.input(mainprogram.limitDV))
                 stateDV = newDV
 
-        quest = input('Test the AP stepper 400 steps using direction forward')
+        quest = input('Test the AP stepper 800 steps using direction forward')
         print('direction set to', mainprogram.APforward)
         count = 1
         GPIO.output(mainprogram.enableAll, 0)
 #        GPIO.output(buttonprogram.directionAP, buttonprogram.APforward)
 
-        while count <= 400:
+        while count <= 800:
             print("start")
             if GPIO.input(mainprogram.limitAP) == 1:
                 GPIO.output(mainprogram.directionAP, mainprogram.APforward)
@@ -208,13 +208,13 @@ class mainprogram:
                 print('step', count)
                 count += 1
 
-        quest = input('Test the AP stepper 400 steps using direction back')
+        quest = input('Test the AP stepper 800 steps using direction back')
         print('direction set to', mainprogram.APback)
         count = 1
         GPIO.output(mainprogram.enableAll, 0)
 
 
-        while count <= 400:
+        while count <= 800:
             if GPIO.input(mainprogram.limitAP) == 1:
                 GPIO.output(mainprogram.directionAP, mainprogram.APback)
                 GPIO.output(mainprogram.stepAP, 1)
@@ -224,13 +224,13 @@ class mainprogram:
                 print('step', count)
                 count += 1
 
-        quest = input('Test the ML stepper 400 steps using direction left')
+        quest = input('Test the ML stepper 800 steps using direction left')
         print('direction set to', mainprogram.MLleft)
         count = 1
         GPIO.output(mainprogram.enableAll, 0)
         GPIO.output(mainprogram.directionML, mainprogram.MLleft)
 
-        while count <= 400:
+        while count <= 800:
             print("start")
             if GPIO.input(mainprogram.limitML) == 1:
                 GPIO.output(mainprogram.stepML, 1)
@@ -240,13 +240,13 @@ class mainprogram:
                 print('step', count)
                 count += 1
 
-        quest = input('Test the ML stepper 400 steps using direction right')
+        quest = input('Test the ML stepper 800 steps using direction right')
         print('direction set to', mainprogram.MLright)
         count = 1
         GPIO.output(mainprogram.enableAll, 0)
         GPIO.output(mainprogram.directionML, mainprogram.MLright)
 
-        while count <= 400:
+        while count <= 800:
             if GPIO.input(mainprogram.limitML) == 1:
                 GPIO.output(mainprogram.stepML, 1)
                 time.sleep(0.001)
@@ -255,13 +255,13 @@ class mainprogram:
                 print('step', count)
                 count += 1
 
-        quest = input('Test the DV stepper 400 steps using direction up')
+        quest = input('Test the DV stepper 800 steps using direction up')
         print('direction set to', mainprogram.DVup)
         count = 1
         GPIO.output(mainprogram.enableAll, 0)
         GPIO.output(mainprogram.directionDV, mainprogram.DVup)
 
-        while count <= 400:
+        while count <= 800:
             print("start")
             if GPIO.input(mainprogram.limitDV) == 1:
                 GPIO.output(mainprogram.stepDV, 1)
@@ -271,13 +271,13 @@ class mainprogram:
                 print('step', count)
                 count += 1
 
-        quest = input('Test the DV stepper 400 steps using direction down')
+        quest = input('Test the DV stepper 800 steps using direction down')
         print('direction set to', mainprogram.DVdown)
         count = 1
         GPIO.output(mainprogram.enableAll, 0)
         GPIO.output(mainprogram.directionDV, mainprogram.DVdown)
 
-        while count <= 400:
+        while count <= 800:
             if GPIO.input(mainprogram.limitDV) == 1:
                 GPIO.output(mainprogram.stepDV, 1)
                 time.sleep(0.001)
