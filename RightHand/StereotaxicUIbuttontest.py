@@ -336,6 +336,7 @@ class MainWindow(QMainWindow):
 
 #INITIALIZE STEPPERS
     def initializesteppers(self):
+        print('StereotaxicUI file')
         print('steppers initialize')
         #the plusdir and minusdir reflect the direction the arm moves when the steps advance
         print("AP start")
