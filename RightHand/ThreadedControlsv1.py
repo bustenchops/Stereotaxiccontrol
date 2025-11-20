@@ -365,13 +365,17 @@ class threadedcontrols:
         #self.quest = self.get_user_input('MESSAGE:','Initialization Process ... ENTER to continue')
         self.quest = self.get_user_input('MESSAGE:','CAUTION...Remove all attachments from frame arms! ENTER to continue.')
 
+        print('remove stop flag')
         var_list.emergencystopflag = 0
+        print('enable steppers for calibration')
         GPIO.output(var_list.enableAll, 0)
 #Zero all steppers
+        print('send zero command')
         self.zerosteppers(1,var_list.backoff, var_list.btnSteps)
         self.zerosteppers(2,var_list.backoff, var_list.btnSteps)
         self.zerosteppers(3, var_list.backoff, var_list.btnSteps)
 
+        print('import calibration file command')
         self.importcalibrationfile(var_list.calibfilename)
 # calibrate steppers if needed
         tempAP = round(var_list.APstepdistance, 5)
