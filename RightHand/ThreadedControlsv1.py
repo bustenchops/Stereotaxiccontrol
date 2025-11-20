@@ -392,6 +392,8 @@ class threadedcontrols:
             self.zerosteppers(2, var_list.backoff, var_list.btnSteps)
             self.zerosteppers(3, var_list.backoff, var_list.btnSteps)
 
+        var_list.engagebutton = 1
+
     def runcontrolthread(self):
 # INITIALIZE ENCODERS
         print('Control thread started')
