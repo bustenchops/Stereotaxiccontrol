@@ -6,7 +6,7 @@ from PySide6.QtWidgets import (QApplication, QFrame, QLCDNumber, QMainWindow, QM
                                QWidget, QLabel, QPlainTextEdit, QCheckBox, QPushButton, QListWidget,QFileDialog)
 
 from StepperControlv1 import Steppercontrol
-from Buttonclassv1 import buttonprogram
+from Buttonclassblank import buttonprogram
 from ThreadedControlsv1 import threadedcontrols
 from VariableList import var_list
 
