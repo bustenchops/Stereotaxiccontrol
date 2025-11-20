@@ -44,73 +44,74 @@ class buttonprogram:
 
                 print("button ", butarr[i], " state change", lastbut[i], ' to ', newbut[i])
 
-                #button to home to ABS zero
-                if lastbut[var_list.homeABSzero] == 1:
-                    print('HOME to ABS Zero')
-                    self.hometoABSzero()
+                if var_list.engagebutton == 1:
+                    #button to home to ABS zero
+                    if lastbut[var_list.homeABSzero] == 1:
+                        print('HOME to ABS Zero')
+                        self.hometoABSzero()
 
-                #set relative zero for ALL
-                if lastbut[var_list.relativeALL] == 1:
-                    print('set relative positions for all three')
-                    self.setrelforall()
-                        # and then update LCDS
+                    #set relative zero for ALL
+                    if lastbut[var_list.relativeALL] == 1:
+                        print('set relative positions for all three')
+                        self.setrelforall()
+                            # and then update LCDS
 
-                #set only AP relative zero
-                if lastbut[var_list.relativeAP] == 1:
-                    print('set relative AP')
-                    self.setrelforAP()
+                    #set only AP relative zero
+                    if lastbut[var_list.relativeAP] == 1:
+                        print('set relative AP')
+                        self.setrelforAP()
 
-                # set only ML relative zero
-                if lastbut[var_list.relativeML] == 1:
-                    print('set relative ML')
-                    self.setrelforML()
+                    # set only ML relative zero
+                    if lastbut[var_list.relativeML] == 1:
+                        print('set relative ML')
+                        self.setrelforML()
 
-                # set only DV relative zero
-                if lastbut[var_list.relativeDV] == 1:
-                    print('set relative DV')
-                    self.setrelforDV()
+                    # set only DV relative zero
+                    if lastbut[var_list.relativeDV] == 1:
+                        print('set relative DV')
+                        self.setrelforDV()
 
-                #button action - Home to Rel zero for AP and ML BUT DV goes all up
-                if lastbut[var_list.homeRELzero] == 1:
-                    print('DV up AP and ML homed to rel')
-                    self.upDVrelhomeAP_ML()
+                    #button action - Home to Rel zero for AP and ML BUT DV goes all up
+                    if lastbut[var_list.homeRELzero] == 1:
+                        print('DV up AP and ML homed to rel')
+                        self.upDVrelhomeAP_ML()
 
-                #miscbuttonC - DRILL to relative zero for AP and ML - DV up 0.5cm but still sets the relative pos
-                if lastbut[var_list.drilloff] == 1:
-                    print('Drill offset start thread')
-                    self.drillmovetooffset()
+                    #miscbuttonC - DRILL to relative zero for AP and ML - DV up 0.5cm but still sets the relative pos
+                    if lastbut[var_list.drilloff] == 1:
+                        print('Drill offset start thread')
+                        self.drillmovetooffset()
 
-                #miscbuttonD - needle to relative zero for AP and ML - DV up 0.5cm but still sets the relative pos
-                if lastbut[var_list.needleoff] == 1:
-                    print('Needle offset start thread')
-                    self.needlemovetooffset()
+                    #miscbuttonD - needle to relative zero for AP and ML - DV up 0.5cm but still sets the relative pos
+                    if lastbut[var_list.needleoff] == 1:
+                        print('Needle offset start thread')
+                        self.needlemovetooffset()
 
-                #miscbuttonE - fiber to relative zero for AP and ML - DV up 0.5cm but still sets the relative pos
-                if lastbut[var_list.fiberoff] == 1:
-                    print('Fiber offset start thread')
-                    self.fibermovetooffset()
+                    #miscbuttonE - fiber to relative zero for AP and ML - DV up 0.5cm but still sets the relative pos
+                    if lastbut[var_list.fiberoff] == 1:
+                        print('Fiber offset start thread')
+                        self.fibermovetooffset()
 
-                #home to bregma (relative) moves DV up by value in variable list, positions AP and ML to relative home
-                if lastbut[var_list.bregmahome] == 1:
-                    print("Home to Bregma (DV up buy set value)")
-                    self.bregmahome()
+                    #home to bregma (relative) moves DV up by value in variable list, positions AP and ML to relative home
+                    if lastbut[var_list.bregmahome] == 1:
+                        print("Home to Bregma (DV up buy set value)")
+                        self.bregmahome()
 
-                #re-calibrate button
-                if lastbut[var_list.recalibrate] == 1:
-                    print("Re-Zero the steppers")
-                    self.sendtoUI.uitest()
-                    self.sendtoUI.recalibrateaxis()
+                    #re-calibrate button
+                    if lastbut[var_list.recalibrate] == 1:
+                        print("Re-Zero the steppers")
+                        self.sendtoUI.uitest()
+                        self.sendtoUI.recalibrateaxis()
 
-                #miscbuttonA - unused
-                if lastbut[var_list.miscbuttonA] == 1:
-                    print('misc Button A')
-                    self.sendtoUI.uitest()
+                    #miscbuttonA - unused
+                    if lastbut[var_list.miscbuttonA] == 1:
+                        print('misc Button A')
+                        self.sendtoUI.uitest()
 
 
-                #miscbuttonB - unused
-                if lastbut[var_list.miscbuttonB] == 1:
-                    print('send to drill working (AP,ML and DV advance')
-                    self.sendtoworking()
+                    #miscbuttonB - unused
+                    if lastbut[var_list.miscbuttonB] == 1:
+                        print('send to drill working (AP,ML and DV advance')
+                        self.sendtoworking()
 
 
                 lastbut[i] = newbut[i]
@@ -139,6 +140,16 @@ class buttonprogram:
         return lastbut
 
 #Button executes
+    def endisstep(self):
+        if var_list.lastenablestate == 1:
+            GPIO.output(var_list.enableAll, 0)
+            var_list.lastenablestate = 0
+            print('steppers ENABLED manually')
+        else:
+            GPIO.output(var_list.enableAll, 1)
+            var_list.lastenablestate = 1
+            print('steppers DISABLED manually')
+
 
     def setrelforall(self):
         print('set relative for ALL - fromButtonthread')
@@ -520,7 +531,7 @@ class buttonprogram:
 
     #MAIN CODE ################################################################################################
     def runbuttonthread(self):
-
+        print('Button thread started')
         while var_list.keepalive:
         #reading the buttons
             newbuttonstate = self.getshiftregisterdata()

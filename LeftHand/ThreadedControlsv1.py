@@ -365,13 +365,17 @@ class threadedcontrols:
         #self.quest = self.get_user_input('MESSAGE:','Initialization Process ... ENTER to continue')
         self.quest = self.get_user_input('MESSAGE:','CAUTION...Remove all attachments from frame arms! ENTER to continue.')
 
+        print('remove stop flag')
         var_list.emergencystopflag = 0
+        print('enable steppers for calibration')
         GPIO.output(var_list.enableAll, 0)
 #Zero all steppers
+        print('send zero command')
         self.zerosteppers(1,var_list.backoff, var_list.btnSteps)
         self.zerosteppers(2,var_list.backoff, var_list.btnSteps)
         self.zerosteppers(3, var_list.backoff, var_list.btnSteps)
 
+        print('import calibration file command')
         self.importcalibrationfile(var_list.calibfilename)
 # calibrate steppers if needed
         tempAP = round(var_list.APstepdistance, 5)
@@ -387,9 +391,17 @@ class threadedcontrols:
             self.zerosteppers(1, var_list.backoff, var_list.btnSteps)
             self.zerosteppers(2, var_list.backoff, var_list.btnSteps)
             self.zerosteppers(3, var_list.backoff, var_list.btnSteps)
+        calibyesno = self.get_user_input('MESSAGE:',
+                                         'Did zeroing and/or calibration complete sucessfully? (y/n)')
+        if calibyesno == "y":
+            print('BUTTONS ENAGED')
+            var_list.engagebutton = 1
+        else:
+            self.calibratethings()
 
     def runcontrolthread(self):
 # INITIALIZE ENCODERS
+        print('Control thread started')
         print('encoders init')
         self.AProto = RotaryEncoder(var_list.rotoA_AP, var_list.rotoB_AP, var_list.emergstop, self.AP_event)
         self.MLroto = RotaryEncoder(var_list.rotoA_ML, var_list.rotoB_ML, var_list.misc_eventbuttonA, self.ML_event)
