@@ -115,7 +115,7 @@ class buttonprogram:
                 #miscbuttonA - unused
                 if lastbut[var_list.miscbuttonA] == 1:
                     if newbut[i] > lastbut[i]:
-                        print('enable/diable steppers')
+                        print('enable/disable steppers')
                         #self.endisstep()
                         self.sendtoUI.uitest()
 
