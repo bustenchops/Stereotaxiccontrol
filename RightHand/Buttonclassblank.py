@@ -39,7 +39,6 @@ class buttonprogram:
         y = len(newbut)
         if x != y:
             print("Button Array detected state change")
-
         for i in range(x):
             if lastbut[i] != newbut[i]:
 
