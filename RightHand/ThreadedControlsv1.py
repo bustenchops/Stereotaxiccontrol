@@ -391,9 +391,13 @@ class threadedcontrols:
             self.zerosteppers(1, var_list.backoff, var_list.btnSteps)
             self.zerosteppers(2, var_list.backoff, var_list.btnSteps)
             self.zerosteppers(3, var_list.backoff, var_list.btnSteps)
-
-        print('BUTTONS ENAGED')
-        var_list.engagebutton = 1
+        calibyesno = self.get_user_input('MESSAGE:',
+                                         'Did zeroing and/or calibration complete sucessfully? (y/n)')
+        if calibyesno == "y":
+            print('BUTTONS ENAGED')
+            var_list.engagebutton = 1
+        else:
+            self.calibratethings()
 
     def runcontrolthread(self):
 # INITIALIZE ENCODERS
