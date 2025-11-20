@@ -148,7 +148,7 @@ class var_list:
     DVup = 0
     DVdown = 1
 
-    calibfilename = 'Calibration.txt'
+    calibfilename = 'CalibrationRH.txt'
 
     lastenablestate = 1
     emergencystopflag = 0
