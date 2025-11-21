@@ -134,7 +134,7 @@ class threadedcontrols:
         elif axis == 2:
             print('ML zeroing')
             while GPIO.input(var_list.limitML):
-                var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, btwnsteps)
+                var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, btwnsteps)
                 if GPIO.input(var_list.limitML) != True:
                     print('ML limit triggered')
                     break
@@ -242,7 +242,7 @@ class threadedcontrols:
                 self.MLinput = self.get_user_input('INPUT:', 'Enter the ML starting position in millimeters.')
                 for x in range(calibrationsteps):
                     if 0 <= var_list.MLsteps < 6000:
-                        var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, btwnSteps)
+                        var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, btwnSteps)
                         var_list.MLmove.PosRelAbsCalc()
                 self.MLinputend = self.get_user_input('INPUT:', 'Enter the ML final position in millimeters.')
                 flMLinput = float(self.MLinput)
