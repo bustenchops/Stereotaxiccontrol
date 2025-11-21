@@ -176,8 +176,8 @@ class Steppercontrol:
         if self.axis == 2:
             print('ML calculation')
             var_list.MLcurRELdist = round(
-                ((var_list.MLsteps - var_list.MLrelpos) * var_list.MLstepdistance * -1), 3)
-            var_list.MLcurABSdist = round((var_list.MLsteps * var_list.MLstepdistance * -1), 3)
+                ((var_list.MLsteps - var_list.MLrelpos) * var_list.MLstepdistance), 3)
+            var_list.MLcurABSdist = round((var_list.MLsteps * var_list.MLstepdistance), 3)
             # self.sendtoUI.updateMLstepLCD(var_list.MLsteps)
             # self.sendtoUI.updateMLabsposLCD(var_list.MLcurABSdist)
             # self.sendtoUI.updateMLrelposLCD(var_list.MLcurRELdist)
