@@ -212,7 +212,7 @@ class buttonprogram:
             shiftdistance = var_list.MLrelpos - var_list.MLsteps
             for x in range(shiftdistance):
                 var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
-        elif var_list.MLsteps < var_list.MLrelpos:
+        elif var_list.MLsteps > var_list.MLrelpos:
             shiftdistance = var_list.MLsteps - var_list.MLrelpos
             for x in range(shiftdistance):
                 var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
@@ -458,16 +458,16 @@ class buttonprogram:
         print(var_list.MLrelpos,"mlRelative")
         print(var_list.MLsteps,"mlsteps")
 
-        if var_list.MLrelpos < var_list.MLsteps:
+        if var_list.MLrelpos > var_list.MLsteps:
             MLdiff = var_list.MLrelpos - var_list.MLsteps
             print('left')
             for x in range(MLdiff):
-                var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
+                var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
         else:
             MLdiff = var_list.MLsteps - var_list.MLrelpos
             print('right')
             for x in range(MLdiff):
-                var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
+                var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
         var_list.APmove.PosRelAbsCalc()
         var_list.MLmove.PosRelAbsCalc()
         var_list.DVmove.PosRelAbsCalc()
