@@ -342,7 +342,7 @@ class MainWindow(QMainWindow):
         print("AP start")
         var_list.APmove = Steppercontrol(var_list.enableAll,var_list.stepAP,var_list.directionAP,var_list.limitAP,1,var_list.APforward,var_list.APback, window)
         print('AP finished, ML start')
-        var_list.MLmove = Steppercontrol(var_list.enableAll,var_list.stepML,var_list.directionML,var_list.limitML,2,var_list.MLleft,var_list.MLright, window)
+        var_list.MLmove = Steppercontrol(var_list.enableAll,var_list.stepML,var_list.directionML,var_list.limitML,2,var_list.MLright,var_list.MLleft, window)
         print('ML finished, DV start')
         var_list.DVmove = Steppercontrol(var_list.enableAll,var_list.stepDV,var_list.directionDV,var_list.limitDV,3,var_list.DVdown,var_list.DVup, window)
         print('steppers are a go')
