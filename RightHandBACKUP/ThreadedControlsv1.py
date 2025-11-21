@@ -215,10 +215,12 @@ class threadedcontrols:
         if axisno == 1:
             self.APinput = 0
             self.APinputend = 0
+            GPIO.output(var_list.enableAll, 1)
             yesno = self.get_user_input('Calibration:', 'Perform re-calibration on AP axis? (y/n)')
             notation = self.get_user_input('MESSAGE:',
                                        '!!!Make sure to remove all attachments from rig!!! ENTER key to continue')
             if yesno == "y":
+                GPIO.output(var_list.enableAll, 0)
                 self.APinput = self.get_user_input('INPUT:', 'Enter the AP starting position in millimeters.')
                 for x in range(calibrationsteps):
                     if 0 <= var_list.APsteps < 8000:
@@ -235,10 +237,12 @@ class threadedcontrols:
         if axisno == 2:
             self.MLinput = 0
             self.MLinputend = 0
+            GPIO.output(var_list.enableAll, 1)
             yesno = self.get_user_input('Calibration:', 'Perform re-calibration on ML axis? (y/n)')
             notation = self.get_user_input('MESSAGE:',
                                        '!!!Make sure to remove all attachments from rig!!! ENTER key to continue')
             if yesno == "y":
+                GPIO.output(var_list.enableAll, 0)
                 self.MLinput = self.get_user_input('INPUT:', 'Enter the ML starting position in millimeters.')
                 for x in range(calibrationsteps):
                     if 0 <= var_list.MLsteps < 6000:
@@ -255,10 +259,13 @@ class threadedcontrols:
         if axisno == 3:
             self.DVinput = 0
             self.DVinputend = 0
+            GPIO.output(var_list.enableAll, 1)
             yesno = self.get_user_input('Calibration:', 'Perform re-calibration on DV axis? (y/n)')
             notation = self.get_user_input('MESSAGE:',
                                            '!!!Make sure to remove all attachments from rig!!! ENTER key to continue')
+
             if yesno == "y":
+                GPIO.output(var_list.enableAll, 0)
                 self.DVinput = self.get_user_input('INPUT:', 'Enter the DV starting position in millimeters.')
                 for x in range(calibrationsteps):
                     if 0 <= var_list.DVsteps < 6000:
