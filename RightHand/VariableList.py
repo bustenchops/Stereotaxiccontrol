@@ -105,14 +105,14 @@ class var_list:
     DVadvance = 400
     MLadvance = 400
 
-    APworking = 13600
-    MLworking = 11455
-    DVworking = 4000
+    APworking = 6400 #13600
+    MLworking = 6070 #11455
+    DVworking = 2000  #4000
 
-    DVup_bregramhome = 1340 #about 0.5cm
+    DVup_bregramhome = 670 #about 0.5cm
 
 # how many steps DV goes up and then back when changing the offsets to avoid scrapping the skull
-    DVup_OffsetSafety = 1340 #about 0.5cm
+    DVup_OffsetSafety = 670 #about 0.5cm
 
 
 #DEFINE STEPPER CONTROL PINS
