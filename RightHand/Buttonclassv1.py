@@ -486,7 +486,7 @@ class buttonprogram:
         print(var_list.MLsteps,"MLsteps")
         print(var_list.MLworking,"MLworking")
 
-        if var_list.MLsteps > var_list.MLworking:
+        if var_list.MLsteps < var_list.MLworking:
             print('right')
             for x in range(self.MLstepdiff):
                 var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
