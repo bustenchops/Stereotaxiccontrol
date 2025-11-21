@@ -153,7 +153,7 @@ class Steppercontrol:
             GPIO.output(self.enable, 0)
 
         for x in range(var_list.MLadvance):
-            GPIO.output(self.direction, var_list.MLleft)
+            GPIO.output(self.direction, var_list.MLright)
             GPIO.output(self.step, 1)
             time.sleep(btwnsteps)
             GPIO.output(self.step, 0)
