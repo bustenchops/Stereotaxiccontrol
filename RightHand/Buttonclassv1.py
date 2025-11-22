@@ -241,9 +241,9 @@ class buttonprogram:
 
         if var_list.TOGGLEoff != 1:
 
-            self.AP_Noffsetcalc = int(var_list.DrillAPmm / var_list.APstepdistance)
-            self.ML_Noffsetcalc = int(var_list.DrillMLmm / var_list.MLstepdistance)
-            self.DV_Noffsetcalc = int(var_list.DrillDVmm / var_list.DVstepdistance)
+            self.AP_Doffsetcalc = int(var_list.DrillAPmm / var_list.APstepdistance)
+            self.ML_Doffsetcalc = int(var_list.DrillMLmm / var_list.MLstepdistance)
+            self.DV_Doffsetcalc = int(var_list.DrillDVmm / var_list.DVstepdistance)
 
             self.DVdifferential = abs(var_list.DVcurrentoffsset)
             self.MLdifferential = abs(var_list.MLcurrentoffsset)
@@ -257,33 +257,33 @@ class buttonprogram:
             for x in range(var_list.DVup_OffsetSafety):
                 var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
 
-            if var_list.APcurrentoffsset > self.AP_Noffsetcalc:
+            if var_list.APcurrentoffsset > self.AP_Doffsetcalc:
                 for x in range (self.APdifferential):
                     var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
-            elif var_list.APcurrentoffsset < self.AP_Noffsetcalc:
+            elif var_list.APcurrentoffsset < self.AP_Doffsetcalc:
                 for x in range (self.APdifferential):
                     var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
 
-            if var_list.MLcurrentoffsset < self.ML_Noffsetcalc:
+            if var_list.MLcurrentoffsset < self.ML_Doffsetcalc:
                 for x in range (self.MLdifferential):
                     var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
-            elif var_list.MLcurrentoffsset > self.ML_Noffsetcalc:
+            elif var_list.MLcurrentoffsset > self.ML_Doffsetcalc:
                 for x in range (self.MLdifferential):
                     var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
 
-            if var_list.DVcurrentoffsset < self.DV_Noffsetcalc:
+            if var_list.DVcurrentoffsset < self.DV_Doffsetcalc:
                 for x in range (self.DVdifferential):
                     var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
-            elif var_list.DVcurrentoffsset > self.DV_Noffsetcalc:
+            elif var_list.DVcurrentoffsset > self.DV_Doffsetcalc:
                 for x in range (self.DVdifferential):
                     var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
 
             for x in range(var_list.DVup_OffsetSafety):
                 var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
 
-            var_list.APcurrentoffsset = self.AP_Noffsetcalc
-            var_list.MLcurrentoffsset = self.ML_Noffsetcalc
-            var_list.DVcurrentoffsset = self.DV_Noffsetcalc
+            var_list.APcurrentoffsset = self.AP_Doffsetcalc
+            var_list.MLcurrentoffsset = self.ML_Doffsetcalc
+            var_list.DVcurrentoffsset = self.DV_Doffsetcalc
 
             var_list.APrelpos = var_list.APsteps
             var_list.MLrelpos = var_list.MLsteps
@@ -375,9 +375,9 @@ class buttonprogram:
             self.ML_Foffsetcalc = int(var_list.FiberMLmm / var_list.MLstepdistance)
             self.DV_Foffsetcalc = int(var_list.FiberDVmm / var_list.DVstepdistance)
 
-            print(self.AP_Noffsetcalc, 'AP calc')
-            print(self.ML_Noffsetcalc, 'ML calc')
-            print(self.DV_Noffsetcalc, 'DV calc')
+            print(self.AP_Foffsetcalc, 'AP calc')
+            print(self.ML_Foffsetcalc, 'ML calc')
+            print(self.DV_Foffsetcalc, 'DV calc')
             print(var_list.TOGGLEoff, 'toggle')
 
             for x in range(var_list.DVup_OffsetSafety):
