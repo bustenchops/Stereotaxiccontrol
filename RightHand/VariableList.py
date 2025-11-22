@@ -13,7 +13,7 @@ class var_list:
 # OFFSETS FOR THE DRILL, Syringe, Needle (minus values is back, left or up)
 # in mm using the drill as 0
 
-# GOTO THE FILE Buttonclassv1.py and enter the values at the lines indicated
+# Change in the file offsetsXX.txt
     DrillAPmm = float(0)
     DrillMLmm = float(0)
     DrillDVmm = float(0)

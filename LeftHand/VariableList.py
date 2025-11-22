@@ -13,12 +13,13 @@ class var_list:
 # OFFSETS FOR THE DRILL, Syringe, Needle (minus values is back, left or up)
 # in mm using the drill as 0
 
+# Change in the file offsetsXX.txt
     DrillAPmm = float(0)
     DrillMLmm = float(0)
-    DrillDVmm = float(0.2)
+    DrillDVmm = float(0)
 
     NeedleAPmm = float(11.1)
-    NeedleMLmm = float(31.22)
+    NeedleMLmm = float(-31.22)
     NeedleDVmm = float(5)
 
     FiberAPmm = float(-5.069)
@@ -84,7 +85,11 @@ class var_list:
     MLinitREL_holdvalue = 0
     APinitREL_holdvalue = 0
 
-    APstepdistance = float(0.006725)
+    DVcurrentoffsset = 0
+    MLcurrentoffsset = 0
+    APcurrentoffsset = 0
+
+    APstepdistance = float(0.0075)
     MLstepdistance = float(0.0075)
     DVstepdistance = float(0.0075)
 
