@@ -417,9 +417,9 @@ class buttonprogram:
             for x in range(var_list.DVup_OffsetSafety):
                 var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
 
-            var_list.APcurrentoffsset = self.AP_Noffsetcalc
-            var_list.MLcurrentoffsset = self.ML_Noffsetcalc
-            var_list.DVcurrentoffsset = self.DV_Noffsetcalc
+            var_list.APcurrentoffsset = self.AP_Foffsetcalc
+            var_list.MLcurrentoffsset = self.ML_Foffsetcalc
+            var_list.DVcurrentoffsset = self.DV_Foffsetcalc
 
             var_list.APrelpos = var_list.APsteps
             var_list.MLrelpos = var_list.MLsteps
