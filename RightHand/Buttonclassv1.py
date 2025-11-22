@@ -320,11 +320,11 @@ class buttonprogram:
             if self.AP_Noffsetcalc > var_list.APcurrentoffsset:
                 self.APdifferential = abs(self.AP_Noffsetcalc - var_list.APcurrentoffsset)
                 for x in range(self.APdifferential):
-                    var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
+                    var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
             else:
                 self.APdifferential = abs(var_list.APcurrentoffsset - self.AP_Noffsetcalc)
                 for x in range(self.APdifferential):
-                    var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
+                    var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
 
             if self.ML_Noffsetcalc > var_list.MLcurrentoffsset:
                 self.MLdifferential = abs(self.ML_Noffsetcalc - var_list.MLcurrentoffsset)
@@ -386,11 +386,11 @@ class buttonprogram:
             if self.AP_Noffsetcalc > var_list.APcurrentoffsset:
                 self.APdifferential = abs(self.AP_Noffsetcalc - var_list.APcurrentoffsset)
                 for x in range(self.APdifferential):
-                    var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
+                    var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
             else:
                 self.APdifferential = abs(var_list.APcurrentoffsset - self.AP_Noffsetcalc)
                 for x in range(self.APdifferential):
-                    var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
+                    var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
 
             if self.ML_Noffsetcalc > var_list.MLcurrentoffsset:
                 self.MLdifferential = abs(self.ML_Noffsetcalc - var_list.MLcurrentoffsset)
