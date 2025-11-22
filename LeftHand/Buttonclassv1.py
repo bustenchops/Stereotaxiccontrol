@@ -239,9 +239,9 @@ class buttonprogram:
         print('Move to drill offset')
         self.sendtoUI.drilloffset()
 
-        self.DrillAPmm = float(0)
-        self.DrillMLmm = float(0)
-        self.DrillDVmm = float(0)
+        self.DrillAPmm = var_list.DrillAPmm
+        self.DrillMLmm = var_list.DrillMLmm
+        self.DrillDVmm = var_list.DrillDVmm
 
         if var_list.TOGGLEoff != 1:
 
@@ -315,9 +315,9 @@ class buttonprogram:
         print('Move to Syringe Offset')
         self.sendtoUI.needleoffset()
 
-        self.NeedleAPmm = float(11.1)
-        self.NeedleMLmm = float(-31.22)
-        self.NeedleDVmm = float(5)
+        self.NeedleAPmm = var_list.NeedleAPmm
+        self.NeedleMLmm = var_list.NeedleMLmm
+        self.NeedleDVmm = var_list.NeedleDVmm
 
         if var_list.TOGGLEoff != 2:
 
@@ -397,9 +397,9 @@ class buttonprogram:
         print('Move to Probe offset')
         self.sendtoUI.probeoffset()
 
-        self.FiberAPmm = float(-20)
-        self.FiberMLmm= float(-21.22)
-        self.FiberDVmm = float(-2)
+        self.FiberAPmm = var_list.FiberAPmm
+        self.FiberMLmm = var_list.FiberMLmm
+        self.FiberDVmm = var_list.FiberDVmm
 
         if var_list.TOGGLEoff != 3:
 
