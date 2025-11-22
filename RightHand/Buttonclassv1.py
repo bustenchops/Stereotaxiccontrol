@@ -313,17 +313,23 @@ class buttonprogram:
 
         if var_list.TOGGLEoff != 2:
 
-            self.APvalue = float(var_list.NeedleAPmm)
-            self.MLvalue = float(var_list.NeedleMLmm)
-            self.DVvalue = float(var_list.NeedleDVmm)
+            if var_list.NeedleAPmm < 0:
+                print('AP negative value')
+            else:
+                print ('AP positive value')
+            if var_list.NeedleMLmm < 0:
+                print('ML negative value')
+            else:
+                print ('ML positive value')
+            if var_list.NeedleDVmm < 0:
+                print('DV negative value')
+            else:
+                print ('DV positive value')
 
-            self.AP_Noffsetcalc = (self.APvalue/ var_list.APstepdistance)
-            self.ML_Noffsetcalc = (self.MLvalue / var_list.MLstepdistance)
-            self.DV_Noffsetcalc = (self.DVvalue / var_list.DVstepdistance)
+            self.AP_Noffsetcalc = int(var_list.NeedleAPmm/ var_list.APstepdistance)
+            self.ML_Noffsetcalc = int(var_list.NeedleMLmm / var_list.MLstepdistance)
+            self.DV_Noffsetcalc = int(var_list.NeedleDVmm / var_list.DVstepdistance)
 
-            print(var_list.NeedleMLmm)
-            self.inttest =int(var_list.NeedleMLmm / 2)
-            print (self.inttest)
             print(self.AP_Noffsetcalc,'AP calc')
             print(self.ML_Noffsetcalc,'ML calc')
             print(self.DV_Noffsetcalc,'DV calc')
