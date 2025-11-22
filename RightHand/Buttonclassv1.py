@@ -321,9 +321,9 @@ class buttonprogram:
 
         if var_list.TOGGLEoff != 2:
 
-            print (var_list.NeedleAPmm)
-            print (var_list.NeedleMLmm)
-            print (var_list.NeedleDVmm)
+            print (self.NeedleAPmm)
+            print (self.NeedleMLmm)
+            print (self.NeedleDVmm)
 
             self.AP_Noffsetcalc = int(self.NeedleAPmm/ var_list.APstepdistance)
             self.ML_Noffsetcalc = int(self.NeedleMLmm / var_list.MLstepdistance)
