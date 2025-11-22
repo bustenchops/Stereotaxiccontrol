@@ -17,9 +17,9 @@ class var_list:
     DrillMLmm = float(0)
     DrillDVmm = float(0)
 
-    NeedleAPmm = '11.1'
-    NeedleMLmm = '-31.22'
-    NeedleDVmm = '5'
+    NeedleAPmm = 11.1
+    NeedleMLmm = -31.22
+    NeedleDVmm = 5
 
     FiberAPmm = float(-20)
     FiberMLmm = float(-21.22)

@@ -315,6 +315,7 @@ class buttonprogram:
             self.negtestAP = float(var_list.NeedleAPmm)
             self.negtestML = float(var_list.NeedleMLmm)
             self.negtestDV = float(var_list.NeedleDVmm)
+
             print (var_list.NeedleAPmm)
             print (var_list.NeedleMLmm)
             print (var_list.NeedleDVmm)
@@ -330,61 +331,61 @@ class buttonprogram:
             print(self.ML_Noffsetcalc,'ML calc')
             print(self.DV_Noffsetcalc,'DV calc')
 
-            for x in range(var_list.DVup_OffsetSafety):
-                var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
-
-            if self.AP_Noffsetcalc > var_list.APcurrentoffsset:
-                self.APdifferential = abs(self.AP_Noffsetcalc - var_list.APcurrentoffsset)
-                for x in range(self.APdifferential):
-                    var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
-            elif self.AP_Noffsetcalc < var_list.APcurrentoffsset:
-                self.APdifferential = abs(var_list.APcurrentoffsset - self.AP_Noffsetcalc)
-                for x in range(self.APdifferential):
-                    var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
-
-            if self.ML_Noffsetcalc > var_list.MLcurrentoffsset:
-                self.MLdifferential = abs(self.ML_Noffsetcalc - var_list.MLcurrentoffsset)
-                for x in range(self.MLdifferential):
-                    var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
-            elif self.ML_Noffsetcalc < var_list.MLcurrentoffsset:
-                self.MLdifferential = abs(var_list.MLcurrentoffsset - self.ML_Noffsetcalc)
-                for x in range(self.MLdifferential):
-                    var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
-
-            if self.DV_Noffsetcalc > var_list.DVcurrentoffsset:
-                self.DVdifferential = abs(self.DV_Noffsetcalc - var_list.DVcurrentoffsset)
-                for x in range(self.DVdifferential):
-                    var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
-            elif self.DV_Noffsetcalc < var_list.DVcurrentoffsset:
-                self.DVdifferential = abs(var_list.DVcurrentoffsset - self.DV_Noffsetcalc)
-                for x in range(self.DVdifferential):
-                    var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
-
-            for x in range(var_list.DVup_OffsetSafety):
-                var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
-
-            print(self.DVdifferential,"DV differential")
-            print(self.MLdifferential,"ML differential")
-            print(self.APdifferential,"AP differential")
-            print(var_list.TOGGLEoff, 'toggle')
-
-            var_list.APcurrentoffsset = self.AP_Noffsetcalc
-            var_list.MLcurrentoffsset = self.ML_Noffsetcalc
-            var_list.DVcurrentoffsset = self.DV_Noffsetcalc
-
-            print(var_list.APcurrentoffsset,"AP currentoffsset")
-            print(var_list.MLcurrentoffsset,"ML currentoffsset")
-            print(var_list.DVcurrentoffsset,"DV currentoffsset")
-
-            var_list.APrelpos = var_list.APsteps
-            var_list.MLrelpos = var_list.MLsteps
-            var_list.DVrelpos = var_list.DVsteps
-
-            var_list.APmove.PosRelAbsCalc()
-            var_list.MLmove.PosRelAbsCalc()
-            var_list.DVmove.PosRelAbsCalc()
-
-            GPIO.output(var_list.enableAll, 1)
+            # for x in range(var_list.DVup_OffsetSafety):
+            #     var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+            #
+            # if self.AP_Noffsetcalc > var_list.APcurrentoffsset:
+            #     self.APdifferential = abs(self.AP_Noffsetcalc - var_list.APcurrentoffsset)
+            #     for x in range(self.APdifferential):
+            #         var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
+            # elif self.AP_Noffsetcalc < var_list.APcurrentoffsset:
+            #     self.APdifferential = abs(var_list.APcurrentoffsset - self.AP_Noffsetcalc)
+            #     for x in range(self.APdifferential):
+            #         var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
+            #
+            # if self.ML_Noffsetcalc > var_list.MLcurrentoffsset:
+            #     self.MLdifferential = abs(self.ML_Noffsetcalc - var_list.MLcurrentoffsset)
+            #     for x in range(self.MLdifferential):
+            #         var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
+            # elif self.ML_Noffsetcalc < var_list.MLcurrentoffsset:
+            #     self.MLdifferential = abs(var_list.MLcurrentoffsset - self.ML_Noffsetcalc)
+            #     for x in range(self.MLdifferential):
+            #         var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
+            #
+            # if self.DV_Noffsetcalc > var_list.DVcurrentoffsset:
+            #     self.DVdifferential = abs(self.DV_Noffsetcalc - var_list.DVcurrentoffsset)
+            #     for x in range(self.DVdifferential):
+            #         var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+            # elif self.DV_Noffsetcalc < var_list.DVcurrentoffsset:
+            #     self.DVdifferential = abs(var_list.DVcurrentoffsset - self.DV_Noffsetcalc)
+            #     for x in range(self.DVdifferential):
+            #         var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
+            #
+            # for x in range(var_list.DVup_OffsetSafety):
+            #     var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
+            #
+            # print(self.DVdifferential,"DV differential")
+            # print(self.MLdifferential,"ML differential")
+            # print(self.APdifferential,"AP differential")
+            # print(var_list.TOGGLEoff, 'toggle')
+            #
+            # var_list.APcurrentoffsset = self.AP_Noffsetcalc
+            # var_list.MLcurrentoffsset = self.ML_Noffsetcalc
+            # var_list.DVcurrentoffsset = self.DV_Noffsetcalc
+            #
+            # print(var_list.APcurrentoffsset,"AP currentoffsset")
+            # print(var_list.MLcurrentoffsset,"ML currentoffsset")
+            # print(var_list.DVcurrentoffsset,"DV currentoffsset")
+            #
+            # var_list.APrelpos = var_list.APsteps
+            # var_list.MLrelpos = var_list.MLsteps
+            # var_list.DVrelpos = var_list.DVsteps
+            #
+            # var_list.APmove.PosRelAbsCalc()
+            # var_list.MLmove.PosRelAbsCalc()
+            # var_list.DVmove.PosRelAbsCalc()
+            #
+            # GPIO.output(var_list.enableAll, 1)
             var_list.lastenablestate = 1
             var_list.TOGGLEoff = 2
 
