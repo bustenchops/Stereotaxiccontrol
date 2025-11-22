@@ -315,8 +315,8 @@ class buttonprogram:
         print('Move to Syringe Offset')
         self.sendtoUI.needleoffset()
 
-        self.NeedleAPmm = var_list.NeedleAPm
-        self.NeedleMLmm = var_list.NeedleMLm
+        self.NeedleAPmm = var_list.NeedleAPmm
+        self.NeedleMLmm = var_list.NeedleMLmm
         self.NeedleDVmm = var_list.NeedleDVmm
 
         if var_list.TOGGLEoff != 2:
