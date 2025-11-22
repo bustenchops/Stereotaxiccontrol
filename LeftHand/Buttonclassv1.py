@@ -397,15 +397,23 @@ class buttonprogram:
         print('Move to Probe offset')
         self.sendtoUI.probeoffset()
 
+        self.FiberAPmm = float(-20)
+        self.FiberMLmm= float(-21.22)
+        self.FiberDVmm = float(-2)
+
         if var_list.TOGGLEoff != 3:
 
-            self.AP_Foffsetcalc = int(var_list.FiberAPmm / var_list.APstepdistance)
-            self.ML_Foffsetcalc = int(var_list.FiberMLmm / var_list.MLstepdistance)
-            self.DV_Foffsetcalc = int(var_list.FiberDVmm / var_list.DVstepdistance)
+            print (self.FiberAPmm)
+            print (self.FiberMLmm)
+            print (self.FiberDVmm)
 
-            print(self.AP_Foffsetcalc, 'AP calc')
-            print(self.ML_Foffsetcalc, 'ML calc')
-            print(self.DV_Foffsetcalc, 'DV calc')
+            self.AP_Foffsetcalc = int(self.FiberAPmm/ var_list.APstepdistance)
+            self.ML_Foffsetcalc = int(self.FiberMLmm / var_list.MLstepdistance)
+            self.DV_Foffsetcalc = int(self.FiberDVmm / var_list.DVstepdistance)
+
+            print(self.AP_Foffsetcalc,'AP calc')
+            print(self.ML_Foffsetcalc,'ML calc')
+            print(self.DV_Foffsetcalc,'DV calc')
 
             for x in range(var_list.DVup_OffsetSafety):
                 var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
@@ -425,7 +433,7 @@ class buttonprogram:
                     var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
             elif self.ML_Foffsetcalc < var_list.MLcurrentoffsset:
                 self.MLdifferential = abs(var_list.MLcurrentoffsset - self.ML_Foffsetcalc)
-                for x in range(self.APdifferential):
+                for x in range(self.MLdifferential):
                     var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
 
             if self.DV_Foffsetcalc > var_list.DVcurrentoffsset:
@@ -437,13 +445,14 @@ class buttonprogram:
                 for x in range(self.DVdifferential):
                     var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
 
+            for x in range(var_list.DVup_OffsetSafety):
+                var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
+
             print(self.DVdifferential,"DV differential")
             print(self.MLdifferential,"ML differential")
             print(self.APdifferential,"AP differential")
             print(var_list.TOGGLEoff, 'toggle')
 
-            for x in range(var_list.DVup_OffsetSafety):
-                var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
 
             var_list.APcurrentoffsset = self.AP_Foffsetcalc
             var_list.MLcurrentoffsset = self.ML_Foffsetcalc

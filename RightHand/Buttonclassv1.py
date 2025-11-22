@@ -453,6 +453,7 @@ class buttonprogram:
             print(self.APdifferential,"AP differential")
             print(var_list.TOGGLEoff, 'toggle')
 
+
             var_list.APcurrentoffsset = self.AP_Foffsetcalc
             var_list.MLcurrentoffsset = self.ML_Foffsetcalc
             var_list.DVcurrentoffsset = self.DV_Foffsetcalc
