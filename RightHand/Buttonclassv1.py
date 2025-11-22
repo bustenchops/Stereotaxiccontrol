@@ -312,6 +312,9 @@ class buttonprogram:
         self.sendtoUI.needleoffset()
 
         if var_list.TOGGLEoff != 2:
+            self.claimit = float(-23)
+            print (self.claimit)
+
             self.negtestAP = float(var_list.NeedleAPmm)
             self.negtestML = float(var_list.NeedleMLmm)
             self.negtestDV = float(var_list.NeedleDVmm)
