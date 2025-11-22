@@ -245,6 +245,10 @@ class buttonprogram:
             self.ML_Doffsetcalc = int(var_list.DrillMLmm / var_list.MLstepdistance)
             self.DV_Doffsetcalc = int(var_list.DrillDVmm / var_list.DVstepdistance)
 
+            print(self.AP_Doffsetcalc,'AP calc')
+            print(self.ML_Doffsetcalc,'ML calc')
+            print(self.DV_Doffsetcalc,'DV calc')
+
             self.DVdifferential = abs(var_list.DVcurrentoffsset)
             self.MLdifferential = abs(var_list.MLcurrentoffsset)
             self.APdifferential = abs(var_list.APcurrentoffsset)
@@ -285,6 +289,10 @@ class buttonprogram:
             var_list.MLcurrentoffsset = self.ML_Doffsetcalc
             var_list.DVcurrentoffsset = self.DV_Doffsetcalc
 
+            print(var_list.APcurrentoffsset,"AP currentoffsset")
+            print(var_list.MLcurrentoffsset,"ML currentoffsset")
+            print(var_list.DVcurrentoffsset,"DV currentoffsset")
+
             var_list.APrelpos = var_list.APsteps
             var_list.MLrelpos = var_list.MLsteps
             var_list.DVrelpos = var_list.DVsteps
@@ -312,7 +320,6 @@ class buttonprogram:
             print(self.AP_Noffsetcalc,'AP calc')
             print(self.ML_Noffsetcalc,'ML calc')
             print(self.DV_Noffsetcalc,'DV calc')
-            print(var_list.TOGGLEoff, 'toggle')
 
             for x in range(var_list.DVup_OffsetSafety):
                 var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
@@ -347,9 +354,18 @@ class buttonprogram:
             for x in range(var_list.DVup_OffsetSafety):
                 var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
 
+            print(self.DVdifferential,"DV differential")
+            print(self.MLdifferential,"ML differential")
+            print(self.APdifferential,"AP differential")
+            print(var_list.TOGGLEoff, 'toggle')
+
             var_list.APcurrentoffsset = self.AP_Noffsetcalc
             var_list.MLcurrentoffsset = self.ML_Noffsetcalc
             var_list.DVcurrentoffsset = self.DV_Noffsetcalc
+
+            print(var_list.APcurrentoffsset,"AP currentoffsset")
+            print(var_list.MLcurrentoffsset,"ML currentoffsset")
+            print(var_list.DVcurrentoffsset,"DV currentoffsset")
 
             var_list.APrelpos = var_list.APsteps
             var_list.MLrelpos = var_list.MLsteps
@@ -378,7 +394,6 @@ class buttonprogram:
             print(self.AP_Foffsetcalc, 'AP calc')
             print(self.ML_Foffsetcalc, 'ML calc')
             print(self.DV_Foffsetcalc, 'DV calc')
-            print(var_list.TOGGLEoff, 'toggle')
 
             for x in range(var_list.DVup_OffsetSafety):
                 var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
@@ -410,9 +425,10 @@ class buttonprogram:
                 for x in range(self.DVdifferential):
                     var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
 
-            print(self.DVdifferential, "DV differential")
-            print(self.MLdifferential, "ML differential")
-            print(self.APdifferential, "AP differential")
+            print(self.DVdifferential,"DV differential")
+            print(self.MLdifferential,"ML differential")
+            print(self.APdifferential,"AP differential")
+            print(var_list.TOGGLEoff, 'toggle')
 
             for x in range(var_list.DVup_OffsetSafety):
                 var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
@@ -420,6 +436,10 @@ class buttonprogram:
             var_list.APcurrentoffsset = self.AP_Foffsetcalc
             var_list.MLcurrentoffsset = self.ML_Foffsetcalc
             var_list.DVcurrentoffsset = self.DV_Foffsetcalc
+
+            print(var_list.APcurrentoffsset,"AP currentoffsset")
+            print(var_list.MLcurrentoffsset,"ML currentoffsset")
+            print(var_list.DVcurrentoffsset,"DV currentoffsset")
 
             var_list.APrelpos = var_list.APsteps
             var_list.MLrelpos = var_list.MLsteps
