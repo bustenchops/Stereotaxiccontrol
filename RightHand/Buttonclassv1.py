@@ -317,6 +317,9 @@ class buttonprogram:
             self.ML_Noffsetcalc = int(var_list.NeedleMLmm / var_list.MLstepdistance)
             self.DV_Noffsetcalc = int(var_list.NeedleDVmm / var_list.DVstepdistance)
 
+            print(var_list.NeedleMLmm)
+            self.inttest =int(var_list.NeedleMLmm / 2)
+            print (self.inttest)
             print(self.AP_Noffsetcalc,'AP calc')
             print(self.ML_Noffsetcalc,'ML calc')
             print(self.DV_Noffsetcalc,'DV calc')
