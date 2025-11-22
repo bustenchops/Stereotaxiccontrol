@@ -312,23 +312,25 @@ class buttonprogram:
         self.sendtoUI.needleoffset()
 
         if var_list.TOGGLEoff != 2:
-
-            if var_list.NeedleAPmm < 0:
+            self.negtestAP = float(var_list.NeedleAPmm)
+            self.negtestML = float(var_list.NeedleMLmm)
+            self.negtestDV = float(var_list.NeedleDVmm)
+            if self.negtestAP < 0:
                 print('AP negative value')
             else:
                 print ('AP positive value')
-            if var_list.NeedleMLmm < 0:
+            if self.negtestML < 0:
                 print('ML negative value')
             else:
                 print ('ML positive value')
-            if var_list.NeedleDVmm < 0:
+            if self.negtestDV < 0:
                 print('DV negative value')
             else:
                 print ('DV positive value')
 
-            self.AP_Noffsetcalc = int(var_list.NeedleAPmm/ var_list.APstepdistance)
-            self.ML_Noffsetcalc = int(var_list.NeedleMLmm / var_list.MLstepdistance)
-            self.DV_Noffsetcalc = int(var_list.NeedleDVmm / var_list.DVstepdistance)
+            self.AP_Noffsetcalc = int(self.negtestAP/ var_list.APstepdistance)
+            self.ML_Noffsetcalc = int(self.negtestML / var_list.MLstepdistance)
+            self.DV_Noffsetcalc = int(self.negtestDV / var_list.DVstepdistance)
 
             print(self.AP_Noffsetcalc,'AP calc')
             print(self.ML_Noffsetcalc,'ML calc')
