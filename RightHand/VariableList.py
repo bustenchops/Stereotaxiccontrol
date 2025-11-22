@@ -14,17 +14,17 @@ class var_list:
 # in mm using the drill as 0
 
 # GOTO THE FILE Buttonclassv1.py and enter the values at the lines indicated
-#     DrillAPmm = float(0)
-#     DrillMLmm = float(0)
-#     DrillDVmm = float(0)
-#
-#     NeedleAPmm = float(11.1)
-#     NeedleMLmm = float(-31.22)
-#     NeedleDVmm = float(5)
-#
-#     FiberAPmm = float(-20)
-#     FiberMLmm = float(-21.22)
-#     FiberDVmm = float(-2)
+    DrillAPmm = float(0)
+    DrillMLmm = float(0)
+    DrillDVmm = float(0)
+
+    NeedleAPmm = float(11.1)
+    NeedleMLmm = float(-31.22)
+    NeedleDVmm = float(5)
+
+    FiberAPmm = float(-20)
+    FiberMLmm = float(-21.22)
+    FiberDVmm = float(-2)
 
 # variable to let program know which offset of toggled on. 1-drill,2-syringe,3-probe
     TOGGLEoff = 1
