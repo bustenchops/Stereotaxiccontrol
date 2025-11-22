@@ -15,15 +15,15 @@ class var_list:
 
     DrillAPmm = float(0)
     DrillMLmm = float(0)
-    DrillDVmm = float(0.2)
+    DrillDVmm = float(0)
 
     NeedleAPmm = float(11.1)
     NeedleMLmm = float(-31.22)
     NeedleDVmm = float(5)
 
-    FiberAPmm = float(5.069)
+    FiberAPmm = float(-20)
     FiberMLmm = float(-21.22)
-    FiberDVmm = float(6)
+    FiberDVmm = float(-2)
 
 # variable to let program know which offset of toggled on. 1-drill,2-syringe,3-probe
     TOGGLEoff = 1
@@ -83,6 +83,10 @@ class var_list:
     DVinitREL_holdvalue = 0
     MLinitREL_holdvalue = 0
     APinitREL_holdvalue = 0
+
+    DVcurrentoffsset = 0
+    MLcurrentoffsset = 0
+    APcurrentoffsset = 0
 
     APstepdistance = float(0.0075)
     MLstepdistance = float(0.0075)
