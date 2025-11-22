@@ -313,9 +313,13 @@ class buttonprogram:
 
         if var_list.TOGGLEoff != 2:
 
-            self.AP_Noffsetcalc = int(var_list.NeedleAPmm / var_list.APstepdistance)
-            self.ML_Noffsetcalc = int(var_list.NeedleMLmm / var_list.MLstepdistance)
-            self.DV_Noffsetcalc = int(var_list.NeedleDVmm / var_list.DVstepdistance)
+            self.APvalue = float(var_list.NeedleAPmm)
+            self.MLvalue = float(var_list.NeedleMLmm)
+            self.DVvalue = float(var_list.NeedleDVmm)
+
+            self.AP_Noffsetcalc = (self.APvalue/ var_list.APstepdistance)
+            self.ML_Noffsetcalc = (self.MLvalue / var_list.MLstepdistance)
+            self.DV_Noffsetcalc = (self.DVvalue / var_list.DVstepdistance)
 
             print(var_list.NeedleMLmm)
             self.inttest =int(var_list.NeedleMLmm / 2)
