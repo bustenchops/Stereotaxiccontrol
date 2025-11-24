@@ -410,7 +410,7 @@ class threadedcontrols:
 
         print('Set Drill toggle')
         self.sendtoUI.drilloffset()
-
+        time.sleep(2)
         self.calibratethings()
 
 # concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)
