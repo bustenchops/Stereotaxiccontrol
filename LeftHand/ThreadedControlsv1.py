@@ -117,6 +117,12 @@ class threadedcontrols:
         # Destroy the root window
         root.destroy()
 
+    def questionzerosteppers(self):
+        zeroyorno = self.get_user_input('Input Required:', 'Do you wish to re-zero the steppers? (y) if yes')
+        if zeroyorno == 'y':
+            self.zerosteppers(3, var_list.backoff, var_list.btnSteps)
+            self.zerosteppers(1, var_list.backoff, var_list.btnSteps)
+            self.zerosteppers(2, var_list.backoff, var_list.btnSteps)
 
     def zerosteppers(self, axis, backoff, btwnsteps):
         print('zero steppers called')

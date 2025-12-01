@@ -1,6 +1,6 @@
 import time
 import RPi.GPIO as GPIO
-
+import tkinter as tk
 from VariableList import var_list
 
 class buttonprogram:
@@ -14,6 +14,25 @@ class buttonprogram:
 
 
 #Get the shift register data
+    def get_user_input_button(self,giventitle,givenprompt):
+        # Create the root window
+        root = tk.Tk()
+        root.withdraw()  # Hide the root window
+
+        # Prompt the user for input
+        user_input_button = simpledialog.askstring(title=giventitle, prompt=givenprompt)
+
+        # Print the user input
+        if user_input_button is not None:
+            print(f"User input: {user_input_button}")
+            return user_input_button
+
+        else:
+            print("No input provided")
+
+        # Destroy the root window
+        root.destroy()
+
     def getshiftregisterdata(self):
         self.shiftvalues = []
         #get number of buttons
@@ -189,19 +208,21 @@ class buttonprogram:
         var_list.DVmove.PosRelAbsCalc()
 
     def hometoABSzero(self):
-        print('home the ABS zero')
-        for x in range(var_list.DVsteps):
-            var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
-        for x in range(var_list.MLsteps):
-            var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
-        for x in range(var_list.APsteps):
-            var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
-        var_list.APmove.PosRelAbsCalc()
-        var_list.MLmove.PosRelAbsCalc()
-        var_list.DVmove.PosRelAbsCalc()
+        print('home to ABS zero')
+        questionABSzero = self.get_user_input_button('ABSzero button pressed:', 'Home to absolute zero? (y) for yes')
+        if questionABSzero == 'y':
+            for x in range(var_list.DVsteps):
+                var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+            for x in range(var_list.MLsteps):
+                var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
+            for x in range(var_list.APsteps):
+                var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
+            var_list.APmove.PosRelAbsCalc()
+            var_list.MLmove.PosRelAbsCalc()
+            var_list.DVmove.PosRelAbsCalc()
 
-        GPIO.output(var_list.enableAll, 1)
-        var_list.lastenablestate = 1
+            GPIO.output(var_list.enableAll, 1)
+            var_list.lastenablestate = 1
 
     def upDVrelhomeAP_ML(self):
         print('relative home AP and ML homed DVup')
