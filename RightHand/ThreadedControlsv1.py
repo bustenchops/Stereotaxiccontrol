@@ -118,6 +118,7 @@ class threadedcontrols:
         root.destroy()
 
     def questionzerosteppers(self):
+        print('UI sent this to control thread')
         zeroyorno = self.get_user_input('Input Required:', 'Do you wish to re-zero the steppers? (y) if yes')
         if zeroyorno == 'y':
             self.zerosteppers(3, var_list.backoff, var_list.btnSteps)
