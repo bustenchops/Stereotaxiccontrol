@@ -17,12 +17,14 @@ class buttonprogram:
 #Get the shift register data
     def get_user_input_button(self,giventitle,givenprompt):
         # Create the root window
+        print('called get_user_input')
         root = tk.Tk()
+        print('root')
         root.withdraw()  # Hide the root window
-
+        print('withdraw')
         # Prompt the user for input
         user_input_button = simpledialog.askstring(title=giventitle, prompt=givenprompt)
-
+        print('should see a button')
         # Print the user input
         if user_input_button is not None:
             print(f"User input: {user_input_button}")
