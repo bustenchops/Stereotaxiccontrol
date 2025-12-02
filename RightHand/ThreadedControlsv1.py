@@ -121,7 +121,7 @@ class threadedcontrols:
 
     def questionzerosteppers(self):
         print('UI sent this to control thread')
-        self.zeroyorno = self.get_user_input('Input Required:', 'Do you wish to re-zero the steppers? (y) if yes')
+        self.zeroyorno = self.get_user_input('Calibration:', 'Perform re-calibration on DV axis? (y/n)')
         if self.zeroyorno == 'y':
             self.zerosteppers(3, var_list.backoff, var_list.btnSteps)
             self.zerosteppers(1, var_list.backoff, var_list.btnSteps)
