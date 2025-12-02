@@ -418,7 +418,7 @@ class threadedcontrols:
 
 
         print('Set Drill toggle')
-        time.sleep(2)
+        time.sleep(1)
         self.sendtoUI.drilloffset()
         self.calibratethings()
 

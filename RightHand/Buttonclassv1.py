@@ -1,6 +1,6 @@
 import time
 import RPi.GPIO as GPIO
-import tkinter as tk
+import tkinter as tkb
 from tkinter import simpledialog
 from VariableList import var_list
 
@@ -18,7 +18,7 @@ class buttonprogram:
     def get_user_input_button(self,giventitle,givenprompt):
         # Create the root window
         print('called get_user_input o f button')
-        root = tk.Tk()
+        root = tkb.Tk()
         print('root')
         root.withdraw()  # Hide the root window
         print('withdraw')
