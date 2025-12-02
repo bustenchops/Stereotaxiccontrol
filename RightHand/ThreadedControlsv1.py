@@ -102,11 +102,12 @@ class threadedcontrols:
         # Create the root window
         print('called get_user_input')
         root = tk.Tk()
+        print('root1')
         root.withdraw()  # Hide the root window
-
+        print('withdraw1')
         # Prompt the user for input
         user_input = simpledialog.askstring(title=giventitle, prompt=givenprompt)
-
+        print('should see window')
         # Print the user input
         if user_input is not None:
             print(f"User input: {user_input}")
