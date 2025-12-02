@@ -1,7 +1,7 @@
 import time
 import RPi.GPIO as GPIO
-import tkinter as tkb
-from tkinter import simpledialog
+# import tkinter as tkb
+# from tkinter import simpledialog
 from VariableList import var_list
 
 class buttonprogram:
@@ -15,26 +15,26 @@ class buttonprogram:
 
 
 #Get the shift register data
-    def get_user_input_button(self,giventitle,givenprompt):
-        # Create the root window
-        print('called get_user_input o f button')
-        root = tkb.Tk()
-        print('root')
-        root.withdraw()  # Hide the root window
-        print('withdraw')
-        # Prompt the user for input
-        user_input_button = simpledialog.askstring(title=giventitle, prompt=givenprompt)
-        print('should see a button')
-        # Print the user input
-        if user_input_button is not None:
-            print(f"User input: {user_input_button}")
-            return user_input_button
-
-        else:
-            print("No input provided")
-
-        # Destroy the root window
-        root.destroy()
+    # def get_user_input_button(self,giventitle,givenprompt):
+    #     # Create the root window
+    #     print('called get_user_input o f button')
+    #     root = tkb.Tk()
+    #     print('root')
+    #     root.withdraw()  # Hide the root window
+    #     print('withdraw')
+    #     # Prompt the user for input
+    #     user_input_button = simpledialog.askstring(title=giventitle, prompt=givenprompt)
+    #     print('should see a button')
+    #     # Print the user input
+    #     if user_input_button is not None:
+    #         print(f"User input: {user_input_button}")
+    #         return user_input_button
+    #
+    #     else:
+    #         print("No input provided")
+    #
+    #     # Destroy the root window
+    #     root.destroy()
 
     def getshiftregisterdata(self):
         self.shiftvalues = []
