@@ -100,6 +100,7 @@ class threadedcontrols:
 
     def get_user_input(self,giventitle,givenprompt):
         # Create the root window
+        print('called get_user_input')
         root = tk.Tk()
         root.withdraw()  # Hide the root window
 
@@ -119,8 +120,8 @@ class threadedcontrols:
 
     def questionzerosteppers(self):
         print('UI sent this to control thread')
-        zeroyorno = self.get_user_input('Input Required:', 'Do you wish to re-zero the steppers? (y) if yes')
-        if zeroyorno == 'y':
+        self.zeroyorno = self.get_user_input('Input Required:', 'Do you wish to re-zero the steppers? (y) if yes')
+        if self.zeroyorno == 'y':
             self.zerosteppers(3, var_list.backoff, var_list.btnSteps)
             self.zerosteppers(1, var_list.backoff, var_list.btnSteps)
             self.zerosteppers(2, var_list.backoff, var_list.btnSteps)

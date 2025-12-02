@@ -1,6 +1,7 @@
 import time
 import RPi.GPIO as GPIO
 import tkinter as tk
+from tkinter import simpledialog
 from VariableList import var_list
 
 class buttonprogram:
