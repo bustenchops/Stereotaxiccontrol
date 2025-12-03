@@ -106,18 +106,18 @@ class var_list:
 #Variables that may need tweaking
     calibrationsteps = 4000
     backoff = 200
-    APadvance = 2000 #8500
+    APadvance = 2000
     DVadvance = 400
     MLadvance = 400
 
-    APworking = 6400 #13600
-    MLworking = 6070 #11455
-    DVworking = 2000  #4000
+    APworking = 6400
+    MLworking = 6070
+    DVworking = 3500
 
     DVup_bregramhome = 670 #about 0.5cm
 
 # how many steps DV goes up and then back when changing the offsets to avoid scrapping the skull
-    DVup_OffsetSafety = 670 #about 0.5cm
+    DVup_OffsetSafety = 1340 #about 1cm
 
 
 #DEFINE STEPPER CONTROL PINS

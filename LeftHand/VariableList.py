@@ -13,7 +13,7 @@ class var_list:
 # OFFSETS FOR THE DRILL, Syringe, Needle (minus values is back, left or up)
 # in mm using the drill as 0
 
-# Change in the file offsetsXX.txt
+# Change in the file offsetsXX.txt (XX is LH or RH)
     DrillAPmm = float(0)
     DrillMLmm = float(0)
     DrillDVmm = float(0)
@@ -112,12 +112,12 @@ class var_list:
 
     APworking = 6400
     MLworking = 6070
-    DVworking = 3990
+    DVworking = 3500
 
     DVup_bregramhome = 670 #about 0.5cm
 
 # how many steps DV goes up and then back when changing the offsets to avoid scrapping the skull
-    DVup_OffsetSafety = 670 #about 0.5cm
+    DVup_OffsetSafety = 1340 #about 1cm
 
 
 #DEFINE STEPPER CONTROL PINS
