@@ -76,7 +76,9 @@ class threadedcontrols:
             var_list.MLmove.steppgo(var_list.MLleft, var_list.stepper_speed, var_list.btnSteps)
             var_list.MLmove.PosRelAbsCalc()
         elif event == RotaryEncoder.BUTTONDOWN:
-            print("hardwired event button A clicked")
+            # print("hardwired event button A clicked")
+            print('safety disengaged')
+            var_list.safetybutton = 1
             return
         elif event == RotaryEncoder.BUTTONUP:
             return
@@ -121,11 +123,9 @@ class threadedcontrols:
 
     def questionzerosteppers(self):
         print('UI sent this to control thread')
-        self.zeroyorno = self.get_user_input('Calibration:', 'Perform re-calibration on DV axis? (y/n)')
-        if self.zeroyorno == 'y':
-            self.zerosteppers(3, var_list.backoff, var_list.btnSteps)
-            self.zerosteppers(1, var_list.backoff, var_list.btnSteps)
-            self.zerosteppers(2, var_list.backoff, var_list.btnSteps)
+        self.zerosteppers(3, var_list.backoff, var_list.btnSteps)
+        self.zerosteppers(1, var_list.backoff, var_list.btnSteps)
+        self.zerosteppers(2, var_list.backoff, var_list.btnSteps)
 
     def zerosteppers(self, axis, backoff, btwnsteps):
         print('zero steppers called')

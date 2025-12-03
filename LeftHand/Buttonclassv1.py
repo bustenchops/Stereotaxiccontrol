@@ -1,6 +1,5 @@
 import time
 import RPi.GPIO as GPIO
-import tkinter as tk
 from VariableList import var_list
 
 class buttonprogram:
@@ -14,24 +13,6 @@ class buttonprogram:
 
 
 #Get the shift register data
-    def get_user_input_button(self,giventitle,givenprompt):
-        # Create the root window
-        root = tk.Tk()
-        root.withdraw()  # Hide the root window
-
-        # Prompt the user for input
-        user_input_button = simpledialog.askstring(title=giventitle, prompt=givenprompt)
-
-        # Print the user input
-        if user_input_button is not None:
-            print(f"User input: {user_input_button}")
-            return user_input_button
-
-        else:
-            print("No input provided")
-
-        # Destroy the root window
-        root.destroy()
 
     def getshiftregisterdata(self):
         self.shiftvalues = []
@@ -66,8 +47,10 @@ class buttonprogram:
                 if var_list.engagebutton == 1:
                     #button to home to ABS zero
                     if lastbut[var_list.homeABSzero] == 1:
-                        print('HOME to ABS Zero')
-                        self.hometoABSzero()
+                        if var_list.safetybutton == 1:
+                            print('HOME to ABS Zero')
+                            self.hometoABSzero()
+                            var_list.safetybutton = 0
 
                     #set relative zero for ALL
                     if lastbut[var_list.relativeALL] == 1:
@@ -92,8 +75,10 @@ class buttonprogram:
 
                     #button action - Home to Rel zero for AP and ML BUT DV goes all up
                     if lastbut[var_list.homeRELzero] == 1:
-                        print('DV up AP and ML homed to rel')
-                        self.upDVrelhomeAP_ML()
+                        if var_list.safetybutton == 1:
+                            print('DV up AP and ML homed to rel')
+                            self.upDVrelhomeAP_ML()
+                            var_list.safetybutton = 0
 
                     #miscbuttonC - DRILL to relative zero for AP and ML - DV up 0.5cm but still sets the relative pos
                     if lastbut[var_list.drilloff] == 1:
@@ -112,14 +97,18 @@ class buttonprogram:
 
                     #home to bregma (relative) moves DV up by value in variable list, positions AP and ML to relative home
                     if lastbut[var_list.bregmahome] == 1:
-                        print("Home to Bregma (DV up buy set value)")
-                        self.bregmahome()
+                        if var_list.safetybutton == 1:
+                            print("Home to Bregma (DV up buy set value)")
+                            self.bregmahome()
+                            var_list.safetybutton = 0
 
                     #re-calibrate button
                     if lastbut[var_list.recalibrate] == 1:
-                        print("Re-Zero the steppers")
-                        self.sendtoUI.uitest()
-                        self.sendtoUI.recalibrateaxis()
+                        if var_list.safetybutton == 1:
+                            print("Re-Zero the steppers")
+                            self.sendtoUI.uitest()
+                            self.sendtoUI.recalibrateaxis()
+                            var_list.safetybutton = 0
 
                     #miscbuttonA - unused
                     if lastbut[var_list.miscbuttonA] == 1:
@@ -130,9 +119,10 @@ class buttonprogram:
 
                     #miscbuttonB - unused
                     if lastbut[var_list.miscbuttonB] == 1:
-                        print('send to drill working (AP,ML and DV advance')
-                        self.sendtoworking()
-
+                        if var_list.safetybutton == 1:
+                            print('send to drill working (AP,ML and DV advance')
+                            self.sendtoworking()
+                            var_list.safetybutton = 0
 
                 lastbut[i] = newbut[i]
 
@@ -161,14 +151,16 @@ class buttonprogram:
 
 #Button executes
     def endisstep(self):
-        if var_list.lastenablestate == 1:
-            GPIO.output(var_list.enableAll, 0)
-            var_list.lastenablestate = 0
-            print('steppers ENABLED manually')
-        else:
-            GPIO.output(var_list.enableAll, 1)
-            var_list.lastenablestate = 1
-            print('steppers DISABLED manually')
+        if var_list.safetybutton == 1:
+            if var_list.lastenablestate == 1:
+                GPIO.output(var_list.enableAll, 0)
+                var_list.lastenablestate = 0
+                print('steppers ENABLED manually')
+            else:
+                GPIO.output(var_list.enableAll, 1)
+                var_list.lastenablestate = 1
+                print('steppers DISABLED manually')
+            var_list.safetybutton = 0
 
 
     def setrelforall(self):
@@ -209,20 +201,18 @@ class buttonprogram:
 
     def hometoABSzero(self):
         print('home to ABS zero')
-        questionABSzero = self.get_user_input_button('ABSzero button pressed:', 'Home to absolute zero? (y) for yes')
-        if questionABSzero == 'y':
-            for x in range(var_list.DVsteps):
-                var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
-            for x in range(var_list.MLsteps):
-                var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
-            for x in range(var_list.APsteps):
-                var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
-            var_list.APmove.PosRelAbsCalc()
-            var_list.MLmove.PosRelAbsCalc()
-            var_list.DVmove.PosRelAbsCalc()
+        for x in range(var_list.DVsteps):
+            var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+        for x in range(var_list.MLsteps):
+            var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
+        for x in range(var_list.APsteps):
+            var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
+        var_list.APmove.PosRelAbsCalc()
+        var_list.MLmove.PosRelAbsCalc()
+        var_list.DVmove.PosRelAbsCalc()
 
-            GPIO.output(var_list.enableAll, 1)
-            var_list.lastenablestate = 1
+        GPIO.output(var_list.enableAll, 1)
+        var_list.lastenablestate = 1
 
     def upDVrelhomeAP_ML(self):
         print('relative home AP and ML homed DVup')

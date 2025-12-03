@@ -76,7 +76,9 @@ class threadedcontrols:
             var_list.MLmove.steppgo(var_list.MLleft, var_list.stepper_speed, var_list.btnSteps)
             var_list.MLmove.PosRelAbsCalc()
         elif event == RotaryEncoder.BUTTONDOWN:
-            print("hardwired event button A clicked")
+            # print("hardwired event button A clicked")
+            print('safety disengaged')
+            var_list.safetybutton = 1
             return
         elif event == RotaryEncoder.BUTTONUP:
             return
@@ -100,12 +102,14 @@ class threadedcontrols:
 
     def get_user_input(self,giventitle,givenprompt):
         # Create the root window
+        print('called get_user_input')
         root = tk.Tk()
+        print('root1')
         root.withdraw()  # Hide the root window
-
+        print('withdraw1')
         # Prompt the user for input
         user_input = simpledialog.askstring(title=giventitle, prompt=givenprompt)
-
+        print('should see window')
         # Print the user input
         if user_input is not None:
             print(f"User input: {user_input}")
@@ -118,11 +122,10 @@ class threadedcontrols:
         root.destroy()
 
     def questionzerosteppers(self):
-        zeroyorno = self.get_user_input('Input Required:', 'Do you wish to re-zero the steppers? (y) if yes')
-        if zeroyorno == 'y':
-            self.zerosteppers(3, var_list.backoff, var_list.btnSteps)
-            self.zerosteppers(1, var_list.backoff, var_list.btnSteps)
-            self.zerosteppers(2, var_list.backoff, var_list.btnSteps)
+        print('UI sent this to control thread')
+        self.zerosteppers(3, var_list.backoff, var_list.btnSteps)
+        self.zerosteppers(1, var_list.backoff, var_list.btnSteps)
+        self.zerosteppers(2, var_list.backoff, var_list.btnSteps)
 
     def zerosteppers(self, axis, backoff, btwnsteps):
         print('zero steppers called')

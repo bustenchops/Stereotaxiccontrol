@@ -159,4 +159,5 @@ class var_list:
     lastenablestate = 1
     emergencystopflag = 0
     engagebutton = 0
+    safetybutton = 0
 # concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)
