@@ -222,11 +222,11 @@ class buttonprogram:
         if var_list.MLrelpos > var_list.MLsteps:
             shiftdistance = var_list.MLrelpos - var_list.MLsteps
             for x in range(shiftdistance):
-                var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
+                var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
         elif var_list.MLsteps > var_list.MLrelpos:
             shiftdistance = var_list.MLsteps - var_list.MLrelpos
             for x in range(shiftdistance):
-                var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
+                var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
 
         if var_list.APsteps < var_list.APrelpos:
             shiftdistance = var_list.APrelpos - var_list.APsteps
