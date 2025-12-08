@@ -110,9 +110,9 @@ class var_list:
     DVadvance = 400
     MLadvance = 400
 
-    APworking = 6400
-    MLworking = 6070
-    DVworking = 3500
+    APworking = 7400
+    MLworking = 5740
+    DVworking = 2900
 
     DVup_bregramhome = 670 #about 0.5cm
 
