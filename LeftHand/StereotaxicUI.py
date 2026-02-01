@@ -199,9 +199,9 @@ class MainWindow(QMainWindow):
         self.ratoffsetcheck.setFont(radiobuttonfont)
 
         self.mouseoffsetcheck = QRadioButton("Mouse", self.widget)
-        self.mouseeoffsetcheck.setObjectName(u"mouseradio")
+        self.mouseoffsetcheck.setObjectName(u"mouseradio")
         self.mouseoffsetcheck.setGeometry(QRect(662, 100, 92, 20))
-        self.mouseeoffsetcheck.setFont(radiobuttonfont)
+        self.mouseoffsetcheck.setFont(radiobuttonfont)
 
 
         self.radiolabel = QLabel("Current Offset", self.widget)
