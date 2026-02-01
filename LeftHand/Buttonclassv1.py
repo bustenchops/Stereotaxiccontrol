@@ -73,11 +73,12 @@ class buttonprogram:
                         print('set relative DV')
                         self.setrelforDV()
 
-                    #button action - Home to Rel zero for AP and ML BUT DV goes all up
+                    #button action - Home to bregma (relative zero) for AP and ML BUT DV goes all up WAS THIS
+                    #1feb2026 - not gotolambda
                     if lastbut[var_list.homeRELzero] == 1:
                         if var_list.safetybutton == 1:
                             print('DV up AP and ML homed to rel')
-                            self.upDVrelhomeAP_ML()
+                            self.gotolambda()
                             var_list.safetybutton = 0
 
                     #miscbuttonC - DRILL to relative zero for AP and ML - DV up 0.5cm but still sets the relative pos
@@ -85,18 +86,21 @@ class buttonprogram:
                         if var_list.safetybutton == 1:
                             print('Drill offset start thread')
                             self.drillmovetooffset()
+                            var_list.safetybutton = 0
 
                     #miscbuttonD - needle to relative zero for AP and ML - DV up 0.5cm but still sets the relative pos
                     if lastbut[var_list.needleoff] == 1:
                         if var_list.safetybutton == 1:
                             print('Needle offset start thread')
                             self.needlemovetooffset()
+                            var_list.safetybutton = 0
 
                     #miscbuttonE - fiber to relative zero for AP and ML - DV up 0.5cm but still sets the relative pos
                     if lastbut[var_list.fiberoff] == 1:
                         if var_list.safetybutton == 1:
                             print('Fiber offset start thread')
                             self.fibermovetooffset()
+                            var_list.safetybutton = 0
 
                     #home to bregma (relative) moves DV up by value in variable list, positions AP and ML to relative home
                     if lastbut[var_list.bregmahome] == 1:
@@ -166,9 +170,52 @@ class buttonprogram:
     def gotolambda(self):
         if var_list.ratormouseselect == 1:
             var_list.rellambda = var_list.APrelpos - var_list.mouselambda
-
         if var_list.ratormouseselect == 2:
             var_list.rellambda = var_list.APrelpos - var_list.ratlambda
+
+        go_upDVby = var_list.DVrelpos - var_list.DVup_bregramhome
+        if (var_list.DVsteps > go_upDVby):
+            DVdiff = var_list.DVsteps - go_upDVby
+            for x in range(DVdiff):
+                var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+        else:
+            DVdiff = go_upDVby - var_list.DVsteps
+            for x in range(DVdiff):
+                var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
+
+        print(var_list.APrelpos, "APRelative")
+        print(var_list.APsteps, "APsteps")
+
+        if var_list.rellambda > var_list.APsteps:
+            APdiff = var_list.rellambda - var_list.APsteps
+            print('back')
+            for x in range(APdiff):
+                var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
+        else:
+            APdiff = var_list.APsteps - var_list.rellambda
+            print('forward')
+            for x in range(APdiff):
+                var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
+
+        print(var_list.MLrelpos, "mlRelative")
+        print(var_list.MLsteps, "mlsteps")
+
+        if var_list.MLrelpos > var_list.MLsteps:
+            MLdiff = var_list.MLrelpos - var_list.MLsteps
+            print('left')
+            for x in range(MLdiff):
+                var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
+        else:
+            MLdiff = var_list.MLsteps - var_list.MLrelpos
+            print('right')
+            for x in range(MLdiff):
+                var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
+        var_list.APmove.PosRelAbsCalc()
+        var_list.MLmove.PosRelAbsCalc()
+        var_list.DVmove.PosRelAbsCalc()
+
+        GPIO.output(var_list.enableAll, 1)
+        var_list.lastenablestate = 1
 
 
 
@@ -524,7 +571,7 @@ class buttonprogram:
         else:
             DVdiff = go_upDVby - var_list.DVsteps
             for x in range(DVdiff):
-                var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+                var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
 
         print(var_list.APrelpos,"APRelative")
         print(var_list.APsteps,"APsteps")
