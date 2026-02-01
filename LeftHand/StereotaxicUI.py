@@ -188,6 +188,21 @@ class MainWindow(QMainWindow):
         radiobuttonfont.setPointSize(12)
         radiobuttonfont.setBold(False)
 
+        self.radiolabel = QLabel("Rodent species", self.widget)
+        self.radiolabel.setObjectName(u"Animallabelmanual")
+        self.radiolabel.setGeometry(QRect(652, 40, 111, 16))
+        self.radiolabel.setFont(radiobuttonfont)
+
+        self.ratoffsetcheck = QRadioButton("Rat", self.widget)
+        self.ratoffsetcheck.setObjectName(u"ratradio")
+        self.ratoffsetcheck.setGeometry(QRect(662, 70, 92, 20))
+        self.ratoffsetcheck.setFont(radiobuttonfont)
+
+        self.mouseoffsetcheck = QRadioButton("Mouse", self.widget)
+        self.mouseeoffsetcheck.setObjectName(u"mouseradio")
+        self.mouseoffsetcheck.setGeometry(QRect(662, 100, 92, 20))
+        self.mouseeoffsetcheck.setFont(radiobuttonfont)
+
 
         self.radiolabel = QLabel("Current Offset", self.widget)
         self.radiolabel.setObjectName(u"DVlabelmanual")
