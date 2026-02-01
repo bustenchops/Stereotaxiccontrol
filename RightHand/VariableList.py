@@ -114,6 +114,8 @@ class var_list:
     MLworking = 5740
     DVworking = 2900
 
+    fullretract = 7650
+
     DVup_bregramhome = 268 #about 0.2cm
 
 # how many steps DV goes up and then back when changing the offsets to avoid scrapping the skull
