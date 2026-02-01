@@ -193,41 +193,77 @@ class MainWindow(QMainWindow):
         radiobuttonfont.setPointSize(12)
         radiobuttonfont.setBold(False)
 
-        self.speciesgroup.radiolabel = QLabel("Species", self.widget)
-        self.speciesgroup.radiolabel.setObjectName(u"Animallabelmanual")
-        self.speciesgroup.radiolabel.setGeometry(QRect(652, 40, 111, 16))
-        self.speciesgroup.radiolabel.setFont(radiobuttonfont)
+        self.speciesgrouplabel = QLabel("Species:", self)
+        self.speciesgrouplabel.setObjectName(u"speciesgrouplabel")
+        self.speciesgrouplabel.setGeometry(QRect(652, 40, 111, 16))
+        self.speciesgrouplabel.setFont(radiobuttonfont)
 
-        self.speciesgroup.ratoffsetcheck = QRadioButton("Rat", self.widget)
-        self.speciesgroup.ratoffsetcheck.setObjectName(u"ratradio")
-        self.speciesgroup.ratoffsetcheck.setGeometry(QRect(662, 70, 92, 20))
-        self.speciesgroup.ratoffsetcheck.setFont(radiobuttonfont)
+        # self.speciesgroup.radiolabel = QLabel("Species", self.widget)
+        # self.speciesgroup.radiolabel.setObjectName(u"Animallabelmanual")
+        # self.speciesgroup.radiolabel.setGeometry(QRect(652, 40, 111, 16))
+        # self.speciesgroup.radiolabel.setFont(radiobuttonfont)
 
-        self.speciesgroup.mouseoffsetcheck = QRadioButton("Mouse", self.widget)
-        self.speciesgroup.mouseoffsetcheck.setObjectName(u"mouseradio")
-        self.speciesgroup.mouseoffsetcheck.setGeometry(QRect(662, 100, 92, 20))
-        self.speciesgroup.mouseoffsetcheck.setFont(radiobuttonfont)
+        self.ratradio = QRadioButton("Rat", self)
+        self.ratradio.setGeometry(QRect(662, 70, 92, 20))
+        self.ratradio.setFont(radiobuttonfont)
 
+        self.mouseradio = QRadioButton("Rat", self)
+        self.mouseradio.setGeometry(QRect(662, 100, 92, 20))
+        self.mouseradio.setFont(radiobuttonfont)
 
-        self.offsetgroup.radiolabel = QLabel("Current Offset", self.widget)
-        self.offsetgroup.radiolabel.setObjectName(u"DVlabelmanual")
-        self.offsetgroup.radiolabel.setGeometry(QRect(652, 140, 111, 16))
-        self.offsetgroup.radiolabel.setFont(radiobuttonfont)
+        self.speciesgroup.addButton(self.ratradio)
+        self.speciesgroup.addButton(self.mouseradio)
 
-        self.offsetgroup.drilloffsetcheck = QRadioButton("Drill", self.widget)
-        self.offsetgroup.drilloffsetcheck.setObjectName(u"drillradio")
-        self.offsetgroup.drilloffsetcheck.setGeometry(QRect(662, 170, 92, 20))
-        self.offsetgroup.drilloffsetcheck.setFont(radiobuttonfont)
+        # self.speciesgroup.ratoffsetcheck = QRadioButton("Rat", self.widget)
+        # self.speciesgroup.ratoffsetcheck.setObjectName(u"ratradio")
+        # self.speciesgroup.ratoffsetcheck.setGeometry(QRect(662, 70, 92, 20))
+        # self.speciesgroup.ratoffsetcheck.setFont(radiobuttonfont)
 
-        self.offsetgroup.needleoffsetcheck = QRadioButton("Syringe", self.widget)
-        self.offsetgroup.needleoffsetcheck.setObjectName(u"needleradio")
-        self.offsetgroup.needleoffsetcheck.setGeometry(QRect(662, 200, 92, 20))
-        self.offsetgroup.needleoffsetcheck.setFont(radiobuttonfont)
+        # self.speciesgroup.mouseoffsetcheck = QRadioButton("Mouse", self.widget)
+        # self.speciesgroup.mouseoffsetcheck.setObjectName(u"mouseradio")
+        # self.speciesgroup.mouseoffsetcheck.setGeometry(QRect(662, 100, 92, 20))
+        # self.speciesgroup.mouseoffsetcheck.setFont(radiobuttonfont)
 
-        self.offsetgroup.fiberoffsetcheck = QRadioButton("Probe", self.widget)
-        self.offsetgroup.fiberoffsetcheck.setObjectName(u"proberadio")
-        self.offsetgroup.fiberoffsetcheck.setGeometry(QRect(662, 230, 92, 20))
-        self.offsetgroup.fiberoffsetcheck.setFont(radiobuttonfont)
+        self.offsetgrouplabel = QLabel("Current Offset:", self)
+        self.offsetgrouplabel.setObjectName(u"offsetgrouplabel")
+        self.offsetgrouplabel.setGeometry(QRect(652, 140, 111, 16))
+        self.offsetgrouplabel.setFont(radiobuttonfont)
+
+        # self.offsetgroup.radiolabel = QLabel("Current Offset", self.widget)
+        # self.offsetgroup.radiolabel.setObjectName(u"DVlabelmanual")
+        # self.offsetgroup.radiolabel.setGeometry(QRect(652, 140, 111, 16))
+        # self.offsetgroup.radiolabel.setFont(radiobuttonfont)
+
+        self.drillradio = QRadioButton("Drill", self)
+        self.drillradio.setGeometry(QRect(662, 170, 92, 20))
+        self.drillradio.setFont(radiobuttonfont)
+
+        self.needleradio = QRadioButton("Syringe", self)
+        self.needleradio.setGeometry(QRect(662, 200, 92, 20))
+        self.needleradio.setFont(radiobuttonfont)
+
+        self.fiberradio = QRadioButton("Probe", self)
+        self.fiberradio.setGeometry(QRect(662, 230, 92, 20))
+        self.fiberradio.setFont(radiobuttonfont)
+
+        self.offsetgroup.addButton(self.drillradio)
+        self.offsetgroup.addButton(self.needleradio)
+        self.offsetgroup.addButton(self.fiberradio)
+
+        # self.offsetgroup.drilloffsetcheck = QRadioButton("Drill", self.widget)
+        # self.offsetgroup.drilloffsetcheck.setObjectName(u"drillradio")
+        # self.offsetgroup.drilloffsetcheck.setGeometry(QRect(662, 170, 92, 20))
+        # self.offsetgroup.drilloffsetcheck.setFont(radiobuttonfont)
+        #
+        # self.offsetgroup.needleoffsetcheck = QRadioButton("Syringe", self.widget)
+        # self.offsetgroup.needleoffsetcheck.setObjectName(u"needleradio")
+        # self.offsetgroup.needleoffsetcheck.setGeometry(QRect(662, 200, 92, 20))
+        # self.offsetgroup.needleoffsetcheck.setFont(radiobuttonfont)
+        #
+        # self.offsetgroup.fiberoffsetcheck = QRadioButton("Probe", self.widget)
+        # self.offsetgroup.fiberoffsetcheck.setObjectName(u"proberadio")
+        # self.offsetgroup.fiberoffsetcheck.setGeometry(QRect(662, 230, 92, 20))
+        # self.offsetgroup.fiberoffsetcheck.setFont(radiobuttonfont)
 
         self.checkBox = QCheckBox("Make it so", self.widget)
         self.checkBox.setObjectName(u"engagecheckbox")
@@ -330,24 +366,24 @@ class MainWindow(QMainWindow):
 #sets the radio button for rat or mouse
     @Slot()
     def ratselected(self):
-        self.speciesgroup.ratoffsetcheck.toggle()
+        self.ratradio.toggle()
 
     @Slot()
     def mouseselected(self):
-        self.speciesgroup.mouseoffsetcheck.toggle()
+        self.mouseradio.toggle()
 
 #controls the toggles for the drill, needle and probe
     @Slot()
     def drilloffset(self):
-        self.offsetgroup.drilloffsetcheck.toggle()
+        self.drillradio.toggle()
 
     @Slot()
     def needleoffset(self):
-        self.offsetgroup.needleoffsetcheck.toggle()
+        self.needleradio.toggle()
 
     @Slot()
     def probeoffset(self):
-        self.offsetgroup.fiberoffsetcheck.toggle()
+        self.fiberradio.toggle()
 
 # Report Current Speed
     @Slot(int)
