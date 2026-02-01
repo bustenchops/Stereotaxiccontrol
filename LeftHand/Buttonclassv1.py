@@ -659,8 +659,6 @@ class buttonprogram:
         var_list.MLmove.PosRelAbsCalc()
         var_list.DVmove.PosRelAbsCalc()
 
-        print('Zero to working preset')
-
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
         self.sendtoUI.drilloffset()

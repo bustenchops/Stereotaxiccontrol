@@ -114,7 +114,7 @@ class var_list:
     MLworking = 5740
     DVworking = 2900
 
-    DVup_bregramhome = 670 #about 0.5cm
+    DVup_bregramhome = 268 #about 0.2cm
 
 # how many steps DV goes up and then back when changing the offsets to avoid scrapping the skull
     DVup_OffsetSafety = 1340 #about 1cm
@@ -160,4 +160,10 @@ class var_list:
     emergencystopflag = 0
     engagebutton = 0
     safetybutton = 0
+
+    ratormouseselect = 1  #1 is mouse 2 is rat (mouse default)
+    ratlambda = 1208   # steps for 9mm at 0.0745 per step
+    mouselambda = 550  # steps for 4.1mm at 0.0745 per step
+    rellambda = 0
+
 # concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)

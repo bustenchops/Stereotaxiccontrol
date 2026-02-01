@@ -187,6 +187,9 @@ class threadedcontrols:
         print('disable steppers')
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
+        print('set back to drill')
+        self.sendtoUI.drilloffset()
+        var_list.TOGGLEoff = 1
 
 
     def importcalibrationfile(self, filenameis):
@@ -419,9 +422,10 @@ class threadedcontrols:
         self.DVroto = RotaryEncoder(var_list.rotoA_DV, var_list.rotoB_DV, var_list.misc_eventbuttonB, self.DV_event)
 
 
-        print('Set Drill toggle')
+        print('Set Drill toggle and Mouse settings')
         time.sleep(1)
         self.sendtoUI.drilloffset()
+        self.sendtoUI.mouseselected()
         self.calibratethings()
 
 # concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)

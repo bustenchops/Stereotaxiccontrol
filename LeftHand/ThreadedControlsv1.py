@@ -423,7 +423,7 @@ class threadedcontrols:
 
 
         print('Set Drill toggle and Mouse settings')
-        time.sleep(2)
+        time.sleep(1)
         self.sendtoUI.drilloffset()
         self.sendtoUI.mouseselected()
         self.calibratethings()
