@@ -82,18 +82,21 @@ class buttonprogram:
 
                     #miscbuttonC - DRILL to relative zero for AP and ML - DV up 0.5cm but still sets the relative pos
                     if lastbut[var_list.drilloff] == 1:
-                        print('Drill offset start thread')
-                        self.drillmovetooffset()
+                        if var_list.safetybutton == 1:
+                            print('Drill offset start thread')
+                            self.drillmovetooffset()
 
                     #miscbuttonD - needle to relative zero for AP and ML - DV up 0.5cm but still sets the relative pos
                     if lastbut[var_list.needleoff] == 1:
-                        print('Needle offset start thread')
-                        self.needlemovetooffset()
+                        if var_list.safetybutton == 1:
+                            print('Needle offset start thread')
+                            self.needlemovetooffset()
 
                     #miscbuttonE - fiber to relative zero for AP and ML - DV up 0.5cm but still sets the relative pos
                     if lastbut[var_list.fiberoff] == 1:
-                        print('Fiber offset start thread')
-                        self.fibermovetooffset()
+                        if var_list.safetybutton == 1:
+                            print('Fiber offset start thread')
+                            self.fibermovetooffset()
 
                     #home to bregma (relative) moves DV up by value in variable list, positions AP and ML to relative home
                     if lastbut[var_list.bregmahome] == 1:
