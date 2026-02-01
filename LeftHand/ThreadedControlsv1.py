@@ -188,6 +188,7 @@ class threadedcontrols:
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
         print('set back to drill')
+        self.sendtoUI.drilloffset()
         var_list.TOGGLEoff = 1
 
 
