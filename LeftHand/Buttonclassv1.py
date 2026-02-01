@@ -584,15 +584,15 @@ class buttonprogram:
             for x in range(self.DVstepdiff):
                 var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
 
+        var_list.APrelpos = var_list.APsteps
+        var_list.MLrelpos = var_list.MLsteps
+        var_list.DVrelpos = var_list.DVsteps
+
         var_list.APmove.PosRelAbsCalc()
         var_list.MLmove.PosRelAbsCalc()
         var_list.DVmove.PosRelAbsCalc()
 
         print('Zero to working preset')
-
-        var_list.APrelpos = var_list.APsteps
-        var_list.MLrelpos = var_list.MLsteps
-        var_list.DVrelpos = var_list.DVsteps
 
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
