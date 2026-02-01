@@ -113,14 +113,14 @@ class buttonprogram:
                             self.sendtoUI.recalibrateaxis()
                             var_list.safetybutton = 0
 
-                    #miscbuttonA - unused
+                    #miscbuttonA - unused - this is the disable button
                     if lastbut[var_list.miscbuttonA] == 1:
                         print('enable/disable steppers')
                         self.endisstep()
                         self.sendtoUI.uitest()
 
 
-                    #miscbuttonB - unused
+                    #miscbuttonB - unused - go to preset
                     if lastbut[var_list.miscbuttonB] == 1:
                         if var_list.safetybutton == 1:
                             print('send to drill working (AP,ML and DV advance')
@@ -250,6 +250,8 @@ class buttonprogram:
     def drillmovetooffset(self):
         #print('offset set to DRILL')
         #self.sendtoUI.uitest()
+        print('Moving to home position first')
+        self.bregmahome()
         print('Move to drill offset')
         self.sendtoUI.drilloffset()
 
@@ -326,6 +328,8 @@ class buttonprogram:
     def needlemovetooffset(self):
         # print('offset set to Needle')
         # self.sendtoUI.uitest()
+        print('Moving to home position first')
+        self.bregmahome()
         print('Move to Syringe Offset')
         self.sendtoUI.needleoffset()
 
@@ -408,6 +412,8 @@ class buttonprogram:
     def fibermovetooffset(self):
         # print('offset set to Fiber')
         # self.sendtoUI.uitest()
+        print('Moving to home position first')
+        self.bregmahome()
         print('Move to Probe offset')
         self.sendtoUI.probeoffset()
 
@@ -490,11 +496,14 @@ class buttonprogram:
 
     def bregmahome(self):
         print('goto bregma but lift DV up by value in variable list')
-        if (var_list.DVsteps > var_list.DVup_bregramhome):
-            for x in range(var_list.DVup_bregramhome):
+        go_upDVby = var_list.DVrelpos - var_list.DVup_bregramhome
+        if (var_list.DVsteps > go_upDVby):
+            DVdiff = var_list.DVsteps - go_upDVby
+            for x in range(DVdiff):
                 var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
         else:
-            for x in range(var_list.DVsteps):
+            DVdiff = go_upDVby - var_list.DVsteps
+            for x in range(DVdiff):
                 var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
 
         print(var_list.APrelpos,"APRelative")
@@ -578,6 +587,12 @@ class buttonprogram:
         var_list.APmove.PosRelAbsCalc()
         var_list.MLmove.PosRelAbsCalc()
         var_list.DVmove.PosRelAbsCalc()
+
+        print('Zero to working preset')
+
+        var_list.APrelpos = var_list.APsteps
+        var_list.MLrelpos = var_list.MLsteps
+        var_list.DVrelpos = var_list.DVsteps
 
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
