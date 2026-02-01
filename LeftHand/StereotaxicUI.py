@@ -322,6 +322,15 @@ class MainWindow(QMainWindow):
         self.MLmanualenter.setPlainText(MLlist)
         self.DVmanualenter.setPlainText(DVlist)
 
+#sets the radio button for rat or mouse
+    @Slot()
+    def ratselected(self):
+        self.ratoffsetcheck.toggle()
+
+    @Slot()
+    def mouseselected(self):
+        self.mouseoffsetcheck.toggle()
+
 #controls the toggles for the drill, needle and probe
     @Slot()
     def drilloffset(self):

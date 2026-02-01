@@ -113,10 +113,11 @@ class buttonprogram:
                             self.sendtoUI.recalibrateaxis()
                             var_list.safetybutton = 0
 
-                    #miscbuttonA - unused - this is the disable button
+                    #miscbuttonA - unused - this WAS the disable button
+                    #1feb2026 it is now the Rat / Mouse selector
                     if lastbut[var_list.miscbuttonA] == 1:
                         print('enable/disable steppers')
-                        self.endisstep()
+                        self.ratormouse()
                         self.sendtoUI.uitest()
 
 
@@ -153,6 +154,26 @@ class buttonprogram:
         return lastbut
 
 #Button executes
+    def ratormouse(self):
+        if var_list.ratormouseselect == 2:
+            var_list.ratormouseselect = 1
+            self.sendtoUI.mouseoffset()
+
+        if var_list.ratormouseselect == 1:
+            var_list.ratormouseselect = 2
+            self.sendtoUI.ratoffset()
+
+
+    def gotolambda(self):
+        if var_list.ratormouseselect == 1:
+            var_list.rellambda = var_list.APrelpos - var_list.mouselambda
+
+        if var_list.ratormouseselect == 2:
+            var_list.rellambda = var_list.APrelpos - var_list.ratlambda
+
+
+
+    # this if a function to disable the steppers...it has not seen much use so it does not currently have have a button call
     def endisstep(self):
         if var_list.safetybutton == 1:
             if var_list.lastenablestate == 1:
