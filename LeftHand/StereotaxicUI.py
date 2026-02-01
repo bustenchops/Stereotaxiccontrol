@@ -188,7 +188,7 @@ class MainWindow(QMainWindow):
         radiobuttonfont.setPointSize(12)
         radiobuttonfont.setBold(False)
 
-        self.radiolabel = QLabel("Rodent species", self.widget)
+        self.radiolabel = QLabel("Species", self.widget)
         self.radiolabel.setObjectName(u"Animallabelmanual")
         self.radiolabel.setGeometry(QRect(652, 40, 111, 16))
         self.radiolabel.setFont(radiobuttonfont)
