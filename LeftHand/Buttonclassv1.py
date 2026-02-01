@@ -275,8 +275,9 @@ class buttonprogram:
             var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
         for x in range(var_list.MLsteps):
             var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
-        for x in range(var_list.APsteps):
-            var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
+        fullretraactdiff = var_list.fullretract - var_list.APsteps
+        for x in range(fullretraactdiff):
+            var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
         var_list.APmove.PosRelAbsCalc()
         var_list.MLmove.PosRelAbsCalc()
         var_list.DVmove.PosRelAbsCalc()
