@@ -276,7 +276,7 @@ class buttonprogram:
             print(self.DVdifferential,"DV differential")
             print(self.MLdifferential,"ML differential")
             print(self.APdifferential,"AP differential")
-            print(var_list.TOGGLEoff, 'toggle')
+            print(var_list.TOGGLEoff, 'toggle drill')
 
             for x in range(var_list.DVup_OffsetSafety):
                 var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
@@ -596,6 +596,7 @@ class buttonprogram:
 
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
+        var_list.TOGGLEoff = 1
 
 # concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)
 

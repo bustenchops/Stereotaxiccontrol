@@ -187,6 +187,8 @@ class threadedcontrols:
         print('disable steppers')
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
+        print('set back to drill')
+        var_list.TOGGLEoff = 1
 
 
     def importcalibrationfile(self, filenameis):
