@@ -114,7 +114,7 @@ class var_list:
     MLworking = 6070
     DVworking = 3500
 
-    DVup_bregramhome = 325 #about 0.2cm
+    DVup_bregramhome = 268 #about 0.2cm
 
 # how many steps DV goes up and then back when changing the offsets to avoid scrapping the skull
     DVup_OffsetSafety = 1340 #about 1cm
