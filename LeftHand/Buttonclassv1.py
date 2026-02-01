@@ -158,8 +158,7 @@ class buttonprogram:
         if var_list.ratormouseselect == 2:
             var_list.ratormouseselect = 1
             self.sendtoUI.mouseselected()
-
-        if var_list.ratormouseselect == 1:
+        elif var_list.ratormouseselect == 1:
             var_list.ratormouseselect = 2
             self.sendtoUI.ratselected()
 
