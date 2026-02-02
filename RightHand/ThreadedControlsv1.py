@@ -43,7 +43,7 @@ class threadedcontrols:
 
 # Shuts down steppers regardless of what they were doing direction - restart by re-zeroing
     def emergencystop(self):
-        doubleclicktime = 1                         #remove later
+        doubleclicktime = 0.6                       #remove later
         now = time.time()                           #remove later
         if now - self.lasttime > doubleclicktime:   #remove later
             self.countpush += 1                     #remove later
@@ -51,7 +51,7 @@ class threadedcontrols:
             self.countpush = 1                      #remove later
             self.lasttime = now                     #remove later
 
-        if self.countpush == 2:                     #remove later
+        if self.countpush == 3:                     #remove later
             GPIO.output(var_list.enableAll, 1)
             var_list.lastenablestate = 1
             var_list.emergencystopflag = 1
