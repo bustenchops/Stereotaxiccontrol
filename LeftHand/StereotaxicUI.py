@@ -171,20 +171,24 @@ class MainWindow(QMainWindow):
         self.DVmanualenter.setGeometry(QRect(530, 460, 75, 40))
         self.DVmanualenter.setFont(manualenterfont)
 
+        coordlabelfont = QFont()
+        coordlabelfont.setPointSize(16)
+        coordlabelfont.setBold(True)
+
         self.APlabel = QLabel("AP", self.widget)
         self.APlabel.setObjectName(u"APlabelmanual")
         self.APlabel.setGeometry(QRect(500, 360, 41, 40))
-        self.APlabel.setFont(toplabelfont)
+        self.APlabel.setFont(coordlabelfont)
 
         self.MLlabel = QLabel("ML", self.widget)
         self.MLlabel.setObjectName(u"MLlabelmanual")
         self.MLlabel.setGeometry(QRect(500, 410, 41, 40))
-        self.MLlabel.setFont(toplabelfont)
+        self.MLlabel.setFont(coordlabelfont)
 
         self.DVlabel = QLabel("DV", self.widget)
         self.DVlabel.setObjectName(u"DVlabelmanual")
         self.DVlabel.setGeometry(QRect(500, 460, 41, 40))
-        self.DVlabel.setFont(toplabelfont)
+        self.DVlabel.setFont(coordlabelfont)
 
 
 
