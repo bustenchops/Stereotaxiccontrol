@@ -29,7 +29,7 @@ class MainWindow(QMainWindow):
 
         self.APstepLCD = QLCDNumber(self.widget)
         self.APstepLCD.setObjectName(u"APstepLCD")
-        self.APstepLCD.setGeometry(QRect(170, 37, 90, 45))
+        self.APstepLCD.setGeometry(QRect(150, 37, 90, 45))
         self.APstepLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.APstepLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.APstepLCD.setLineWidth(1)
@@ -38,7 +38,7 @@ class MainWindow(QMainWindow):
 
         self.MLstepLCD = QLCDNumber(self.widget)
         self.MLstepLCD.setObjectName(u"MLstepLCD")
-        self.MLstepLCD.setGeometry(QRect(340, 37, 90, 45))
+        self.MLstepLCD.setGeometry(QRect(320, 37, 90, 45))
         self.MLstepLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.MLstepLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.MLstepLCD.setLineWidth(1)
@@ -47,7 +47,7 @@ class MainWindow(QMainWindow):
 
         self.DVstepLCD = QLCDNumber(self.widget)
         self.DVstepLCD.setObjectName(u"DVstepLCD")
-        self.DVstepLCD.setGeometry(QRect(500, 37, 90, 45))
+        self.DVstepLCD.setGeometry(QRect(480, 37, 90, 45))
         self.DVstepLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.DVstepLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.DVstepLCD.setLineWidth(1)
@@ -56,7 +56,7 @@ class MainWindow(QMainWindow):
 
         self.APABSposLCD = QLCDNumber(self.widget)
         self.APABSposLCD.setObjectName(u"APABSposLCD")
-        self.APABSposLCD.setGeometry(QRect(170, 92, 90, 45))
+        self.APABSposLCD.setGeometry(QRect(150, 92, 90, 45))
         self.APABSposLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.APABSposLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.APABSposLCD.setLineWidth(1)
@@ -65,7 +65,7 @@ class MainWindow(QMainWindow):
 
         self.MLABSposLCD = QLCDNumber(self.widget)
         self.MLABSposLCD.setObjectName(u"MLABSposLCD")
-        self.MLABSposLCD.setGeometry(QRect(340, 92, 90, 45))
+        self.MLABSposLCD.setGeometry(QRect(320, 92, 90, 45))
         self.MLABSposLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.MLABSposLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.MLABSposLCD.setLineWidth(1)
@@ -74,7 +74,7 @@ class MainWindow(QMainWindow):
 
         self.DVABSposLCD = QLCDNumber(self.widget)
         self.DVABSposLCD.setObjectName(u"DVABSposLCD")
-        self.DVABSposLCD.setGeometry(QRect(500, 92, 90, 45))
+        self.DVABSposLCD.setGeometry(QRect(480, 92, 90, 45))
         self.DVABSposLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.DVABSposLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.DVABSposLCD.setLineWidth(1)
@@ -83,7 +83,7 @@ class MainWindow(QMainWindow):
 
         self.APRelposLCD = QLCDNumber(self.widget)
         self.APRelposLCD.setObjectName(u"APRelposLCD")
-        self.APRelposLCD.setGeometry(QRect(170, 157, 131, 61))
+        self.APRelposLCD.setGeometry(QRect(150, 157, 131, 61))
         self.APRelposLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.APRelposLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.APRelposLCD.setLineWidth(1)
@@ -92,7 +92,7 @@ class MainWindow(QMainWindow):
 
         self.MLRelposLCD = QLCDNumber(self.widget)
         self.MLRelposLCD.setObjectName(u"MLRelposLCD")
-        self.MLRelposLCD.setGeometry(QRect(340, 157, 131, 61))
+        self.MLRelposLCD.setGeometry(QRect(320, 157, 131, 61))
         self.MLRelposLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.MLRelposLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.MLRelposLCD.setLineWidth(1)
@@ -101,7 +101,7 @@ class MainWindow(QMainWindow):
 
         self.DVRelposLCD = QLCDNumber(self.widget)
         self.DVRelposLCD.setObjectName(u"DVRelposLCD")
-        self.DVRelposLCD.setGeometry(QRect(500, 157, 131, 61))
+        self.DVRelposLCD.setGeometry(QRect(480, 157, 131, 61))
         self.DVRelposLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.DVRelposLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.DVRelposLCD.setLineWidth(1)
@@ -137,19 +137,19 @@ class MainWindow(QMainWindow):
 
         self.stepposlabel = QLabel("Step:", self.widget)
         self.stepposlabel.setObjectName(u"stepposlabel")
-        self.stepposlabel.setGeometry(QRect(60, 37, 111, 41))
+        self.stepposlabel.setGeometry(QRect(40, 37, 111, 41))
         self.stepposlabel.setFont(poslabelfont)
 
 
 
         self.ABSposLabel = QLabel("ABS:", self.widget)
         self.ABSposLabel.setObjectName(u"ABSposlabel")
-        self.ABSposLabel.setGeometry(QRect(60, 92, 111, 61))
+        self.ABSposLabel.setGeometry(QRect(40, 92, 111, 61))
         self.ABSposLabel.setFont(poslabelfont)
 
         self.RELposLabel = QLabel("REL:", self.widget)
         self.RELposLabel.setObjectName(u"RELposlabel")
-        self.RELposLabel.setGeometry(QRect(60, 157, 111, 61))
+        self.RELposLabel.setGeometry(QRect(40, 152, 111, 61))
         self.RELposLabel.setFont(poslabelfont)
 
         manualenterfont = QFont()
