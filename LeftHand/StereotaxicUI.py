@@ -270,7 +270,7 @@ class MainWindow(QMainWindow):
 
         self.armcoordinatebutton = QPushButton("Arm Coordinates", self.widget)
         self.armcoordinatebutton.setObjectName(u"armcoordinatebutton")
-        self.armcoordinatebutton.setGeometry(QRect(15, 450, 161, 31))
+        self.armcoordinatebutton.setGeometry(QRect(105, 450, 161, 31))
         self.armcoordinatebutton.setFont(stepposlabelfont)
         self.armcoordinatebutton.clicked.connect(self.selectlistcoordinates)
 
@@ -288,7 +288,7 @@ class MainWindow(QMainWindow):
 
         self.listWidget = QListWidget(self.widget)
         self.listWidget.setObjectName(u"listWidget")
-        self.listWidget.setGeometry(QRect(35, 273, 320, 200))
+        self.listWidget.setGeometry(QRect(35, 273, 320, 160))
         self.listWidget.setFont(stepposlabelfont)
 
         self.menubar = QMenuBar()
