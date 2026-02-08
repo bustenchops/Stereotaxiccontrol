@@ -23,13 +23,13 @@ class MainWindow(QMainWindow):
 #Setup GUI LAYOUT
 
         self.setObjectName(u"MainWindow")
-        self.resize(1240, 500)
+        self.resize(1240, 550)
 
         self.widget = QWidget()
 
         self.APstepLCD = QLCDNumber(self.widget)
         self.APstepLCD.setObjectName(u"APstepLCD")
-        self.APstepLCD.setGeometry(QRect(170, 37, 131, 61))
+        self.APstepLCD.setGeometry(QRect(170, 37, 70, 30))
         self.APstepLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.APstepLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.APstepLCD.setLineWidth(1)
