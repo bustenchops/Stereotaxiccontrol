@@ -202,6 +202,11 @@ class MainWindow(QMainWindow):
         radiobuttonfont.setPointSize(12)
         radiobuttonfont.setBold(False)
 
+        self.targetlabel = QLabel("Selected Target:", self)
+        self.targetlabel.setObjectName(u"selectedtargetlabel")
+        self.targetlabel.setGeometry(QRect(490, 275, 111, 16))
+        self.targetlabel.setFont(radiobuttonfont)
+
         self.speciesgrouplabel = QLabel("Set Species:", self)
         self.speciesgrouplabel.setObjectName(u"speciesgrouplabel")
         self.speciesgrouplabel.setGeometry(QRect(575, 35, 111, 16))
