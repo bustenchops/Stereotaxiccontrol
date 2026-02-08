@@ -229,7 +229,7 @@ class MainWindow(QMainWindow):
 
         self.DVinsertpauselabel = QLabel("# pauses:", self)
         self.DVinsertpauselabel.setObjectName(u"dvnumberpauses")
-        self.DVinsertpauselabel.setGeometry(QRect(703, 460, 130, 20))
+        self.DVinsertpauselabel.setGeometry(QRect(703, 430, 130, 20))
         self.DVinsertpauselabel.setFont(smalllabelfont)
 
         self.DVinsertpausetimelabel = QLabel("pause time:", self)
@@ -239,7 +239,7 @@ class MainWindow(QMainWindow):
 
         self.DVinsertdepthlabel = QLabel("Target DV:", self)
         self.DVinsertdepthlabel.setObjectName(u"dvtargetdepth")
-        self.DVinsertdepthlabel.setGeometry(QRect(615, 445, 130, 20))
+        self.DVinsertdepthlabel.setGeometry(QRect(615, 425, 130, 20))
         self.DVinsertdepthlabel.setFont(smalllabelfont)
 
         self.withdrawcheckbox = QCheckBox("Withdraw:", self.widget)
