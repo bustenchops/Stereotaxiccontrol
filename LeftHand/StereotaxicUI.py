@@ -260,7 +260,7 @@ class MainWindow(QMainWindow):
 
         self.checkBox = QCheckBox("Make it so", self.widget)
         self.checkBox.setObjectName(u"engagecheckbox")
-        self.checkBox.setGeometry(QRect(530, 270, 105, 20))
+        self.checkBox.setGeometry(QRect(400, 270, 105, 20))
         self.checkBox.setFont(radiobuttonfont)
 
         self.safetyBox = QCheckBox("Safety Disengaged", self.widget)
@@ -282,7 +282,7 @@ class MainWindow(QMainWindow):
 
         self.movebutton = QPushButton("Engage", self.widget)
         self.movebutton.setObjectName(u"movebutton")
-        self.movebutton.setGeometry(QRect(540, 310, 101, 81))
+        self.movebutton.setGeometry(QRect(400, 310, 101, 81))
         self.movebutton.setFont(stepposlabelfont)
         self.movebutton.clicked.connect(self.plaintextgrab)
 
