@@ -186,6 +186,11 @@ class MainWindow(QMainWindow):
         self.DVlabel.setGeometry(QRect(500, 460, 41, 40))
         self.DVlabel.setFont(toplabelfont)
 
+        self.speciesgrouplabel = QLabel("Selected Target:", self)
+        self.speciesgrouplabel.setObjectName(u"selectedtargetlabel")
+        self.speciesgrouplabel.setGeometry(QRect(490, 275, 111, 16))
+        self.speciesgrouplabel.setFont(radiobuttonfont)
+
         self.speciesgroup = QButtonGroup(self)
         self.speciesgroup.setExclusive(True)
         self.offsetgroup = QButtonGroup(self)
@@ -285,8 +290,6 @@ class MainWindow(QMainWindow):
         self.loadpresetbutton.setGeometry(QRect(105, 230, 171, 31))
         self.loadpresetbutton.setFont(stepposlabelfont)
         self.loadpresetbutton.clicked.connect(self.choseafile)
-
-
 
         self.listWidget = QListWidget(self.widget)
         self.listWidget.setObjectName(u"listWidget")
