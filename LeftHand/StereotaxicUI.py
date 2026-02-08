@@ -158,32 +158,32 @@ class MainWindow(QMainWindow):
 
         self.APmanualenter = QPlainTextEdit(self.widget)
         self.APmanualenter.setObjectName(u"APmanualenter")
-        self.APmanualenter.setGeometry(QRect(530, 260, 91, 40))
+        self.APmanualenter.setGeometry(QRect(530, 360, 75, 40))
         self.APmanualenter.setFont(manualenterfont)
 
         self.MLmanualenter = QPlainTextEdit(self.widget)
         self.MLmanualenter.setObjectName(u"MLmanualenter")
-        self.MLmanualenter.setGeometry(QRect(530, 310, 91, 40))
+        self.MLmanualenter.setGeometry(QRect(530, 410, 75, 40))
         self.MLmanualenter.setFont(manualenterfont)
 
         self.DVmanualenter = QPlainTextEdit(self.widget)
         self.DVmanualenter.setObjectName(u"DVmanualenter")
-        self.DVmanualenter.setGeometry(QRect(530, 360, 91, 40))
+        self.DVmanualenter.setGeometry(QRect(530, 460, 75, 40))
         self.DVmanualenter.setFont(manualenterfont)
 
         self.APlabel = QLabel("AP", self.widget)
         self.APlabel.setObjectName(u"APlabelmanual")
-        self.APlabel.setGeometry(QRect(500, 260, 41, 40))
+        self.APlabel.setGeometry(QRect(500, 360, 41, 40))
         self.APlabel.setFont(toplabelfont)
 
         self.MLlabel = QLabel("ML", self.widget)
         self.MLlabel.setObjectName(u"MLlabelmanual")
-        self.MLlabel.setGeometry(QRect(500, 310, 41, 40))
+        self.MLlabel.setGeometry(QRect(500, 410, 41, 40))
         self.MLlabel.setFont(toplabelfont)
 
         self.DVlabel = QLabel("DV", self.widget)
         self.DVlabel.setObjectName(u"DVlabelmanual")
-        self.DVlabel.setGeometry(QRect(500, 360, 41, 40))
+        self.DVlabel.setGeometry(QRect(500, 460, 41, 40))
         self.DVlabel.setFont(toplabelfont)
 
         self.speciesgroup = QButtonGroup(self)
