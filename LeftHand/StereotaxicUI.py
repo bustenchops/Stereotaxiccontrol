@@ -248,7 +248,7 @@ class MainWindow(QMainWindow):
 
         self.DVinsertmanrate = QPlainTextEdit(self.widget)
         self.DVinsertmanrate.setObjectName(u"DVinsertmanrate")
-        self.DVinsertmanrate.setGeometry(QRect(621, 385, 60, 33))
+        self.DVinsertmanrate.setGeometry(QRect(621, 385, 60, 31))
         self.DVinsertmanrate.setFont(smalllmanualfont)
 
         self.DVinserttarget = QPlainTextEdit(self.widget)
