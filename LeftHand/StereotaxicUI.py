@@ -113,7 +113,7 @@ class MainWindow(QMainWindow):
         toplabelfont.setBold(True)
 
         smalllabelfont = QFont()
-        smalllabelfont.setPointSize(7)
+        smalllabelfont.setPointSize(8)
         smalllabelfont.setBold(False)
 
         poslabelfont = QFont()
