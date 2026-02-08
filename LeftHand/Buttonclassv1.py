@@ -273,8 +273,9 @@ class buttonprogram:
         print('home to ABS zero')
         for x in range(var_list.DVsteps):
             var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
-        for x in range(var_list.MLsteps):
-            var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
+        fullMLretractdiff = var_list.fullretractML - var_list.MLsteps
+        for x in range(fullMLretractdiff):
+            var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
         fullretraactdiff = var_list.fullretract - var_list.APsteps
         for x in range(fullretraactdiff):
             var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)

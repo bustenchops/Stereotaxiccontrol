@@ -115,6 +115,7 @@ class var_list:
     DVworking = 3500
 
     fullretract = 7650
+    fullretractML = 9500
 
     DVup_bregramhome = 268 #about 0.2cm
 
