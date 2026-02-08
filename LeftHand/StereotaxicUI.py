@@ -186,10 +186,7 @@ class MainWindow(QMainWindow):
         self.DVlabel.setGeometry(QRect(500, 460, 41, 40))
         self.DVlabel.setFont(toplabelfont)
 
-        self.speciesgrouplabel = QLabel("Selected Target:", self)
-        self.speciesgrouplabel.setObjectName(u"selectedtargetlabel")
-        self.speciesgrouplabel.setGeometry(QRect(490, 275, 111, 16))
-        self.speciesgrouplabel.setFont(radiobuttonfont)
+
 
         self.speciesgroup = QButtonGroup(self)
         self.speciesgroup.setExclusive(True)
@@ -205,7 +202,7 @@ class MainWindow(QMainWindow):
         self.targetlabel = QLabel("Selected Target:", self)
         self.targetlabel.setObjectName(u"selectedtargetlabel")
         self.targetlabel.setGeometry(QRect(490, 275, 111, 16))
-        self.targetlabel.setFont(radiobuttonfont)
+        self.stargetlabel.setFont(radiobuttonfont)
 
         self.speciesgrouplabel = QLabel("Set Species:", self)
         self.speciesgrouplabel.setObjectName(u"speciesgrouplabel")
