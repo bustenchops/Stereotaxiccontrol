@@ -38,7 +38,7 @@ class MainWindow(QMainWindow):
 
         self.MLstepLCD = QLCDNumber(self.widget)
         self.MLstepLCD.setObjectName(u"MLstepLCD")
-        self.MLstepLCD.setGeometry(QRect(340, 37, 131, 61))
+        self.MLstepLCD.setGeometry(QRect(340, 37, 90, 45))
         self.MLstepLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.MLstepLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.MLstepLCD.setLineWidth(1)
@@ -47,7 +47,7 @@ class MainWindow(QMainWindow):
 
         self.DVstepLCD = QLCDNumber(self.widget)
         self.DVstepLCD.setObjectName(u"DVstepLCD")
-        self.DVstepLCD.setGeometry(QRect(500, 37, 131, 61))
+        self.DVstepLCD.setGeometry(QRect(500, 37, 90, 45))
         self.DVstepLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.DVstepLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.DVstepLCD.setLineWidth(1)
@@ -56,7 +56,7 @@ class MainWindow(QMainWindow):
 
         self.APABSposLCD = QLCDNumber(self.widget)
         self.APABSposLCD.setObjectName(u"APABSposLCD")
-        self.APABSposLCD.setGeometry(QRect(170, 107, 131, 61))
+        self.APABSposLCD.setGeometry(QRect(170, 107, 90, 45))
         self.APABSposLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.APABSposLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.APABSposLCD.setLineWidth(1)
@@ -65,7 +65,7 @@ class MainWindow(QMainWindow):
 
         self.MLABSposLCD = QLCDNumber(self.widget)
         self.MLABSposLCD.setObjectName(u"MLABSposLCD")
-        self.MLABSposLCD.setGeometry(QRect(340, 107, 131, 61))
+        self.MLABSposLCD.setGeometry(QRect(340, 107, 90, 45))
         self.MLABSposLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.MLABSposLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.MLABSposLCD.setLineWidth(1)
@@ -74,7 +74,7 @@ class MainWindow(QMainWindow):
 
         self.DVABSposLCD = QLCDNumber(self.widget)
         self.DVABSposLCD.setObjectName(u"DVABSposLCD")
-        self.DVABSposLCD.setGeometry(QRect(500, 107, 131, 61))
+        self.DVABSposLCD.setGeometry(QRect(500, 107, 90, 45))
         self.DVABSposLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.DVABSposLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.DVABSposLCD.setLineWidth(1)
