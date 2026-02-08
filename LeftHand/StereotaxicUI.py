@@ -209,7 +209,7 @@ class MainWindow(QMainWindow):
 
         self.targetlabel = QLabel("Selected Target:", self)
         self.targetlabel.setObjectName(u"selectedtargetlabel")
-        self.targetlabel.setGeometry(QRect(490, 275, 130, 20))
+        self.targetlabel.setGeometry(QRect(375, 475, 130, 20))
         self.targetlabel.setFont(radiobuttonfont)
 
         self.coordinatelabel = QLabel("Coordinates:", self)
