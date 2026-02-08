@@ -197,7 +197,7 @@ class MainWindow(QMainWindow):
 
         self.speciesgrouplabel = QLabel("Species:", self)
         self.speciesgrouplabel.setObjectName(u"speciesgrouplabel")
-        self.speciesgrouplabel.setGeometry(QRect(550, 35, 111, 16))
+        self.speciesgrouplabel.setGeometry(QRect(575, 35, 111, 16))
         self.speciesgrouplabel.setFont(radiobuttonfont)
 
         # self.speciesgroup.radiolabel = QLabel("Species", self.widget)
@@ -206,11 +206,11 @@ class MainWindow(QMainWindow):
         # self.speciesgroup.radiolabel.setFont(radiobuttonfont)
 
         self.ratradio = QRadioButton("Rat", self)
-        self.ratradio.setGeometry(QRect(555, 65, 92, 20))
+        self.ratradio.setGeometry(QRect(580, 65, 92, 20))
         self.ratradio.setFont(radiobuttonfont)
 
         self.mouseradio = QRadioButton("Mouse", self)
-        self.mouseradio.setGeometry(QRect(555, 95, 92, 20))
+        self.mouseradio.setGeometry(QRect(580, 95, 92, 20))
         self.mouseradio.setFont(radiobuttonfont)
 
         self.speciesgroup.addButton(self.ratradio)
@@ -228,7 +228,7 @@ class MainWindow(QMainWindow):
 
         self.offsetgrouplabel = QLabel("Current Offset:", self)
         self.offsetgrouplabel.setObjectName(u"offsetgrouplabel")
-        self.offsetgrouplabel.setGeometry(QRect(652, 140, 111, 16))
+        self.offsetgrouplabel.setGeometry(QRect(680, 35, 111, 16))
         self.offsetgrouplabel.setFont(radiobuttonfont)
 
         # self.offsetgroup.radiolabel = QLabel("Current Offset", self.widget)
@@ -237,15 +237,15 @@ class MainWindow(QMainWindow):
         # self.offsetgroup.radiolabel.setFont(radiobuttonfont)
 
         self.drillradio = QRadioButton("Drill", self)
-        self.drillradio.setGeometry(QRect(662, 170, 92, 20))
+        self.drillradio.setGeometry(QRect(685, 65, 92, 20))
         self.drillradio.setFont(radiobuttonfont)
 
         self.needleradio = QRadioButton("Syringe", self)
-        self.needleradio.setGeometry(QRect(662, 200, 92, 20))
+        self.needleradio.setGeometry(QRect(685, 95, 92, 20))
         self.needleradio.setFont(radiobuttonfont)
 
         self.fiberradio = QRadioButton("Probe", self)
-        self.fiberradio.setGeometry(QRect(662, 230, 92, 20))
+        self.fiberradio.setGeometry(QRect(685, 125, 92, 20))
         self.fiberradio.setFont(radiobuttonfont)
 
         self.offsetgroup.addButton(self.drillradio)
