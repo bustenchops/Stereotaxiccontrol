@@ -270,7 +270,7 @@ class MainWindow(QMainWindow):
 
         self.armcoordinatebutton = QPushButton("Arm Coordinates", self.widget)
         self.armcoordinatebutton.setObjectName(u"armcoordinatebutton")
-        self.armcoordinatebutton.setGeometry(QRect(105, 450, 161, 31))
+        self.armcoordinatebutton.setGeometry(QRect(105, 445, 161, 31))
         self.armcoordinatebutton.setFont(stepposlabelfont)
         self.armcoordinatebutton.clicked.connect(self.selectlistcoordinates)
 
