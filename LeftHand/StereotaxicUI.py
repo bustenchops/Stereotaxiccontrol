@@ -190,6 +190,8 @@ class MainWindow(QMainWindow):
         self.speciesgroup.setExclusive(True)
         self.offsetgroup = QButtonGroup(self)
         self.offsetgroup.setExclusive(True)
+        self.speedgroup = QButtonGroup(self)
+        self.speedgroup.setExclusive(True)
 
         radiobuttonfont = QFont()
         radiobuttonfont.setPointSize(12)
@@ -200,10 +202,6 @@ class MainWindow(QMainWindow):
         self.speciesgrouplabel.setGeometry(QRect(575, 35, 111, 16))
         self.speciesgrouplabel.setFont(radiobuttonfont)
 
-        # self.speciesgroup.radiolabel = QLabel("Species", self.widget)
-        # self.speciesgroup.radiolabel.setObjectName(u"Animallabelmanual")
-        # self.speciesgroup.radiolabel.setGeometry(QRect(652, 40, 111, 16))
-        # self.speciesgroup.radiolabel.setFont(radiobuttonfont)
 
         self.ratradio = QRadioButton("Rat", self)
         self.ratradio.setGeometry(QRect(580, 65, 92, 20))
@@ -216,25 +214,10 @@ class MainWindow(QMainWindow):
         self.speciesgroup.addButton(self.ratradio)
         self.speciesgroup.addButton(self.mouseradio)
 
-        # self.speciesgroup.ratoffsetcheck = QRadioButton("Rat", self.widget)
-        # self.speciesgroup.ratoffsetcheck.setObjectName(u"ratradio")
-        # self.speciesgroup.ratoffsetcheck.setGeometry(QRect(662, 70, 92, 20))
-        # self.speciesgroup.ratoffsetcheck.setFont(radiobuttonfont)
-
-        # self.speciesgroup.mouseoffsetcheck = QRadioButton("Mouse", self.widget)
-        # self.speciesgroup.mouseoffsetcheck.setObjectName(u"mouseradio")
-        # self.speciesgroup.mouseoffsetcheck.setGeometry(QRect(662, 100, 92, 20))
-        # self.speciesgroup.mouseoffsetcheck.setFont(radiobuttonfont)
-
         self.offsetgrouplabel = QLabel("Current Offset:", self)
         self.offsetgrouplabel.setObjectName(u"offsetgrouplabel")
         self.offsetgrouplabel.setGeometry(QRect(680, 35, 111, 16))
         self.offsetgrouplabel.setFont(radiobuttonfont)
-
-        # self.offsetgroup.radiolabel = QLabel("Current Offset", self.widget)
-        # self.offsetgroup.radiolabel.setObjectName(u"DVlabelmanual")
-        # self.offsetgroup.radiolabel.setGeometry(QRect(652, 140, 111, 16))
-        # self.offsetgroup.radiolabel.setFont(radiobuttonfont)
 
         self.drillradio = QRadioButton("Drill", self)
         self.drillradio.setGeometry(QRect(685, 65, 92, 20))
@@ -251,6 +234,11 @@ class MainWindow(QMainWindow):
         self.offsetgroup.addButton(self.drillradio)
         self.offsetgroup.addButton(self.needleradio)
         self.offsetgroup.addButton(self.fiberradio)
+
+        self.speedgrouplabel = QLabel("Current Speed:", self)
+        self.speedgrouplabel.setObjectName(u"speedgrouplabel")
+        self.speedgrouplabel.setGeometry(QRect(780, 35, 111, 16))
+        self.speedgrouplabel.setFont(radiobuttonfont)
 
         # self.offsetgroup.drilloffsetcheck = QRadioButton("Drill", self.widget)
         # self.offsetgroup.drilloffsetcheck.setObjectName(u"drillradio")
