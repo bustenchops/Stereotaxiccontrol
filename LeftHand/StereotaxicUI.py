@@ -135,7 +135,7 @@ class MainWindow(QMainWindow):
         poslabelfont.setPointSize(20)
         poslabelfont.setBold(False)
 
-        self.stepposlabel = QLabel("Step:", self.widget)
+        self.stepposlabel = QLabel("Steps:", self.widget)
         self.stepposlabel.setObjectName(u"stepposlabel")
         self.stepposlabel.setGeometry(QRect(15, 37, 111, 41))
         self.stepposlabel.setFont(poslabelfont)
@@ -144,12 +144,12 @@ class MainWindow(QMainWindow):
 
         self.ABSposLabel = QLabel("ABS:", self.widget)
         self.ABSposLabel.setObjectName(u"ABSposlabel")
-        self.ABSposLabel.setGeometry(QRect(15, 92, 111, 61))
+        self.ABSposLabel.setGeometry(QRect(15, 80, 111, 61))
         self.ABSposLabel.setFont(poslabelfont)
 
         self.RELposLabel = QLabel("REL:", self.widget)
         self.RELposLabel.setObjectName(u"RELposlabel")
-        self.RELposLabel.setGeometry(QRect(15, 152, 111, 61))
+        self.RELposLabel.setGeometry(QRect(15, 148, 111, 61))
         self.RELposLabel.setFont(poslabelfont)
 
         manualenterfont = QFont()
