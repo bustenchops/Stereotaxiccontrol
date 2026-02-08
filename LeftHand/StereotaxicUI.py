@@ -263,7 +263,7 @@ class MainWindow(QMainWindow):
         self.checkBox.setGeometry(QRect(530, 270, 105, 20))
         self.checkBox.setFont(radiobuttonfont)
 
-        self.safetyBox = QCheckBox("Safety Disengage", self.widget)
+        self.safetyBox = QCheckBox("Safety Disengaged", self.widget)
         self.safetyBox.setObjectName(u"safetycheckbox")
         self.safetyBox.setGeometry(QRect(700, 270, 175, 20))
         self.safetyBox.setFont(radiobuttonfont)
