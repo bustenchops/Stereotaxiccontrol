@@ -206,11 +206,11 @@ class MainWindow(QMainWindow):
         # self.speciesgroup.radiolabel.setFont(radiobuttonfont)
 
         self.ratradio = QRadioButton("Rat", self)
-        self.ratradio.setGeometry(QRect(560, 65, 92, 20))
+        self.ratradio.setGeometry(QRect(555, 65, 92, 20))
         self.ratradio.setFont(radiobuttonfont)
 
         self.mouseradio = QRadioButton("Mouse", self)
-        self.mouseradio.setGeometry(QRect(560, 95, 92, 20))
+        self.mouseradio.setGeometry(QRect(555, 95, 92, 20))
         self.mouseradio.setFont(radiobuttonfont)
 
         self.speciesgroup.addButton(self.ratradio)
