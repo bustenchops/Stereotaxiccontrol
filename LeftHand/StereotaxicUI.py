@@ -112,6 +112,26 @@ class MainWindow(QMainWindow):
         toplabelfont.setPointSize(18)
         toplabelfont.setBold(True)
 
+        stepposlabelfont = QFont()
+        stepposlabelfont.setPointSize(12)
+        stepposlabelfont.setBold(False)
+
+        poslabelfont = QFont()
+        poslabelfont.setPointSize(20)
+        poslabelfont.setBold(False)
+
+        manualenterfont = QFont()
+        manualenterfont.setPointSize(16)
+        manualenterfont.setBold(False)
+
+        coordlabelfont = QFont()
+        coordlabelfont.setPointSize(16)
+        coordlabelfont.setBold(True)
+
+        radiobuttonfont = QFont()
+        radiobuttonfont.setPointSize(12)
+        radiobuttonfont.setBold(False)
+
         self.APlabel = QLabel("AP", self.widget)
         self.APlabel.setObjectName(u"APlabel")
         self.APlabel.setGeometry(QRect(142, -3, 41, 41))
@@ -127,20 +147,10 @@ class MainWindow(QMainWindow):
         self.DVlabel.setGeometry(QRect(460, -3, 41, 41))
         self.DVlabel.setFont(toplabelfont)
 
-        stepposlabelfont = QFont()
-        stepposlabelfont.setPointSize(12)
-        stepposlabelfont.setBold(False)
-
-        poslabelfont = QFont()
-        poslabelfont.setPointSize(20)
-        poslabelfont.setBold(False)
-
         self.stepposlabel = QLabel("Steps:", self.widget)
         self.stepposlabel.setObjectName(u"stepposlabel")
         self.stepposlabel.setGeometry(QRect(15, 37, 111, 41))
         self.stepposlabel.setFont(poslabelfont)
-
-
 
         self.ABSposLabel = QLabel("ABS:", self.widget)
         self.ABSposLabel.setObjectName(u"ABSposlabel")
@@ -151,10 +161,6 @@ class MainWindow(QMainWindow):
         self.RELposLabel.setObjectName(u"RELposlabel")
         self.RELposLabel.setGeometry(QRect(15, 148, 111, 61))
         self.RELposLabel.setFont(poslabelfont)
-
-        manualenterfont = QFont()
-        manualenterfont.setPointSize(16)
-        manualenterfont.setBold(False)
 
         self.APmanualenter = QPlainTextEdit(self.widget)
         self.APmanualenter.setObjectName(u"APmanualenter")
@@ -171,9 +177,6 @@ class MainWindow(QMainWindow):
         self.DVmanualenter.setGeometry(QRect(525, 470, 75, 40))
         self.DVmanualenter.setFont(manualenterfont)
 
-        coordlabelfont = QFont()
-        coordlabelfont.setPointSize(16)
-        coordlabelfont.setBold(True)
 
         self.APlabel = QLabel("AP", self.widget)
         self.APlabel.setObjectName(u"APlabelmanual")
@@ -190,6 +193,10 @@ class MainWindow(QMainWindow):
         self.DVlabel.setGeometry(QRect(490, 470, 41, 40))
         self.DVlabel.setFont(coordlabelfont)
 
+        self.targetname = QPlainTextEdit(self.widget)
+        self.targetname.setObjectName(u"targetnameselected")
+        self.targetname.setGeometry(QRect(450, 305, 200, 31))
+        self.targetname.setFont(radiobuttonfont)
 
 
         self.speciesgroup = QButtonGroup(self)
@@ -199,17 +206,10 @@ class MainWindow(QMainWindow):
         self.speedgroup = QButtonGroup(self)
         self.speedgroup.setExclusive(True)
 
-        radiobuttonfont = QFont()
-        radiobuttonfont.setPointSize(12)
-        radiobuttonfont.setBold(False)
-
-        radiobuttonfont = QFont()
-        radiobuttonfont.setPointSize(12)
-        radiobuttonfont.setBold(False)
 
         self.targetlabel = QLabel("Selected Target:", self)
         self.targetlabel.setObjectName(u"selectedtargetlabel")
-        self.targetlabel.setGeometry(QRect(375, 315, 130, 20))
+        self.targetlabel.setGeometry(QRect(375, 305, 130, 20))
         self.targetlabel.setFont(radiobuttonfont)
 
         self.coordinatelabel = QLabel("Coordinates:", self)
@@ -285,8 +285,6 @@ class MainWindow(QMainWindow):
         self.speedgroup.addButton(self.finespeedset)
         self.speedgroup.addButton(self.medspeedset)
         self.speedgroup.addButton(self.coarsespeedset)
-
-
 
         self.checkBox = QCheckBox("Make it so", self.widget)
         self.checkBox.setObjectName(u"engagecheckbox")
