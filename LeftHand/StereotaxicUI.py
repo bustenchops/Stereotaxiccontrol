@@ -116,6 +116,10 @@ class MainWindow(QMainWindow):
         smalllabelfont.setPointSize(8)
         smalllabelfont.setBold(False)
 
+        smalllmanualfont = QFont()
+        smalllmanualfont.setPointSize(10)
+        smalllmanualfont.setBold(False)
+
         poslabelfont = QFont()
         poslabelfont.setPointSize(20)
         poslabelfont.setBold(False)
@@ -227,12 +231,12 @@ class MainWindow(QMainWindow):
         self.DVinsertratelabel.setGeometry(QRect(615, 365, 130, 20))
         self.DVinsertratelabel.setFont(smalllabelfont)
 
-        self.DVinsertpauselabel = QLabel("# pauses:", self)
+        self.DVinsertpauselabel = QLabel("pause time:", self)
         self.DVinsertpauselabel.setObjectName(u"dvnumberpauses")
-        self.DVinsertpauselabel.setGeometry(QRect(703, 430, 130, 20))
+        self.DVinsertpauselabel.setGeometry(QRect(703, 425, 130, 20))
         self.DVinsertpauselabel.setFont(smalllabelfont)
 
-        self.DVinsertpausetimelabel = QLabel("pause time:", self)
+        self.DVinsertpausetimelabel = QLabel("num. pauses:", self)
         self.DVinsertpausetimelabel.setObjectName(u"dvinsertpausetime")
         self.DVinsertpausetimelabel.setGeometry(QRect(703, 365, 130, 20))
         self.DVinsertpausetimelabel.setFont(smalllabelfont)
@@ -241,6 +245,26 @@ class MainWindow(QMainWindow):
         self.DVinsertdepthlabel.setObjectName(u"dvtargetdepth")
         self.DVinsertdepthlabel.setGeometry(QRect(615, 425, 130, 20))
         self.DVinsertdepthlabel.setFont(smalllabelfont)
+
+        self.DVinsertmanrate = QPlainTextEdit(self.widget)
+        self.DVinsertmanrate.setObjectName(u"DVinsertmanrate")
+        self.DVinsertmanrate.setGeometry(QRect(615, 380, 100, 26))
+        self.DVinsertmanrate.setFont(smalllmanualfont)
+
+        self.DVinserttarget = QPlainTextEdit(self.widget)
+        self.DVinserttarget.setObjectName(u"DVinserttarget")
+        self.DVinserttarget.setGeometry(QRect(615, 440, 100, 26))
+        self.DVinserttarget.setFont(smalllmanualfont)
+
+        self.DVinsertnumpause = QPlainTextEdit(self.widget)
+        self.DVinsertnumpause.setObjectName(u"DVinsertnumpause")
+        self.DVinsertnumpause.setGeometry(QRect(703, 380, 100, 26))
+        self.DVinsertnumpause.setFont(smalllmanualfont)
+
+        self.DVinsertpausetime = QPlainTextEdit(self.widget)
+        self.DVinsertpausetime.setObjectName(u"DVinsertpausetime")
+        self.DVinsertpausetime.setGeometry(QRect(701, 440, 100, 26))
+        self.DVinsertpausetime.setFont(smalllmanualfont)
 
         self.withdrawcheckbox = QCheckBox("Withdraw:", self.widget)
         self.withdrawcheckbox.setObjectName(u"DVinsertionbox")
