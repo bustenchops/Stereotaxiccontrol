@@ -367,6 +367,18 @@ class MainWindow(QMainWindow):
 
 #controls the toggles for the drill, needle and probe
     @Slot()
+    def setfinespeed(self):
+        self.finespeedset.toggle()
+
+    @Slot()
+    def setmedspeed(self):
+        self.medspeedset.toggle()
+
+    @Slot()
+    def setcoarsespeed(self):
+        self.coarsespeedset.toggle()
+
+    @Slot()
     def drilloffset(self):
         self.drillradio.toggle()
 
