@@ -216,19 +216,19 @@ class MainWindow(QMainWindow):
 
         self.offsetgrouplabel = QLabel("Current Offset:", self)
         self.offsetgrouplabel.setObjectName(u"offsetgrouplabel")
-        self.offsetgrouplabel.setGeometry(QRect(695, 35, 111, 16))
+        self.offsetgrouplabel.setGeometry(QRect(716, 35, 111, 16))
         self.offsetgrouplabel.setFont(radiobuttonfont)
 
         self.drillradio = QRadioButton("Drill", self)
-        self.drillradio.setGeometry(QRect(700, 65, 92, 20))
+        self.drillradio.setGeometry(QRect(721, 65, 92, 20))
         self.drillradio.setFont(radiobuttonfont)
 
         self.needleradio = QRadioButton("Syringe", self)
-        self.needleradio.setGeometry(QRect(700, 95, 92, 20))
+        self.needleradio.setGeometry(QRect(721, 95, 92, 20))
         self.needleradio.setFont(radiobuttonfont)
 
         self.fiberradio = QRadioButton("Probe", self)
-        self.fiberradio.setGeometry(QRect(700, 125, 92, 20))
+        self.fiberradio.setGeometry(QRect(721, 125, 92, 20))
         self.fiberradio.setFont(radiobuttonfont)
 
         self.offsetgroup.addButton(self.drillradio)
