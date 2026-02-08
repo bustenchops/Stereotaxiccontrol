@@ -112,9 +112,9 @@ class MainWindow(QMainWindow):
         toplabelfont.setPointSize(18)
         toplabelfont.setBold(True)
 
-        stepposlabelfont = QFont()
-        stepposlabelfont.setPointSize(12)
-        stepposlabelfont.setBold(False)
+        smalllabelfont = QFont()
+        smalllabelfont.setPointSize(9)
+        smalllabelfont.setBold(False)
 
         poslabelfont = QFont()
         poslabelfont.setPointSize(20)
@@ -222,6 +222,26 @@ class MainWindow(QMainWindow):
         self.DVinsertcheckbox.setGeometry(QRect(640, 340, 130, 20))
         self.DVinsertcheckbox.setFont(radiobuttonfont)
 
+        self.DVinsertratelabel = QLabel("rate (um/min):", self)
+        self.DVinsertratelabel.setObjectName(u"dvinsertrate")
+        self.DVinsertratelabel.setGeometry(QRect(640, 400, 130, 20))
+        self.DVinsertratelabel.setFont(smalllabelfont)
+
+        self.DVinsertpauselabel = QLabel("# pauses:", self)
+        self.DVinsertpauselabel.setObjectName(u"dvnumberpauses")
+        self.DVinsertpauselabel.setGeometry(QRect(640, 460, 130, 20))
+        self.DVinsertpauselabel.setFont(smalllabelfont)
+
+        self.DVinsertpausetimelabel = QLabel("pause time:", self)
+        self.DVinsertpausetimelabel.setObjectName(u"dvinsertpausetime")
+        self.DVinsertpausetimelabel.setGeometry(QRect(740, 400, 130, 20))
+        self.DVinsertpausetimelabel.setFont(smalllabelfont)
+
+        self.DVinsertdepthlabel = QLabel("Target DV:", self)
+        self.DVinsertdepthlabel.setObjectName(u"dvtargetdepth")
+        self.DVinsertdepthlabel.setGeometry(QRect(640, 460, 130, 20))
+        self.DVinsertdepthlabel.setFont(smalllabelfont)
+
         self.withdrawcheckbox = QCheckBox("Withdraw:", self.widget)
         self.withdrawcheckbox.setObjectName(u"DVinsertionbox")
         self.withdrawcheckbox.setGeometry(QRect(790, 340, 130, 20))
@@ -294,7 +314,7 @@ class MainWindow(QMainWindow):
         self.movebutton = QPushButton("Engage", self.widget)
         self.movebutton.setObjectName(u"movebutton")
         self.movebutton.setGeometry(QRect(375, 398, 101, 81))
-        self.movebutton.setFont(stepposlabelfont)
+        self.movebutton.setFont(radiobuttonfont)
         self.movebutton.clicked.connect(self.plaintextgrab)
 
         self.safetyBox = QCheckBox("Safety Disengaged", self.widget)
@@ -305,19 +325,19 @@ class MainWindow(QMainWindow):
         self.armcoordinatebutton = QPushButton("Arm Coordinates", self.widget)
         self.armcoordinatebutton.setObjectName(u"armcoordinatebutton")
         self.armcoordinatebutton.setGeometry(QRect(105, 445, 161, 31))
-        self.armcoordinatebutton.setFont(stepposlabelfont)
+        self.armcoordinatebutton.setFont(radiobuttonfont)
         self.armcoordinatebutton.clicked.connect(self.selectlistcoordinates)
 
         self.loadpresetbutton = QPushButton("Load Preset File", self.widget)
         self.loadpresetbutton.setObjectName(u"loadpresetbutton")
         self.loadpresetbutton.setGeometry(QRect(105, 230, 171, 31))
-        self.loadpresetbutton.setFont(stepposlabelfont)
+        self.loadpresetbutton.setFont(radiobuttonfont)
         self.loadpresetbutton.clicked.connect(self.choseafile)
 
         self.listWidget = QListWidget(self.widget)
         self.listWidget.setObjectName(u"listWidget")
         self.listWidget.setGeometry(QRect(35, 273, 320, 160))
-        self.listWidget.setFont(stepposlabelfont)
+        self.listWidget.setFont(radiobuttonfont)
 
         self.menubar = QMenuBar()
         self.menubar.setGeometry(QRect(0, 0, 800, 33))
