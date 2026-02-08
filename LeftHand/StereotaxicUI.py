@@ -83,7 +83,7 @@ class MainWindow(QMainWindow):
 
         self.APRelposLCD = QLCDNumber(self.widget)
         self.APRelposLCD.setObjectName(u"APRelposLCD")
-        self.APRelposLCD.setGeometry(QRect(150, 157, 131, 61))
+        self.APRelposLCD.setGeometry(QRect(90, 157, 131, 61))
         self.APRelposLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.APRelposLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.APRelposLCD.setLineWidth(1)
@@ -92,7 +92,7 @@ class MainWindow(QMainWindow):
 
         self.MLRelposLCD = QLCDNumber(self.widget)
         self.MLRelposLCD.setObjectName(u"MLRelposLCD")
-        self.MLRelposLCD.setGeometry(QRect(320, 157, 131, 61))
+        self.MLRelposLCD.setGeometry(QRect(260, 157, 131, 61))
         self.MLRelposLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.MLRelposLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.MLRelposLCD.setLineWidth(1)
@@ -101,7 +101,7 @@ class MainWindow(QMainWindow):
 
         self.DVRelposLCD = QLCDNumber(self.widget)
         self.DVRelposLCD.setObjectName(u"DVRelposLCD")
-        self.DVRelposLCD.setGeometry(QRect(480, 157, 131, 61))
+        self.DVRelposLCD.setGeometry(QRect(410, 157, 131, 61))
         self.DVRelposLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.DVRelposLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.DVRelposLCD.setLineWidth(1)
