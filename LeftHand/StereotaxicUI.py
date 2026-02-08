@@ -56,7 +56,7 @@ class MainWindow(QMainWindow):
 
         self.APABSposLCD = QLCDNumber(self.widget)
         self.APABSposLCD.setObjectName(u"APABSposLCD")
-        self.APABSposLCD.setGeometry(QRect(170, 87, 90, 45))
+        self.APABSposLCD.setGeometry(QRect(170, 92, 90, 45))
         self.APABSposLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.APABSposLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.APABSposLCD.setLineWidth(1)
@@ -65,7 +65,7 @@ class MainWindow(QMainWindow):
 
         self.MLABSposLCD = QLCDNumber(self.widget)
         self.MLABSposLCD.setObjectName(u"MLABSposLCD")
-        self.MLABSposLCD.setGeometry(QRect(340, 87, 90, 45))
+        self.MLABSposLCD.setGeometry(QRect(340, 92, 90, 45))
         self.MLABSposLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.MLABSposLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.MLABSposLCD.setLineWidth(1)
@@ -74,7 +74,7 @@ class MainWindow(QMainWindow):
 
         self.DVABSposLCD = QLCDNumber(self.widget)
         self.DVABSposLCD.setObjectName(u"DVABSposLCD")
-        self.DVABSposLCD.setGeometry(QRect(500, 87, 90, 45))
+        self.DVABSposLCD.setGeometry(QRect(500, 92, 90, 45))
         self.DVABSposLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.DVABSposLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.DVABSposLCD.setLineWidth(1)
@@ -131,21 +131,23 @@ class MainWindow(QMainWindow):
         stepposlabelfont.setPointSize(12)
         stepposlabelfont.setBold(False)
 
-        self.stepposlabel = QLabel("Step position:", self.widget)
-        self.stepposlabel.setObjectName(u"stepposlabel")
-        self.stepposlabel.setGeometry(QRect(60, 47, 111, 41))
-        self.stepposlabel.setFont(stepposlabelfont)
-
         poslabelfont = QFont()
         poslabelfont.setPointSize(20)
         poslabelfont.setBold(False)
 
-        self.ABSposLabel = QLabel("ABS pos:", self.widget)
+        self.stepposlabel = QLabel("Step:", self.widget)
+        self.stepposlabel.setObjectName(u"stepposlabel")
+        self.stepposlabel.setGeometry(QRect(60, 47, 111, 41))
+        self.stepposlabel.setFont(poslabelfont)
+
+
+
+        self.ABSposLabel = QLabel("ABS:", self.widget)
         self.ABSposLabel.setObjectName(u"ABSposlabel")
         self.ABSposLabel.setGeometry(QRect(60, 107, 111, 61))
         self.ABSposLabel.setFont(poslabelfont)
 
-        self.RELposLabel = QLabel("REL pos:", self.widget)
+        self.RELposLabel = QLabel("REL:", self.widget)
         self.RELposLabel.setObjectName(u"RELposlabel")
         self.RELposLabel.setGeometry(QRect(60, 177, 111, 61))
         self.RELposLabel.setFont(poslabelfont)
