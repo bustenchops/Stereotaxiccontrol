@@ -92,7 +92,7 @@ class MainWindow(QMainWindow):
 
         self.MLRelposLCD = QLCDNumber(self.widget)
         self.MLRelposLCD.setObjectName(u"MLRelposLCD")
-        self.MLRelposLCD.setGeometry(QRect(260, 152, 131, 61))
+        self.MLRelposLCD.setGeometry(QRect(250, 152, 131, 61))
         self.MLRelposLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.MLRelposLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.MLRelposLCD.setLineWidth(1)
