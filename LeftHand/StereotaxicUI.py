@@ -260,8 +260,14 @@ class MainWindow(QMainWindow):
 
         self.checkBox = QCheckBox("Make it so", self.widget)
         self.checkBox.setObjectName(u"engagecheckbox")
-        self.checkBox.setGeometry(QRect(400, 270, 105, 20))
+        self.checkBox.setGeometry(QRect(375, 300, 105, 20))
         self.checkBox.setFont(radiobuttonfont)
+
+        self.movebutton = QPushButton("Engage", self.widget)
+        self.movebutton.setObjectName(u"movebutton")
+        self.movebutton.setGeometry(QRect(375, 350, 101, 81))
+        self.movebutton.setFont(stepposlabelfont)
+        self.movebutton.clicked.connect(self.plaintextgrab)
 
         self.safetyBox = QCheckBox("Safety Disengaged", self.widget)
         self.safetyBox.setObjectName(u"safetycheckbox")
@@ -280,11 +286,7 @@ class MainWindow(QMainWindow):
         self.loadpresetbutton.setFont(stepposlabelfont)
         self.loadpresetbutton.clicked.connect(self.choseafile)
 
-        self.movebutton = QPushButton("Engage", self.widget)
-        self.movebutton.setObjectName(u"movebutton")
-        self.movebutton.setGeometry(QRect(400, 310, 101, 81))
-        self.movebutton.setFont(stepposlabelfont)
-        self.movebutton.clicked.connect(self.plaintextgrab)
+
 
         self.listWidget = QListWidget(self.widget)
         self.listWidget.setObjectName(u"listWidget")
