@@ -224,7 +224,7 @@ class MainWindow(QMainWindow):
 
         self.DVinsertratelabel = QLabel("rate (um/min):", self)
         self.DVinsertratelabel.setObjectName(u"dvinsertrate")
-        self.DVinsertratelabel.setGeometry(QRect(605, 370, 130, 20))
+        self.DVinsertratelabel.setGeometry(QRect(615, 365, 130, 20))
         self.DVinsertratelabel.setFont(smalllabelfont)
 
         self.DVinsertpauselabel = QLabel("# pauses:", self)
