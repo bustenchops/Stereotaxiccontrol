@@ -217,15 +217,15 @@ class MainWindow(QMainWindow):
         self.coordinatelabel.setGeometry(QRect(495, 340, 130, 20))
         self.coordinatelabel.setFont(radiobuttonfont)
 
-        self.DVinsertlabel = QLabel("DV insert:", self)
-        self.DVinsertlabel.setObjectName(u"DVinsertionlabel")
-        self.DVinsertlabel.setGeometry(QRect(640, 340, 130, 20))
-        self.DVinsertlabel.setFont(radiobuttonfont)
+        self.DVinsertcheckbox = QCheckBox("DV insert:", self.widget)
+        self.DVinsertcheckbox.setObjectName(u"DVinsertionbox")
+        self.DVinsertcheckbox.setGeometry(QRect(640, 340, 130, 20))
+        self.DVinsertcheckbox.setFont(radiobuttonfont)
 
-        self.withdrawlabel = QLabel("Withdraw:", self)
-        self.withdrawlabel.setObjectName(u"DVinsertionlabel")
-        self.withdrawlabel.setGeometry(QRect(790, 340, 130, 20))
-        self.withdrawlabel.setFont(radiobuttonfont)
+        self.withdrawcheckbox = QCheckbox("Withdraw:", self.wdiget)
+        self.withdrawcheckbox.setObjectName(u"DVinsertionbox")
+        self.withdrawcheckbox.setGeometry(QRect(790, 340, 130, 20))
+        self.withdrawcheckbox.setFont(radiobuttonfont)
 
         self.speciesgrouplabel = QLabel("Set Species:", self)
         self.speciesgrouplabel.setObjectName(u"speciesgrouplabel")
