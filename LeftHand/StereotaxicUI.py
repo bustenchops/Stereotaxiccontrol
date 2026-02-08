@@ -237,7 +237,7 @@ class MainWindow(QMainWindow):
 
         self.speedgrouplabel = QLabel("Current Speed:", self)
         self.speedgrouplabel.setObjectName(u"speedgrouplabel")
-        self.speedgrouplabel.setGeometry(QRect(850, 35, 111, 16))
+        self.speedgrouplabel.setGeometry(QRect(840, 35, 111, 16))
         self.speedgrouplabel.setFont(radiobuttonfont)
 
         # self.offsetgroup.drilloffsetcheck = QRadioButton("Drill", self.widget)
