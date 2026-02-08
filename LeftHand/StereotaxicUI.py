@@ -271,7 +271,7 @@ class MainWindow(QMainWindow):
 
         self.loadpresetbutton = QPushButton("Load Preset File", self.widget)
         self.loadpresetbutton.setObjectName(u"loadpresetbutton")
-        self.loadpresetbutton.setGeometry(QRect(100, 243, 171, 31))
+        self.loadpresetbutton.setGeometry(QRect(110, 230, 171, 31))
         self.loadpresetbutton.setFont(stepposlabelfont)
         self.loadpresetbutton.clicked.connect(self.choseafile)
 
