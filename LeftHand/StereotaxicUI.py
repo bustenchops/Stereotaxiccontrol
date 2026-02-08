@@ -113,7 +113,7 @@ class MainWindow(QMainWindow):
         toplabelfont.setBold(True)
 
         smalllabelfont = QFont()
-        smalllabelfont.setPointSize(9)
+        smalllabelfont.setPointSize(7)
         smalllabelfont.setBold(False)
 
         poslabelfont = QFont()
@@ -229,7 +229,7 @@ class MainWindow(QMainWindow):
 
         self.DVinsertpauselabel = QLabel("# pauses:", self)
         self.DVinsertpauselabel.setObjectName(u"dvnumberpauses")
-        self.DVinsertpauselabel.setGeometry(QRect(640, 460, 130, 20))
+        self.DVinsertpauselabel.setGeometry(QRect(740, 460, 130, 20))
         self.DVinsertpauselabel.setFont(smalllabelfont)
 
         self.DVinsertpausetimelabel = QLabel("pause time:", self)
