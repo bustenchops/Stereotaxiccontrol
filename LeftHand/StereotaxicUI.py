@@ -265,7 +265,7 @@ class MainWindow(QMainWindow):
 
         self.safetyBox = QCheckBox("Safety Disengaged", self.widget)
         self.safetyBox.setObjectName(u"safetycheckbox")
-        self.safetyBox.setGeometry(QRect(100, 490, 175, 20))
+        self.safetyBox.setGeometry(QRect(105, 490, 175, 20))
         self.safetyBox.setFont(radiobuttonfont)
 
         self.armcoordinatebutton = QPushButton("Arm Coordinates", self.widget)
