@@ -210,17 +210,17 @@ class MainWindow(QMainWindow):
 
         self.coordinatelabel = QLabel("Coordinates:", self)
         self.coordinatelabel.setObjectName(u"coordinateslabel")
-        self.coordinatelabel.setGeometry(QRect(490, 350, 130, 20))
+        self.coordinatelabel.setGeometry(QRect(495, 340, 130, 20))
         self.coordinatelabel.setFont(radiobuttonfont)
 
         self.DVinsertlabel = QLabel("DV insert:", self)
         self.DVinsertlabel.setObjectName(u"DVinsertionlabel")
-        self.DVinsertlabel.setGeometry(QRect(630, 350, 130, 20))
+        self.DVinsertlabel.setGeometry(QRect(640, 340, 130, 20))
         self.DVinsertlabel.setFont(radiobuttonfont)
 
         self.withdrawlabel = QLabel("Withdraw:", self)
         self.withdrawlabel.setObjectName(u"DVinsertionlabel")
-        self.withdrawlabel.setGeometry(QRect(770, 350, 130, 20))
+        self.withdrawlabel.setGeometry(QRect(790, 340, 130, 20))
         self.withdrawlabel.setFont(radiobuttonfont)
 
         self.speciesgrouplabel = QLabel("Set Species:", self)
