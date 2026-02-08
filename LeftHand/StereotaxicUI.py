@@ -240,20 +240,23 @@ class MainWindow(QMainWindow):
         self.speedgrouplabel.setGeometry(QRect(835, 35, 111, 16))
         self.speedgrouplabel.setFont(radiobuttonfont)
 
-        # self.offsetgroup.drilloffsetcheck = QRadioButton("Drill", self.widget)
-        # self.offsetgroup.drilloffsetcheck.setObjectName(u"drillradio")
-        # self.offsetgroup.drilloffsetcheck.setGeometry(QRect(662, 170, 92, 20))
-        # self.offsetgroup.drilloffsetcheck.setFont(radiobuttonfont)
-        #
-        # self.offsetgroup.needleoffsetcheck = QRadioButton("Syringe", self.widget)
-        # self.offsetgroup.needleoffsetcheck.setObjectName(u"needleradio")
-        # self.offsetgroup.needleoffsetcheck.setGeometry(QRect(662, 200, 92, 20))
-        # self.offsetgroup.needleoffsetcheck.setFont(radiobuttonfont)
-        #
-        # self.offsetgroup.fiberoffsetcheck = QRadioButton("Probe", self.widget)
-        # self.offsetgroup.fiberoffsetcheck.setObjectName(u"proberadio")
-        # self.offsetgroup.fiberoffsetcheck.setGeometry(QRect(662, 230, 92, 20))
-        # self.offsetgroup.fiberoffsetcheck.setFont(radiobuttonfont)
+        self.finespeedset = QRadioButton("Fine", self)
+        self.finespeedset.setGeometry(QRect(840, 65, 92, 20))
+        self.finespeedset.setFont(radiobuttonfont)
+
+        self.medspeedset = QRadioButton("Medium", self)
+        self.medspeedset.setGeometry(QRect(840, 95, 92, 20))
+        self.medspeedset.setFont(radiobuttonfont)
+
+        self.coarsespeedset = QRadioButton("Coarse", self)
+        self.coarsespeedset.setGeometry(QRect(840, 125, 92, 20))
+        self.coarsespeedset.setFont(radiobuttonfont)
+
+        self.speedgroup.addButton(self.finespeedset)
+        self.speedgroup.addButton(self.medspeedset)
+        self.speedgroup.addButton(self.coarsespeedset)
+
+
 
         self.checkBox = QCheckBox("Make it so", self.widget)
         self.checkBox.setObjectName(u"engagecheckbox")
