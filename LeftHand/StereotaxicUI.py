@@ -288,7 +288,7 @@ class MainWindow(QMainWindow):
 
         self.listWidget = QListWidget(self.widget)
         self.listWidget.setObjectName(u"listWidget")
-        self.listWidget.setGeometry(QRect(40, 273, 311, 110))
+        self.listWidget.setGeometry(QRect(40, 273, 350, 250))
         self.listWidget.setFont(stepposlabelfont)
 
         self.menubar = QMenuBar()
