@@ -197,7 +197,7 @@ class MainWindow(QMainWindow):
 
         self.speciesgrouplabel = QLabel("Species:", self)
         self.speciesgrouplabel.setObjectName(u"speciesgrouplabel")
-        self.speciesgrouplabel.setGeometry(QRect(652, 40, 111, 16))
+        self.speciesgrouplabel.setGeometry(QRect(520, 35, 111, 16))
         self.speciesgrouplabel.setFont(radiobuttonfont)
 
         # self.speciesgroup.radiolabel = QLabel("Species", self.widget)
@@ -206,11 +206,11 @@ class MainWindow(QMainWindow):
         # self.speciesgroup.radiolabel.setFont(radiobuttonfont)
 
         self.ratradio = QRadioButton("Rat", self)
-        self.ratradio.setGeometry(QRect(662, 70, 92, 20))
+        self.ratradio.setGeometry(QRect(530, 65, 92, 20))
         self.ratradio.setFont(radiobuttonfont)
 
         self.mouseradio = QRadioButton("Mouse", self)
-        self.mouseradio.setGeometry(QRect(662, 100, 92, 20))
+        self.mouseradio.setGeometry(QRect(530, 95, 92, 20))
         self.mouseradio.setFont(radiobuttonfont)
 
         self.speciesgroup.addButton(self.ratradio)
