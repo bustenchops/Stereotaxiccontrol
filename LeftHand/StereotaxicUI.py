@@ -248,7 +248,7 @@ class MainWindow(QMainWindow):
 
         self.DVinsertmanrate = QPlainTextEdit(self.widget)
         self.DVinsertmanrate.setObjectName(u"DVinsertmanrate")
-        self.DVinsertmanrate.setGeometry(QRect(621, 385, 60, 28))
+        self.DVinsertmanrate.setGeometry(QRect(621, 385, 60, 33))
         self.DVinsertmanrate.setFont(smalllmanualfont)
 
         self.DVinserttarget = QPlainTextEdit(self.widget)
@@ -263,7 +263,7 @@ class MainWindow(QMainWindow):
 
         self.DVinsertpausetime = QPlainTextEdit(self.widget)
         self.DVinsertpausetime.setObjectName(u"DVinsertpausetime")
-        self.DVinsertpausetime.setGeometry(QRect(709, 445, 100, 28))
+        self.DVinsertpausetime.setGeometry(QRect(709, 445, 60, 28))
         self.DVinsertpausetime.setFont(smalllmanualfont)
 
         self.withdrawcheckbox = QCheckBox("Withdraw:", self.widget)
