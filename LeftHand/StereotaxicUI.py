@@ -197,7 +197,7 @@ class MainWindow(QMainWindow):
         radiobuttonfont.setPointSize(12)
         radiobuttonfont.setBold(False)
 
-        self.speciesgrouplabel = QLabel("Species:", self)
+        self.speciesgrouplabel = QLabel("Selected Species:", self)
         self.speciesgrouplabel.setObjectName(u"speciesgrouplabel")
         self.speciesgrouplabel.setGeometry(QRect(575, 35, 111, 16))
         self.speciesgrouplabel.setFont(radiobuttonfont)
@@ -216,19 +216,19 @@ class MainWindow(QMainWindow):
 
         self.offsetgrouplabel = QLabel("Current Offset:", self)
         self.offsetgrouplabel.setObjectName(u"offsetgrouplabel")
-        self.offsetgrouplabel.setGeometry(QRect(680, 35, 111, 16))
+        self.offsetgrouplabel.setGeometry(QRect(695, 35, 111, 16))
         self.offsetgrouplabel.setFont(radiobuttonfont)
 
         self.drillradio = QRadioButton("Drill", self)
-        self.drillradio.setGeometry(QRect(685, 65, 92, 20))
+        self.drillradio.setGeometry(QRect(700, 65, 92, 20))
         self.drillradio.setFont(radiobuttonfont)
 
         self.needleradio = QRadioButton("Syringe", self)
-        self.needleradio.setGeometry(QRect(685, 95, 92, 20))
+        self.needleradio.setGeometry(QRect(700, 95, 92, 20))
         self.needleradio.setFont(radiobuttonfont)
 
         self.fiberradio = QRadioButton("Probe", self)
-        self.fiberradio.setGeometry(QRect(685, 125, 92, 20))
+        self.fiberradio.setGeometry(QRect(700, 125, 92, 20))
         self.fiberradio.setFont(radiobuttonfont)
 
         self.offsetgroup.addButton(self.drillradio)
@@ -237,19 +237,19 @@ class MainWindow(QMainWindow):
 
         self.speedgrouplabel = QLabel("Current Speed:", self)
         self.speedgrouplabel.setObjectName(u"speedgrouplabel")
-        self.speedgrouplabel.setGeometry(QRect(835, 35, 111, 16))
+        self.speedgrouplabel.setGeometry(QRect(860, 35, 111, 16))
         self.speedgrouplabel.setFont(radiobuttonfont)
 
         self.finespeedset = QRadioButton("Fine", self)
-        self.finespeedset.setGeometry(QRect(840, 65, 92, 20))
+        self.finespeedset.setGeometry(QRect(865, 65, 92, 20))
         self.finespeedset.setFont(radiobuttonfont)
 
         self.medspeedset = QRadioButton("Medium", self)
-        self.medspeedset.setGeometry(QRect(840, 95, 92, 20))
+        self.medspeedset.setGeometry(QRect(865, 95, 92, 20))
         self.medspeedset.setFont(radiobuttonfont)
 
         self.coarsespeedset = QRadioButton("Coarse", self)
-        self.coarsespeedset.setGeometry(QRect(840, 125, 92, 20))
+        self.coarsespeedset.setGeometry(QRect(865, 125, 92, 20))
         self.coarsespeedset.setFont(radiobuttonfont)
 
         self.speedgroup.addButton(self.finespeedset)
