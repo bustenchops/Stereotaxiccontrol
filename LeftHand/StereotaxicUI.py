@@ -222,7 +222,7 @@ class MainWindow(QMainWindow):
         self.DVinsertcheckbox.setGeometry(QRect(640, 340, 130, 20))
         self.DVinsertcheckbox.setFont(radiobuttonfont)
 
-        self.withdrawcheckbox = QCheckbox("Withdraw:", self.wdiget)
+        self.withdrawcheckbox = QCheckBox("Withdraw:", self.wdiget)
         self.withdrawcheckbox.setObjectName(u"DVinsertionbox")
         self.withdrawcheckbox.setGeometry(QRect(790, 340, 130, 20))
         self.withdrawcheckbox.setFont(radiobuttonfont)
