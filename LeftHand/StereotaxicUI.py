@@ -226,19 +226,19 @@ class MainWindow(QMainWindow):
         self.DVinsertcheckbox.setGeometry(QRect(640, 340, 130, 20))
         self.DVinsertcheckbox.setFont(radiobuttonfont)
 
-        self.DVinsertratelabel = QLabel("rate (um/min):", self)
+        self.DVinsertratelabel = QLabel("Rate (um/min):", self)
         self.DVinsertratelabel.setObjectName(u"dvinsertrate")
         self.DVinsertratelabel.setGeometry(QRect(615, 365, 130, 20))
         self.DVinsertratelabel.setFont(smalllabelfont)
 
-        self.DVinsertpauselabel = QLabel("pause time:", self)
+        self.DVinsertpauselabel = QLabel("Pause time:", self)
         self.DVinsertpauselabel.setObjectName(u"dvnumberpauses")
-        self.DVinsertpauselabel.setGeometry(QRect(703, 425, 130, 20))
+        self.DVinsertpauselabel.setGeometry(QRect(701, 425, 130, 20))
         self.DVinsertpauselabel.setFont(smalllabelfont)
 
-        self.DVinsertpausetimelabel = QLabel("num. pauses:", self)
+        self.DVinsertpausetimelabel = QLabel("Num. pauses:", self)
         self.DVinsertpausetimelabel.setObjectName(u"dvinsertpausetime")
-        self.DVinsertpausetimelabel.setGeometry(QRect(703, 365, 130, 20))
+        self.DVinsertpausetimelabel.setGeometry(QRect(701, 365, 130, 20))
         self.DVinsertpausetimelabel.setFont(smalllabelfont)
 
         self.DVinsertdepthlabel = QLabel("Target DV:", self)
@@ -258,12 +258,12 @@ class MainWindow(QMainWindow):
 
         self.DVinsertnumpause = QPlainTextEdit(self.widget)
         self.DVinsertnumpause.setObjectName(u"DVinsertnumpause")
-        self.DVinsertnumpause.setGeometry(QRect(713, 385, 50, 31))
+        self.DVinsertnumpause.setGeometry(QRect(711, 385, 50, 31))
         self.DVinsertnumpause.setFont(smalllmanualfont)
 
         self.DVinsertpausetime = QPlainTextEdit(self.widget)
         self.DVinsertpausetime.setObjectName(u"DVinsertpausetime")
-        self.DVinsertpausetime.setGeometry(QRect(713, 445, 50, 31))
+        self.DVinsertpausetime.setGeometry(QRect(711, 445, 50, 31))
         self.DVinsertpausetime.setFont(smalllmanualfont)
 
         self.withdrawcheckbox = QCheckBox("Withdraw:", self.widget)
