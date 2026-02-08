@@ -158,17 +158,17 @@ class MainWindow(QMainWindow):
 
         self.APmanualenter = QPlainTextEdit(self.widget)
         self.APmanualenter.setObjectName(u"APmanualenter")
-        self.APmanualenter.setGeometry(QRect(525, 360, 75, 40))
+        self.APmanualenter.setGeometry(QRect(525, 370, 75, 40))
         self.APmanualenter.setFont(manualenterfont)
 
         self.MLmanualenter = QPlainTextEdit(self.widget)
         self.MLmanualenter.setObjectName(u"MLmanualenter")
-        self.MLmanualenter.setGeometry(QRect(525, 410, 75, 40))
+        self.MLmanualenter.setGeometry(QRect(525, 420, 75, 40))
         self.MLmanualenter.setFont(manualenterfont)
 
         self.DVmanualenter = QPlainTextEdit(self.widget)
         self.DVmanualenter.setObjectName(u"DVmanualenter")
-        self.DVmanualenter.setGeometry(QRect(525, 460, 75, 40))
+        self.DVmanualenter.setGeometry(QRect(525, 470, 75, 40))
         self.DVmanualenter.setFont(manualenterfont)
 
         coordlabelfont = QFont()
@@ -177,17 +177,17 @@ class MainWindow(QMainWindow):
 
         self.APlabel = QLabel("AP", self.widget)
         self.APlabel.setObjectName(u"APlabelmanual")
-        self.APlabel.setGeometry(QRect(490, 360, 41, 40))
+        self.APlabel.setGeometry(QRect(490, 370, 41, 40))
         self.APlabel.setFont(coordlabelfont)
 
         self.MLlabel = QLabel("ML", self.widget)
         self.MLlabel.setObjectName(u"MLlabelmanual")
-        self.MLlabel.setGeometry(QRect(490, 410, 41, 40))
+        self.MLlabel.setGeometry(QRect(490, 420, 41, 40))
         self.MLlabel.setFont(coordlabelfont)
 
         self.DVlabel = QLabel("DV", self.widget)
         self.DVlabel.setObjectName(u"DVlabelmanual")
-        self.DVlabel.setGeometry(QRect(490, 460, 41, 40))
+        self.DVlabel.setGeometry(QRect(490, 470, 41, 40))
         self.DVlabel.setFont(coordlabelfont)
 
 
