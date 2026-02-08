@@ -23,7 +23,7 @@ class MainWindow(QMainWindow):
 #Setup GUI LAYOUT
 
         self.setObjectName(u"MainWindow")
-        self.resize(800, 480)
+        self.resize(124, 550)
 
         self.widget = QWidget()
 
