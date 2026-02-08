@@ -234,7 +234,7 @@ class MainWindow(QMainWindow):
 
         self.DVinsertpausetimelabel = QLabel("pause time:", self)
         self.DVinsertpausetimelabel.setObjectName(u"dvinsertpausetime")
-        self.DVinsertpausetimelabel.setGeometry(QRect(740, 400, 130, 20))
+        self.DVinsertpausetimelabel.setGeometry(QRect(700, 365, 130, 20))
         self.DVinsertpausetimelabel.setFont(smalllabelfont)
 
         self.DVinsertdepthlabel = QLabel("Target DV:", self)
