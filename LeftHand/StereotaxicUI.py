@@ -114,17 +114,17 @@ class MainWindow(QMainWindow):
 
         self.APlabel = QLabel("AP", self.widget)
         self.APlabel.setObjectName(u"APlabel")
-        self.APlabel.setGeometry(QRect(145, -3, 41, 41))
+        self.APlabel.setGeometry(QRect(141, -3, 41, 41))
         self.APlabel.setFont(toplabelfont)
 
         self.MLlabel = QLabel("ML", self.widget)
         self.MLlabel.setObjectName(u"MLlabel")
-        self.MLlabel.setGeometry(QRect(305, -3, 41, 41))
+        self.MLlabel.setGeometry(QRect(300, -3, 41, 41))
         self.MLlabel.setFont(toplabelfont)
 
         self.DVlabel = QLabel("DV", self.widget)
         self.DVlabel.setObjectName(u"DVlabel")
-        self.DVlabel.setGeometry(QRect(465, -3, 41, 41))
+        self.DVlabel.setGeometry(QRect(460, -3, 41, 41))
         self.DVlabel.setFont(toplabelfont)
 
         stepposlabelfont = QFont()
