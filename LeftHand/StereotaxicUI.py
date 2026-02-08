@@ -428,14 +428,14 @@ window = MainWindow()
 window.initializesteppers()
 
 mainbuttonthread = buttonprogram(window)
-#mainbuttonthread.sendtoUI(window)
+        #mainbuttonthread.sendtoUI(window)
 controlthread = threadedcontrols(window)
-#controlthread.sendtoUI(window)
+        #controlthread.sendtoUI(window)
 
 #Start Threads
 threadpool = QThreadPool()
-threadpool.start(mainbuttonthread.runbuttonthread)
-threadpool.start(controlthread.runcontrolthread)
+# threadpool.start(mainbuttonthread.runbuttonthread)
+# threadpool.start(controlthread.runcontrolthread)
 
 window.show()
 
