@@ -199,7 +199,7 @@ class MainWindow(QMainWindow):
 
         self.targetname = QPlainTextEdit(self.widget)
         self.targetname.setObjectName(u"targetnameselected")
-        self.targetname.setGeometry(QRect(500, 298, 275, 33))
+        self.targetname.setGeometry(QRect(500, 298, 400, 33))
         self.targetname.setFont(radiobuttonfont)
 
 
@@ -213,7 +213,7 @@ class MainWindow(QMainWindow):
 
         self.targetlabel = QLabel("Selected Target:", self)
         self.targetlabel.setObjectName(u"selectedtargetlabel")
-        self.targetlabel.setGeometry(QRect(375, 305, 200, 20))
+        self.targetlabel.setGeometry(QRect(375, 305, 130, 20))
         self.targetlabel.setFont(radiobuttonfont)
 
         self.coordinatelabel = QLabel("Coordinates:", self)
