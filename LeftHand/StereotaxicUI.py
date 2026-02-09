@@ -504,7 +504,8 @@ class MainWindow(QMainWindow):
     def selectlistcoordinates(self):
         selected_items = self.listWidget.selectedItems()
         selected_text = selected_items[0].text()
-        name, APlist, MLlist, DVlist, DVsafe, compensat, DVrate, DVpause, DVpausetime, WDrate, WDpause, WDpausetime, WDfirstWD, WDfirstwait, WDtotwait = selected_text.split(',')
+        name, APlist, MLlist, DVlist, DVsafe, compensat, DVrate, DVpause, DVpausetime, WDrate, WDpause, WDpausetime, WDfirstWD = selected_text.split(',')
+        # , WDfirstwait, WDtotwait
         self.APmanualenter.setPlainText(APlist)
         self.MLmanualenter.setPlainText(MLlist)
         self.DVmanualenter.setPlainText(DVsafe)
