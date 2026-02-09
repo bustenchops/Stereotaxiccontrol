@@ -308,7 +308,7 @@ class MainWindow(QMainWindow):
 
         self.withdrawnumpause = QPlainTextEdit(self.widget)
         self.withdrawnumpause.setObjectName(u"withdrawnumpause")
-        self.withdrawnumpause.setGeometry(QRect(723, 385, 50, 31))
+        self.withdrawnumpause.setGeometry(QRect(799, 493, 50, 31))
         self.withdrawnumpause.setFont(smalllmanualfont)
 
         self.withdrawpausetime = QPlainTextEdit(self.widget)
@@ -318,7 +318,7 @@ class MainWindow(QMainWindow):
 
         self.withdrawfirstwait = QPlainTextEdit(self.widget)
         self.withdrawfirstwait.setObjectName(u"withdrawfirstwait")
-        self.withdrawfirstwait.setGeometry(QRect(711, 440, 50, 31))
+        self.withdrawfirstwait.setGeometry(QRect(887, 385, 50, 31))
         self.withdrawfirstwait.setFont(smalllmanualfont)
 
         self.speciesgrouplabel = QLabel("Set Species:", self)
