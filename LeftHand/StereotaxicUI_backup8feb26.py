@@ -488,15 +488,15 @@ class MainWindow(QMainWindow):
             self.selected_file = file_dialog.selectedFiles()[0]
             print(f'Selected file: {self.selected_file}')
 
-        # with open(self.selected_file, 'r') as file:
-        #     lines = file.readlines()
-        #     for line in lines:
-        #         self.listWidget.addItem(line.strip())
-
         with open(self.selected_file, 'r') as file:
-           self.listWidget.clear()
-           for line in file:
+            lines = file.readlines()
+            for line in lines:
                 self.listWidget.addItem(line.strip())
+
+        # with open(self.selected_file, 'r') as file:
+        #    self.listWidget.clear()
+        #    for line in file:
+        #         self.listWidget.addItem(line.strip())
 
     #loads the coordinates from the list to the text boxes
     @Slot()
