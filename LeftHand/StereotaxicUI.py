@@ -293,8 +293,13 @@ class MainWindow(QMainWindow):
 
         self.withdrawtotalwaitlabel = QLabel("Total wait (s):", self)
         self.withdrawtotalwaitlabel.setObjectName(u"withdrawtotalwaitlabel")
-        self.withdrawtotalwaitlabel.setGeometry(QRect(875, 418, 130, 20))
+        self.withdrawtotalwaitlabel.setGeometry(QRect(875, 473, 130, 20))
         self.withdrawtotalwaitlabel.setFont(smalllabelfont)
+
+        self.withdrawfirstdistwaitlabel = QLabel("First Withdraw:", self)
+        self.withdrawfirstdistwaitlabel.setObjectName(u"withdrawfirstdistwaitlabel")
+        self.withdrawfirstdistwaitlabel.setGeometry(QRect(875, 418, 130, 20))
+        self.withdrawfirstdistwaitlabel.setFont(smalllabelfont)
 
         self.withdrawmanrate = QPlainTextEdit(self.widget)
         self.withdrawmanrate.setObjectName(u"withdrawmanrate")
@@ -303,8 +308,13 @@ class MainWindow(QMainWindow):
 
         self.withdrawtotpause = QPlainTextEdit(self.widget)
         self.withdrawtotpause.setObjectName(u"withdrawtotpause")
-        self.withdrawtotpause.setGeometry(QRect(887, 438, 50, 31))
+        self.withdrawtotpause.setGeometry(QRect(887, 493, 50, 31))
         self.withdrawtotpause.setFont(smalllmanualfont)
+
+        self.withdrawfirstdist = QPlainTextEdit(self.widget)
+        self.withdrawfirstdist.setObjectName(u"withdrawfirstdist")
+        self.withdrawfirstdist.setGeometry(QRect(887, 438, 50, 31))
+        self.withdrawfirstdist.setFont(smalllmanualfont)
 
         self.withdrawnumpause = QPlainTextEdit(self.widget)
         self.withdrawnumpause.setObjectName(u"withdrawnumpause")
