@@ -268,7 +268,7 @@ class MainWindow(QMainWindow):
 
         self.withdrawcheckbox = QCheckBox("Withdraw:", self.widget)
         self.withdrawcheckbox.setObjectName(u"withdrawcheckbox")
-        self.withdrawcheckbox.setGeometry(QRect(790, 340, 130, 20))
+        self.withdrawcheckbox.setGeometry(QRect(808, 340, 130, 20))
         self.withdrawcheckbox.setFont(radiobuttonfont)
 
         self.withdrawratelabel = QLabel("Rate (um/min):", self)
@@ -293,7 +293,7 @@ class MainWindow(QMainWindow):
 
         self.withdrawtotalwaitlabel = QLabel("Total wait (s):", self)
         self.withdrawtotalwaitlabel.setObjectName(u"withdrawtotalwaitlabel")
-        self.withdrawtotalwaitlabel.setGeometry(QRect(615, 420, 130, 20))
+        self.withdrawtotalwaitlabel.setGeometry(QRect(875, 420, 130, 20))
         self.withdrawtotalwaitlabel.setFont(smalllabelfont)
 
         self.withdrawmanrate = QPlainTextEdit(self.widget)
