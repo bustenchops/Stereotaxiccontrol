@@ -530,7 +530,7 @@ class MainWindow(QMainWindow):
 
     # with open(self.selected_file, 'r') as file:
     #     self.listWidget.clear()
-11    #
+    #
     #     for line in file:
     #         parts = line.strip().split(',')
     #         print(parts)  # ['value1', 'value2', 'value3', ...]
