@@ -199,7 +199,7 @@ class MainWindow(QMainWindow):
 
         self.targetname = QPlainTextEdit(self.widget)
         self.targetname.setObjectName(u"targetnameselected")
-        self.targetname.setGeometry(QRect(500, 298, 400, 33))
+        self.targetname.setGeometry(QRect(500, 298, 430, 33))
         self.targetname.setFont(radiobuttonfont)
 
 
