@@ -504,25 +504,36 @@ class MainWindow(QMainWindow):
     def selectlistcoordinates(self):
         selected_items = self.listWidget.selectedItems()
         selected_text = selected_items[0].text()
-        name, APlist, MLlist, DVlist, DVsafe, compensat, DVrate, DVpause, DVpausetime, WDrate, WDpause, WDpausetime, WDfirstWD = selected_text.split(',')
+        parts = selected_text.split(',')
+        for i, p in enumerate(parts):
+                print(f"Part{i}: {p}")
+        # name, APlist, MLlist, DVlist, DVsafe, compensat, DVrate, DVpause, DVpausetime, WDrate, WDpause, WDpausetime, WDfirstWD = selected_text.split(',')
         # , WDfirstwait, WDtotwait
-        self.APmanualenter.setPlainText(APlist)
-        self.MLmanualenter.setPlainText(MLlist)
-        self.DVmanualenter.setPlainText(DVsafe)
-        self.targetname.setPlainText(name)
-        self.DVinserttarget.setPlainText(DVlist)
-        self.DVinsertcompens.setPlainText(compensat)
-        self.DVinsertmanrate.setPlainText(DVrate)
-        self.DVinsertnumpause.setPlainText(DVpause)
-        self.DVinsertpausetime.setPlainText(DVpausetime)
-        self.withdrawmanrate.setPlainText(WDrate)
-        self.withdrawnumpause.setPlainText(WDpause)
-        self.withdrawpausetime.setPlainText(WDpausetime)
-        self.withdrawfirstdist.setPlainText(WDfirstWD)
+        # self.APmanualenter.setPlainText(APlist)
+        # self.MLmanualenter.setPlainText(MLlist)
+        # self.DVmanualenter.setPlainText(DVsafe)
+        # self.targetname.setPlainText(name)
+        # self.DVinserttarget.setPlainText(DVlist)
+        # self.DVinsertcompens.setPlainText(compensat)
+        # self.DVinsertmanrate.setPlainText(DVrate)
+        # self.DVinsertnumpause.setPlainText(DVpause)
+        # self.DVinsertpausetime.setPlainText(DVpausetime)
+        # self.withdrawmanrate.setPlainText(WDrate)
+        # self.withdrawnumpause.setPlainText(WDpause)
+        # self.withdrawpausetime.setPlainText(WDpausetime)
+        # self.withdrawfirstdist.setPlainText(WDfirstWD)
         #self.withdrawfirstwait.setPlainText(WDfirstwait)
         #self.withdrawtotal.setPlainText(WDtotwait)
 
-#to enumerate the items and put them in the list.
+    # with open(self.selected_file, 'r') as file:
+    #     self.listWidget.clear()
+    #
+    #     for line in file:
+    #         parts = line.strip().split(',')
+    #         print(parts)  # ['value1', 'value2', 'value3', ...]
+    #         self.listWidget.addItem(line.strip())
+
+    #to enumerate the items and put them in the list.
         # def enumerate_list_items_zero_based(self):
         #     """Print: index (0-based) and text for each QListWidget item."""
         #     for i in range(self.listWidget.count()):
