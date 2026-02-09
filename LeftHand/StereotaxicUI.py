@@ -504,10 +504,22 @@ class MainWindow(QMainWindow):
     def selectlistcoordinates(self):
         selected_items = self.listWidget.selectedItems()
         selected_text = selected_items[0].text()
-        name, APlist, MLlist, DVlist = selected_text.split(',')
+        name, APlist, MLlist, DVlist, DVsafe, compensat, DVrate, DVpause, DVpausetime, WDrate, WDpause, WDpausetime, WDfirstWD, WDfirstwait, WDtotwait = selected_text.split(',')
         self.APmanualenter.setPlainText(APlist)
         self.MLmanualenter.setPlainText(MLlist)
-        self.DVmanualenter.setPlainText(DVlist)
+        self.DVmanualenter.setPlainText(DVsafe)
+        self.targetname.setPlainText(name)
+        self.DVinserttarget.setPlainText(DVlist)
+        self.DVinsertcompens.setPlainText(compensat)
+        self.DVinsertmanrate.setPlainText(DVrate)
+        self.DVinsertnumpause.setPlainText(DVpause)
+        self.DVinsertpausetime.setPlainText(DVpausetime)
+        self.withdrawmanrate.setPlainText(WDrate)
+        self.withdrawnumpause.setPlainText(WDpause)
+        self.withdrawpausetime.setPlainText(WDpausetime)
+        self.withdrawfirstdist.setPlainText(WDfirstWD)
+        self.withdrawfirstwait.setPlainText(WDfirstwait)
+        self.withdrawtotal.setPlainText(WDtotwait)
 
 #to enumerate the items and put them in the list.
         # def enumerate_list_items_zero_based(self):
