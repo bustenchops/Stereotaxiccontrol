@@ -278,12 +278,12 @@ class MainWindow(QMainWindow):
 
         self.withdrawpausetimelabel = QLabel("Pause time:", self)
         self.withdrawpausetimelabel.setObjectName(u"withdrawpausetimelabel")
-        self.withdrawpausetimelabel.setGeometry(QRect(787, 418, 130, 20))
+        self.withdrawpausetimelabel.setGeometry(QRect(787, 473, 130, 20))
         self.withdrawpausetimelabel.setFont(smalllabelfont)
 
         self.withdrawnumpauselabel = QLabel("Num. pauses:", self)
         self.withdrawnumpauselabel.setObjectName(u"withdrawnumpauselabel")
-        self.withdrawnumpauselabel.setGeometry(QRect(787, 473, 130, 20))
+        self.withdrawnumpauselabel.setGeometry(QRect(787, 418, 130, 20))
         self.withdrawnumpauselabel.setFont(smalllabelfont)
 
         self.withdrawfirstwaitlabel = QLabel("First wait (s):", self)
@@ -308,12 +308,12 @@ class MainWindow(QMainWindow):
 
         self.withdrawnumpause = QPlainTextEdit(self.widget)
         self.withdrawnumpause.setObjectName(u"withdrawnumpause")
-        self.withdrawnumpause.setGeometry(QRect(799, 493, 50, 31))
+        self.withdrawnumpause.setGeometry(QRect(799, 438, 50, 31))
         self.withdrawnumpause.setFont(smalllmanualfont)
 
         self.withdrawpausetime = QPlainTextEdit(self.widget)
         self.withdrawpausetime.setObjectName(u"withdrawpausetime")
-        self.withdrawpausetime.setGeometry(QRect(723, 440, 50, 31))
+        self.withdrawpausetime.setGeometry(QRect(799, 493, 50, 31))
         self.withdrawpausetime.setFont(smalllmanualfont)
 
         self.withdrawfirstwait = QPlainTextEdit(self.widget)
