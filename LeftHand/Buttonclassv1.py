@@ -49,7 +49,7 @@ class buttonprogram:
                     if lastbut[var_list.homeABSzero] == 1:
                         if var_list.safetybutton == 1:
                             print('HOME to ABS Zero')
-                            self.hometoABSzero()
+                            self.fullretract()
                             var_list.safetybutton = 0
 
                     #set relative zero for ALL
@@ -269,7 +269,7 @@ class buttonprogram:
             var_list.DVinitREL_holdvalue = var_list.DVsteps
         var_list.DVmove.PosRelAbsCalc()
 
-    def hometoABSzero(self):
+    def fullretract(self):
         print('home to ABS zero')
         for x in range(var_list.DVsteps):
             var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)

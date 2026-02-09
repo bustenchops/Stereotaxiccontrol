@@ -488,16 +488,12 @@ class MainWindow(QMainWindow):
             self.selected_file = file_dialog.selectedFiles()[0]
             print(f'Selected file: {self.selected_file}')
 
-        # with open(self.selected_file, 'r') as file:
-        #     lines = file.readlines()
-        #     for line in lines:
-        #         self.listWidget.addItem(line.strip())
-
         with open(self.selected_file, 'r') as file:
-           self.listWidget.clear()
-           next(file) #skips the first line
-           for line in file:
+            self.listWidget.clear()
+            next(file) #skips the first line
+            for line in file:
                 self.listWidget.addItem(line.strip())
+        var_list.countoflistwidget = self.listWidget.count()
 
     #loads the coordinates from the list to the text boxes
     @Slot()
@@ -528,20 +524,34 @@ class MainWindow(QMainWindow):
         self.withdrawfirstwait.setPlainText(parts[13])
         self.withdrawtotpause.setPlainText(parts[14])
 
-    # with open(self.selected_file, 'r') as file:
-    #     self.listWidget.clear()
-    #
-    #     for line in file:
-    #         parts = line.strip().split(',')
-    #         print(parts)  # ['value1', 'value2', 'value3', ...]
-    #         self.listWidget.addItem(line.strip())
-
+    @Slot()
+    def toggleselectlist(self, toglistnum):
     #to enumerate the items and put them in the list.
-        # def enumerate_list_items_zero_based(self):
-        #     """Print: index (0-based) and text for each QListWidget item."""
-        #     for i in range(self.listWidget.count()):
-        #         item = self.listWidget.item(i)
-        #         print(f"{i}: {item.text()}")
+        selected_items = self.listWidget.item(toglistnum)
+        selected_text = selected_items[0].text()
+        parts = selected_text.split(',')
+        if len(parts) != 15:
+            print('not enough comma sep values')
+            return
+        for i, p in enumerate(parts):
+            print(f"Part{i}: {p}")
+        # name, APlist, MLlist, DVlist, DVsafe, compensat, DVrate, DVpause, DVpausetime, WDrate, WDpause, WDpausetime, WDfirstWD = selected_text.split(',')
+        # , WDfirstwait, WDtotwait
+        self.targetname.setPlainText(parts[0])
+        self.APmanualenter.setPlainText(parts[1])
+        self.MLmanualenter.setPlainText(parts[2])
+        self.DVmanualenter.setPlainText(parts[4])
+        self.DVinserttarget.setPlainText(parts[3])
+        self.DVinsertcompens.setPlainText(parts[5])
+        self.DVinsertmanrate.setPlainText(parts[6])
+        self.DVinsertnumpause.setPlainText(parts[7])
+        self.DVinsertpausetime.setPlainText(parts[8])
+        self.withdrawmanrate.setPlainText(parts[9])
+        self.withdrawnumpause.setPlainText(parts[10])
+        self.withdrawpausetime.setPlainText(parts[11])
+        self.withdrawfirstdist.setPlainText(parts[12])
+        self.withdrawfirstwait.setPlainText(parts[13])
+        self.withdrawtotpause.setPlainText(parts[14])
 
     #sets the radio button for rat or mouse
     @Slot()

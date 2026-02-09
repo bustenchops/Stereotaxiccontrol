@@ -1,4 +1,9 @@
 class var_list:
+
+#From UI
+    countoflistwidget = 0
+    list_toggle = 9999
+
 #FROM BUTTONCLASS *********************************************************
 
 #Main while loop condition
@@ -30,7 +35,7 @@ class var_list:
     TOGGLEoff = 1
 
 # DEFINE NUMBER OF BUTTONS AND ORDER IN ARRAY
-    buttonarray = ['moveslow', 'needleoffset', 'drilloffset', 'HomeToABSzero', 'movefast', 'recalibrate', 'bregmahome',
+    buttonarray = ['moveslow', 'needleoffset', 'drilloffset', 'fullretract', 'movefast', 'recalibrate', 'bregmahome',
                    'relativeAP', 'HomerelativeZero', 'relativeALLset', 'FiberOffset', 'relativeML', 'relativeDV' ,
                    'miscbuttonA', 'miscbuttonB']
     lastbuttonstate = [0 for x in range(len(buttonarray))]
@@ -39,7 +44,7 @@ class var_list:
     moveslow = 0
     needleoff = 1
     drilloff = 2
-    homeABSzero = 3
+    fullretract = 3
     movefast = 4
     recalibrate = 5
     bregmahome = 6
@@ -51,6 +56,7 @@ class var_list:
     relativeDV = 12
     miscbuttonA = 13
     miscbuttonB = 14
+
 
 #DEFINE EMERGENCY STOP and hard wired buttons
     emergstop = 26
