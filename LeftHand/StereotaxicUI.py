@@ -246,7 +246,7 @@ class MainWindow(QMainWindow):
         self.DVinsertdepthlabel.setGeometry(QRect(615, 418, 130, 20))
         self.DVinsertdepthlabel.setFont(smalllabelfont)
 
-        self.DVinsertcompenslabel = QLabel("Compensation (mm):", self)
+        self.DVinsertcompenslabel = QLabel("Bevel comp. (mm):", self)
         self.DVinsertcompenslabel.setObjectName(u"DVinsertcompenslabel")
         self.DVinsertcompenslabel.setGeometry(QRect(615, 473, 130, 20))
         self.DVinsertcompenslabel.setFont(smalllabelfont)
