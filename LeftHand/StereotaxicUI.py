@@ -495,6 +495,7 @@ class MainWindow(QMainWindow):
 
         with open(self.selected_file, 'r') as file:
            self.listWidget.clear()
+           next(file)
            for line in file:
                 self.listWidget.addItem(line.strip())
 
