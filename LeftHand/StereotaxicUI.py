@@ -526,7 +526,7 @@ class MainWindow(QMainWindow):
         self.withdrawpausetime.setPlainText(parts[11])
         self.withdrawfirstdist.setPlainText(parts[12])
         self.withdrawfirstwait.setPlainText(parts[13])
-        self.withdrawtotal.setPlainText(parts[14])
+        self.withdrawtotpause.setPlainText(parts[14])
 
     # with open(self.selected_file, 'r') as file:
     #     self.listWidget.clear()
