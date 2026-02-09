@@ -246,6 +246,11 @@ class MainWindow(QMainWindow):
         self.DVinsertdepthlabel.setGeometry(QRect(615, 418, 130, 20))
         self.DVinsertdepthlabel.setFont(smalllabelfont)
 
+        self.DVinsertcompenslabel = QLabel("Compensation (mm):", self)
+        self.DVinsertcompenslabel.setObjectName(u"DVinsertcompenslabel")
+        self.DVinsertcompenslabel.setGeometry(QRect(615, 473, 130, 20))
+        self.DVinsertcompenslabel.setFont(smalllabelfont)
+
         self.DVinsertmanrate = QPlainTextEdit(self.widget)
         self.DVinsertmanrate.setObjectName(u"DVinsertmanrate")
         self.DVinsertmanrate.setGeometry(QRect(627, 385, 50, 31))
@@ -255,6 +260,11 @@ class MainWindow(QMainWindow):
         self.DVinserttarget.setObjectName(u"DVinserttarget")
         self.DVinserttarget.setGeometry(QRect(627, 438, 50, 31))
         self.DVinserttarget.setFont(smalllmanualfont)
+
+        self.DVinsertcompens = QPlainTextEdit(self.widget)
+        self.DVinsertcompens.setObjectName(u"DVinsertcompens")
+        self.DVinsertcompens.setGeometry(QRect(627, 493, 50, 31))
+        self.DVinsertcompens.setFont(smalllmanualfont)
 
         self.DVinsertnumpause = QPlainTextEdit(self.widget)
         self.DVinsertnumpause.setObjectName(u"DVinsertnumpause")
@@ -296,7 +306,7 @@ class MainWindow(QMainWindow):
         self.withdrawtotalwaitlabel.setGeometry(QRect(875, 473, 130, 20))
         self.withdrawtotalwaitlabel.setFont(smalllabelfont)
 
-        self.withdrawfirstdistwaitlabel = QLabel("First Withdraw:", self)
+        self.withdrawfirstdistwaitlabel = QLabel("First Withdraw (mm):", self)
         self.withdrawfirstdistwaitlabel.setObjectName(u"withdrawfirstdistwaitlabel")
         self.withdrawfirstdistwaitlabel.setGeometry(QRect(875, 418, 130, 20))
         self.withdrawfirstdistwaitlabel.setFont(smalllabelfont)
