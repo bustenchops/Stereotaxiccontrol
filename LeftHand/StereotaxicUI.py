@@ -518,8 +518,8 @@ class MainWindow(QMainWindow):
         self.withdrawnumpause.setPlainText(WDpause)
         self.withdrawpausetime.setPlainText(WDpausetime)
         self.withdrawfirstdist.setPlainText(WDfirstWD)
-        self.withdrawfirstwait.setPlainText(WDfirstwait)
-        self.withdrawtotal.setPlainText(WDtotwait)
+        #self.withdrawfirstwait.setPlainText(WDfirstwait)
+        #self.withdrawtotal.setPlainText(WDtotwait)
 
 #to enumerate the items and put them in the list.
         # def enumerate_list_items_zero_based(self):
