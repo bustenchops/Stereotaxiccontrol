@@ -288,7 +288,7 @@ class MainWindow(QMainWindow):
 
         self.withdrawfirstwaitlabel = QLabel("First wait (s):", self)
         self.withdrawfirstwaitlabel.setObjectName(u"withdrawfirstwaitlabel")
-        self.withdrawfirstwaitlabel.setGeometry(QRect(866, 365, 130, 20))
+        self.withdrawfirstwaitlabel.setGeometry(QRect(875, 365, 130, 20))
         self.withdrawfirstwaitlabel.setFont(smalllabelfont)
 
         self.withdrawtotalwaitlabel = QLabel("Total wait (s):", self)
