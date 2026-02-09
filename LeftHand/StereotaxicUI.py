@@ -505,29 +505,32 @@ class MainWindow(QMainWindow):
         selected_items = self.listWidget.selectedItems()
         selected_text = selected_items[0].text()
         parts = selected_text.split(',')
+        if len(parts) != 15:
+            print('not enough comma sep values')
+            return
         for i, p in enumerate(parts):
                 print(f"Part{i}: {p}")
         # name, APlist, MLlist, DVlist, DVsafe, compensat, DVrate, DVpause, DVpausetime, WDrate, WDpause, WDpausetime, WDfirstWD = selected_text.split(',')
         # , WDfirstwait, WDtotwait
-        # self.APmanualenter.setPlainText(APlist)
-        # self.MLmanualenter.setPlainText(MLlist)
-        # self.DVmanualenter.setPlainText(DVsafe)
-        # self.targetname.setPlainText(name)
-        # self.DVinserttarget.setPlainText(DVlist)
-        # self.DVinsertcompens.setPlainText(compensat)
-        # self.DVinsertmanrate.setPlainText(DVrate)
-        # self.DVinsertnumpause.setPlainText(DVpause)
-        # self.DVinsertpausetime.setPlainText(DVpausetime)
-        # self.withdrawmanrate.setPlainText(WDrate)
-        # self.withdrawnumpause.setPlainText(WDpause)
-        # self.withdrawpausetime.setPlainText(WDpausetime)
-        # self.withdrawfirstdist.setPlainText(WDfirstWD)
-        #self.withdrawfirstwait.setPlainText(WDfirstwait)
-        #self.withdrawtotal.setPlainText(WDtotwait)
+        self.targetname.setPlainText(parts[0])
+        self.APmanualenter.setPlainText(parts[1])
+        self.MLmanualenter.setPlainText(parts[2])
+        self.DVmanualenter.setPlainText(parts[4])
+        self.DVinserttarget.setPlainText(parts[3])
+        self.DVinsertcompens.setPlainText(parts[5])
+        self.DVinsertmanrate.setPlainText(parts[6])
+        self.DVinsertnumpause.setPlainText(parts[7])
+        self.DVinsertpausetime.setPlainText(parts[8])
+        self.withdrawmanrate.setPlainText(parts[9])
+        self.withdrawnumpause.setPlainText(parts[10])
+        self.withdrawpausetime.setPlainText(parts[11])
+        self.withdrawfirstdist.setPlainText(parts[12])
+        self.withdrawfirstwait.setPlainText(parts[13])
+        self.withdrawtotal.setPlainText(parts[14])
 
     # with open(self.selected_file, 'r') as file:
     #     self.listWidget.clear()
-    #
+11    #
     #     for line in file:
     #         parts = line.strip().split(',')
     #         print(parts)  # ['value1', 'value2', 'value3', ...]
