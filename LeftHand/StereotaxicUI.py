@@ -226,7 +226,7 @@ class MainWindow(QMainWindow):
         self.DVinsertcheckbox.setGeometry(QRect(640, 340, 130, 20))
         self.DVinsertcheckbox.setFont(radiobuttonfont)
 
-        self.DVinsertratelabel = QLabel("Rate (um/min):", self)
+        self.DVinsertratelabel = QLabel("Rate (mm/min):", self)
         self.DVinsertratelabel.setObjectName(u"dvinsertrate")
         self.DVinsertratelabel.setGeometry(QRect(615, 365, 130, 20))
         self.DVinsertratelabel.setFont(smalllabelfont)
@@ -271,7 +271,7 @@ class MainWindow(QMainWindow):
         self.withdrawcheckbox.setGeometry(QRect(808, 340, 130, 20))
         self.withdrawcheckbox.setFont(radiobuttonfont)
 
-        self.withdrawratelabel = QLabel("Rate (um/min):", self)
+        self.withdrawratelabel = QLabel("Rate (mm/min):", self)
         self.withdrawratelabel.setObjectName(u"withdrawratelabel")
         self.withdrawratelabel.setGeometry(QRect(787, 365, 130, 20))
         self.withdrawratelabel.setFont(smalllabelfont)
@@ -303,7 +303,7 @@ class MainWindow(QMainWindow):
 
         self.withdrawtotpause = QPlainTextEdit(self.widget)
         self.withdrawtotpause.setObjectName(u"withdrawtotpause")
-        self.withdrawtotpause.setGeometry(QRect(627, 440, 50, 31))
+        self.withdrawtotpause.setGeometry(QRect(887, 438, 50, 31))
         self.withdrawtotpause.setFont(smalllmanualfont)
 
         self.withdrawnumpause = QPlainTextEdit(self.widget)
