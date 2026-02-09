@@ -231,15 +231,15 @@ class MainWindow(QMainWindow):
         self.DVinsertratelabel.setGeometry(QRect(615, 365, 130, 20))
         self.DVinsertratelabel.setFont(smalllabelfont)
 
-        self.DVinsertpauselabel = QLabel("Pause time:", self)
-        self.DVinsertpauselabel.setObjectName(u"dvpausetime")
-        self.DVinsertpauselabel.setGeometry(QRect(701, 420, 130, 20))
-        self.DVinsertpauselabel.setFont(smalllabelfont)
-
-        self.DVinsertpausetimelabel = QLabel("Num. pauses:", self)
-        self.DVinsertpausetimelabel.setObjectName(u"dvnumpauses")
-        self.DVinsertpausetimelabel.setGeometry(QRect(701, 365, 130, 20))
+        self.DVinsertpausetimelabel = QLabel("Pause time:", self)
+        self.DVinsertpausetimelabel.setObjectName(u"dvpausetime")
+        self.DVinsertpausetimelabel.setGeometry(QRect(701, 420, 130, 20))
         self.DVinsertpausetimelabel.setFont(smalllabelfont)
+
+        self.DVinsertpauselabel = QLabel("Num. pauses:", self)
+        self.DVinsertpauselabel.setObjectName(u"dvnumpauses")
+        self.DVinsertpauselabel.setGeometry(QRect(701, 365, 130, 20))
+        self.DVinsertpauselabel.setFont(smalllabelfont)
 
         self.DVinsertdepthlabel = QLabel("Target DV:", self)
         self.DVinsertdepthlabel.setObjectName(u"dvtargetdepth")
@@ -267,9 +267,59 @@ class MainWindow(QMainWindow):
         self.DVinsertpausetime.setFont(smalllmanualfont)
 
         self.withdrawcheckbox = QCheckBox("Withdraw:", self.widget)
-        self.withdrawcheckbox.setObjectName(u"DVinsertionbox")
+        self.withdrawcheckbox.setObjectName(u"withdrawcheckbox")
         self.withdrawcheckbox.setGeometry(QRect(790, 340, 130, 20))
         self.withdrawcheckbox.setFont(radiobuttonfont)
+
+        self.withdrawratelabel = QLabel("Rate (um/min):", self)
+        self.withdrawratelabel.setObjectName(u"withdrawratelabel")
+        self.withdrawratelabel.setGeometry(QRect(787, 365, 130, 20))
+        self.withdrawratelabel.setFont(smalllabelfont)
+
+        self.withdrawpausetimelabel = QLabel("Pause time:", self)
+        self.withdrawpausetimelabel.setObjectName(u"withdrawpausetimelabel")
+        self.withdrawpausetimelabel.setGeometry(QRect(787, 420, 130, 20))
+        self.withdrawpausetimelabel.setFont(smalllabelfont)
+
+        self.withdrawnumpauselabel = QLabel("Num. pauses:", self)
+        self.withdrawnumpauselabel.setObjectName(u"withdrawnumpauselabel")
+        self.withdrawnumpauselabel.setGeometry(QRect(787, 475, 130, 20))
+        self.withdrawnumpauselabel.setFont(smalllabelfont)
+
+        self.withdrawfirstwaitlabel = QLabel("First wait (s):", self)
+        self.withdrawfirstwaitlabel.setObjectName(u"withdrawfirstwaitlabel")
+        self.withdrawfirstwaitlabel.setGeometry(QRect(866, 365, 130, 20))
+        self.withdrawfirstwaitlabel.setFont(smalllabelfont)
+
+        self.withdrawtotalwaitlabel = QLabel("Total wait (s):", self)
+        self.withdrawtotalwaitlabel.setObjectName(u"withdrawtotalwaitlabel")
+        self.withdrawtotalwaitlabel.setGeometry(QRect(615, 420, 130, 20))
+        self.withdrawtotalwaitlabel.setFont(smalllabelfont)
+
+        self.withdrawmanrate = QPlainTextEdit(self.widget)
+        self.withdrawmanrate.setObjectName(u"withdrawmanrate")
+        self.withdrawmanrate.setGeometry(QRect(627, 385, 50, 31))
+        self.withdrawmanrate.setFont(smalllmanualfont)
+
+        self.withdrawtotpause = QPlainTextEdit(self.widget)
+        self.withdrawtotpause.setObjectName(u"withdrawtotpause")
+        self.withdrawtotpause.setGeometry(QRect(627, 440, 50, 31))
+        self.withdrawtotpause.setFont(smalllmanualfont)
+
+        self.withdrawnumpause = QPlainTextEdit(self.widget)
+        self.withdrawnumpause.setObjectName(u"withdrawnumpause")
+        self.withdrawnumpause.setGeometry(QRect(711, 385, 50, 31))
+        self.withdrawnumpause.setFont(smalllmanualfont)
+
+        self.withdrawpausetime = QPlainTextEdit(self.widget)
+        self.withdrawpausetime.setObjectName(u"withdrawpausetime")
+        self.withdrawpausetime.setGeometry(QRect(711, 440, 50, 31))
+        self.withdrawpausetime.setFont(smalllmanualfont)
+
+        self.withdrawfirstwait = QPlainTextEdit(self.widget)
+        self.withdrawfirstwait.setObjectName(u"withdrawfirstwait")
+        self.withdrawfirstwait.setGeometry(QRect(711, 440, 50, 31))
+        self.withdrawfirstwait.setFont(smalllmanualfont)
 
         self.speciesgrouplabel = QLabel("Set Species:", self)
         self.speciesgrouplabel.setObjectName(u"speciesgrouplabel")
