@@ -482,7 +482,7 @@ class MainWindow(QMainWindow):
     def choseafile(self):
         print("click load file")
         file_dialog = QFileDialog(self)
-        file_dialog.setNameFilter("Text Files (*.txt)")
+        file_dialog.setNameFilter("Text Files (*.csv)")
 
         if file_dialog.exec():
             self.selected_file = file_dialog.selectedFiles()[0]
@@ -495,7 +495,7 @@ class MainWindow(QMainWindow):
 
         with open(self.selected_file, 'r') as file:
            self.listWidget.clear()
-           next(file)
+           next(file) #skips the first line
            for line in file:
                 self.listWidget.addItem(line.strip())
 
@@ -504,7 +504,7 @@ class MainWindow(QMainWindow):
     def selectlistcoordinates(self):
         selected_items = self.listWidget.selectedItems()
         selected_text = selected_items[0].text()
-        name, APlist, MLlist, DVlist = selected_text.split(' ')
+        name, APlist, MLlist, DVlist = selected_text.split(',')
         self.APmanualenter.setPlainText(APlist)
         self.MLmanualenter.setPlainText(MLlist)
         self.DVmanualenter.setPlainText(DVlist)
