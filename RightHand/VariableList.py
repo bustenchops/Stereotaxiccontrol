@@ -110,9 +110,9 @@ class var_list:
     DVadvance = 400
     MLadvance = 400
 
-    APworking = 7400
-    MLworking = 5740
-    DVworking = 2900
+    APworking = 3050
+    MLworking = 5990
+    DVworking = 6100
 
     fullretract = 7650
     fullretractML = 9500
