@@ -104,7 +104,7 @@ class var_list:
 #FROM Threadedcontrol class *********************************************************
 
 #Variables that may need tweaking
-    calibrationsteps = 4000
+    calibrationsteps = 7000
     backoff = 200
     APadvance = 2000
     DVadvance = 400
