@@ -268,7 +268,7 @@ class threadedcontrols:
             if yesno == "y":
                 self.MLinput = self.get_user_input('INPUT:', 'Enter the ML starting position in millimeters.')
                 for x in range(calibrationsteps):
-                    if 0 <= var_list.MLsteps < 6000:
+                    if 0 <= var_list.MLsteps < 8000:
                         var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, btwnSteps)
                         var_list.MLmove.PosRelAbsCalc()
                 self.MLinputend = self.get_user_input('INPUT:', 'Enter the ML final position in millimeters.')
@@ -288,7 +288,7 @@ class threadedcontrols:
             if yesno == "y":
                 self.DVinput = self.get_user_input('INPUT:', 'Enter the DV starting position in millimeters.')
                 for x in range(calibrationsteps):
-                    if 0 <= var_list.DVsteps < 6000:
+                    if 0 <= var_list.DVsteps < 8000:
                         var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, btwnSteps)
                         var_list.DVmove.PosRelAbsCalc()
                 self.DVinputend = self.get_user_input('INPUT:', 'Enter the DV final position in millimeters.')
