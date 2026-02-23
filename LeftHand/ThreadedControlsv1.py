@@ -418,8 +418,8 @@ class threadedcontrols:
         print('Control thread started')
         print('encoders init')
         self.AProto = RotaryEncoder(var_list.rotoA_AP, var_list.rotoB_AP, var_list.emergstop, self.AP_event)
-        self.MLroto = RotaryEncoder(var_list.rotoA_ML, var_list.rotoB_ML, var_list.misc_eventbuttonA, self.ML_event)
-        self.DVroto = RotaryEncoder(var_list.rotoA_DV, var_list.rotoB_DV, var_list.misc_eventbuttonB, self.DV_event)
+        self.MLroto = RotaryEncoder(var_list.rotoA_ML, var_list.rotoB_ML, var_list.safetybut, self.ML_event)
+        self.DVroto = RotaryEncoder(var_list.rotoA_DV, var_list.rotoB_DV, var_list.disablestepperbut, self.DV_event)
 
 
         print('Set Drill toggle and Mouse settings')

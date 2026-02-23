@@ -44,9 +44,9 @@ class buttonprogram:
 
                 print("button ", butarr[i], " state change", lastbut[i], ' to ', newbut[i])
 
-                if var_list.engagebutton == 1:
+                if var_list.engagebuttons == 1:
                     #button to home to ABS zero
-                    if lastbut[var_list.homeABSzero] == 1:
+                    if lastbut[var_list.fullretract] == 1:
                         if var_list.safetybutton == 1:
                             print('HOME to ABS Zero')
                             self.fullretract()
@@ -74,8 +74,8 @@ class buttonprogram:
                         self.setrelforDV()
 
                     #button action - Home to bregma (relative zero) for AP and ML BUT DV goes all up WAS THIS
-                    #1feb2026 - not gotolambda
-                    if lastbut[var_list.homeRELzero] == 1:
+                    #1feb2026 - gotolambda
+                    if lastbut[var_list.gotolambdabut] == 1:
                         if var_list.safetybutton == 1:
                             print('DV up AP and ML homed to rel')
                             self.gotolambda()
@@ -110,7 +110,7 @@ class buttonprogram:
                             var_list.safetybutton = 0
 
                     #re-calibrate button
-                    if lastbut[var_list.recalibrate] == 1:
+                    if lastbut[var_list.rezero] == 1:
                         if var_list.safetybutton == 1:
                             print("Re-Zero the steppers")
                             self.sendtoUI.uitest()
@@ -119,14 +119,14 @@ class buttonprogram:
 
                     #miscbuttonA - unused - this WAS the disable button
                     #1feb2026 it is now the Rat / Mouse selector
-                    if lastbut[var_list.miscbuttonA] == 1:
+                    if lastbut[var_list.ratmouseselect] == 1:
                         print('enable/disable steppers')
                         self.ratormouse()
                         self.sendtoUI.uitest()
 
 
                     #miscbuttonB - unused - go to preset
-                    if lastbut[var_list.miscbuttonB] == 1:
+                    if lastbut[var_list.gotopreset] == 1:
                         if var_list.safetybutton == 1:
                             print('send to drill working (AP,ML and DV advance')
                             self.sendtoworking()
