@@ -479,7 +479,7 @@ class MainWindow(QMainWindow):
             print("DVinsert  State changed: Unchecked")
             var_list.DVinsertindicator = 0
             var_list.safetybutton = 0
-            self.safetycheckbox.setChecked(False)
+            self.safetyBox.setChecked(False)
 
     def on_withdraw_changed(self, state: int):
         if self.withdrawcheckbox.isChecked():
@@ -494,7 +494,7 @@ class MainWindow(QMainWindow):
             print("withdraw  State changed: Unchecked")
             var_list.Withdrawlindicator = 0
             var_list.safetybutton = 0
-            self.safetycheckbox.setChecked(False)
+            self.safetyBox.setChecked(False)
 
     def on_safety_changed(self, state: int):
         if self.safetyBox.isChecked():
