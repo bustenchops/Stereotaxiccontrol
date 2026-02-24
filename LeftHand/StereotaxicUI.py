@@ -226,6 +226,7 @@ class MainWindow(QMainWindow):
         self.DVinsertcheckbox.setObjectName(u"DVinsertionbox")
         self.DVinsertcheckbox.setGeometry(QRect(640, 340, 130, 20))
         self.DVinsertcheckbox.setFont(radiobuttonfont)
+        self.DVinsertcheckbox.stateChanged.connect(self.on_DVinsert_changed)
 
         self.DVinsertratelabel = QLabel("Rate (mm/min):", self)
         self.DVinsertratelabel.setObjectName(u"dvinsertrate")
@@ -281,6 +282,7 @@ class MainWindow(QMainWindow):
         self.withdrawcheckbox.setObjectName(u"withdrawcheckbox")
         self.withdrawcheckbox.setGeometry(QRect(808, 340, 130, 20))
         self.withdrawcheckbox.setFont(radiobuttonfont)
+        self.withdrawcheckbox.stateChanged.connect(self.on_withdraw_changed)
 
         self.withdrawratelabel = QLabel("Rate (mm/min):", self)
         self.withdrawratelabel.setObjectName(u"withdrawratelabel")
@@ -417,6 +419,7 @@ class MainWindow(QMainWindow):
         self.safetyBox.setObjectName(u"safetycheckbox")
         self.safetyBox.setGeometry(QRect(105, 490, 175, 20))
         self.safetyBox.setFont(radiobuttonfont)
+        self.safetyBox.stateChanged.connect(self.on_safety_changed)
 
         self.armcoordinatebutton = QPushButton("Arm Coordinates", self.widget)
         self.armcoordinatebutton.setObjectName(u"armcoordinatebutton")
@@ -449,6 +452,33 @@ class MainWindow(QMainWindow):
         elif state == Qt.Unchecked:
             print("make it so State changed: Unchecked")
             var_list.Makeitsoindicator = 0
+
+    def on_DVinsert_changed(self, state: int):
+        if state == Qt.Checked:
+            print("DVinsert State changed: Checked")
+            var_list.DVinsertindicator= 1
+        elif state == Qt.Unchecked:
+            print("DVinsert  State changed: Unchecked")
+            var_list.DVinsertindicator = 0
+
+    def on_withdraw_changed(self, state: int):
+        if state == Qt.Checked:
+            print("withdraw State changed: Checked")
+            var_list.Withdrawlindicator= 1
+        elif state == Qt.Unchecked:
+            print("withdraw  State changed: Unchecked")
+            var_list.Withdrawlindicator = 0
+
+    def on_safety_changed(self, state: int):
+        if state == Qt.Checked:
+            print("safety State changed: Checked")
+            var_list.safetybutton = 1
+        elif state == Qt.Unchecked:
+            print("safety  State changed: Unchecked")
+            var_list.safetybutton = 0
+
+
+    on_withdraw_changed
 
     def updateAPLCD(self, stepAP,ABS_AP,REL_AP):
         print('updated AP steps')
