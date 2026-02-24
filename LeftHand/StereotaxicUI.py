@@ -506,7 +506,6 @@ class MainWindow(QMainWindow):
             var_list.safetybutton = 0
 
 # UPDATE the LCDS
-
     def updateAPLCD(self, stepAP,ABS_AP,REL_AP):
         print('updated AP steps')
         self.APstepLCD.display(stepAP)
