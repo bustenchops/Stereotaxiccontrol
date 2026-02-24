@@ -31,6 +31,7 @@ class threadedtimer:
                 print ("timer 2sec")
                 counter = 0
             if var_list.safetybutton == 1:
+                print("safety on")
                 if self.Safetytimeout != var_list.Safetytimeouttime:
                     self.Safetytimeout = var_list.Safetytimeouttime
                 currenttime = time.time()
@@ -41,6 +42,7 @@ class threadedtimer:
                     self.sendtoUI.makeitsoBox.setChecked(False)
 
             if var_list.Withdrawlindicator == 1:
+                print("withdrawindicator on")
                 if self.Withdrawtimeout != var_list.Withdrawltimeouttime:
                     self.Withdrawtimeout = var_list.Withdrawltimeouttime
                 currenttime = time.time()
@@ -51,6 +53,7 @@ class threadedtimer:
                     #also uncheck the box
 
             if var_list.DVinsertindicator == 1:
+                print("DVinsert indicator on")
                 if self.DVinsertiontimeout != var_list.DVinserttimeouttime:
                     self.DVinsertiontimeout = var_list.DVinserttimeouttime
                 currenttime = time.time()
@@ -61,6 +64,7 @@ class threadedtimer:
                     # also uncheck the box
 
             if var_list.Makeitsoindicator == 1:
+                print("makeitsoindicator on")
                 if self.Makeitsotimeout != var_list.Makeitsobuttimeouttime:
                     self.Makeitsotimeout = var_list.Makeitsobuttimeouttime
                 currenttime = time.time()
@@ -71,7 +75,7 @@ class threadedtimer:
                     # also uncheck the box
             counter += 1
             time.sleep(0.250)
-
+        print("exit the loop")
 
 
 # note this will send the time now every 250ms to the varlist
