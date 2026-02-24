@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys
-from PySide6.QtCore import (QRect, QThreadPool, Slot, QObject, Signal, QThread)
+from PySide6.QtCore import (QRect, QThreadPool, Slot, QObject, Signal, QThread, Qt)
 from PySide6.QtGui import (QFont)
 from PySide6.QtWidgets import (QApplication, QFrame, QLCDNumber, QMainWindow, QMenuBar, QRadioButton, QStatusBar,
                                QWidget, QLabel, QPlainTextEdit, QCheckBox, QPushButton, QListWidget,QFileDialog, QButtonGroup)
@@ -401,10 +401,11 @@ class MainWindow(QMainWindow):
         self.speedgroup.addButton(self.medspeedset)
         self.speedgroup.addButton(self.coarsespeedset)
 
-        self.checkBox = QCheckBox("Make it so", self.widget)
-        self.checkBox.setObjectName(u"engagecheckbox")
-        self.checkBox.setGeometry(QRect(375, 355, 105, 20))
-        self.checkBox.setFont(radiobuttonfont)
+        self.makeitsoBox = QCheckBox("Make it so", self.widget)
+        self.makeitsoBox.setObjectName(u"makeitsocheckbox")
+        self.makeitsoBox.setGeometry(QRect(375, 355, 105, 20))
+        self.makeitsoBox.setFont(radiobuttonfont)
+        self.makeitsoBox.stateChanged.connect(self.on_makeitso_changed)
 
         self.movebutton = QPushButton("Engage", self.widget)
         self.movebutton.setObjectName(u"movebutton")
@@ -441,6 +442,12 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.widget)
 
 #UPDATE the LCDS
+    def on_makeitso_changed(self, state: int):
+        if state == Qt.Checked:
+            print("make it so State changed: Checked")
+        elif state == Qt.Unchecked:
+            print("make it so State changed: Unchecked")
+
     def updateAPLCD(self, stepAP,ABS_AP,REL_AP):
         print('updated AP steps')
         self.APstepLCD.display(stepAP)
@@ -473,10 +480,10 @@ class MainWindow(QMainWindow):
         APcooord = self.APmanualenter.toPlainText()
         MLcooord = self.MLmanualenter.toPlainText()
         DVcooord = self.DVmanualenter.toPlainText()
-        if self.checkBox.isChecked():
+        if self.makeitsoBox.isChecked():
             print(f"Grad text to go to AP:{APcooord}, ML:{MLcooord}, DV:{DVcooord}")
             controlthread.movetoTargetList(APcooord,MLcooord,DVcooord)
-            self.checkBox.setChecked(False)
+            self.makeitsoBox.setChecked(False)
 
 #select a TXT file to load and preloads the targets
     @Slot()
