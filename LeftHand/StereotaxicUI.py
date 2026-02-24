@@ -445,7 +445,8 @@ class MainWindow(QMainWindow):
         self.statusbar = QStatusBar()
         self.setCentralWidget(self.widget)
 
-#UPDATE the LCDS
+#Checkbox control
+
     def on_makeitso_changed(self, state: int):
         if state == Qt.Checked:
             print("make it so State changed: Checked")
@@ -494,8 +495,7 @@ class MainWindow(QMainWindow):
             print("safety  State changed: Unchecked")
             var_list.safetybutton = 0
 
-
-    on_withdraw_changed
+# UPDATE the LCDS
 
     def updateAPLCD(self, stepAP,ABS_AP,REL_AP):
         print('updated AP steps')
