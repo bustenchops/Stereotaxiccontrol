@@ -24,12 +24,14 @@ class threadedtimer:
         self.Safetytimeout = var_list.Safetytimeouttime
         self.Makeitsotimeout = var_list.Makeitsobuttimeouttime
         counter = 0
-        while True:
+        while counter < 1000:
             print("start thread true loop")
             # check to see if the box is checked first then run the checks
             if counter == 8:
                 print ("timer 2sec")
                 counter = 0
+            else:
+                print("A")
             if var_list.safetybutton == 1:
                 print("safety on")
                 if self.Safetytimeout != var_list.Safetytimeouttime:
@@ -40,7 +42,8 @@ class threadedtimer:
                     print('Safety disengage timed out')
                     var_list.safetybutton = 0
                     self.sendtoUI.makeitsoBox.setChecked(False)
-
+            else:
+                print("B")
             if var_list.Withdrawlindicator == 1:
                 print("withdrawindicator on")
                 if self.Withdrawtimeout != var_list.Withdrawltimeouttime:
@@ -51,7 +54,8 @@ class threadedtimer:
                     print('Withdrawltime engage timed out')
                     var_list.Withdrawlindicator = 0
                     #also uncheck the box
-
+            else:
+                print("C")
             if var_list.DVinsertindicator == 1:
                 print("DVinsert indicator on")
                 if self.DVinsertiontimeout != var_list.DVinserttimeouttime:
@@ -62,6 +66,8 @@ class threadedtimer:
                     print('DVinsert engage timed out')
                     var_list.DVinsertindicator = 0
                     # also uncheck the box
+            else:
+                print("D")
 
             if var_list.Makeitsoindicator == 1:
                 print("makeitsoindicator on")
@@ -73,7 +79,10 @@ class threadedtimer:
                     print('Makeitso checkbox timed out')
                     var_list.Makeitsoindicator = 0
                     # also uncheck the box
+            else:
+                print("E")
             counter += 1
+
             time.sleep(0.250)
         print("exit the loop")
 
