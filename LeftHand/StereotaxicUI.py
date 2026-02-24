@@ -445,8 +445,10 @@ class MainWindow(QMainWindow):
     def on_makeitso_changed(self, state: int):
         if state == Qt.Checked:
             print("make it so State changed: Checked")
+            var_list.Makeitsoindicator = 1
         elif state == Qt.Unchecked:
             print("make it so State changed: Unchecked")
+            var_list.Makeitsoindicator = 0
 
     def updateAPLCD(self, stepAP,ABS_AP,REL_AP):
         print('updated AP steps')
@@ -645,7 +647,7 @@ timedthread = threadedtimer(window)
 threadpool = QThreadPool()
 # threadpool.start(mainbuttonthread.runbuttonthread)
 # threadpool.start(controlthread.runcontrolthread)
-# threadpool.start(timedthread.runtimerthread)
+threadpool.start(timedthread.runtimerthread)
 window.show()
 
 app.exec()
