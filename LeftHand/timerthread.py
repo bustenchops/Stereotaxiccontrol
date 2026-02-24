@@ -25,7 +25,6 @@ class threadedtimer:
         self.Makeitsotimeout = var_list.Makeitsobuttimeouttime
         counter = 0
         while True:
-            print("start thread true loop")
             # check to see if the box is checked first then run the checks
             if counter == 40:
                 print ("timer 10sec")
