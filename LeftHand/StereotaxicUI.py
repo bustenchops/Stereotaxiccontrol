@@ -408,7 +408,7 @@ class MainWindow(QMainWindow):
         self.makeitsoBox.setObjectName(u"makeitsocheckbox")
         self.makeitsoBox.setGeometry(QRect(375, 355, 105, 20))
         self.makeitsoBox.setFont(radiobuttonfont)
-        self.makeitsoBox.stateChanged.connect(self.on_makeitso_changed)
+        self.makeitsoBox.clicked.connect(self.on_makeitso_changed)
 
         self.movebutton = QPushButton("Engage", self.widget)
         self.movebutton.setObjectName(u"movebutton")
@@ -458,11 +458,11 @@ class MainWindow(QMainWindow):
             self.safetyBox.setChecked(False)
 
     def on_makeitso_changed(self, state: int):
-        if state == Qt.Checked:
+        if self.makeitsoBox.isChecked():
             print("make it so State changed: Checked")
             var_list.Makeitsoindicator = 1
             var_list.Makeitsobuttimeouttime = time.time()
-        elif state == Qt.Unchecked:
+        else:
             print("make it so State changed: Unchecked")
             var_list.Makeitsoindicator = 0
 
