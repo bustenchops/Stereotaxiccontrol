@@ -16,15 +16,19 @@ class threadedtimer:
         self.Safetytimeout = None
         self.Makeitsotimeout = None
         self.timerlength = var_list.timeoutlength
+        print("timer thread started")
 
     def runtimerthread(self):
         self.DVinsertiontimeout = var_list.DVinserttimeouttime
         self.Withdrawtimeout = var_list.Withdrawltimeouttime
         self.Safetytimeout = var_list.Safetytimeouttime
         self.Makeitsotimeout = var_list.Makeitsobuttimeouttime
-
+        counter = 0
         while true:
             # check to see if the box is checked first then run the checks
+            if counter == 8:
+                print ("timer 2sec")
+                counter = 0
             if var_list.safetybutton == 1:
                 if self.Safetytimeout != var_list.Safetytimeouttime:
                     self.Safetytimeout = var_list.Safetytimeouttime
@@ -33,6 +37,7 @@ class threadedtimer:
                 if timecruncherSafe > self.timerlength:
                     print('Safety disengage timed out')
                     var_list.safetybutton = 0
+                    self.sendtoUI.makeitsoBox.setChecked(False)
 
             if var_list.Withdrawlindicator == 1:
                 if self.Withdrawtimeout != var_list.Withdrawltimeouttime:
@@ -63,7 +68,7 @@ class threadedtimer:
                     print('Makeitso checkbox timed out')
                     var_list.Makeitsoindicator = 0
                     # also uncheck the box
-
+            counter += 1
             time.sleep(0.250)
 
 
