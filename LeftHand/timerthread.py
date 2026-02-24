@@ -39,6 +39,7 @@ class threadedtimer:
                 if timecruncherSafe > self.timerlength:
                     print('Safety disengage timed out')
                     var_list.safetybutton = 0
+                    self.sendtoUI.uncheckstuff(4)
 
 
             if var_list.Withdrawlindicator == 1:
@@ -50,7 +51,7 @@ class threadedtimer:
                 if timecruncherWith > self.timerlength:
                     print('Withdrawltime engage timed out')
                     var_list.Withdrawlindicator = 0
-                    #also uncheck the box
+                    self.sendtoUI.uncheckstuff(3)
 
             if var_list.DVinsertindicator == 1:
                 print("DVinsert indicator on")
@@ -61,7 +62,7 @@ class threadedtimer:
                 if timecruncherDV > self.timerlength:
                     print('DVinsert engage timed out')
                     var_list.DVinsertindicator = 0
-                    # also uncheck the box
+                    self.sendtoUI.uncheckstuff(2)
 
             if var_list.Makeitsoindicator == 1:
                 print("makeitsoindicator on")
