@@ -96,8 +96,6 @@ class threadedcontrols:
             var_list.DVmove.PosRelAbsCalc()
         elif event == RotaryEncoder.BUTTONDOWN:
             print("hardwired event button B clicked")
-            print('safety disengaged')
-            var_list.safetybutton = 1
             return
         elif event == RotaryEncoder.BUTTONUP:
             return

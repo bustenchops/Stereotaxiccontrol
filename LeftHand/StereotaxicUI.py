@@ -9,6 +9,7 @@ from StepperControlv1 import Steppercontrol
 from Buttonclassv1 import buttonprogram
 from ThreadedControlsv1 import threadedcontrols
 from VariableList import var_list
+from timerthread import threadedtimer
 
 
 
@@ -631,13 +632,13 @@ mainbuttonthread = buttonprogram(window)
         #mainbuttonthread.sendtoUI(window)
 controlthread = threadedcontrols(window)
         #controlthread.sendtoUI(window)
-timerthread
+timedthread = threadedtimer(window)
 
 #Start Threads
 threadpool = QThreadPool()
 # threadpool.start(mainbuttonthread.runbuttonthread)
 # threadpool.start(controlthread.runcontrolthread)
-
+# threadpool.start(timedthread.runtimerthread)
 window.show()
 
 app.exec()
