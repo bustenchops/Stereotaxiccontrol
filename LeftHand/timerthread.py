@@ -24,7 +24,7 @@ class threadedtimer:
         self.Safetytimeout = var_list.Safetytimeouttime
         self.Makeitsotimeout = var_list.Makeitsobuttimeouttime
         counter = 0
-        while true:
+        while True:
             # check to see if the box is checked first then run the checks
             if counter == 8:
                 print ("timer 2sec")
