@@ -10,6 +10,7 @@ from Buttonclassv1 import buttonprogram
 from ThreadedControlsv1 import threadedcontrols
 from VariableList import var_list
 from timerthread import threadedtimer
+import time
 
 
 
@@ -449,6 +450,7 @@ class MainWindow(QMainWindow):
         if state == Qt.Checked:
             print("make it so State changed: Checked")
             var_list.Makeitsoindicator = 1
+            var_list.Makeitsobuttimeouttime = time.time()
         elif state == Qt.Unchecked:
             print("make it so State changed: Unchecked")
             var_list.Makeitsoindicator = 0
@@ -458,6 +460,7 @@ class MainWindow(QMainWindow):
             if var_list.safetybutton == 1:
                 print("DVinsert State changed: Checked")
                 var_list.DVinsertindicator= 1
+                var_list.DVinserttimeouttime = time.time()
             else:
                 print("safety not on")
                 self.DVinsertcheckbox.setChecked(False)
@@ -472,6 +475,7 @@ class MainWindow(QMainWindow):
             if var_list.safetybutton == 1:
                 print("withdraw State changed: Checked")
                 var_list.Withdrawlindicator= 1
+                var_list.Withdrawltimeouttime = time.time()
             else:
                 print("safety not on")
                 self.withdrawcheckbox.setChecked(False)
@@ -485,6 +489,7 @@ class MainWindow(QMainWindow):
         if state == Qt.Checked:
             print("safety State changed: Checked")
             var_list.safetybutton = 1
+            var_list.Safetytimeouttime = time.time()
         elif state == Qt.Unchecked:
             print("safety  State changed: Unchecked")
             var_list.safetybutton = 0
