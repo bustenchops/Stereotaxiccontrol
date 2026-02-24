@@ -199,7 +199,7 @@ class var_list:
     withdrawinsertstop = 0
     DVinsertindicator = 0
     Withdrawlindicator = 0
-    MakeitsoIndicator = 0
+    Makeitsoindicator = 0
 
     ratormouseselect = 1  #1 is mouse 2 is rat (mouse default)
     ratlambda = 1208   # steps for 9mm at 0.0745 per step

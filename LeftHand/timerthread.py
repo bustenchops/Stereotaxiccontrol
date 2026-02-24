@@ -69,7 +69,7 @@ class threadedtimer:
             else:
                 print("D")
 
-            if var_list.DVinsertindicator == 1:
+            if var_list.Makeitsoindicator == 1:
                 print("makeitsoindicator on")
                 if self.Makeitsotimeout != var_list.Makeitsobuttimeouttime:
                     self.Makeitsotimeout = var_list.Makeitsobuttimeouttime
