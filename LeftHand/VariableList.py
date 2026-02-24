@@ -196,6 +196,7 @@ class var_list:
     emergencystopflag = 0
     engagebuttons = 0
     safetybutton = 0
+    withdrawinsertstop = 0
 
     ratormouseselect = 1  #1 is mouse 2 is rat (mouse default)
     ratlambda = 1208   # steps for 9mm at 0.0745 per step

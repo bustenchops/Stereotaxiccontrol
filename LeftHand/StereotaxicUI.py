@@ -631,6 +631,7 @@ mainbuttonthread = buttonprogram(window)
         #mainbuttonthread.sendtoUI(window)
 controlthread = threadedcontrols(window)
         #controlthread.sendtoUI(window)
+timerthread
 
 #Start Threads
 threadpool = QThreadPool()

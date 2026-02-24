@@ -79,6 +79,7 @@ class threadedcontrols:
             # print("hardwired event button A clicked")
             print('safety disengaged')
             var_list.safetybutton = 1
+            var_list.withdrawinsertstop = 1
             return
         elif event == RotaryEncoder.BUTTONUP:
             return
