@@ -40,7 +40,7 @@ class threadedtimer:
                 if timecruncherSafe > self.timerlength:
                     print('Safety disengage timed out')
                     var_list.safetybutton = 0
-                    self.sendtoUI.makeitsoBox.setChecked(False)
+
 
             if var_list.Withdrawlindicator == 1:
                 print("withdrawindicator on")
@@ -73,7 +73,8 @@ class threadedtimer:
                 if timecruncherMakeit > self.timerlength:
                     print('Makeitso checkbox timed out')
                     var_list.Makeitsoindicator = 0
-                    # also uncheck the box
+                    self.sendtoUI.uncheckstuff(1)
+
             counter += 1
 
             time.sleep(0.250)
