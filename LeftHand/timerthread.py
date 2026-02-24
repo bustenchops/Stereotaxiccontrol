@@ -24,7 +24,7 @@ class threadedtimer:
         self.Safetytimeout = var_list.Safetytimeouttime
         self.Makeitsotimeout = var_list.Makeitsobuttimeouttime
         counter = 0
-        while counter < 1000:
+        while True:
             print("start thread true loop")
             # check to see if the box is checked first then run the checks
             if counter == 8:
@@ -66,8 +66,6 @@ class threadedtimer:
                     print('DVinsert engage timed out')
                     var_list.DVinsertindicator = 0
                     # also uncheck the box
-            else:
-                print("D")
 
             if var_list.Makeitsoindicator == 1:
                 print("makeitsoindicator on")
@@ -79,8 +77,6 @@ class threadedtimer:
                     print('Makeitso checkbox timed out')
                     var_list.Makeitsoindicator = 0
                     # also uncheck the box
-            else:
-                print("E")
             counter += 1
 
             time.sleep(0.250)
