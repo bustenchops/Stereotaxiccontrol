@@ -10,6 +10,7 @@ class buttonprogram:
         GPIO.setup(var_list.latchpin, GPIO.OUT)
         GPIO.setup(var_list.clockpin, GPIO.OUT)
         GPIO.setup(var_list.datapin, GPIO.IN)
+        self.offtoggleold = 1
 
 
 #Get the shift register data
@@ -45,16 +46,18 @@ class buttonprogram:
                 print("button ", butarr[i], " state change", lastbut[i], ' to ', newbut[i])
 
                 if var_list.engagebuttons == 1:
-                    #button to home to ABS zero
+                    #full retract
                     if lastbut[var_list.fullretract] == 1:
                         if var_list.safetybutton == 1:
-                            print('HOME to ABS Zero')
+                            print('retract all manipulators')
                             self.fullretract()
                             var_list.safetybutton = 0
+                            self.sendtoUI.uncheckstuff(4)
+
 
                     #set relative zero for ALL
                     if lastbut[var_list.relativeALL] == 1:
-                        print('set relative positions for all three')
+                        print('set relative positions for all axis')
                         self.setrelforall()
                             # and then update LCDS
 
@@ -73,34 +76,32 @@ class buttonprogram:
                         print('set relative DV')
                         self.setrelforDV()
 
-                    #button action - Home to bregma (relative zero) for AP and ML BUT DV goes all up WAS THIS
-                    #1feb2026 - gotolambda
+                    #gotolambda
                     if lastbut[var_list.gotolambdabut] == 1:
                         if var_list.safetybutton == 1:
                             print('DV up AP and ML homed to rel')
                             self.gotolambda()
                             var_list.safetybutton = 0
+                            self.sendtoUI.uncheckstuff(4)
 
-                    #miscbuttonC - DRILL to relative zero for AP and ML - DV up 0.5cm but still sets the relative pos
-                    if lastbut[var_list.drilloff] == 1:
-                        if var_list.safetybutton == 1:
-                            print('Drill offset start thread')
-                            self.drillmovetooffset()
-                            var_list.safetybutton = 0
+                    #offset select
+                    if lastbut[var_list.offposone] == 1 & lastbut[var_list.offpostwo] == 0:
+                        var_list.TOGGLEoff = 1
+                    if lastbut[var_list.offposone] == 0 & lastbut[var_list.offpostwo] == 0:
+                        var_list.TOGGLEoff = 2
+                    if lastbut[var_list.offposone] == 0 & lastbut[var_list.offpostwo] == 1:
+                        var_list.TOGGLEoff = 3
 
-                    #miscbuttonD - needle to relative zero for AP and ML - DV up 0.5cm but still sets the relative pos
-                    if lastbut[var_list.needleoff] == 1:
-                        if var_list.safetybutton == 1:
-                            print('Needle offset start thread')
-                            self.needlemovetooffset()
-                            var_list.safetybutton = 0
+                    #ratormouse select
+                    if lastbut[var_list.ratselect] == 1 & lastbut[var_list.mouseselect] == 0:
+                        var_list.ratormouseselect = 1
+                        self.ratormouse()
+                    if lastbut[var_list.offposone] == 0 & lastbut[var_list.offpostwo] == 0:
+                        var_list.ratormouseselect = 3
+                    if lastbut[var_list.ratselect] == 0 & lastbut[var_list.mouseselect] == 1:
+                        var_list.ratormouseselect = 2
+                        self.ratormouse()
 
-                    #miscbuttonE - fiber to relative zero for AP and ML - DV up 0.5cm but still sets the relative pos
-                    if lastbut[var_list.fiberoff] == 1:
-                        if var_list.safetybutton == 1:
-                            print('Fiber offset start thread')
-                            self.fibermovetooffset()
-                            var_list.safetybutton = 0
 
                     #home to bregma (relative) moves DV up by value in variable list, positions AP and ML to relative home
                     if lastbut[var_list.bregmahome] == 1:
@@ -108,50 +109,107 @@ class buttonprogram:
                             print("Home to Bregma (DV up buy set value)")
                             self.bregmahome()
                             var_list.safetybutton = 0
+                            self.sendtoUI.uncheckstuff(4)
 
-                    #re-calibrate button
+                    #rezero button
                     if lastbut[var_list.rezero] == 1:
                         if var_list.safetybutton == 1:
                             print("Re-Zero the steppers")
-                            self.sendtoUI.uitest()
                             self.sendtoUI.recalibrateaxis()
                             var_list.safetybutton = 0
+                            self.sendtoUI.uncheckstuff(4)
 
-                    #miscbuttonA - unused - this WAS the disable button
-                    #1feb2026 it is now the Rat / Mouse selector
-                    if lastbut[var_list.ratmouseselect] == 1:
-                        print('enable/disable steppers')
-                        self.ratormouse()
-                        self.sendtoUI.uitest()
+                    #home to ABS zero
+                    if lastbut[var_list.ABSzero] == 1:
+                        if var_list.safetybutton == 1:
+                            self.hometoABSzero()
+                            var_list.safetybutton = 0
+                            self.sendtoUI.uncheckstuff(4)
 
+                    #home AP and ML, DV goes to ABS
+                    if lastbut[var_list.bregmahomeDVabs] == 1:
+                        if var_list.safetybutton == 1:
+                            self.upDVrelhomeAP_ML()
+                            var_list.safetybutton = 0
+                            self.sendtoUI.uncheckstuff(4)
 
-                    #miscbuttonB - unused - go to preset
+                    #Hmome AP and ML to bregma and DV up 5.
+                    if lastbut[var_list.bregmahomeDVupfive] == 1:
+                        if var_list.safetybutton == 1:
+                            self.homeDVupfive()
+                            var_list.safetybutton = 0
+                            self.sendtoUI.uncheckstuff(4)
+
+                    #go to preset
                     if lastbut[var_list.gotopreset] == 1:
                         if var_list.safetybutton == 1:
-                            print('send to drill working (AP,ML and DV advance')
-                            self.sendtoworking()
-                            var_list.safetybutton = 0
+                            if self.offtoggleold != var_list.TOGGLEoff:
+                                self.offtoggleold = var_list.TOGGLEoff
+                                if self.offtoggleold == 1:
+                                    self.drillmovetooffset()
+                                    print('send to drill working')
+                                if self.offtoggleold == 2:
+                                    self.needlemovetooffset()
+                                    print('send to needle working')
+                                if self.offtoggleold == 3:
+                                    self.fibermovetooffset()
+                                    print('send to probe working')
+
+                            else:
+                                self.sendtoworking()
+                                var_list.safetybutton = 0
+                                self.sendtoUI.uncheckstuff(4)
+
+
+                    #selectup
+
+                    #selectdown
+
+                    #armbut
+
+                    #engagebut
+
+                    #makeitsobut
+
+                    #DVinsert
+
+                    #withdrawl
+
+                    #retractAP
+
+                    #returnAP
+
+                    #retractDV
+
+                    #returnDV
+
+                    #functionone
+
+                    #functiontwo
+
+
 
                 lastbut[i] = newbut[i]
 
-        # Speed switch (steps per rotation)
-        # note 1 is pressed and 0 is released
-        # stepper_speed (pos 0 and pos 1)
+        # Speed switch
         if lastbut[var_list.movefast] == 0 and lastbut[var_list.moveslow] == 0:
             if var_list.stepper_speed != var_list.normalspeed:
                 var_list.stepper_speed = var_list.normalspeed
                 print('Speed set to: ', var_list.normalspeed)
                 self.sendtoUI.currentspeed(var_list.stepper_speed)
+                self.sendtoUI.setmedspeed()
         elif lastbut[var_list.movefast] == 1 and lastbut[var_list.moveslow] == 0:
             if var_list.stepper_speed != var_list.fastspeed:
                 var_list.stepper_speed = var_list.fastspeed
                 print('Speed set to: ', var_list.fastspeed)
                 self.sendtoUI.currentspeed(var_list.stepper_speed)
+                self.sendtoUI.setcoarsespeed()
         elif lastbut[var_list.movefast] == 0 and lastbut[var_list.moveslow] == 1:
             if var_list.stepper_speed != var_list.finespeed:
                 var_list.stepper_speed = var_list.finespeed
                 print('Speed set to: ', var_list.finespeed)
                 self.sendtoUI.currentspeed(var_list.stepper_speed)
+                self.sendtoUI.setfinespeed()
         else:
             print('speedswitch not working right')
 
@@ -172,8 +230,10 @@ class buttonprogram:
             var_list.rellambda = var_list.APrelpos - var_list.mouselambda
         if var_list.ratormouseselect == 2:
             var_list.rellambda = var_list.APrelpos - var_list.ratlambda
+        if var_list.ratormouseselect == 3:
+            var_list.rellambda = var_list.APrelpos
 
-        go_upDVby = var_list.DVrelpos - var_list.DVup_bregramhome
+        go_upDVby = var_list.DVrelpos - var_list.DVup_lambdabregma
         if (var_list.DVsteps > go_upDVby):
             DVdiff = var_list.DVsteps - go_upDVby
             for x in range(DVdiff):
@@ -217,7 +277,50 @@ class buttonprogram:
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
 
+    def hometoABSzero(self):
+        print('home the ABS zero')
+        for x in range(var_list.DVsteps):
+            var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+        for x in range(var_list.MLsteps):
+            var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
+        for x in range(var_list.APsteps):
+            var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
+        var_list.APmove.PosRelAbsCalc()
+        var_list.MLmove.PosRelAbsCalc()
+        var_list.DVmove.PosRelAbsCalc()
 
+        GPIO.output(var_list.enableAll, 1)
+        var_list.lastenablestate = 1
+
+    def upDVrelhomeAP_ML(self):
+        print('relative home AP and ML homed DVup')
+        for x in range(var_list.DVsteps):
+            var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+
+        if var_list.MLrelpos > var_list.MLsteps:
+            shiftdistance = var_list.MLrelpos - var_list.MLsteps
+            for x in range(shiftdistance):
+                var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
+        elif var_list.MLsteps > var_list.MLrelpos:
+            shiftdistance = var_list.MLsteps - var_list.MLrelpos
+            for x in range(shiftdistance):
+                var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
+
+        if var_list.APsteps < var_list.APrelpos:
+            shiftdistance = var_list.APrelpos - var_list.APsteps
+            for x in range(shiftdistance):
+                var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
+        elif var_list.APsteps > var_list.APrelpos:
+            shiftdistance = var_list.APsteps - var_list.APrelpos
+            for x in range(shiftdistance):
+                var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
+
+        var_list.APmove.PosRelAbsCalc()
+        var_list.MLmove.PosRelAbsCalc()
+        var_list.DVmove.PosRelAbsCalc()
+
+        GPIO.output(var_list.enableAll, 1)
+        var_list.lastenablestate = 1
 
     # this if a function to disable the steppers...it has not seen much use so it does not currently have have a button call
     def endisstep(self):
@@ -562,6 +665,46 @@ class buttonprogram:
             GPIO.output(var_list.enableAll, 1)
             var_list.lastenablestate = 1
             var_list.TOGGLEoff = 3
+
+    def homeDVupfive(self):
+        print('goto bregma but lift DV up by value in variable list')
+        for x in range(var_list.DVup_five):
+            var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+
+        print(var_list.APrelpos,"APRelative")
+        print(var_list.APsteps,"APsteps")
+
+        if var_list.APrelpos > var_list.APsteps:
+            APdiff = var_list.APrelpos - var_list.APsteps
+            print('back')
+            for x in range(APdiff):
+                var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
+        else:
+            APdiff = var_list.APsteps - var_list.APrelpos
+            print('forward')
+            for x in range(APdiff):
+                var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
+
+        print(var_list.MLrelpos,"mlRelative")
+        print(var_list.MLsteps,"mlsteps")
+
+        if var_list.MLrelpos > var_list.MLsteps:
+            MLdiff = var_list.MLrelpos - var_list.MLsteps
+            print('left')
+            for x in range(MLdiff):
+                var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
+        else:
+            MLdiff = var_list.MLsteps - var_list.MLrelpos
+            print('right')
+            for x in range(MLdiff):
+                var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
+        var_list.APmove.PosRelAbsCalc()
+        var_list.MLmove.PosRelAbsCalc()
+        var_list.DVmove.PosRelAbsCalc()
+
+        GPIO.output(var_list.enableAll, 1)
+        var_list.lastenablestate = 1
+
 
     def bregmahome(self):
         print('goto bregma but lift DV up by value in variable list')

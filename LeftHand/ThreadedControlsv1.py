@@ -78,6 +78,7 @@ class threadedcontrols:
         elif event == RotaryEncoder.BUTTONDOWN:
             # print("hardwired event button A clicked")
             print('safety disengaged')
+            self.sendtoUI.checkstuff(4)
             var_list.safetybutton = 1
             var_list.withdrawinsertstop = 1
             return

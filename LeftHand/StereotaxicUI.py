@@ -457,6 +457,17 @@ class MainWindow(QMainWindow):
         if whichone == 4:
             self.safetyBox.setChecked(False)
 
+    def checkstuff(self, whichone):
+        print("unchecking")
+        if whichone == 1:
+            self.makeitsoBox.setChecked(False)
+        if whichone == 2:
+            self.DVinsertcheckbox.setChecked(False)
+        if whichone == 3:
+            self.withdrawcheckbox.setChecked(False)
+        if whichone == 4:
+            self.safetyBox.setChecked(False)
+
     def on_makeitso_changed(self, state: int):
         if self.makeitsoBox.isChecked():
             print("make it so State changed: Checked")

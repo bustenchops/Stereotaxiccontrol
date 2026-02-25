@@ -151,6 +151,8 @@ class var_list:
     fullretractML = 9500
 
     DVup_bregramhome = 268 #about 0.2cm
+    DVup_lambdabregma = 200 # about 0.15cm
+    DVup_five = 675 # about 5 mm
 
 # how many steps DV goes up and then back when changing the offsets to avoid scrapping the skull
     DVup_OffsetSafety = 1340 #about 1cm
@@ -193,10 +195,14 @@ class var_list:
     offsetfilename = 'offsetsLH.txt'
 
     lastenablestate = 1
+
     emergencystopflag = 0
+
     engagebuttons = 0
     safetybutton = 0
+
     withdrawinsertstop = 0
+
     DVinsertindicator = 0
     Withdrawlindicator = 0
     Makeitsoindicator = 0
