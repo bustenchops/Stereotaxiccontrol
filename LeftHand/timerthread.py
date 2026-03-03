@@ -26,9 +26,9 @@ class threadedtimer:
         counter = 0
         while True:
             # check to see if the box is checked first then run the checks
-            if counter == 40:
-                print ("timer 10sec")
-                counter = 0
+            # if counter == 40:
+            #     print ("timer 10sec")
+            #     counter = 0
 
             if var_list.safetybutton == 1:
                 print("safety on")

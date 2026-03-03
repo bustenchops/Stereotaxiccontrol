@@ -571,6 +571,7 @@ class MainWindow(QMainWindow):
             for line in file:
                 self.listWidget.addItem(line.strip())
         var_list.countoflistwidget = self.listWidget.count()
+        print('number of items:' + var_list.countoflistwidget)
 
     #loads the coordinates from the list to the text boxes
     @Slot()
