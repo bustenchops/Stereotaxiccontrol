@@ -482,6 +482,10 @@ class MainWindow(QMainWindow):
             self.on_safety_changed()
 
     def on_makeitso_changed(self):
+        if self.withdrawcheckbox.isChecked():
+            self.uncheckstuff(3)
+        if self.DVinsertcheckbox.isChecked():
+            self.uncheckstuff(2)
         if self.makeitsoBox.isChecked():
             print("make it so State changed: Checked")
             var_list.Makeitsoindicator = 1
@@ -491,6 +495,10 @@ class MainWindow(QMainWindow):
             var_list.Makeitsoindicator = 0
 
     def on_DVinsert_changed(self):
+        if self.makeitsoBox.isChecked():
+            self.uncheckstuff(1)
+        if self.withdrawcheckbox.isChecked():
+            self.uncheckstuff(3)
         if self.DVinsertcheckbox.isChecked():
             if var_list.safetybutton == 1:
                 print("DVinsert State changed: Checked")
@@ -507,6 +515,10 @@ class MainWindow(QMainWindow):
             self.uncheckstuff(4)
 
     def on_withdraw_changed(self):
+        if self.makeitsoBox.isChecked():
+            self.uncheckstuff(1)
+        if self.DVinsertcheckbox.isChecked():
+            self.uncheckstuff(2)
         if self.withdrawcheckbox.isChecked():
             if var_list.safetybutton == 1:
                 print("withdraw State changed: Checked")
