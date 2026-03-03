@@ -120,7 +120,7 @@ class buttonprogram:
                     #miscbuttonA - unused - this WAS the disable button
                     #1feb2026 it is now the Rat / Mouse selector
                     if lastbut[var_list.miscbuttonA] == 1:
-                        print('enable/disable steppers')
+                        print('rat or mouse')
                         self.ratormouse()
                         self.sendtoUI.uitest()
 

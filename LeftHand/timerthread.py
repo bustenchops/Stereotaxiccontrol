@@ -38,7 +38,7 @@ class threadedtimer:
                 timecruncherSafe = currenttime - self.Safetytimeout
                 if timecruncherSafe > self.timerlength:
                     print('Safety disengage timed out')
-                    var_list.safetybutton = 0
+                    # var_list.safetybutton = 0
                     self.sendtoUI.uncheckstuff(4)
 
 

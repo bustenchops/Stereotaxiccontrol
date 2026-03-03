@@ -78,9 +78,15 @@ class threadedcontrols:
         elif event == RotaryEncoder.BUTTONDOWN:
             # print("hardwired event button A clicked")
             print('safety disengaged')
-            self.sendtoUI.checkstuff(4)
-            var_list.safetybutton = 1
-            var_list.withdrawinsertstop = 1
+            if var_list.withdrawinsertstop == 1:
+                var_list.withdrawinsertstop = 0
+                return
+            if var_list.dvinsertstop == 1:
+                var_list.dvinsertstop = 0
+                return
+            else:
+                self.sendtoUI.checkstuff(4)
+                # var_list.safetybutton = 1
             return
         elif event == RotaryEncoder.BUTTONUP:
             return
@@ -96,7 +102,43 @@ class threadedcontrols:
             var_list.DVmove.steppgo(var_list.DVup, var_list.stepper_speed, var_list.btnSteps)
             var_list.DVmove.PosRelAbsCalc()
         elif event == RotaryEncoder.BUTTONDOWN:
-            print("hardwired event button B clicked")
+            print("Disable Stepper")
+            if var_list.withdrawinsertstop == 1:
+                var_list.withdrawinsertstop = 0
+                return
+            if var_list.dvinsertstop == 1:
+                var_list.dvinsertstop = 0
+                return
+            elif var_list.safetybutton == 1:
+                if var_list.lastenablestate == 1:
+                    GPIO.output(var_list.enableAll, 0)
+                    var_list.lastenablestate = 0
+                    print('steppers ENABLED manually')
+                else:
+                    GPIO.output(var_list.enableAll, 1)
+                    var_list.lastenablestate = 1
+                    print('steppers DISABLED manually')
+                #var_list.safetybutton = 0
+                self.sendtoUI.uncheckstuff(4)
+            return
+        elif event == RotaryEncoder.BUTTONUP:
+            return
+        return
+
+    def fourth_event(self, event):
+
+        if event == RotaryEncoder.CLOCKWISE:
+            print('encoder 4 clockwise')
+        elif event == RotaryEncoder.ANTICLOCKWISE:
+            print('encoder 4 counter clockwise')
+        elif event == RotaryEncoder.BUTTONDOWN:
+            print("encoder 4 psuhed")
+            if var_list.withdrawinsertstop == 1:
+                var_list.withdrawinsertstop = 0
+                return
+            if var_list.dvinsertstop == 1:
+                var_list.dvinsertstop = 0
+                return
             return
         elif event == RotaryEncoder.BUTTONUP:
             return
@@ -372,6 +414,180 @@ class threadedcontrols:
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
 
+    def dvinsertauto(self, ftargetdepth, insrate, numberopauses, lengpauses):
+
+        print('moving to DV insertion target')
+        if insrate == 0:
+            return
+        elif insrate == None:
+            return
+        if numberopauses == 0:
+            return
+        elif numberopauses == None:
+            return
+
+        self.intftargetdepth = float(ftargetdepth)
+        self.intinsrate = float(insrate)
+        self.intnumberopauses = numberopauses
+        self.intlengpauses = lengpauses
+        self.countdowntim = self.intlengpauses
+
+        self.reltargetdiff = abs(self.intftargetdepth - var_list.DVcurRELdist)
+
+        print('difference')
+        print(self.reltargetdiff)
+
+        self.instepstotargetDV = self.reltargetdiff / var_list.DVstepdistance
+
+        self.instepstarget_int = int(self.instepstotargetDV)
+
+        print('steps needed')
+        print(self.instepstarget_int)
+
+        stepbtwnpauses = self.instepstotargetDV / self.intnumberopauses
+        remainderpause = self.instepstotargetDV % self.intnumberopauses
+        insertrate = 1 / (self.intinsrate * ( 1 / var_list.DVstepdistance ) / 60)
+        roundinsertrate = round(insertrate, 3)
+
+
+        if var_list.DVcurRELdist > self.intftargetdepth:
+            print('DV down')
+            for y in range(self.intnumberopauses):
+                for x in range(stepbtwnpauses):
+                    if var_list.dvinsertstop == 0:
+                        var_list.DVmove.PosRelAbsCalc()
+                        self.sendtoUI.uncheckstuff(2)
+                        self.sendtoUI.uncheckstuff(4)
+                        return
+                    else:
+                        var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
+                        time.sleep(roundinsertrate)
+                var_list.DVmove.PosRelAbsCalc()
+                for t in range(self.intlengpauses):
+                    if var_list.dvinsertstop == 0:
+                        var_list.DVmove.PosRelAbsCalc()
+                        self.sendtoUI.uncheckstuff(2)
+                        self.sendtoUI.uncheckstuff(4)
+                    else:
+                        self.sendtoUI.timercountdownupdate(self.countdowntim)
+                        time.sleep(1)
+                        self.countdowntim -= 1
+            for f in range(remainderpause):
+                if var_list.dvinsertstop == 0:
+                    var_list.DVmove.PosRelAbsCalc()
+                    self.sendtoUI.uncheckstuff(2)
+                    self.sendtoUI.uncheckstuff(4)
+                    return
+                else:
+                    var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
+                    time.sleep(roundinsertrate)
+
+        elif var_list.DVcurRELdist < self.intftargetdepth:
+            print('DV up')
+            for x in range(self.instepsDV_int):
+                var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+        else:
+            print('DV not moving')
+
+        var_list.DVmove.PosRelAbsCalc()
+
+        GPIO.output(var_list.enableAll, 1)
+        var_list.lastenablestate = 1
+        var_list.dvinsertstop = 0
+        self.sendtoUI.uncheckstuff(2)
+        self.sendtoUI.uncheckstuff(4)
+
+    def withdrawauto(self, withdrrate, withnumpause, withpausetime, withfirstdist, withfirstwait, withtotalpause):
+
+        if withdrrate == 0:
+            return
+        elif withdrrate == None:
+            return
+        if withnumpause == 0:
+            return
+        elif withnumpause == None:
+            return
+
+        print('withdrawing')
+        self.wdfirstdist = withfirstdist / var_list.DVstepdistance
+        self.withdrawdist = (var_list.DVsteps - withfirstdist) - var_list.DVrelpos
+        self.withstepsperpause = self.withdrawdist / withnumpause
+        self.withstepsperpauseremainder = self.withdrawdist % withnumpause
+        self.secondpause = withtotalpause - withfirstwait
+        self.countdowntim = withfirstwait
+        self.countdowntimB = self.secondpause
+        self.wdptime = withpausetime
+
+
+        wdrate = 1 / (withdrrate * ( 1 / var_list.DVstepdistance ) / 60)
+        roundwdrate = round(wdrate, 3)
+
+
+        if var_list.DVsteps > var_list.DVrelpos:
+            print('DV down')
+            for o in range(withfirstwait):
+                if var_list.withdrawinsertstop == 0:
+                    self.sendtoUI.uncheckstuff(3)
+                    self.sendtoUI.uncheckstuff(4)
+                    return
+                else:
+                    self.sendtoUI.timercountdownupdate(self.countdowntim)
+                    time.sleep(1)
+                    self.countdowntim -= 1
+            for f in range(self.wdfirstdist):
+                if var_list.withdrawinsertstop == 0:
+                    self.sendtoUI.uncheckstuff(3)
+                    self.sendtoUI.uncheckstuff(4)
+                    return
+                else:
+                    var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+                    time.sleep(roundwdrate)
+            var_list.DVmove.PosRelAbsCalc()
+            for j in range(self.secondpause):
+                if var_list.withdrawinsertstop == 0:
+                    self.sendtoUI.uncheckstuff(3)
+                    self.sendtoUI.uncheckstuff(4)
+                    return
+                else:
+                    self.sendtoUI.timercountdownupdate(self.countdowntimB)
+                    time.sleep(1)
+                    self.countdowntimB -= 1
+            for y in range(withnumpause):
+                for x in range(self.withdrawdist):
+                    if var_list.withdrawinsertstop == 0:
+                        self.sendtoUI.uncheckstuff(3)
+                        self.sendtoUI.uncheckstuff(4)
+                        return
+                    else:
+                        var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+                        time.sleep(roundwdrate)
+                var_list.DVmove.PosRelAbsCalc()
+                for t in range(withpausetime):
+                    if var_list.withdrawinsertstop == 0:
+                        self.sendtoUI.uncheckstuff(2)
+                        self.sendtoUI.uncheckstuff(4)
+                        return
+                    else:
+                        self.sendtoUI.timercountdownupdate(self.wdptime)
+                        time.sleep(1)
+                        self.wdptime -= 1
+            for f in range(self.withstepsperpauseremainder):
+                if var_list.withdrawinsertstop == 0:
+                    self.sendtoUI.uncheckstuff(3)
+                    self.sendtoUI.uncheckstuff(4)
+                    return
+                else:
+                    var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+                    time.sleep(roundwdrate)
+
+        var_list.DVmove.PosRelAbsCalc()
+
+        GPIO.output(var_list.enableAll, 1)
+        var_list.lastenablestate = 1
+        var_list.withdrawinsertstop = 0
+        self.sendtoUI.uncheckstuff(3)
+        self.sendtoUI.uncheckstuff(4)
+
 
 # question and waits for user input
     def calibratethings(self):
@@ -420,6 +636,7 @@ class threadedcontrols:
         self.AProto = RotaryEncoder(var_list.rotoA_AP, var_list.rotoB_AP, var_list.emergstop, self.AP_event)
         self.MLroto = RotaryEncoder(var_list.rotoA_ML, var_list.rotoB_ML, var_list.safetybut, self.ML_event)
         self.DVroto = RotaryEncoder(var_list.rotoA_DV, var_list.rotoB_DV, var_list.disablestepperbut, self.DV_event)
+        self.fourthroto = RotaryEncoder(var_list.rotoA_fourth, var_list.rotoB_fourth, var_list.fourthhardwarebutton, self.fourth_event)
 
 
         print('Set Drill toggle and Mouse settings')

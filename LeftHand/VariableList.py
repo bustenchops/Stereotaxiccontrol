@@ -88,7 +88,7 @@ class var_list:
     emergstop = 26
     safetybut = 10
     disablestepperbut = 11
-    fourthhardwarebutton = 1
+    fourthhardwarebutton = 9 #encoder 4 depress?
 
 #DEFINE SHIFT REGISTER PINS
     latchpin = 18
@@ -182,6 +182,9 @@ class var_list:
     rotoB_ML = 16
     rotoA_DV = 20
     rotoB_DV = 21
+    rotoA_fourth = 7
+    rotoB_fourth =  1
+
 
 #DEFINE STEPPER DIRECTIONS
     APback = 1
@@ -202,6 +205,7 @@ class var_list:
     safetybutton = 0
 
     withdrawinsertstop = 0
+    dvinsertstop = 0
 
     DVinsertindicator = 0
     Withdrawlindicator = 0

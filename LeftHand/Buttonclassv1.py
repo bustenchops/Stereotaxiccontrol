@@ -51,7 +51,7 @@ class buttonprogram:
                         if var_list.safetybutton == 1:
                             print('retract all manipulators')
                             self.fullretract()
-                            var_list.safetybutton = 0
+                            # var_list.safetybutton = 0
                             self.sendtoUI.uncheckstuff(4)
 
 
@@ -81,7 +81,7 @@ class buttonprogram:
                         if var_list.safetybutton == 1:
                             print('DV up AP and ML homed to rel')
                             self.gotolambda()
-                            var_list.safetybutton = 0
+                            # var_list.safetybutton = 0
                             self.sendtoUI.uncheckstuff(4)
 
                     #offset select
@@ -108,7 +108,7 @@ class buttonprogram:
                         if var_list.safetybutton == 1:
                             print("Home to Bregma (DV up buy set value)")
                             self.bregmahome()
-                            var_list.safetybutton = 0
+                            # var_list.safetybutton = 0
                             self.sendtoUI.uncheckstuff(4)
 
                     #rezero button
@@ -116,28 +116,28 @@ class buttonprogram:
                         if var_list.safetybutton == 1:
                             print("Re-Zero the steppers")
                             self.sendtoUI.recalibrateaxis()
-                            var_list.safetybutton = 0
+                            # var_list.safetybutton = 0
                             self.sendtoUI.uncheckstuff(4)
 
                     #home to ABS zero
                     if lastbut[var_list.ABSzero] == 1:
                         if var_list.safetybutton == 1:
                             self.hometoABSzero()
-                            var_list.safetybutton = 0
+                            # var_list.safetybutton = 0
                             self.sendtoUI.uncheckstuff(4)
 
                     #home AP and ML, DV goes to ABS
                     if lastbut[var_list.bregmahomeDVabs] == 1:
                         if var_list.safetybutton == 1:
                             self.upDVrelhomeAP_ML()
-                            var_list.safetybutton = 0
+                            # var_list.safetybutton = 0
                             self.sendtoUI.uncheckstuff(4)
 
                     #Hmome AP and ML to bregma and DV up 5.
                     if lastbut[var_list.bregmahomeDVupfive] == 1:
                         if var_list.safetybutton == 1:
                             self.homeDVupfive()
-                            var_list.safetybutton = 0
+                            # var_list.safetybutton = 0
                             self.sendtoUI.uncheckstuff(4)
 
                     #go to preset
@@ -157,23 +157,61 @@ class buttonprogram:
 
                             else:
                                 self.sendtoworking()
-                                var_list.safetybutton = 0
-                                self.sendtoUI.uncheckstuff(4)
+                            # var_list.safetybutton = 0
+                            self.sendtoUI.uncheckstuff(4)
 
 
                     #selectup
+                    if lastbut[var_list.selectup] == 1:
+                        if self.var_list.list_toggle == 9999:
+                            self.var_list.list_toggle = self.var_list.countoflistwidget - 1
+                        elif self.var_list.list_toggle == 0:
+                            self.var_list.list_toggle = self.var_list.countoflistwidget - 1
+                        else:
+                            self.var_list.list_toggle -= 1
+                        self.sendtoUI.selecrowtoggle(self.var_list.list_toggle)
 
                     #selectdown
+                    if lastbut[var_list.selectdown] == 1:
+                        if self.var_list.list_toggle == 9999:
+                            self.var_list.list_toggle = 0
+                        elif self.var_list.list_toggle == self.var_list.countoflistwidget - 1:
+                            self.var_list.list_toggle = 0
+                        else:
+                            self.var_list.list_toggle += 1
+                        self.sendtoUI.selecrowtoggle(self.var_list.list_toggle)
 
                     #armbut
+                    if lastbut[var_list.armbut] == 1:
+                        self.sendtoUI.selectlistcoordinates()
 
-                    #engagebut
-
-                    #makeitsobut
+                    # makeitsobut
+                    if lastbut[var_list.makeitsobut] == 1:
+                        if var_list.safetybutton == 1:
+                            self.sendtoUI.checkstuff(1)
+                            self.sendtoUI.on_makeitso_changed()
+                            # var_list.safetybutton = 0
+                            self.sendtoUI.uncheckstuff(4)
 
                     #DVinsert
+                    if lastbut[var_list.DVinsert] == 1:
+                        if var_list.safetybutton == 1:
+                            self.sendtoUI.checkstuff(2)
+                            # self.sendtoUI.on_DVinsert_changed()
+                            # var_list.safetybutton = 0
+                            self.sendtoUI.uncheckstuff(4)
 
                     #withdrawl
+                    if lastbut[var_list.withdrawl] == 1:
+                        if var_list.safetybutton == 1:
+                            self.sendtoUI.checkstuff(3)
+                            #self.sendtoUI.on_DVinsert_changed()
+                            # var_list.safetybutton = 0
+                            self.sendtoUI.uncheckstuff(4)
+
+                    #engagebut
+                    if lastbut[var_list.engagebut] == 1:
+                        self.sendtoUI.engagemovement()
 
                     #retractAP
 
@@ -322,7 +360,7 @@ class buttonprogram:
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
 
-    # this if a function to disable the steppers...it has not seen much use so it does not currently have have a button call
+    # this if a function to disable the steppers. It is now and event button
     def endisstep(self):
         if var_list.safetybutton == 1:
             if var_list.lastenablestate == 1:
@@ -333,7 +371,8 @@ class buttonprogram:
                 GPIO.output(var_list.enableAll, 1)
                 var_list.lastenablestate = 1
                 print('steppers DISABLED manually')
-            var_list.safetybutton = 0
+            # var_list.safetybutton = 0
+            self.sendtoUI.uncheckstuff(4)
 
 
     def setrelforall(self):

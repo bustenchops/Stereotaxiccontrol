@@ -279,6 +279,11 @@ class MainWindow(QMainWindow):
         self.DVinsertpausetime.setGeometry(QRect(711, 438, 50, 31))
         self.DVinsertpausetime.setFont(smalllmanualfont)
 
+        self.timertimereport = QPlainTextEdit(self.widget)
+        self.timertimereport.setObjectName(u"countdowtimer")
+        self.timertimereport.setGeometry(QRect(711, 493, 50, 31))
+        self.timertimereport.setFont(smalllmanualfont)
+
         self.withdrawcheckbox = QCheckBox("Withdraw:", self.widget)
         self.withdrawcheckbox.setObjectName(u"withdrawcheckbox")
         self.withdrawcheckbox.setGeometry(QRect(808, 340, 130, 20))
@@ -414,7 +419,7 @@ class MainWindow(QMainWindow):
         self.movebutton.setObjectName(u"movebutton")
         self.movebutton.setGeometry(QRect(375, 398, 101, 81))
         self.movebutton.setFont(radiobuttonfont)
-        self.movebutton.clicked.connect(self.plaintextgrab)
+        self.movebutton.clicked.connect(self.engagemovement)
 
         self.safetyBox = QCheckBox("Safety Disengaged", self.widget)
         self.safetyBox.setObjectName(u"safetycheckbox")
@@ -450,25 +455,33 @@ class MainWindow(QMainWindow):
         print("unchecking")
         if whichone == 1:
             self.makeitsoBox.setChecked(False)
+            self.on_makeitso_changed()
         if whichone == 2:
             self.DVinsertcheckbox.setChecked(False)
+            self.on_DVinsert_changed()
         if whichone == 3:
             self.withdrawcheckbox.setChecked(False)
+            self.on_withdraw_changed()
         if whichone == 4:
             self.safetyBox.setChecked(False)
+            self.on_safety_changed()
 
     def checkstuff(self, whichone):
         print("unchecking")
         if whichone == 1:
             self.makeitsoBox.setChecked(False)
+            self.on_makeitso_changed()
         if whichone == 2:
             self.DVinsertcheckbox.setChecked(False)
+            self.on_DVinsert_changed()
         if whichone == 3:
             self.withdrawcheckbox.setChecked(False)
+            self.on_withdraw_changed()
         if whichone == 4:
             self.safetyBox.setChecked(False)
+            self.on_safety_changed()
 
-    def on_makeitso_changed(self, state: int):
+    def on_makeitso_changed(self):
         if self.makeitsoBox.isChecked():
             print("make it so State changed: Checked")
             var_list.Makeitsoindicator = 1
@@ -477,7 +490,7 @@ class MainWindow(QMainWindow):
             print("make it so State changed: Unchecked")
             var_list.Makeitsoindicator = 0
 
-    def on_DVinsert_changed(self, state: int):
+    def on_DVinsert_changed(self):
         if self.DVinsertcheckbox.isChecked():
             if var_list.safetybutton == 1:
                 print("DVinsert State changed: Checked")
@@ -489,10 +502,11 @@ class MainWindow(QMainWindow):
         else:
             print("DVinsert  State changed: Unchecked")
             var_list.DVinsertindicator = 0
-            var_list.safetybutton = 0
-            self.safetyBox.setChecked(False)
+            #var_list.safetybutton = 0
+            #self.uncheckstuff(False)
+            self.uncheckstuff(4)
 
-    def on_withdraw_changed(self, state: int):
+    def on_withdraw_changed(self):
         if self.withdrawcheckbox.isChecked():
             if var_list.safetybutton == 1:
                 print("withdraw State changed: Checked")
@@ -504,10 +518,11 @@ class MainWindow(QMainWindow):
         else:
             print("withdraw  State changed: Unchecked")
             var_list.Withdrawlindicator = 0
-            var_list.safetybutton = 0
-            self.safetyBox.setChecked(False)
+            # var_list.safetybutton = 0
+            # self.safetyBox.setChecked(False)
+            self.uncheckstuff(4)
 
-    def on_safety_changed(self, state: int):
+    def on_safety_changed(self):
         if self.safetyBox.isChecked():
             print("safety State changed: Checked")
             var_list.safetybutton = 1
@@ -543,16 +558,42 @@ class MainWindow(QMainWindow):
 
 #grabs the plaintext from the text boxes only if the checkbox is selected
     @Slot()
-    def plaintextgrab(self):
-        # here - this is where the if statements checking which boxes are checked and engages the various functions.
-        #alo resets the checkboxes
-        APcooord = self.APmanualenter.toPlainText()
-        MLcooord = self.MLmanualenter.toPlainText()
-        DVcooord = self.DVmanualenter.toPlainText()
+    def timercountdownupdate(self,lefttime):
+        self.timertimereport.setPlainText(lefttime)
+
+    @Slot()
+    def engagemovement(self):
         if self.makeitsoBox.isChecked():
+            APcooord = self.APmanualenter.toPlainText()
+            MLcooord = self.MLmanualenter.toPlainText()
+            DVcooord = self.DVmanualenter.toPlainText()
             print(f"Grad text to go to AP:{APcooord}, ML:{MLcooord}, DV:{DVcooord}")
-            controlthread.movetoTargetList(APcooord,MLcooord,DVcooord)
-            self.makeitsoBox.setChecked(False)
+            controlthread.movetoTargetList(APcooord, MLcooord, DVcooord)
+            self.uncheckstuff(1)
+
+        if self.DVinsertcheckbox.isChecked():
+            self.var_list.dvinsertstop = 1
+            targetdepth = self.DVinserttarget.toPlainText()
+            finaltargetdepth = targetdepth - self.DVinsertcompens.toPlainText()
+            insertrate = self.DVinsertmanrate.toPlainText()
+            numberofpauses = self.DVinsertnumpause.toPlainText()
+            lengthofpauses = self.DVinsertpausetime.toPlainText()
+            print('DV insert started')
+            controlthread.dvinsertauto(finaltargetdepth, insertrate, numberofpauses, lengthofpauses)
+            self.uncheckstuff(2)
+
+        if self.withdrawcheckbox.isChecked():
+            self.var_list.withdrawinsertstop = 1
+            withdrrate = self.withdrawmanrate.toPlainText()
+            withnumpause= self.withdrawnumpause.toPlainText()
+            withpausetime = self.withdrawpausetime.toPlainText()
+            withfirstdist = self.withdrawfirstdist.toPlainText()
+            withfirstwait = self.withdrawfirstwait.toPlainText()
+            withtotalpause = self.withdrawtotpause.toPlainText()
+            controlthread.withdrawauto(withdrrate, withnumpause, withpausetime, withfirstdist, withfirstwait, withtotalpause)
+            self.uncheckstuff(3)
+
+
 
 #select a TXT file to load and preloads the targets
     @Slot()
@@ -603,6 +644,11 @@ class MainWindow(QMainWindow):
         self.withdrawfirstwait.setPlainText(parts[13])
         self.withdrawtotpause.setPlainText(parts[14])
 
+    @Slot()
+    def selecrowtoggle(self, fromtoggle):
+        self.listWidget.setCurrentRow(fromtoggle)
+
+    # note I dont think this is going to be used...keep for now though.
     @Slot()
     def toggleselectlist(self, toglistnum):
     #to enumerate the items and put them in the list.
