@@ -132,7 +132,7 @@ class threadedcontrols:
         elif event == RotaryEncoder.ANTICLOCKWISE:
             print('encoder 4 counter clockwise')
         elif event == RotaryEncoder.BUTTONDOWN:
-            print("encoder 4 psuhed")
+            print("encoder 4 pushed")
             if var_list.withdrawinsertstop == 1:
                 var_list.withdrawinsertstop = 0
                 return

@@ -174,6 +174,7 @@ class var_list:
     limitAP = 22
     limitML = 13
     limitDV = 19
+    limitAUX = 0
 
 #DEFINE ROTARY ENCODER PINS
     rotoA_AP = 25
@@ -182,8 +183,8 @@ class var_list:
     rotoB_ML = 16
     rotoA_DV = 20
     rotoB_DV = 21
-    rotoA_fourth = 7
-    rotoB_fourth =  1
+    rotoA_fourth = 14
+    rotoB_fourth =  15
 
 
 #DEFINE STEPPER DIRECTIONS
@@ -193,6 +194,8 @@ class var_list:
     MLright = 0
     DVup = 0
     DVdown = 1
+    AuxUP = 0
+    AuxDown = 1
 
     calibfilename = 'CalibrationLH.txt'
     offsetfilename = 'offsetsLH.txt'

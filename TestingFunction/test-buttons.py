@@ -6,27 +6,53 @@ class mainprogram:
     keepalive = True
 
     # DEFINE NUMBER OF BUTTONS AND ORDER IN ARRAY
-    buttonarray = ['movefast', 'bregmahome', 'relativeML', 'relativeAP', 'moveslow', 'HomeToABSzero', 'recalibrate',
-                   'miscbuttonA', 'presetworking', 'FiberOffset', 'needleoffset', 'drilloffset', 'relactiveDV', 'relativeALLset', 'HomerelativeZero'
-                   ]
+    buttonarray = ['moveslow', 'movefast', 'offposone', 'offpostwo', 'rezero',
+                   'relativeAP', 'relativeML', 'relativeDV', 'relativeALLset', 'fullretract',
+                   'bregmahome', 'bregmahomeDVabs', 'bregmahomeDVupfive', 'gotolambdabut', 'ratselect',
+                   'mouseselect','gotopreset', 'selectup', 'selectdown', 'armbut',
+                   'engagebut', 'makeitsobut', 'withdrawl', 'DVinsert', 'retractAP',
+                   'returnAP', 'retactDV', 'returnDV', 'functionone', 'functiontwo',
+                   'ABSzero', 'unassigned']
     lastbuttonstate = [0 for x in range(len(buttonarray))]
 
     # BUTTON POSITION IN SHIFT REGISTER ARRAY
-    movefast = 1
-    bregmahome = 2
-    relativeML = 3
-    relativeAP = 4
-    moveslow = 5
-    homeABSzero = 6
-    recalibrate = 7
-    miscbuttonA = 8
-    miscbuttonB = 9
-    fiberoff = 10
-    needleoff = 11
-    drilloff = 12
-    relativeDV = 13
-    relativeALL = 14
-    homeRELzero = 15
+    moveslow = 0
+    movefast = 4
+    offposone = 2
+    offpostwo = 10
+    rezero = 5
+
+    relativeAP = 7
+    relativeML = 11
+    relativeDV = 12
+    relativeALL = 9
+    fullretract = 3
+
+    bregmahome = 6
+    bregmahomeDVabs = 8
+    bregmahomeDVupfive = 1
+    gotolambdabut = 1
+    ratselect = 13
+
+    mouseselect = 1
+    gotopreset = 14
+    selectup = 1
+    selectdown = 1
+    armbut = 1
+
+    engagebut = 1
+    makeitsobut = 1
+    withdrawl = 1
+    DVinsert = 1
+    retractAP = 1
+
+    returnAP = 1
+    retractDV = 1
+    returnDV = 1
+    functionone = 1
+    functiontwo = 1
+
+    ABSzero = 1
 
 
     # setup GPIO
@@ -36,8 +62,9 @@ class mainprogram:
 
     #DEFINE EMERGENCY STOP and hard wired buttons
     emergstop = 26
-    misc_eventbuttonA = 10
-    misc_eventbuttonB = 11
+    safetybut = 10
+    disablestepperbut = 11
+    fourthhardwarebutton = 9 #encoder 4 depress?
 
     #DEFINE SHIFT REGISTER PINS
     latchpin = 18
