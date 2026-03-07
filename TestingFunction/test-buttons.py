@@ -79,8 +79,9 @@ class mainprogram:
         GPIO.setup(mainprogram.datapin,GPIO.IN)
 
         GPIO.setup(mainprogram.emergstop, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.setup(mainprogram.misc_eventbuttonA, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.setup(mainprogram.misc_eventbuttonB, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(mainprogram.safetybut, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(mainprogram.disablestepperbut, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(mainprogram.fourthhardwarebutton, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
         #EMPTY variables to initialize
         self.quest = "none"
