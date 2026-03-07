@@ -605,9 +605,18 @@ class MainWindow(QMainWindow):
             controlthread.withdrawauto(withdrrate, withnumpause, withpausetime, withfirstdist, withfirstwait, withtotalpause)
             self.uncheckstuff(3)
 
+    @Slot()
+    def functiononebutton(self):
+        controlthread.yodudeA()
+        self.uncheckstuff(4)
+
+    @Slot()
+    def functiontwobutton(self):
+        controlthread.yodudeB()
+        self.uncheckstuff(4)
 
 
-#select a TXT file to load and preloads the targets
+# select a TXT file to load and preloads the targets
     @Slot()
     def choseafile(self):
         print("click load file")

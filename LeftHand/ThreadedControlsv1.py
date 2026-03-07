@@ -629,6 +629,27 @@ class threadedcontrols:
         else:
             self.calibratethings()
 
+    def yodudeA(self):
+        yoyodude = self.get_user_input('MESSAGE:', 'you cool dude? Function button 1 pressed. y/n')
+        if yoyodude == "y":
+            answers = self.get_user_input('MESSAGE:', 'cool')
+            print ('cool')
+        if yoyodude== "n":
+            answers = self.get_user_input('MESSAGE:', 'get that checked bro')
+            print ('get that checked bro')
+        return
+
+    def yodudeB(self):
+        yoyodudeB = self.get_user_input('MESSAGE:', 'you cool dude? Function button 2 pressed. y/n')
+        if yoyodudeB == "y":
+            answers = self.get_user_input('MESSAGE:', 'yeah...sure.')
+            print ('yeah...sure.')
+        if yoyodudeB == "n":
+            answers = self.get_user_input('MESSAGE:','i knew it')
+            print ('i knew it')
+        return
+
+
     def runcontrolthread(self):
 # INITIALIZE ENCODERS
         print('Control thread started')

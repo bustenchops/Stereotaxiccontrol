@@ -114,6 +114,10 @@ class var_list:
     MLrelpos = 0
     DVrelpos = 0
 
+    APretractstart = 0
+    DVretractstart = 0
+
+
     DVinitREL_holdvalue = 0
     MLinitREL_holdvalue = 0
     APinitREL_holdvalue = 0

@@ -215,17 +215,40 @@ class buttonprogram:
 
                     #retractAP
                     if lastbut[var_list.retractAP] == 1:
-                        self.sendtoUI.engagemovement()
+                        if var_list.safetybutton == 1:
+                            self.sendtoUI.APretractmovent()
+                            self.sendtoUI.uncheckstuff(4)
+
 
                     #returnAP
+                    if lastbut[var_list.returnAP] == 1:
+                        if var_list.safetybutton == 1:
+                            self.sendtoUI.APreturnmovement()
+                            self.sendtoUI.uncheckstuff(4)
 
                     #retractDV
+                    if lastbut[var_list.retractDV] == 1:
+                        if var_list.safetybutton == 1:
+                            self.sendtoUI.DVreturnmovement()
+                            self.sendtoUI.uncheckstuff(4)
 
                     #returnDV
+                    if lastbut[var_list.returnDV] == 1:
+                        if var_list.safetybutton == 1:
+                            self.sendtoUI.DVreturnmovement()
+                            self.sendtoUI.uncheckstuff(4)
 
                     #functionone
+                    if lastbut[var_list.functionone] == 1:
+                        if var_list.safetybutton == 1:
+                            self.sendtoUI.functiononebutton()
+                            self.sendtoUI.uncheckstuff(4)
 
                     #functiontwo
+                    if lastbut[var_list.functiontwo] == 1:
+                        if var_list.safetybutton == 1:
+                            self.sendtoUI.functiontwobutton()
+                            self.sendtoUI.uncheckstuff(4)
 
 
 
@@ -278,7 +301,7 @@ class buttonprogram:
             DVdiff = var_list.DVsteps - go_upDVby
             for x in range(DVdiff):
                 var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
-        else:
+        elif (var_list.DVsteps < go_upDVby):
             DVdiff = go_upDVby - var_list.DVsteps
             for x in range(DVdiff):
                 var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
@@ -286,7 +309,7 @@ class buttonprogram:
         print(var_list.APrelpos, "APRelative")
         print(var_list.APsteps, "APsteps")
 
-        if var_list.rellambda > var_list.APsteps:
+        if var_list.rellambda >= var_list.APsteps:
             APdiff = var_list.rellambda - var_list.APsteps
             print('back')
             for x in range(APdiff):
@@ -300,7 +323,7 @@ class buttonprogram:
         print(var_list.MLrelpos, "mlRelative")
         print(var_list.MLsteps, "mlsteps")
 
-        if var_list.MLrelpos > var_list.MLsteps:
+        if var_list.MLrelpos >= var_list.MLsteps:
             MLdiff = var_list.MLrelpos - var_list.MLsteps
             print('left')
             for x in range(MLdiff):
@@ -339,7 +362,7 @@ class buttonprogram:
         for x in range(var_list.DVsteps):
             var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
 
-        if var_list.MLrelpos > var_list.MLsteps:
+        if var_list.MLrelpos >= var_list.MLsteps:
             shiftdistance = var_list.MLrelpos - var_list.MLsteps
             for x in range(shiftdistance):
                 var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
@@ -348,7 +371,7 @@ class buttonprogram:
             for x in range(shiftdistance):
                 var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
 
-        if var_list.APsteps < var_list.APrelpos:
+        if var_list.APsteps <= var_list.APrelpos:
             shiftdistance = var_list.APrelpos - var_list.APsteps
             for x in range(shiftdistance):
                 var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
@@ -377,7 +400,7 @@ class buttonprogram:
                 var_list.lastenablestate = 1
                 print('steppers DISABLED manually')
             # var_list.safetybutton = 0
-            self.sendtoUI.uncheckstuff(4)
+        self.sendtoUI.uncheckstuff(4)
 
 
     def setrelforall(self):
@@ -417,7 +440,7 @@ class buttonprogram:
         var_list.DVmove.PosRelAbsCalc()
 
     def fullretract(self):
-        print('home to ABS zero')
+        print('fullretraction')
         for x in range(var_list.DVsteps):
             var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
         fullMLretractdiff = var_list.fullretractML - var_list.MLsteps
@@ -511,6 +534,7 @@ class buttonprogram:
             GPIO.output(var_list.enableAll, 1)
             var_list.lastenablestate = 1
             var_list.TOGGLEoff = 1
+        self.sendtoUI.uncheckstuff(4)
 
     def needlemovetooffset(self):
         # print('offset set to Needle')
@@ -595,6 +619,7 @@ class buttonprogram:
             GPIO.output(var_list.enableAll, 1)
             var_list.lastenablestate = 1
             var_list.TOGGLEoff = 2
+        self.sendtoUI.uncheckstuff(4)
 
     def fibermovetooffset(self):
         # print('offset set to Fiber')
@@ -680,6 +705,7 @@ class buttonprogram:
             GPIO.output(var_list.enableAll, 1)
             var_list.lastenablestate = 1
             var_list.TOGGLEoff = 3
+        self.sendtoUI.uncheckstuff(4)
 
     def homeDVupfive(self):
         print('goto bregma but lift DV up by value in variable list')
@@ -720,6 +746,8 @@ class buttonprogram:
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
 
+        self.sendtoUI.uncheckstuff(4)
+
 
     def bregmahome(self):
         print('goto bregma but lift DV up by value in variable list')
@@ -728,7 +756,7 @@ class buttonprogram:
             DVdiff = var_list.DVsteps - go_upDVby
             for x in range(DVdiff):
                 var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
-        else:
+        elif (var_list.DVsteps < go_upDVby):
             DVdiff = go_upDVby - var_list.DVsteps
             for x in range(DVdiff):
                 var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
@@ -766,6 +794,88 @@ class buttonprogram:
 
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
+
+        self.sendtoUI.uncheckstuff(4)
+
+    def APretractmovent(self):
+        print('APretraction')
+        print('list DV up a bit from bregma first, no down movement')
+        if var_list.APretractstart > 0:
+            self.sendtoUI.uncheckstuff(4)
+            return
+        else:
+            var_list.APretractstart = var_list.APsteps
+            go_upDVby = var_list.DVrelpos - var_list.DVup_bregramhome
+            if (var_list.DVsteps > go_upDVby):
+                DVdiff = var_list.DVsteps - go_upDVby
+                for x in range(DVdiff):
+                    var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+            fullretraactdiff = var_list.fullretract - var_list.APsteps
+            for x in range(fullretraactdiff):
+                var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
+            var_list.APmove.PosRelAbsCalc()
+            var_list.MLmove.PosRelAbsCalc()
+            var_list.DVmove.PosRelAbsCalc()
+
+        GPIO.output(var_list.enableAll, 1)
+        var_list.lastenablestate = 1
+        self.sendtoUI.uncheckstuff(4)
+
+    def APreturnmovement(self):
+        print('APreturn')
+        print('list DV up a bit from bregma first, no down movement')
+        if var_list.APretractstart == 0:
+            self.sendtoUI.uncheckstuff(4)
+            return
+        else:
+            APdiffreturn = var_list.APsteps - var_list.APretractstart
+            go_upDVby = var_list.DVrelpos - var_list.DVup_bregramhome
+            if (var_list.DVsteps > go_upDVby):
+                DVdiff = var_list.DVsteps - go_upDVby
+                for x in range(DVdiff):
+                    var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+
+            for x in range(APdiffreturn):
+                var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
+            var_list.APmove.PosRelAbsCalc()
+            var_list.MLmove.PosRelAbsCalc()
+            var_list.DVmove.PosRelAbsCalc()
+
+        GPIO.output(var_list.enableAll, 1)
+        var_list.lastenablestate = 1
+
+        self.sendtoUI.uncheckstuff(4)
+
+    def DVretractmovement(self):
+        if var_list.DVretractstart > 0:
+            self.sendtoUI.uncheckstuff(4)
+            return
+        else:
+            for x in range(var_list.DVsteps):
+                var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+
+            var_list.APmove.PosRelAbsCalc()
+            var_list.MLmove.PosRelAbsCalc()
+            var_list.DVmove.PosRelAbsCalc()
+
+        GPIO.output(var_list.enableAll, 1)
+        var_list.lastenablestate = 1
+
+        self.sendtoUI.uncheckstuff(4)
+
+    def DVreturnmovement(self):
+        for x in range(var_list.DVretractstart):
+            var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
+
+        var_list.APmove.PosRelAbsCalc()
+        var_list.MLmove.PosRelAbsCalc()
+        var_list.DVmove.PosRelAbsCalc()
+
+        GPIO.output(var_list.enableAll, 1)
+        var_list.lastenablestate = 1
+        var_list.DVretractstart = 0
+        self.sendtoUI.uncheckstuff(4)
+
 
     def sendtoworking(self):
         print('this is sendtoworking')
@@ -823,6 +933,7 @@ class buttonprogram:
         var_list.lastenablestate = 1
         self.sendtoUI.drilloffset()
         var_list.TOGGLEoff = 1
+        self.sendtoUI.uncheckstuff(4)
 
 # concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)
 
