@@ -98,7 +98,7 @@ class mainprogram:
             hardB = str(GPIO.input(mainprogram.disablestepperbut))
             hardC = str(GPIO.input(mainprogram.fourthhardwarebutton))
 
-            print('emerg=' + emerginput + '  hardA=' + hardA + '  hardB=' + hardB)
+            print('emerg=' + emerginput + '  hardA=' + hardA + '  hardB=' + hardB + '  hardC=' + hardC)
 
 
 letsgo = mainprogram()
