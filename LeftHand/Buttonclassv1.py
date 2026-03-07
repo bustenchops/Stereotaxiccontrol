@@ -163,23 +163,23 @@ class buttonprogram:
 
                     #selectup
                     if lastbut[var_list.selectup] == 1:
-                        if self.var_list.list_toggle == 9999:
-                            self.var_list.list_toggle = self.var_list.countoflistwidget - 1
-                        elif self.var_list.list_toggle == 0:
-                            self.var_list.list_toggle = self.var_list.countoflistwidget - 1
+                        if var_list.list_toggle == 9999:
+                            var_list.list_toggle = var_list.countoflistwidget - 1
+                        elif var_list.list_toggle == 0:
+                            var_list.list_toggle = var_list.countoflistwidget - 1
                         else:
-                            self.var_list.list_toggle -= 1
-                        self.sendtoUI.selecrowtoggle(self.var_list.list_toggle)
+                            var_list.list_toggle -= 1
+                        self.sendtoUI.selecrowtoggle(var_list.list_toggle)
 
                     #selectdown
                     if lastbut[var_list.selectdown] == 1:
-                        if self.var_list.list_toggle == 9999:
-                            self.var_list.list_toggle = 0
-                        elif self.var_list.list_toggle == self.var_list.countoflistwidget - 1:
-                            self.var_list.list_toggle = 0
+                        if var_list.list_toggle == 9999:
+                            var_list.list_toggle = 0
+                        elif var_list.list_toggle == var_list.countoflistwidget - 1:
+                            var_list.list_toggle = 0
                         else:
-                            self.var_list.list_toggle += 1
-                        self.sendtoUI.selecrowtoggle(self.var_list.list_toggle)
+                            var_list.list_toggle += 1
+                        self.sendtoUI.selecrowtoggle(var_list.list_toggle)
 
                     #armbut
                     if lastbut[var_list.armbut] == 1:
@@ -214,6 +214,8 @@ class buttonprogram:
                         self.sendtoUI.engagemovement()
 
                     #retractAP
+                    if lastbut[var_list.retractAP] == 1:
+                        self.sendtoUI.engagemovement()
 
                     #returnAP
 
@@ -314,6 +316,7 @@ class buttonprogram:
 
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
+        self.sendtoUI.uncheckstuff(4)
 
     def hometoABSzero(self):
         print('home the ABS zero')
@@ -329,6 +332,7 @@ class buttonprogram:
 
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
+        self.sendtoUI.uncheckstuff(4)
 
     def upDVrelhomeAP_ML(self):
         print('relative home AP and ML homed DVup')
@@ -359,6 +363,7 @@ class buttonprogram:
 
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
+        self.sendtoUI.uncheckstuff(4)
 
     # this if a function to disable the steppers. It is now and event button
     def endisstep(self):
@@ -427,36 +432,7 @@ class buttonprogram:
 
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
-
-    def upDVrelhomeAP_ML(self):
-        print('relative home AP and ML homed DVup')
-        for x in range(var_list.DVsteps):
-            var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
-
-        if var_list.MLrelpos > var_list.MLsteps:
-            shiftdistance = var_list.MLrelpos - var_list.MLsteps
-            for x in range(shiftdistance):
-                var_list.MLmove.steppgo(var_list.MLleft, var_list.finespeed, var_list.btnSteps)
-        elif var_list.MLsteps > var_list.MLrelpos:
-            shiftdistance = var_list.MLsteps - var_list.MLrelpos
-            for x in range(shiftdistance):
-                var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, var_list.btnSteps)
-
-        if var_list.APsteps < var_list.APrelpos:
-            shiftdistance = var_list.APrelpos - var_list.APsteps
-            for x in range(shiftdistance):
-                var_list.APmove.steppgo(var_list.APback, var_list.finespeed, var_list.btnSteps)
-        elif var_list.APsteps > var_list.APrelpos:
-            shiftdistance = var_list.APsteps - var_list.APrelpos
-            for x in range(shiftdistance):
-                var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, var_list.btnSteps)
-
-        var_list.APmove.PosRelAbsCalc()
-        var_list.MLmove.PosRelAbsCalc()
-        var_list.DVmove.PosRelAbsCalc()
-
-        GPIO.output(var_list.enableAll, 1)
-        var_list.lastenablestate = 1
+        self.sendtoUI.uncheckstuff(4)
 
     def drillmovetooffset(self):
         #print('offset set to DRILL')
