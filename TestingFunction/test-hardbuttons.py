@@ -63,9 +63,9 @@ class mainprogram:
 
     #DEFINE EMERGENCY STOP and hard wired buttons
     emergstop = 26
-    safetybut = 10
-    disablestepperbut = 11
-    fourthhardwarebutton = 9 #encoder 4 depress?
+    safetybut = 9
+    disablestepperbut = 10
+    fourthhardwarebutton = 11 #encoder 4 depress?
 
     #DEFINE SHIFT REGISTER PINS
     latchpin = 18

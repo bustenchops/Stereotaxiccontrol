@@ -46,49 +46,49 @@ class var_list:
     lastbuttonstate = [0 for x in range(len(buttonarray))]
 
 # BUTTON POSITION IN SHIFT REGISTER ARRAY (0 to 31)
-    moveslow = 0
-    movefast = 4
-    offposone = 2
-    offpostwo = 10
-    rezero = 5
+    moveslow = 30
+    movefast = 29
+    offposone = 27
+    offpostwo = 26
+    rezero = 3
 
-    relativeAP = 7
-    relativeML = 11
-    relativeDV = 12
-    relativeALL = 9
-    fullretract = 3
+    relativeAP = 24
+    relativeML = 20
+    relativeDV = 31
+    relativeALL = 25
+    fullretract = 2
 
-    bregmahome = 6
-    bregmahomeDVabs = 8
-    bregmahomeDVupfive = 1
-    gotolambdabut = 1
-    ratselect = 13
+    bregmahome = 14
+    bregmahomeDVabs = 5
+    bregmahomeDVupfive = 4
+    gotolambdabut = 15
+    ratselect = 16
 
-    mouseselect = 1
-    gotopreset = 14
-    selectup = 1
-    selectdown = 1
-    armbut = 1
+    mouseselect = 17
+    gotopreset = 7
+    selectup = 11
+    selectdown = 10
+    armbut = 19
 
-    engagebut = 1
-    makeitsobut = 1
+    engagebut = 9
+    makeitsobut = 8
     withdrawl = 1
-    DVinsert = 1
-    retractAP = 1
+    DVinsert = 0
+    retractAP = 12
 
-    returnAP = 1
-    retractDV = 1
-    returnDV = 1
-    functionone = 1
-    functiontwo = 1
+    returnAP = 13
+    retractDV = 21
+    returnDV = 22
+    functionone = 18
+    functiontwo = 23
 
-    ABSzero = 1
+    ABSzero = 6
 
 #DEFINE EMERGENCY STOP and hard wired buttons GPIO
     emergstop = 26
-    safetybut = 10
-    disablestepperbut = 11
-    fourthhardwarebutton = 9 #encoder 4 depress?
+    safetybut = 9
+    disablestepperbut = 10
+    fourthhardwarebutton = 11 #encoder 4 depress?
 
 #DEFINE SHIFT REGISTER PINS
     latchpin = 18
