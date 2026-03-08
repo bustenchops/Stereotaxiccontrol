@@ -781,8 +781,8 @@ timedthread = threadedtimer(window)
 
 #Start Threads
 threadpool = QThreadPool()
-# threadpool.start(mainbuttonthread.runbuttonthread)
-# threadpool.start(controlthread.runcontrolthread)
+threadpool.start(mainbuttonthread.runbuttonthread)
+threadpool.start(controlthread.runcontrolthread)
 threadpool.start(timedthread.runtimerthread)
 window.show()
 
