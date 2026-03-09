@@ -110,13 +110,13 @@ class mainprogram:
         print('setup DV stepper')
         GPIO.setup(mainprogram.stepDV, GPIO.OUT, initial=0)
         GPIO.setup(mainprogram.directionDV, GPIO.OUT, initial=0)
-        GPIO.setup(mainprogram.limitDV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(mainprogram.limitDV, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         print('done')
 
         print('setup DV stepper')
         GPIO.setup(mainprogram.stepAUX, GPIO.OUT, initial=0)
         GPIO.setup(mainprogram.directionAUX, GPIO.OUT, initial=0)
-        GPIO.setup(mainprogram.limitAUX, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(mainprogram.limitAUX, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         print('done')
 
 
