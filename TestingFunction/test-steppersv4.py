@@ -200,28 +200,28 @@ class mainprogram:
 
             if newAP != stateAP:
                 if GPIO.input(mainprogram.limitAP) == 0:
-                    print('AP limit reached:= 0', GPIO.input(mainprogram.limitAP))
+                    print('AP limit reached:= 0', mainprogram.limitAP)
                 if GPIO.input(mainprogram.limitAP) == 1:
                     print('AP limit reached: = 1', GPIO.input(mainprogram.limitAP))
                 stateAP = newAP
 
             if newML != stateML:
                 if GPIO.input(mainprogram.limitML) == 0:
-                    print('ML limit reached = 0', GPIO.input(mainprogram.limitML))
+                    print('ML limit reached = 0', mainprogram.limitML)
                 if GPIO.input(mainprogram.limitML) == 1:
                     print('ML limit reached = 1', GPIO.input(mainprogram.limitML))
                 stateML = newML
 
             if newDV != stateDV:
                 if GPIO.input(mainprogram.limitDV) == 0:
-                    print('DV limit reached = 0', GPIO.input(mainprogram.limitDV))
+                    print('DV limit reached = 0', mainprogram.limitDV)
                 if GPIO.input(mainprogram.limitDV) == 1:
                     print('DV limit reached = 1', GPIO.input(mainprogram.limitDV))
                 stateDV = newDV
 
             if newAUX != stateAUX:
                 if GPIO.input(mainprogram.limitAUX) == 0:
-                    print('AUX limit reached = 0', GPIO.input(mainprogram.limitAUX))
+                    print('AUX limit reached = 0', mainprogram.limitAUX)
                 if GPIO.input(mainprogram.limitAUX) == 1:
                     print('AUX limit reached = 1', GPIO.input(mainprogram.limitAUX))
                 stateAUX = newAUX
@@ -297,7 +297,7 @@ class mainprogram:
 
         while count <= 800:
             print("start")
-            if GPIO.input(mainprogram.limitDV) == 1:
+            if GPIO.input(mainprogram.limitDV) == 0:
                 GPIO.output(mainprogram.stepDV, 1)
                 time.sleep(0.001)
                 GPIO.output(mainprogram.stepDV, 0)
