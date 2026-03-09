@@ -181,9 +181,10 @@ class mainprogram:
         elif event == RotaryEncoder.BUTTONUP:
             return
         return
-    def limitsonly(self):
 
-    def executerrrr(self):
+
+
+    def limitsonly(self):
         quest=input('TEST limitswitches - any key to cont')
         print('starting limitswitch test')
         print('hit individually OR AP and ML simultaneously to move on')

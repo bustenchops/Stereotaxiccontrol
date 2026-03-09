@@ -62,6 +62,8 @@ class mainprogram:
     rotoB_ML = 16
     rotoA_DV = 20
     rotoB_DV = 21
+    rotoA_AUX = 14
+    rotoB_AUX = 15
 
     #DEFINE STEPPER DIRECTIONS
     APback = 1
@@ -96,25 +98,25 @@ class mainprogram:
         GPIO.setup(mainprogram.enableAll, GPIO.OUT, initial=1)
         GPIO.setup(mainprogram.stepAP, GPIO.OUT, initial=0)
         GPIO.setup(mainprogram.directionAP, GPIO.OUT, initial=0)
-        GPIO.setup(mainprogram.limitAP, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(mainprogram.limitAP, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         print('done')
 
         print('setup ML stepper')
         GPIO.setup(mainprogram.stepML, GPIO.OUT, initial=0)
         GPIO.setup(mainprogram.directionML, GPIO.OUT, initial=0)
-        GPIO.setup(mainprogram.limitML, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(mainprogram.limitML, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         print('done')
 
         print('setup DV stepper')
         GPIO.setup(mainprogram.stepDV, GPIO.OUT, initial=0)
         GPIO.setup(mainprogram.directionDV, GPIO.OUT, initial=0)
-        GPIO.setup(mainprogram.limitDV, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(mainprogram.limitDV, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         print('done')
 
         print('setup DV stepper')
         GPIO.setup(mainprogram.stepAUX, GPIO.OUT, initial=0)
         GPIO.setup(mainprogram.directionAUX, GPIO.OUT, initial=0)
-        GPIO.setup(mainprogram.limitAUX, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(mainprogram.limitAUX, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         print('done')
 
 
@@ -128,6 +130,18 @@ class mainprogram:
 
 
     #Event handling for the encoders and hard wired buttons each encoder
+    def AUX_event(self, event):
+        if event == RotaryEncoder.CLOCKWISE:
+            print('AUX clockwise')
+        elif event == RotaryEncoder.ANTICLOCKWISE:
+            print('AUX counterclock')
+        #This is a hard wired button note the encoder switch
+        elif event == RotaryEncoder.BUTTONDOWN:
+            mainprogram.emergencystop(self)
+        elif event == RotaryEncoder.BUTTONUP:
+            return
+        return
+
     def AP_event(self, event):
         if event == RotaryEncoder.CLOCKWISE:
             print('AP clockwise')
@@ -175,112 +189,42 @@ class mainprogram:
         stateAP = GPIO.input(mainprogram.limitAP)
         stateML = GPIO.input(mainprogram.limitML)
         stateDV = GPIO.input(mainprogram.limitDV)
+        stateAUX = GPIO.input(mainprogram.limitAUX)
 
         while GPIO.input(mainprogram.limitAP) == 1 or GPIO.input(mainprogram.limitML) == 1:
             newAP = GPIO.input(mainprogram.limitAP)
             newML = GPIO.input(mainprogram.limitML)
             newDV = GPIO.input(mainprogram.limitDV)
+            newAUX = GPIO.input(mainprogram.limitAUX)
+
 
             if newAP != stateAP:
                 if GPIO.input(mainprogram.limitAP) == 0:
-                    print('AP limit reached:', GPIO.input(mainprogram.limitAP))
+                    print('AP limit reached:= 0', GPIO.input(mainprogram.limitAP))
                 if GPIO.input(mainprogram.limitAP) == 1:
-                    print('AP limit reached:', GPIO.input(mainprogram.limitAP))
+                    print('AP limit reached: = 1', GPIO.input(mainprogram.limitAP))
                 stateAP = newAP
 
             if newML != stateML:
                 if GPIO.input(mainprogram.limitML) == 0:
-                    print('ML limit reached', GPIO.input(mainprogram.limitML))
+                    print('ML limit reached = 0', GPIO.input(mainprogram.limitML))
                 if GPIO.input(mainprogram.limitML) == 1:
-                    print('ML limit reached', GPIO.input(mainprogram.limitML))
+                    print('ML limit reached = 1', GPIO.input(mainprogram.limitML))
                 stateML = newML
 
             if newDV != stateDV:
                 if GPIO.input(mainprogram.limitDV) == 0:
-                    print('DV limit reached', GPIO.input(mainprogram.limitDV))
+                    print('DV limit reached = 0', GPIO.input(mainprogram.limitDV))
                 if GPIO.input(mainprogram.limitDV) == 1:
-                    print('DV limit reached', GPIO.input(mainprogram.limitDV))
+                    print('DV limit reached = 1', GPIO.input(mainprogram.limitDV))
                 stateDV = newDV
 
-        quest = input('Test the AP stepper 800 steps using direction forward')
-        print('direction set to', mainprogram.APforward)
-        count = 1
-        GPIO.output(mainprogram.enableAll, 0)
-#        GPIO.output(buttonprogram.directionAP, buttonprogram.APforward)
-
-        while count <= 800:
-            print("start")
-            if GPIO.input(mainprogram.limitAP) == 1:
-                GPIO.output(mainprogram.directionAP, mainprogram.APforward)
-                GPIO.output(mainprogram.stepAP, 1)
-                time.sleep(0.001)
-                GPIO.output(mainprogram.stepAP, 0)
-                time.sleep(0.001)
-                print('step', count)
-                count += 1
-
-        quest = input('Test the AP stepper 800 steps using direction back')
-        print('direction set to', mainprogram.APback)
-        count = 1
-        GPIO.output(mainprogram.enableAll, 0)
-
-
-        while count <= 800:
-            if GPIO.input(mainprogram.limitAP) == 1:
-                GPIO.output(mainprogram.directionAP, mainprogram.APback)
-                GPIO.output(mainprogram.stepAP, 1)
-                time.sleep(0.001)
-                GPIO.output(mainprogram.stepAP, 0)
-                time.sleep(0.001)
-                print('step', count)
-                count += 1
-
-        quest = input('Test the ML stepper 800 steps using direction left')
-        print('direction set to', mainprogram.MLleft)
-        count = 1
-        GPIO.output(mainprogram.enableAll, 0)
-        GPIO.output(mainprogram.directionML, mainprogram.MLleft)
-
-        while count <= 800:
-            print("start")
-            if GPIO.input(mainprogram.limitML) == 1:
-                GPIO.output(mainprogram.stepML, 1)
-                time.sleep(0.001)
-                GPIO.output(mainprogram.stepML, 0)
-                time.sleep(0.001)
-                print('step', count)
-                count += 1
-
-        quest = input('Test the ML stepper 800 steps using direction right')
-        print('direction set to', mainprogram.MLright)
-        count = 1
-        GPIO.output(mainprogram.enableAll, 0)
-        GPIO.output(mainprogram.directionML, mainprogram.MLright)
-
-        while count <= 800:
-            if GPIO.input(mainprogram.limitML) == 1:
-                GPIO.output(mainprogram.stepML, 1)
-                time.sleep(0.001)
-                GPIO.output(mainprogram.stepML, 0)
-                time.sleep(0.001)
-                print('step', count)
-                count += 1
-
-        quest = input('Test the DV stepper 800 steps using direction up')
-        print('direction set to', mainprogram.DVup)
-        count = 1
-        GPIO.output(mainprogram.enableAll, 0)
-        GPIO.output(mainprogram.directionDV, mainprogram.DVup)
-
-        while count <= 800:
-            print("start")
-            if GPIO.input(mainprogram.limitDV) == 1:
-                GPIO.output(mainprogram.stepDV, 1)
-                time.sleep(0.001)
-                GPIO.output(mainprogram.stepDV, 0)
-                time.sleep(0.001)
-                print('step', count)
-                count += 1
+            if newAUX != stateAUX:
+                if GPIO.input(mainprogram.limitAUX) == 0:
+                    print('AUX limit reached = 0', GPIO.input(mainprogram.limitAUX))
+                if GPIO.input(mainprogram.limitAUX) == 1:
+                    print('AUX limit reached = 1', GPIO.input(mainprogram.limitAUX))
+                stateAUX = newAUX
 
         quest = input('Test the DV stepper 800 steps using direction down')
         print('direction set to', mainprogram.DVdown)
