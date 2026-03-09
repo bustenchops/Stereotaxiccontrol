@@ -98,13 +98,13 @@ class mainprogram:
         GPIO.setup(mainprogram.enableAll, GPIO.OUT, initial=1)
         GPIO.setup(mainprogram.stepAP, GPIO.OUT, initial=0)
         GPIO.setup(mainprogram.directionAP, GPIO.OUT, initial=0)
-        GPIO.setup(mainprogram.limitAP, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(mainprogram.limitAP, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         print('done')
 
         print('setup ML stepper')
         GPIO.setup(mainprogram.stepML, GPIO.OUT, initial=0)
         GPIO.setup(mainprogram.directionML, GPIO.OUT, initial=0)
-        GPIO.setup(mainprogram.limitML, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(mainprogram.limitML, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         print('done')
 
         print('setup DV stepper')
