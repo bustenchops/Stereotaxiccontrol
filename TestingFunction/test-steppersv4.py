@@ -33,9 +33,9 @@ class mainprogram:
 
     #DEFINE LIMIT SWITCH PINS
     limitAP = 22
-    limitML = 13
-    limitDV = 19
-    limitAUX = 0
+    limitML = 19
+    limitDV = 0
+    limitAUX = 13
 
     #OFFSETS FOR THE DRILL, Syringe, Needle (minus values is back, left or up)
     APDRILL = 0

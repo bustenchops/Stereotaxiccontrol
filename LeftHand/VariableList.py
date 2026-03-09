@@ -176,9 +176,9 @@ class var_list:
 
 #DEFINE LIMIT SWITCH PINS
     limitAP = 22
-    limitML = 13
-    limitDV = 19
-    limitAUX = 0
+    limitML = 19
+    limitDV = 0
+    limitAUX = 13
 
 #DEFINE ROTARY ENCODER PINS
     rotoA_AP = 25
