@@ -33,7 +33,7 @@ class var_list:
     buttonarray = ['movefast', 'bregmahome', 'relativeML', 'relativeAP', 'moveslow',
                    'HomeToABSzero', 'recalibrate', 'miscbuttonA', 'presetworking', 'FiberOffset',
                    'needleoffset', 'drilloffset', 'relativeDV', 'relativeALLset', 'HomerelativeZero',
-                   'miscbutton C']
+                   'miscbuttonC']
     lastbuttonstate = [0 for x in range(len(buttonarray))]
 
 # BUTTON POSITION IN SHIFT REGISTER ARRAY
