@@ -6,8 +6,10 @@ class mainprogram:
     keepalive = True
 
     # DEFINE NUMBER OF BUTTONS AND ORDER IN ARRAY
-    buttonarray = ['movefast', 'bregmahome', 'relativeML', 'relativeAP', 'moveslow', 'HomeToABSzero', 'recalibrate',
-                   'miscbuttonA', 'presetworking', 'FiberOffset', 'needleoffset', 'drilloffset', 'relactiveDV', 'relativeALLset', 'HomerelativeZero', 'miscbuttonC'
+    buttonarray = ['movefast', 'bregmahome', 'relativeML', 'relativeAP', 'moveslow',
+                   'HomeToABSzero', 'recalibrate', 'miscbuttonA', 'presetworking', 'FiberOffset',
+                   'needleoffset', 'drilloffset', 'relactiveDV', 'relativeALLset', 'HomerelativeZero',
+                   'miscbuttonC'
                    ]
     lastbuttonstate = [0 for x in range(len(buttonarray))]
 
@@ -27,7 +29,7 @@ class mainprogram:
     relativeDV = 13
     relativeALL = 14
     homeRELzero = 15
-    miscbuttonC = 16
+    miscbuttonC = 0
 
 
     # setup GPIO
@@ -38,7 +40,7 @@ class mainprogram:
     #DEFINE EMERGENCY STOP and hard wired buttons
     emergstop = 26
     misc_eventbuttonA = 10
-    misc_eventbuttonB = 11
+    misc_eventbuttonB = None
 
     #DEFINE SHIFT REGISTER PINS
     latchpin = 18
@@ -64,7 +66,7 @@ class mainprogram:
         self.shiftvalues = []
         #get number of buttons
         x = len(mainprogram.buttonarray)
-        print("button array lenght=", x)
+        print("button array length=", x)
         for k in range(x):
             self.shiftvalues.append(0)
         #LOAD DATA
