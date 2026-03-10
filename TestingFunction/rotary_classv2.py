@@ -31,7 +31,7 @@ class RotaryEncoder:
 
     # Initialise rotary encoder object
     def __init__(self, pinA, pinB, button, callbackdef):
-        self.oldtimey = None
+
         self.pinA = pinA
         self.pinB = pinB
         self.button = button
@@ -59,75 +59,68 @@ class RotaryEncoder:
     # Call back routine called by switch events
     def switch_event(self,switch):
         self.eventtime = time.time() * 1000
-        print("event detected on encoder")
-        if self.oldtimey != None:
-            if self.eventtime - self.oldtimey < 200:
-                print("event detected on encoder")
-                self.oldtimey = self.eventtime
-                if GPIO.input(self.pinA):
-                    self.rotary_a = 1
-                else:
-                    self.rotary_a = 0
+        print("event detected on encoder", self.eventtime)
 
-                if GPIO.input(self.pinB):
-                    self.rotary_b = 1
-                else:
-                    self.rotary_b = 0
+        if GPIO.input(self.pinA):
+            self.rotary_a = 1
+        else:
+            self.rotary_a = 0
+
+        if GPIO.input(self.pinB):
+            self.rotary_b = 1
+        else:
+            self.rotary_b = 0
         
-                self.rotary_c = self.rotary_a ^ self.rotary_b
-                new_state = self.rotary_a * 4 + self.rotary_b * 2 + self.rotary_c * 1
-                delta = (new_state - self.last_state) % 4
-                self.last_state = new_state
-                self.event = 0
+        self.rotary_c = self.rotary_a ^ self.rotary_b
+        new_state = self.rotary_a * 4 + self.rotary_b * 2 + self.rotary_c * 1
+        delta = (new_state - self.last_state) % 4
+        self.last_state = new_state
+        self.event = 0
  
-                if delta == 1:
+        if delta == 1:
  
-                    if self.direction == self.CLOCKWISE:
-                        self.event = self.direction
-                    #    self.deltaonetime = time.time() * 1000
-                    # if (self.deltaonetime - self.eventtime) < 200:
-                        self.Ccount +=1
-                        print(self.Ccount)
-                    # else:
-                    #     self.Ccount = 0
-                    else:
-                        self.direction = self.CLOCKWISE
-                        self.Ccount = 0
-
+            if self.direction == self.CLOCKWISE:
+                self.event = self.direction
+                self.deltaonetime = time.time() * 1000
+                if (self.deltaonetime - self.eventtime) < 300:
+                    self.Ccount +=1
+                    print(self.Ccount)
+                else:
+                    self.Ccount = 0
+            else:
+                self.direction = self.CLOCKWISE
+                self.Ccount = 0
             #print(self.direction, "  CLOCKWISE   ", self.CLOCKWISE)
-                elif delta == 3:
+        elif delta == 3:
     
-                    if self.direction == self.ANTICLOCKWISE:
-                        self.event = self.direction
-                        # self.deltathreetime = time.time() * 1000
-                    #    if (self.deltathreetime - self.eventtime) < 300:
-                        self.CCcount +=1
-                        print(self.CCcount)
-                    else:
-                        self.direction = self.ANTICLOCKWISE
-                        self.CCcount = 0
-
+            if self.direction == self.ANTICLOCKWISE:
+                self.event = self.direction
+                self.deltathreetime = time.time() * 1000
+                if (self.deltathreetime - self.eventtime) < 300:
+                    self.CCcount +=1
+                    print(self.CCcount)
+            else:
+                self.direction = self.ANTICLOCKWISE
+                self.CCcount = 0
             # print(self.direction, "  ANTICLOCKWISE   ", self.ANTICLOCKWISE)
         #print("detected", event, )
-            if self.event > 0:
-                if self.event == 1 and self.Ccount >=3:
-                    print('ACTION clockwise')
-                    self.Ccount = 0
-                    self.sendtoSteppercontrol(self.event)
-                if self.event == 2 and self.CCcount >=3:
-                    print('ACTION counterclockwise')
-                    self.CCcount = 0
-                    self.sendtoSteppercontrol(self.event)
+        if self.event > 0:
+            if self.event == 1 and self.Ccount >=3:
+                print('ACTION clockwise')
+                self.Ccount = 0
+                self.sendtoSteppercontrol(self.event)
+            if self.event == 2 and self.CCcount >=3:
+                print('ACTION counterclockwise')
+                self.CCcount = 0
+                self.sendtoSteppercontrol(self.event)
 
 
         #    self.callback(event)
             # print('do something count = ',self.count)
             #self.count += 1
         # print(event)
-            return
-        else:
-            self.oldtimey = self.eventtime
-            return
+
+        return
 
 # Push button up event
     def button_event(self, button):
