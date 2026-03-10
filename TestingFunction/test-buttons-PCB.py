@@ -52,9 +52,9 @@ class mainprogram:
         GPIO.setup(mainprogram.clockpin,GPIO.OUT)
         GPIO.setup(mainprogram.datapin,GPIO.IN)
 
-        GPIO.setup(mainprogram.emergstop, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.setup(mainprogram.misc_eventbuttonA, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.setup(mainprogram.misc_eventbuttonB, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(mainprogram.emergstop, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        GPIO.setup(mainprogram.misc_eventbuttonA, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        GPIO.setup(mainprogram.misc_eventbuttonB, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
         #EMPTY variables to initialize
         self.quest = "none"
