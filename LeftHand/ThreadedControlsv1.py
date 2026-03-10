@@ -179,7 +179,7 @@ class threadedcontrols:
             print('AP zeroing')
             while not GPIO.input(var_list.limitAP):
                 var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, btwnsteps)
-                if GPIO.input(var_list.limitAP) = True:
+                if GPIO.input(var_list.limitAP):
                     print('AP limit triggered')
                     break
             print('run AP backoff')
@@ -188,7 +188,7 @@ class threadedcontrols:
             print('ML zeroing')
             while not GPIO.input(var_list.limitML):
                 var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, btwnsteps)
-                if GPIO.input(var_list.limitML) = True:
+                if GPIO.input(var_list.limitML):
                     print('ML limit triggered')
                     break
             print('run ML backoff')
@@ -197,7 +197,7 @@ class threadedcontrols:
             print('DV zeroing')
             while not GPIO.input(var_list.limitDV):
                 var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, btwnsteps)
-                if GPIO.input(var_list.limitDV) = True:
+                if GPIO.input(var_list.limitDV):
                     print('DV limit triggered')
                     break
             print('run DV backoff')
