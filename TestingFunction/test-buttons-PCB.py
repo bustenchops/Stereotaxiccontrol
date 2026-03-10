@@ -78,7 +78,8 @@ class mainprogram:
             GPIO.output(mainprogram.clockpin,GPIO.LOW)
             self.shiftvalues[i] = GPIO.input(mainprogram.datapin)
             GPIO.output(mainprogram.clockpin, GPIO.HIGH)
-            time.sleep(0.001)
+            # time.sleep(0.001)
+            time.sleep(0.1)
         return self.shiftvalues
 
     #MAIN CODE ################################################################################################
