@@ -14,6 +14,7 @@ class Steppercontrol:
             # AP = 1
             # ML = 2
             # DV = 3
+            # AUX = 4
         self.axis = Axis
             # NOTE plus and minus direction relative to stereo coordinates
         self.goplus = Plusdir
@@ -28,7 +29,7 @@ class Steppercontrol:
         GPIO.setup(self.enable, GPIO.OUT, initial=1)
         GPIO.setup(self.step, GPIO.OUT, initial=0)
         GPIO.setup(self.direction, GPIO.OUT, initial=0)
-        GPIO.setup(self.limit, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(self.limit, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
     def steppgo(self,move_direction, speed, btwnsteps):
 
@@ -39,7 +40,7 @@ class Steppercontrol:
 
             for x in range (speed):
 
-                if GPIO.input(self.limit):
+                if not GPIO.input(self.limit):
                     GPIO.output(self.direction,move_direction)
                     GPIO.output(self.step, 1)
                     time.sleep(btwnsteps)
@@ -91,6 +92,15 @@ class Steppercontrol:
                             GPIO.output(self.step, 0)
                             time.sleep(btwnsteps)
                             var_list.DVsteps += 1
+
+                    elif self.axis == 4:
+                        if move_direction == self.goplus:  # DV steps up and DV measure goes minus
+                            GPIO.output(self.direction, move_direction)
+                            GPIO.output(self.step, 1)
+                            time.sleep(btwnsteps)
+                            GPIO.output(self.step, 0)
+                            time.sleep(btwnsteps)
+                            var_list.AUXsteps += 1
 
         else:
             print("Emergency Stopped - Cannot move until re-zeroed")

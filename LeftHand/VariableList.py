@@ -13,6 +13,7 @@ class var_list:
     APmove = None
     MLmove = None
     DVmove = None
+    AUXmove = None
 
 
 # OFFSETS FOR THE DRILL, Syringe, Needle (minus values is back, left or up)
@@ -109,6 +110,7 @@ class var_list:
     APsteps = 0
     MLsteps = 0
     DVsteps = 0
+    AUXsteps = 0
 
     APrelpos = 0
     MLrelpos = 0
@@ -173,6 +175,9 @@ class var_list:
 
     directionDV = 5
     stepDV = 6
+
+    directionAUX = 1
+    stepAUX = 7
 
 #DEFINE LIMIT SWITCH PINS
     limitAP = 22

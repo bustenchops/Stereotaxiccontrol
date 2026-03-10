@@ -177,27 +177,27 @@ class threadedcontrols:
         GPIO.output(var_list.enableAll, 0)
         if axis == 1:
             print('AP zeroing')
-            while GPIO.input(var_list.limitAP):
+            while not GPIO.input(var_list.limitAP):
                 var_list.APmove.steppgo(var_list.APforward, var_list.finespeed, btwnsteps)
-                if GPIO.input(var_list.limitAP) != True:
+                if GPIO.input(var_list.limitAP) = True:
                     print('AP limit triggered')
                     break
             print('run AP backoff')
             var_list.APmove.backoffafterzero(backoff,var_list.finespeed,var_list.btnSteps)
         elif axis == 2:
             print('ML zeroing')
-            while GPIO.input(var_list.limitML):
+            while not GPIO.input(var_list.limitML):
                 var_list.MLmove.steppgo(var_list.MLright, var_list.finespeed, btwnsteps)
-                if GPIO.input(var_list.limitML) != True:
+                if GPIO.input(var_list.limitML) = True:
                     print('ML limit triggered')
                     break
             print('run ML backoff')
             var_list.MLmove.backoffafterzero(backoff, var_list.finespeed, var_list.btnSteps)
         elif axis == 3:
             print('DV zeroing')
-            while GPIO.input(var_list.limitDV):
+            while not GPIO.input(var_list.limitDV):
                 var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, btwnsteps)
-                if GPIO.input(var_list.limitDV) != True:
+                if GPIO.input(var_list.limitDV) = True:
                     print('DV limit triggered')
                     break
             print('run DV backoff')

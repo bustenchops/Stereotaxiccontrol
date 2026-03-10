@@ -761,6 +761,8 @@ class MainWindow(QMainWindow):
         print('ML finished, DV start')
         var_list.DVmove = Steppercontrol(var_list.enableAll,var_list.stepDV,var_list.directionDV,var_list.limitDV,3,var_list.DVdown,var_list.DVup, window)
         print('steppers are a go')
+        var_list.AUXmove = Steppercontrol(var_list.enableAll,var_list.stepAUX,var_list.directionAUX,var_list.limitAUX,3,var_list.AuxDown,var_list.AuxUP, window)
+        print('steppers are a go')
 
 
 
