@@ -40,7 +40,7 @@ class mainprogram:
     #DEFINE EMERGENCY STOP and hard wired buttons
     emergstop = 26
     misc_eventbuttonA = 10
-    misc_eventbuttonB = None
+    misc_eventbuttonB = 11
 
     #DEFINE SHIFT REGISTER PINS
     latchpin = 18
