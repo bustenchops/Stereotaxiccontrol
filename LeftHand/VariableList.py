@@ -34,15 +34,16 @@ class var_list:
 
 # variable to let program know which offset of toggled on. 1-drill,2-syringe,3-probe
     TOGGLEoff = 1
+    offtoggleold = 1
 
 # DEFINE NUMBER OF BUTTONS AND ORDER IN ARRAY
-    buttonarray = ['moveslow', 'movefast', 'offposone', 'offpostwo', 'rezero',
-                   'relativeAP', 'relativeML', 'relativeDV', 'relativeALLset', 'fullretract',
-                   'bregmahome', 'bregmahomeDVabs', 'bregmahomeDVupfive', 'gotolambdabut', 'ratselect',
-                   'mouseselect','gotopreset', 'selectup', 'selectdown', 'armbut',
-                   'engagebut', 'makeitsobut', 'withdrawl', 'DVinsert', 'retractAP',
-                   'returnAP', 'retactDV', 'returnDV', 'functionone', 'functiontwo',
-                   'ABSzero', 'unassigned']
+    buttonarray = ['DVinsert', 'withdrawl', 'fullretract', 'rezero', 'bregmahomeDVupfive',
+                   'bregmahomeDVabs', 'ABSzero', 'gotopreset', 'makeitsobut', 'engagebut',
+                    'selectdown', 'selectup', 'retractAP', 'returnAP', 'bregmahome',
+                   'gotolambdabut', 'ratselect', 'mouseselect', 'functionone', 'armbut',
+                   'relativeML', 'retractDV', 'returnDV', 'functiontwo', 'relativeAP',
+                   'relativeALLset', 'offpostwo', 'offposone' 'movefast', 'moveslow',
+                   'relativeDV', 'unassigned']
 
     lastbuttonstate = [0 for x in range(len(buttonarray))]
 

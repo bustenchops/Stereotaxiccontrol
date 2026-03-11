@@ -68,8 +68,8 @@ class mainprogram:
     #DEFINE STEPPER DIRECTIONS
     APback = 1
     APforward = 0
-    MLleft = 0
-    MLright = 1
+    MLleft = 1
+    MLright = 0
     DVup = 0
     DVdown = 1
 
@@ -258,7 +258,7 @@ class mainprogram:
                 print('step', count)
                 count += 1
 
-        quest = input('Test the ML stepper 800 steps using direction left')
+        quest = input('Test the ML stepper 800 steps using direction right')
         print('direction set to', mainprogram.MLleft)
         count = 1
         GPIO.output(mainprogram.enableAll, 0)
@@ -274,7 +274,7 @@ class mainprogram:
                 print('step', count)
                 count += 1
 
-        quest = input('Test the ML stepper 800 steps using direction right')
+        quest = input('Test the ML stepper 800 steps using direction left')
         print('direction set to', mainprogram.MLright)
         count = 1
         GPIO.output(mainprogram.enableAll, 0)

@@ -10,7 +10,6 @@ class buttonprogram:
         GPIO.setup(var_list.latchpin, GPIO.OUT)
         GPIO.setup(var_list.clockpin, GPIO.OUT)
         GPIO.setup(var_list.datapin, GPIO.IN)
-        self.offtoggleold = 1
 
 
 #Get the shift register data
@@ -143,16 +142,16 @@ class buttonprogram:
                     #go to preset
                     if lastbut[var_list.gotopreset] == 1:
                         if var_list.safetybutton == 1:
-                            if self.offtoggleold != var_list.TOGGLEoff:
-                                self.offtoggleold = var_list.TOGGLEoff
-                                if self.offtoggleold == 1:
-                                    self.drillmovetooffset()
+                            if var_list.offtoggleold != var_list.TOGGLEoff:
+                                var_list.offtoggleold = var_list.TOGGLEoff
+                                if var_list.offtoggleold == 1:
+                                    var_list.drillmovetooffset()
                                     print('send to drill working')
-                                if self.offtoggleold == 2:
-                                    self.needlemovetooffset()
+                                if var_list.offtoggleold == 2:
+                                    var_list.needlemovetooffset()
                                     print('send to needle working')
-                                if self.offtoggleold == 3:
-                                    self.fibermovetooffset()
+                                if var_list.offtoggleold == 3:
+                                    var_list.fibermovetooffset()
                                     print('send to probe working')
 
                             else:
