@@ -20,7 +20,7 @@ class mainprogram:
 
     def __init__(self):
         # INITIALIZE PINS
-        GPIO.setup(mainprogram.testA, GPIO.IN)
+        GPIO.setup(mainprogram.testA, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.setup(mainprogram.testB, GPIO.IN)
         GPIO.setup(mainprogram.testC, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.setup(mainprogram.testD, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
