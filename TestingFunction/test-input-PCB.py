@@ -35,7 +35,7 @@ class mainprogram:
             Cresult = GPIO.input(mainprogram.testC)
             Dresult = GPIO.input(mainprogram.testD)
 
-            print = ('rep:', count)
+            print ('rep:', count)
             print ('pin ', mainprogram.testA, ' is', Aresult, 'just wired')
             print('pin ', mainprogram.testB, ' is', Bresult, 'just wired through trigger')
             print('pin ', mainprogram.testC, ' is', Cresult, 'trigger with pullup')
