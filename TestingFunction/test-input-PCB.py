@@ -27,8 +27,9 @@ class mainprogram:
 
     # MAIN CODE ################################################################################################
     def intializethesystem_andrun(self):
+        count = 1
         while mainprogram.keepalive:
-            count = 1
+
             # reading the buttons
             Aresult = GPIO.input(mainprogram.testA)
             Bresult = GPIO.input(mainprogram.testB)
