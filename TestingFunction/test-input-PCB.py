@@ -28,17 +28,20 @@ class mainprogram:
     # MAIN CODE ################################################################################################
     def intializethesystem_andrun(self):
         while mainprogram.keepalive:
+            count = 1
             # reading the buttons
             Aresult = GPIO.input(mainprogram.testA)
             Bresult = GPIO.input(mainprogram.testB)
             Cresult = GPIO.input(mainprogram.testC)
             Dresult = GPIO.input(mainprogram.testD)
 
+            print = ('rep:', count)
             print ('pin ', mainprogram.testA, ' is', Aresult, 'just wired')
             print('pin ', mainprogram.testB, ' is', Bresult, 'just wired through trigger')
             print('pin ', mainprogram.testC, ' is', Cresult, 'trigger with pullup')
             print('pin ', mainprogram.testD, ' is', Dresult, 'trigger with pulldown')
-            time.sleep(0.5)
+            time.sleep(0.25)
+            count += 1
 
 letsgo = mainprogram()
 letsgo.intializethesystem_andrun()
