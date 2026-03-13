@@ -12,18 +12,18 @@ class mainprogram:
     GPIO.setmode(GPIO.BCM)
 
     # DEFINE EMERGENCY STOP and hard wired buttons
-    testA = 26
-    testB = 10
-    testC = 11
-    testD = 7
+    #testA = 26
+    testB = 14
+    #testC = 11
+    #testD = 7
 
 
     def __init__(self):
         # INITIALIZE PINS
-        GPIO.setup(mainprogram.testA, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        #GPIO.setup(mainprogram.testA, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.setup(mainprogram.testB, GPIO.IN)
-        GPIO.setup(mainprogram.testC, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.setup(mainprogram.testD, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        #GPIO.setup(mainprogram.testC, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        #GPIO.setup(mainprogram.testD, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
     # MAIN CODE ################################################################################################
     def intializethesystem_andrun(self):
@@ -31,16 +31,16 @@ class mainprogram:
         while mainprogram.keepalive:
 
             # reading the buttons
-            Aresult = GPIO.input(mainprogram.testA)
+        #    Aresult = GPIO.input(mainprogram.testA)
             Bresult = GPIO.input(mainprogram.testB)
-            Cresult = GPIO.input(mainprogram.testC)
-            Dresult = GPIO.input(mainprogram.testD)
+        #    Cresult = GPIO.input(mainprogram.testC)
+        #    Dresult = GPIO.input(mainprogram.testD)
 
             print ('rep:', count)
-            print ('pin ', mainprogram.testA, ' is', Aresult, 'just wired')
+        #    print ('pin ', mainprogram.testA, ' is', Aresult, 'just wired')
             print('pin ', mainprogram.testB, ' is', Bresult, 'just wired through trigger')
-            print('pin ', mainprogram.testC, ' is', Cresult, 'trigger with pullup')
-            print('pin ', mainprogram.testD, ' is', Dresult, 'trigger with pulldown')
+        #    print('pin ', mainprogram.testC, ' is', Cresult, 'trigger with pullup')
+        #    print('pin ', mainprogram.testD, ' is', Dresult, 'trigger with pulldown')
             time.sleep(0.25)
             count += 1
 
