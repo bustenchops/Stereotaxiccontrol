@@ -82,7 +82,6 @@ class RotaryEncoder:
 
     # Call back routine called by switch events
     def switch_event(self, switch):
-        self.eventtime = time.time() * 1000
         # print(f"event detected on {switch}")
 
         if GPIO.input(self.pinA):
