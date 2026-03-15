@@ -124,9 +124,11 @@ class mainprogram:
 
 
     def eventdelayconfirm(self):
+        print('eventdelay calculation')
         self.comparetimer = time.time() * 1000
         if self.comparetimer - self.eventtimer >= self.eventdelay:
             self.eventtimer = self.comparetimer
+            print('delay:', self.comparetimer)
             return True
         else:
             return False
