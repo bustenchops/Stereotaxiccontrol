@@ -146,9 +146,13 @@ class RotaryEncoder:
         if self.event > 0:
             if self.event == 1:
                 print('ACTION clockwise----------------------------------------------------------------')
+                print('count:', test_vary.thecount)
+                test_vary.thecount += 1
                 self.sendtoSteppercontrol(self.event)
             if self.event == 2:
                 print('ACTION counterclockwise---------------------------------------------------------')
+                print('count:', test_vary.thecount)
+                test_vary.thecount += 1
                 self.sendtoSteppercontrol(self.event)
             else:
                 return

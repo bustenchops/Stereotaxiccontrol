@@ -3,5 +3,7 @@ class test_vary:
     eventdelay = 100
     backwardrotdelay = 100
     lastdirection = 0 #0 = counterclock, 1 = clock
+    thecount = 0
+
 
 
