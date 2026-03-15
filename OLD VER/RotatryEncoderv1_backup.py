@@ -13,7 +13,6 @@
 import RPi.GPIO as GPIO
 
 import time
-from VariableList import var_list
 
 
 class RotaryEncoder:
@@ -55,29 +54,6 @@ class RotaryEncoder:
 
         return
 
-    def stateanddelay(self,rotdata):
-        print('state and delay calculation')
-        self.comparetimer = time.time() * 1000
-        if var_list.lastdirection == rotdata:
-            self.testtime = self.comparetimer - var_list.eventime
-            if self.testtime >= var_list.eventdelay:
-                var_list.eventime = self.comparetimer
-                print('delay:', self.testtime)
-                return True
-            else:
-                print('event delay fail.....time:', self.testtime)
-                return False
-        elif var_list.lastdirection != rotdata:
-            self.testtime = self.comparetimer - var_list.eventime
-            if self.testtime >= var_list.backwardrotdelay:
-                var_list.eventime = self.comparetimer
-                print('delay:', self.testtime)
-                return True
-            else:
-                print('event changerotation delay fail.....time:', self.testtime)
-                return False
-
-
     # Call back routine called by switch events
     def switch_event(self, switch):
         self.eventtime = time.time() * 1000
@@ -100,21 +76,32 @@ class RotaryEncoder:
         self.event = 0
 
         if delta == 1:
-            if self.stateanddelay(delta):
-                if self.direction == self.CLOCKWISE:
-                    self.event = self.direction
+
+            if self.direction == self.CLOCKWISE:
+                self.event = self.direction
+                self.deltaonetime = time.time() * 1000
+                if (self.deltaonetime - self.eventtime) < 200:
+                    self.Ccount += 1
+                    print(self.Ccount)
                 else:
-                    self.direction = self.CLOCKWISE
+                    self.Ccount = 0
+            else:
+                self.direction = self.CLOCKWISE
+                self.Ccount = 0
             # print(self.direction, "  CLOCKWISE   ", self.CLOCKWISE)
         elif delta == 3:
-            if self.stateanddelay(delta):
-                if self.direction == self.ANTICLOCKWISE:
-                    self.event = self.direction
-                else:
-                    self.direction = self.ANTICLOCKWISE
 
+            if self.direction == self.ANTICLOCKWISE:
+                self.event = self.direction
+                self.deltathreetime = time.time() * 1000
+                if (self.deltathreetime - self.eventtime) < 200:
+                    self.CCcount += 1
+                    print(self.CCcount)
+            else:
+                self.direction = self.ANTICLOCKWISE
+                self.CCcount = 0
             # print(self.direction, "  ANTICLOCKWISE   ", self.ANTICLOCKWISE)
-
+        # print("detected", event, )
         if self.event > 0:
             if self.event == 1 and self.Ccount >= 3:
                 print('ACTION clockwise')

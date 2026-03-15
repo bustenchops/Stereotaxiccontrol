@@ -152,6 +152,13 @@ class var_list:
     rotoA_AUX = 14
     rotoB_AUX = 15
 
+#ENCODER CALC VARIABLES
+    eventime = None
+    eventdelay = 175
+    backwardrotdelay = 400
+    lastdirection = 0 #3 = counterclock, 1 = clock
+    thecount = 0
+
 #DEFINE STEPPER DIRECTIONS
     APback = 0
     APforward = 1
