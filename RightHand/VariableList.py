@@ -42,7 +42,7 @@ class var_list:
     relativeML = 11
     relativeAP = 9
     moveslow = 7
-    homeABSzero =
+    homeABSzero = 8 #full retract
     recalibrate = 10
     miscbuttonA =  1# speciesselect
     miscbuttonB =  3 # gotoworking preset
