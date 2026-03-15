@@ -134,6 +134,7 @@ class mainprogram:
     #Event handling for the encoders and hard wired buttons each encoder
     def AP_event(self, event):
         if self.eventdelayconfirm():
+            print('DELAY OK AP')
             if event == RotaryEncoder.CLOCKWISE:
                 print('AP clockwise')
             elif event == RotaryEncoder.ANTICLOCKWISE:
