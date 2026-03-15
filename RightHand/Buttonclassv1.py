@@ -81,21 +81,21 @@ class buttonprogram:
                             self.gotolambda()
                             var_list.safetybutton = 0
 
-                    #miscbuttonC - DRILL to relative zero for AP and ML - DV up 0.5cm but still sets the relative pos
+                    #drilloffset- DRILL to relative zero for AP and ML - DV up 0.5cm but still sets the relative pos
                     if lastbut[var_list.drilloff] == 1:
                         if var_list.safetybutton == 1:
                             print('Drill offset start thread')
                             self.drillmovetooffset()
                             var_list.safetybutton = 0
 
-                    #miscbuttonD - needle to relative zero for AP and ML - DV up 0.5cm but still sets the relative pos
+                    #needleoff - needle to relative zero for AP and ML - DV up 0.5cm but still sets the relative pos
                     if lastbut[var_list.needleoff] == 1:
                         if var_list.safetybutton == 1:
                             print('Needle offset start thread')
                             self.needlemovetooffset()
                             var_list.safetybutton = 0
 
-                    #miscbuttonE - fiber to relative zero for AP and ML - DV up 0.5cm but still sets the relative pos
+                    #mifberoff - fiber to relative zero for AP and ML - DV up 0.5cm but still sets the relative pos
                     if lastbut[var_list.fiberoff] == 1:
                         if var_list.safetybutton == 1:
                             print('Fiber offset start thread')

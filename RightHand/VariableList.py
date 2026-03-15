@@ -37,27 +37,27 @@ class var_list:
     lastbuttonstate = [0 for x in range(len(buttonarray))]
 
 # BUTTON POSITION IN SHIFT REGISTER ARRAY
-    movefast = 0
-    bregmahome = 1
-    relativeML = 2
-    relativeAP = 3
-    moveslow = 4
-    homeABSzero = 5
-    recalibrate = 6
-    miscbuttonA = 7 # disable steppers
-    miscbuttonB = 8 # send to preset
-    fiberoff = 9
-    needleoff = 10
-    drilloff = 11
-    relativeDV = 12
+    movefast = 6
+    bregmahome = 14
+    relativeML = 11
+    relativeAP = 9
+    moveslow = 7
+    homeABSzero =
+    recalibrate = 10
+    miscbuttonA =  1# speciesselect
+    miscbuttonB =  3 # gotoworking preset
+    fiberoff = 4
+    needleoff = 15
+    drilloff = 5
+    relativeDV = 0
     relativeALL = 13
-    homeRELzero = 14
-    miscbuttonC = 15 #empty for now
+    homeRELzero = 12 #gotolambda
+    miscbuttonC = 2 #unassigned
 
 #DEFINE EMERGENCY STOP and hard wired buttons
-    emergstop = 26
-    misc_eventbuttonA = 10
-    misc_eventbuttonB = None
+    emergstop = 10
+    misc_eventbuttonA = 16
+    misc_eventbuttonB = 11
 
 #DEFINE SHIFT REGISTER PINS
     latchpin = 18
@@ -143,12 +143,12 @@ class var_list:
     limitDV = 19
 
 #DEFINE ROTARY ENCODER PINS
-    rotoA_AP = 25
-    rotoB_AP =  8
-    rotoA_ML = 20
-    rotoB_ML = 21
-    rotoA_DV = 16
-    rotoB_DV = 12
+    rotoA_AP = 20
+    rotoB_AP = 21
+    rotoA_ML = 16
+    rotoB_ML = 12
+    rotoA_DV = 25
+    rotoB_DV = 8
 
 #DEFINE STEPPER DIRECTIONS
     APback = 0
