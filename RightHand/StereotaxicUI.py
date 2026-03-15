@@ -9,7 +9,7 @@ from StepperControlv1 import Steppercontrol
 from Buttonclassv1 import buttonprogram
 from ThreadedControlsv1 import threadedcontrols
 from VariableList import var_list
-
+import time
 
 
 
@@ -413,8 +413,7 @@ class MainWindow(QMainWindow):
         print('ML finished, DV start')
         var_list.DVmove = Steppercontrol(var_list.enableAll,var_list.stepDV,var_list.directionDV,var_list.limitDV,3,var_list.DVdown,var_list.DVup, window)
         print('steppers are a go')
-
-
+        var_list.eventime = time.time() * 1000
 
 # concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)
 

@@ -17,7 +17,6 @@ class threadedcontrols:
 
         self.countpush = 0
         self.lasttime = 0
-        var_list.eventime = time.time() * 1000
 
 #Import the offset values from file
         self.offsetimport = []
