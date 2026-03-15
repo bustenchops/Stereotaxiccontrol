@@ -334,11 +334,11 @@ class mainprogram:
 
     def encoderinit(self):
         print('initialize encoders')
-        self.AProto = RotaryEncoder(mainprogram.rotoA_AP, mainprogram.rotoB_AP, mainprogram.emergstop,Letsgonow.AP_event)
-        self.MLroto = RotaryEncoder(mainprogram.rotoA_ML, mainprogram.rotoB_ML, mainprogram.misc_eventbuttonA,Letsgonow.ML_event)
-        self.DVroto = RotaryEncoder(mainprogram.rotoA_DV, mainprogram.rotoB_DV, mainprogram.misc_eventbuttonB,Letsgonow.DV_event)
+        self.AProto = RotaryEncoder(mainprogram.rotoA_AP, mainprogram.rotoB_AP, mainprogram.emergstop,self.AP_event)
+        self.MLroto = RotaryEncoder(mainprogram.rotoA_ML, mainprogram.rotoB_ML, mainprogram.misc_eventbuttonA,self.ML_event)
+        self.DVroto = RotaryEncoder(mainprogram.rotoA_DV, mainprogram.rotoB_DV, mainprogram.misc_eventbuttonB,self.DV_event)
         self.AUXroto = RotaryEncoder(mainprogram.rotoA_AUX, mainprogram.rotoB_AUX, mainprogram.misc_eventbuttonB,
-                                    Letsgonow.AUX_event)
+                                    self.AUX_event)
 
         print('done')
 
