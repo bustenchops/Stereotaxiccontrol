@@ -80,6 +80,29 @@ class RotaryEncoder:
             print ('counter delay fail')
             return False
 
+    def stateanddelay(self,rotdata):
+        print('state and delay calculation')
+        self.comparetimer = time.time() * 1000
+        if test_vary.lastdirection == rotdata:
+            self.testtime = self.comparetimer - test_vary.eventime
+            if self.testtime >= test_vary.eventdelay:
+                test_vary.eventime = self.comparetimer
+                print('delay:', self.testtime)
+                return True
+            else:
+                print('event delay fail.....time:', self.comparetimer)
+                return False
+        elif test_vary.lastdirection != rotdata:
+            self.testtime = self.comparetimer - test_vary.eventime
+            if self.testtime >= test_vary.backwardrotdelay:
+                test_vary.eventime = self.comparetimer
+                print('delay:', self.testtime)
+                return True
+            else:
+                print('event changerotation delay fail.....time:', self.comparetimer)
+                return False
+
+
 
     # Call back routine called by switch events
     def switch_event(self,switch):
@@ -103,45 +126,28 @@ class RotaryEncoder:
         self.last_state = new_state
         self.event = 0
 
+
         if delta == 1:
-            if test_vary.lastdirection == 1 and self.eventdelayconfirm():
+            if self.stateanddelay(delta):
                 if self.direction == self.CLOCKWISE:
                     self.event = self.direction
                     print(self.direction, "  CLOCKWISE   ", self.CLOCKWISE)
-                    test_vary.lastdirection = 1
                 else:
                     self.direction = self.CLOCKWISE
-                    print(self.direction, "  CLOCKWISE   ", self.CLOCKWISE)
-                    test_vary.lastdirection = 1
-            elif test_vary.lastdirection == 0 and self.counterotationdelay():
-                if self.direction == self.CLOCKWISE:
-                    self.event = self.direction
-                    print(self.direction, "  changed to CLOCKWISE   ", self.CLOCKWISE)
-                    test_vary.lastdirection = 1
-                else:
-                    self.direction = self.CLOCKWISE
-                    print(self.direction, "  changed to CLOCKWISE   ", self.CLOCKWISE)
-                    test_vary.lastdirection = 1
+                    print(self.direction, "  change to CLOCKWISE   ", self.CLOCKWISE)
+                test_vary.lastdirection = delta
+
 
         elif delta == 3:
-            if test_vary.lastdirection == 0 and self.eventdelayconfirm():
+            if self.stateanddelay(delta):
                 if self.direction == self.ANTICLOCKWISE:
                     self.event = self.direction
                     print(self.direction, "  ANTICLOCKWISE   ", self.ANTICLOCKWISE)
-                    test_vary.lastdirection = 0
-                else:
-                    self.direction = self.ANTICLOCKWISE
-                    print(self.direction, "  ANTICLOCKWISE   ", self.ANTICLOCKWISE)
-                    test_vary.lastdirection = 0
-            elif test_vary.lastdirection == 1 and self.counterotationdelay():
-                if self.direction == self.ANTICLOCKWISE:
-                    self.event = self.direction
-                    print(self.direction, "  changed to ANTICLOCKWISE   ", self.ANTICLOCKWISE)
-                    test_vary.lastdirection = 0
                 else:
                     self.direction = self.ANTICLOCKWISE
                     print(self.direction, "  changed to ANTICLOCKWISE   ", self.ANTICLOCKWISE)
-                    test_vary.lastdirection = 0
+                 test_vary.lastdirection = 0
+
 
         if self.event > 0:
             if self.event == 1:
