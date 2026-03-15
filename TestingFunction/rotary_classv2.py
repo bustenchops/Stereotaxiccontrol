@@ -59,9 +59,10 @@ class RotaryEncoder:
     def eventdelayconfirm(self):
         print('eventdelay calculation')
         self.comparetimer = time.time() * 1000
-        if self.comparetimer - test_vary.eventime >= test_vary.eventdelay:
+        self.testtime = self.comparetimer - test_vary.eventime
+        if self.testtime >= test_vary.eventdelay:
             test_vary.eventime = self.comparetimer
-            print('delay:', self.comparetimer)
+            print('delay:', self.testtime)
             return True
         else:
             return False
@@ -69,9 +70,10 @@ class RotaryEncoder:
     def counterotationdelay(self):
         print('counterotation calculation')
         self.comparerottimer = time.time() * 1000
-        if self.comparerottimer - test_vary.eventime >= test_vary.backwardrotdelay:
+        self.testtimerot = self.comparerottimer - test_vary.eventime
+        if self.testtimerot >= test_vary.backwardrotdelay:
             test_vary.backwardrotdelay = self.comparerottimer
-            print('delay:', self.comparerottimer)
+            print('delay:', self.testtimerot)
             return True
         else:
             return False
