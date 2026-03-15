@@ -57,6 +57,9 @@ class mainprogram:
     rotoB_ML = 16
     rotoA_DV = 20
     rotoB_DV = 21
+    rotoA_AUX = 14
+    rotoB_AUX = 15
+
 
     #DEFINE STEPPER DIRECTIONS
     APback = 1
@@ -150,6 +153,18 @@ class mainprogram:
             print('DV clockwise')
         elif event == RotaryEncoder.ANTICLOCKWISE:
             print('DV counterclock')
+        elif event == RotaryEncoder.BUTTONDOWN:
+            print("event 2nd misc buttonclicked")
+            return
+        elif event == RotaryEncoder.BUTTONUP:
+            return
+        return
+
+    def AUX_event(self, event):
+        if event == RotaryEncoder.CLOCKWISE:
+            print('AUX clockwise')
+        elif event == RotaryEncoder.ANTICLOCKWISE:
+            print('AUX counterclock')
         elif event == RotaryEncoder.BUTTONDOWN:
             print("event 2nd misc buttonclicked")
             return
@@ -291,6 +306,9 @@ class mainprogram:
         self.AProto = RotaryEncoder(mainprogram.rotoA_AP, mainprogram.rotoB_AP, mainprogram.emergstop,Letsgonow.AP_event)
         self.MLroto = RotaryEncoder(mainprogram.rotoA_ML, mainprogram.rotoB_ML, mainprogram.misc_eventbuttonA,Letsgonow.ML_event)
         self.DVroto = RotaryEncoder(mainprogram.rotoA_DV, mainprogram.rotoB_DV, mainprogram.misc_eventbuttonB,Letsgonow.DV_event)
+        self.AUXroto = RotaryEncoder(mainprogram.rotoA_AUX, mainprogram.rotoB_AUX, mainprogram.misc_eventbuttonB,
+                                    Letsgonow.AUX_event)
+
         print('done')
 
 
