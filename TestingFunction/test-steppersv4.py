@@ -183,13 +183,18 @@ class mainprogram:
         return
 
     def executerrrr(self):
-        quest=input('TEST limitswitches - any key to cont')
+        # quest=input('TEST limitswitches - any key to cont')
         print('starting limitswitch test')
         print('hit individually OR AP and ML simultaneously to move on')
         stateAP = GPIO.input(mainprogram.limitAP)
         stateML = GPIO.input(mainprogram.limitML)
         stateDV = GPIO.input(mainprogram.limitDV)
         stateAUX = GPIO.input(mainprogram.limitAUX)
+
+        print('AP:', stateAP)
+        print('ML:', stateML)
+        print('DV:', stateDV)
+        print('AUX:', stateAUX)
 
         while GPIO.input(mainprogram.limitAP) == 0 or GPIO.input(mainprogram.limitML) == 0:
             newAP = GPIO.input(mainprogram.limitAP)
@@ -325,6 +330,7 @@ class mainprogram:
         self.AProto = RotaryEncoder(mainprogram.rotoA_AP, mainprogram.rotoB_AP, mainprogram.emergstop,Letsgonow.AP_event)
         self.MLroto = RotaryEncoder(mainprogram.rotoA_ML, mainprogram.rotoB_ML, mainprogram.misc_eventbuttonA,Letsgonow.ML_event)
         self.DVroto = RotaryEncoder(mainprogram.rotoA_DV, mainprogram.rotoB_DV, mainprogram.misc_eventbuttonB,Letsgonow.DV_event)
+        self.AUXroto = RotaryEncoder(mainprogram.rotoA_AUX, mainprogram.rotoB_AUX, mainprogram.misc_eventbuttonB,Letsgonow.AUX_event())
         print('done')
 
 
