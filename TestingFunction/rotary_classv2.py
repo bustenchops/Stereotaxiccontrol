@@ -65,6 +65,7 @@ class RotaryEncoder:
             print('delay:', self.testtime)
             return True
         else:
+            print('event delay fail')
             return False
 
     def counterotationdelay(self):
@@ -76,6 +77,7 @@ class RotaryEncoder:
             print('delay:', self.testtimerot)
             return True
         else:
+            print ('counter delay fail')
             return False
 
 
@@ -102,6 +104,7 @@ class RotaryEncoder:
         self.event = 0
 
         if delta == 1:
+            print('eventtime:', self.comparetimer)
             if test_vary.lastdirection == 1 and self.eventdelayconfirm():
                 if self.direction == self.CLOCKWISE:
                     self.event = self.direction
