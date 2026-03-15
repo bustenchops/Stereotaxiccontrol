@@ -56,10 +56,9 @@ class RotaryEncoder:
         return
 
     def stateanddelay(self, rotdata):
-        self.rotordata = rotdata
         print('state and delay calculation')
         self.comparetimer = time.time() * 1000
-        if var_list.lastdirection == self.rotordata:
+        if var_list.lastdirection == rotdata:
             print('test1')
             self.testtime = self.comparetimer - var_list.eventime
             if self.testtime >= var_list.eventdelay:
@@ -69,7 +68,7 @@ class RotaryEncoder:
             else:
                 print('event delay fail.....time:', self.testtime)
                 return False
-        elif var_list.lastdirection != self.rotordata:
+        elif var_list.lastdirection != rotdata:
             self.testtime = self.comparetimer - var_list.eventime
             if self.testtime >= var_list.backwardrotdelay:
                 var_list.eventime = self.comparetimer
@@ -104,26 +103,29 @@ class RotaryEncoder:
             if self.stateanddelay(delta):
                 if self.direction == self.CLOCKWISE:
                     self.event = self.direction
+                    print(self.direction, "  CLOCKWISE   ", self.CLOCKWISE)
                 else:
-                    self.direction = self.CLOCKWISE
-            # print(self.direction, "  CLOCKWISE   ", self.CLOCKWISE)
+                    print(self.direction, "  change to CLOCKWISE   ", self.CLOCKWISE)
+                var_list.lastdirection = delta
+
         elif delta == 3:
             if self.stateanddelay(delta):
                 if self.direction == self.ANTICLOCKWISE:
                     self.event = self.direction
+                    print(self.direction, "  ANTICLOCKWISE   ", self.ANTICLOCKWISE)
                 else:
                     self.direction = self.ANTICLOCKWISE
+                    print(self.direction, "  changed to ANTICLOCKWISE   ", self.ANTICLOCKWISE)
+                var_list.lastdirection = delta
 
             # print(self.direction, "  ANTICLOCKWISE   ", self.ANTICLOCKWISE)
 
         if self.event > 0:
-            if self.event == 1 and self.Ccount >= 3:
+            if self.event == 1:
                 print('ACTION clockwise')
-                self.Ccount = 0
                 self.sendtoThreadedControl(self.event)
-            if self.event == 2 and self.CCcount >= 3:
+            if self.event == 2:
                 print('ACTION counterclockwise')
-                self.CCcount = 0
                 self.sendtoThreadedControl(self.event)
 
         #    self.callback(event)
