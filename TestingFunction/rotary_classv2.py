@@ -104,7 +104,6 @@ class RotaryEncoder:
         self.event = 0
 
         if delta == 1:
-            print('eventtime:', self.comparetimer)
             if test_vary.lastdirection == 1 and self.eventdelayconfirm():
                 if self.direction == self.CLOCKWISE:
                     self.event = self.direction
