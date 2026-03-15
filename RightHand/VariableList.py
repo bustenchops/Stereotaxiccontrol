@@ -153,7 +153,7 @@ class var_list:
     rotoB_AUX = 15
 
 #ENCODER CALC VARIABLES
-    eventime = None
+    eventime = 0
     eventdelay = 175
     backwardrotdelay = 400
     lastdirection = 0 #3 = counterclock, 1 = clock

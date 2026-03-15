@@ -17,6 +17,7 @@ class threadedcontrols:
 
         self.countpush = 0
         self.lasttime = 0
+        var_list.eventime = time.time() * 1000
 
 #Import the offset values from file
         self.offsetimport = []
@@ -430,7 +431,6 @@ class threadedcontrols:
 # INITIALIZE ENCODERS
         print('Control thread started')
         print('encoders init')
-        var_list.eventime = time.time()*1000
         self.AProto = RotaryEncoder(var_list.rotoA_AP, var_list.rotoB_AP, var_list.emergstop, self.AP_event)
         self.MLroto = RotaryEncoder(var_list.rotoA_ML, var_list.rotoB_ML, var_list.misc_eventbuttonA, self.ML_event)
         self.DVroto = RotaryEncoder(var_list.rotoA_DV, var_list.rotoB_DV, var_list.misc_eventbuttonB, self.DV_event)
