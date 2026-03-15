@@ -102,42 +102,45 @@ class RotaryEncoder:
         self.event = 0
 
         if delta == 1:
-
-            if self.direction == self.CLOCKWISE:
-                if self.eventdelayconfirm():
+            if test_vary.lastdirection == 1 and self.eventdelayconfirm():
+                if self.direction == self.CLOCKWISE:
                     self.event = self.direction
-                # self.deltaonetime = time.time() * 1000
-                # #self.difftime = self.deltaonetime - self.eventtime
-                # print ('diff time:', self.difftime)
-                # if self.difftime < 200:
-                #     self.Ccount +=1
-                #     print(self.Ccount)
-                # else:
-                #     self.Ccount = 0
                     print(self.direction, "  CLOCKWISE   ", self.CLOCKWISE)
-            else:
-                if self.counterotationdelay():
+                    test_vary.lastdirection = 1
+                else:
                     self.direction = self.CLOCKWISE
-                # self.Ccount = 0
-                    print(self.direction, "  changed to CLOCKWISE   ", self.CLOCKWISE)
-        elif delta == 3:
-    
-            if self.direction == self.ANTICLOCKWISE:
-                if self.eventdelayconfirm():
+                    print(self.direction, "  CLOCKWISE   ", self.CLOCKWISE)
+                    test_vary.lastdirection = 1
+            elif test_vary.lastdirection == 0 and self.counterotationdelay():
+                if self.direction == self.CLOCKWISE:
                     self.event = self.direction
-                # self.deltathreetime = time.time() * 1000
-                # self.defftime = self.deltathreetime - self.eventtime
-                # print ('defftime:', self.defftime)
-                # if self.defftime < 200:
-                #     self.CCcount +=1
-                #     print(self.CCcount)
+                    print(self.direction, "  changed to CLOCKWISE   ", self.CLOCKWISE)
+                    test_vary.lastdirection = 1
+                else:
+                    self.direction = self.CLOCKWISE
+                    print(self.direction, "  changed to CLOCKWISE   ", self.CLOCKWISE)
+                    test_vary.lastdirection = 1
+
+        elif delta == 3:
+            if test_vary.lastdirection == 0 and self.eventdelayconfirm():
+                if self.direction == self.ANTICLOCKWISE:
+                    self.event = self.direction
                     print(self.direction, "  ANTICLOCKWISE   ", self.ANTICLOCKWISE)
-            else:
-                if self.counterotationdelay():
+                    test_vary.lastdirection = 0
+                else:
                     self.direction = self.ANTICLOCKWISE
-                # self.CCcount = 0
+                    print(self.direction, "  ANTICLOCKWISE   ", self.ANTICLOCKWISE)
+                    test_vary.lastdirection = 0
+            elif test_vary.lastdirection == 1 and self.counterotationdelay():
+                if self.direction == self.ANTICLOCKWISE:
+                    self.event = self.direction
                     print(self.direction, "  changed to ANTICLOCKWISE   ", self.ANTICLOCKWISE)
-        #print("detected", event, )
+                    test_vary.lastdirection = 0
+                else:
+                    self.direction = self.ANTICLOCKWISE
+                    print(self.direction, "  changed to ANTICLOCKWISE   ", self.ANTICLOCKWISE)
+                    test_vary.lastdirection = 0
+
         if self.event > 0:
             if self.event == 1:
                 print('ACTION clockwise')
