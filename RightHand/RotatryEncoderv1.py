@@ -56,12 +56,14 @@ class RotaryEncoder:
         return
 
     def stateanddelay(self, rotdata):
+        print(var_list.eventime)
         print('state and delay calculation')
         self.comparetimer = time.time() * 1000
         if var_list.lastdirection == rotdata:
             print('test1')
             self.testtime = self.comparetimer - var_list.eventime
             if self.testtime >= var_list.eventdelay:
+                print('test2')
                 var_list.eventime = self.comparetimer
                 print('delay:', self.testtime)
                 return True
