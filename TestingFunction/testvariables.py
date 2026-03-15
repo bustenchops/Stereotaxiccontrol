@@ -1,7 +1,7 @@
 class test_vary:
     eventime = None
-    eventdelay = 150
-    backwardrotdelay = 400
+    eventdelay = 100
+    backwardrotdelay = 100
     lastdirection = 0 #0 = counterclock, 1 = clock
 
 
