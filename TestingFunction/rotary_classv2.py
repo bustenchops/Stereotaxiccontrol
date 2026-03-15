@@ -66,6 +66,17 @@ class RotaryEncoder:
         else:
             return False
 
+    def counterotationdelay(self):
+        print('counterotation calculation')
+        self.comparerottimer = time.time() * 1000
+        if self.comparerottimer - test_vary.eventime >= test_vary.backwardrotdelay
+            test_vary.backwardrotdelay = self.comparerottimer
+            print('delay:', self.comparerottimer)
+            return True
+        else:
+            return False
+
+
     # Call back routine called by switch events
     def switch_event(self,switch):
         # self.eventtime = time.time() * 1000
@@ -91,7 +102,8 @@ class RotaryEncoder:
         if delta == 1:
 
             if self.direction == self.CLOCKWISE:
-                self.event = self.direction
+                if self.eventdelayconfirm():
+                    self.event = self.direction
                 # self.deltaonetime = time.time() * 1000
                 # #self.difftime = self.deltaonetime - self.eventtime
                 # print ('diff time:', self.difftime)
@@ -100,43 +112,39 @@ class RotaryEncoder:
                 #     print(self.Ccount)
                 # else:
                 #     self.Ccount = 0
+                print(self.direction, "  CLOCKWISE   ", self.CLOCKWISE)
             else:
-                self.direction = self.CLOCKWISE
+                if self.counterotationdelay():
+                    self.direction = self.CLOCKWISE
                 # self.Ccount = 0
-            print(self.direction, "  CLOCKWISE   ", self.CLOCKWISE)
+                print(self.direction, "  changed to CLOCKWISE   ", self.CLOCKWISE)
         elif delta == 3:
     
             if self.direction == self.ANTICLOCKWISE:
-                self.event = self.direction
+                if self.eventdelayconfirm():
+                    self.event = self.direction
                 # self.deltathreetime = time.time() * 1000
                 # self.defftime = self.deltathreetime - self.eventtime
                 # print ('defftime:', self.defftime)
                 # if self.defftime < 200:
                 #     self.CCcount +=1
                 #     print(self.CCcount)
+                print(self.direction, "  ANTICLOCKWISE   ", self.ANTICLOCKWISE)
             else:
-                self.direction = self.ANTICLOCKWISE
+                if self.counterotationdelay():
+                    self.direction = self.ANTICLOCKWISE
                 # self.CCcount = 0
-            print(self.direction, "  ANTICLOCKWISE   ", self.ANTICLOCKWISE)
+                print(self.direction, "  ANTICLOCKWISE   ", self.ANTICLOCKWISE)
         #print("detected", event, )
         if self.event > 0:
-            if self.eventdelayconfirm():
-                if self.event == 1 and self.Ccount >=3:
-                    self.currectdirection = 1
-                    if self.currectdirection != test_vary.lastdirection and self.comparetimer - test_vary.eventime >= test_vary.backwardrotdelay:
-                        print('ACTION clockwise')
-                        # self.Ccount = 0
-                        test_vary.lastdirection = 1
-                        self.sendtoSteppercontrol(self.event)
-                if self.event == 2 and self.CCcount >=3:
-                    self.currectdirection = 1
-                    if self.currectdirection != test_vary.lastdirection and self.comparetimer - test_vary.eventime >= test_vary.backwardrotdelay:
-                        print('ACTION counterclockwise')
-                        # self.CCcount = 0
-                        test_vary.lastdirection = 0
-                        self.sendtoSteppercontrol(self.event)
-                    else:
-                        return
+            if self.event == 1:
+                print('ACTION clockwise')
+                self.sendtoSteppercontrol(self.event)
+            if self.event == 2:
+                print('ACTION counterclockwise')
+                self.sendtoSteppercontrol(self.event)
+            else:
+                return
 
         #    self.callback(event)
             # print('do something count = ',self.count)
