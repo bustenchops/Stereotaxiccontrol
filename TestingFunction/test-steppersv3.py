@@ -1,7 +1,6 @@
 import threading
 import time
 import RPi.GPIO as GPIO
-from networkx.classes import non_edges
 
 from rotary_classv2 import RotaryEncoder
 
