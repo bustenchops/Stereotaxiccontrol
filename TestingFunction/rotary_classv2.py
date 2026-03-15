@@ -82,41 +82,41 @@ class RotaryEncoder:
  
             if self.direction == self.CLOCKWISE:
                 self.event = self.direction
-                self.deltaonetime = time.time() * 1000
-                self.difftime = self.deltaonetime - self.eventtime
-                print ('diff time:', self.difftime)
-                if self.difftime < 200:
-                    self.Ccount +=1
-                    print(self.Ccount)
-                else:
-                    self.Ccount = 0
+                # self.deltaonetime = time.time() * 1000
+                # #self.difftime = self.deltaonetime - self.eventtime
+                # print ('diff time:', self.difftime)
+                # if self.difftime < 200:
+                #     self.Ccount +=1
+                #     print(self.Ccount)
+                # else:
+                #     self.Ccount = 0
             else:
                 self.direction = self.CLOCKWISE
-                self.Ccount = 0
-            #print(self.direction, "  CLOCKWISE   ", self.CLOCKWISE)
+                # self.Ccount = 0
+            print(self.direction, "  CLOCKWISE   ", self.CLOCKWISE)
         elif delta == 3:
     
             if self.direction == self.ANTICLOCKWISE:
                 self.event = self.direction
-                self.deltathreetime = time.time() * 1000
-                self.defftime = self.deltathreetime - self.eventtime
-                print ('defftime:', self.defftime)
-                if self.defftime < 200:
-                    self.CCcount +=1
-                    print(self.CCcount)
+                # self.deltathreetime = time.time() * 1000
+                # self.defftime = self.deltathreetime - self.eventtime
+                # print ('defftime:', self.defftime)
+                # if self.defftime < 200:
+                #     self.CCcount +=1
+                #     print(self.CCcount)
             else:
                 self.direction = self.ANTICLOCKWISE
-                self.CCcount = 0
-            # print(self.direction, "  ANTICLOCKWISE   ", self.ANTICLOCKWISE)
+                # self.CCcount = 0
+            print(self.direction, "  ANTICLOCKWISE   ", self.ANTICLOCKWISE)
         #print("detected", event, )
         if self.event > 0:
             if self.event == 1 and self.Ccount >=3:
                 print('ACTION clockwise')
-                self.Ccount = 0
+                # self.Ccount = 0
                 self.sendtoSteppercontrol(self.event)
             if self.event == 2 and self.CCcount >=3:
                 print('ACTION counterclockwise')
-                self.CCcount = 0
+                # self.CCcount = 0
                 self.sendtoSteppercontrol(self.event)
 
 

@@ -1,5 +1,8 @@
+import threading
 import time
 import RPi.GPIO as GPIO
+from networkx.classes import non_edges
+
 from rotary_classv2 import RotaryEncoder
 
 class mainprogram:
@@ -73,6 +76,8 @@ class mainprogram:
 
     def __init__(self):
         #INITIALIZE PINS
+        self.eventtimer = time.time() * 1000
+        self.eventdelay = 150
 
         print('initialize hardwired buttons')
         GPIO.setup(mainprogram.emergstop, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -119,58 +124,81 @@ class mainprogram:
         return
 
 
+    def eventdelayconfirm(self):
+        self.comparetimer = time.time() * 1000
+        if self.comparetimer - self.eventtimer >= self.eventdelay:
+            self.eventtimer = self.comparetimer
+            return True
+        else:
+            return False
+
     #Event handling for the encoders and hard wired buttons each encoder
     def AP_event(self, event):
-        if event == RotaryEncoder.CLOCKWISE:
-            print('AP clockwise')
-        elif event == RotaryEncoder.ANTICLOCKWISE:
-            print('AP counterclock')
-        #This is a hard wired button note the encoder switch
-        elif event == RotaryEncoder.BUTTONDOWN:
-            mainprogram.emergencystop(self)
-        elif event == RotaryEncoder.BUTTONUP:
+        if self.eventdelayconfirm():
+            if event == RotaryEncoder.CLOCKWISE:
+                print('AP clockwise')
+            elif event == RotaryEncoder.ANTICLOCKWISE:
+                print('AP counterclock')
+            #This is a hard wired button note the encoder switch
+            elif event == RotaryEncoder.BUTTONDOWN:
+                mainprogram.emergencystop(self)
+            elif event == RotaryEncoder.BUTTONUP:
+                return
             return
-        return
+        else:
+            print('not enough delay')
+            return
 
 
     #Event handling for the encoders and hard wired buttons each encoder
     def ML_event(self, event):
-        if event == RotaryEncoder.CLOCKWISE:
-            print('ML clockwise')
-        elif event == RotaryEncoder.ANTICLOCKWISE:
-            print('ML counterclock')
-        elif event == RotaryEncoder.BUTTONDOWN:
-            print("event 1st misc buttonclicked")
+        if self.eventdelayconfirm():
+            if event == RotaryEncoder.CLOCKWISE:
+                print('ML clockwise')
+            elif event == RotaryEncoder.ANTICLOCKWISE:
+                print('ML counterclock')
+            elif event == RotaryEncoder.BUTTONDOWN:
+                print("event 1st misc buttonclicked")
+                return
+            elif event == RotaryEncoder.BUTTONUP:
+                return
             return
-        elif event == RotaryEncoder.BUTTONUP:
+        else:
+            print('not enough delay')
             return
-        return
-
 
     #Event handling for the encoders and hard wired buttons each encoder
     def DV_event(self, event):
-        if event == RotaryEncoder.CLOCKWISE:
-            print('DV clockwise')
-        elif event == RotaryEncoder.ANTICLOCKWISE:
-            print('DV counterclock')
-        elif event == RotaryEncoder.BUTTONDOWN:
-            print("event 2nd misc buttonclicked")
+        if self.eventdelayconfirm():
+            if event == RotaryEncoder.CLOCKWISE:
+                print('DV clockwise')
+            elif event == RotaryEncoder.ANTICLOCKWISE:
+                print('DV counterclock')
+            elif event == RotaryEncoder.BUTTONDOWN:
+                print("event 2nd misc buttonclicked")
+                return
+            elif event == RotaryEncoder.BUTTONUP:
+                return
             return
-        elif event == RotaryEncoder.BUTTONUP:
+        else:
+            print('not enough delay')
             return
-        return
 
     def AUX_event(self, event):
-        if event == RotaryEncoder.CLOCKWISE:
-            print('AUX clockwise')
-        elif event == RotaryEncoder.ANTICLOCKWISE:
-            print('AUX counterclock')
-        elif event == RotaryEncoder.BUTTONDOWN:
-            print("event 2nd misc buttonclicked")
+        if self.eventdelayconfirm():
+            if event == RotaryEncoder.CLOCKWISE:
+                print('AUX clockwise')
+            elif event == RotaryEncoder.ANTICLOCKWISE:
+                print('AUX counterclock')
+            elif event == RotaryEncoder.BUTTONDOWN:
+                print("event 2nd misc buttonclicked")
+                return
+            elif event == RotaryEncoder.BUTTONUP:
+                return
             return
-        elif event == RotaryEncoder.BUTTONUP:
+        else:
+            print('not enough delay')
             return
-        return
 
     def executerrrr(self):
         quest=input('TEST limitswitches - any key to cont')
