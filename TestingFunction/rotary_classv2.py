@@ -134,7 +134,7 @@ class RotaryEncoder:
                 if self.counterotationdelay():
                     self.direction = self.ANTICLOCKWISE
                 # self.CCcount = 0
-                    print(self.direction, "  ANTICLOCKWISE   ", self.ANTICLOCKWISE)
+                    print(self.direction, "  changed to ANTICLOCKWISE   ", self.ANTICLOCKWISE)
         #print("detected", event, )
         if self.event > 0:
             if self.event == 1:
