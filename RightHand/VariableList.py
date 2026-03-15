@@ -143,12 +143,14 @@ class var_list:
     limitDV = 19
 
 #DEFINE ROTARY ENCODER PINS
-    rotoA_AP = 20
-    rotoB_AP = 21
-    rotoA_ML = 16
-    rotoB_ML = 12
-    rotoA_DV = 25
-    rotoB_DV = 8
+    rotoA_AP = 21
+    rotoB_AP = 20
+    rotoA_ML = 8
+    rotoB_ML = 25
+    rotoA_DV = 12
+    rotoB_DV = 16
+    rotoA_AUX = 14
+    rotoB_AUX = 15
 
 #DEFINE STEPPER DIRECTIONS
     APback = 0
