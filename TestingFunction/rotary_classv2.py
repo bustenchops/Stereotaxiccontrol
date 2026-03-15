@@ -42,8 +42,8 @@ class RotaryEncoder:
         # The following lines enable the internal pull-up resistors
         # on version 2 (latest) boards
         GPIO.setwarnings(False)
-        GPIO.setup(self.pinA, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-        GPIO.setup(self.pinB, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        GPIO.setup(self.pinA, GPIO.IN) #pull_up_down=GPIO.PUD_DOWN)
+        GPIO.setup(self.pinB, GPIO.IN) # pull_up_down=GPIO.PUD_DOWN)
         GPIO.setup(self.button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     
         # Add event detection to the GPIO inputs
@@ -59,6 +59,7 @@ class RotaryEncoder:
     # Call back routine called by switch events
     def switch_event(self,switch):
         self.eventtime = time.time() * 1000
+        print ('event time:', self.eventtime)
         # print(f"event detected on {switch}")
 
         if GPIO.input(self.pinA):
@@ -82,7 +83,9 @@ class RotaryEncoder:
             if self.direction == self.CLOCKWISE:
                 self.event = self.direction
                 self.deltaonetime = time.time() * 1000
-                if (self.deltaonetime - self.eventtime) < 200:
+                self.difftime = self.deltaonetime - self.eventtime
+                print ('diff time:', self.difftime)
+                if self.difftime < 200:
                     self.Ccount +=1
                     print(self.Ccount)
                 else:
@@ -96,7 +99,9 @@ class RotaryEncoder:
             if self.direction == self.ANTICLOCKWISE:
                 self.event = self.direction
                 self.deltathreetime = time.time() * 1000
-                if (self.deltathreetime - self.eventtime) < 200:
+                self.defftime = self.deltathreetime - self.eventtime
+                print ('defftime:', self.defftime)
+                if self.defftime < 200:
                     self.CCcount +=1
                     print(self.CCcount)
             else:

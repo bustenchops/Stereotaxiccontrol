@@ -52,7 +52,7 @@ class mainprogram:
 
         GPIO.setup(mainprogram.emergstop, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         GPIO.setup(mainprogram.misc_eventbuttonA, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-        GPIO.setup(mainprogram.misc_eventbuttonB, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(mainprogram.misc_eventbuttonB, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
         #EMPTY variables to initialize
         self.quest = "none"
@@ -68,7 +68,7 @@ class mainprogram:
             hardB = str(GPIO.input(mainprogram.misc_eventbuttonB))
 
             print('emerg=' + emerginput + '  hardA=' + hardA + '  hardB=' + hardB)
-            time.sleep(0.05)
+
 
 letsgo = mainprogram()
 letsgo.intializethesystem_andrun()
