@@ -112,12 +112,12 @@ class RotaryEncoder:
                 #     print(self.Ccount)
                 # else:
                 #     self.Ccount = 0
-                print(self.direction, "  CLOCKWISE   ", self.CLOCKWISE)
+                    print(self.direction, "  CLOCKWISE   ", self.CLOCKWISE)
             else:
                 if self.counterotationdelay():
                     self.direction = self.CLOCKWISE
                 # self.Ccount = 0
-                print(self.direction, "  changed to CLOCKWISE   ", self.CLOCKWISE)
+                    print(self.direction, "  changed to CLOCKWISE   ", self.CLOCKWISE)
         elif delta == 3:
     
             if self.direction == self.ANTICLOCKWISE:
@@ -129,12 +129,12 @@ class RotaryEncoder:
                 # if self.defftime < 200:
                 #     self.CCcount +=1
                 #     print(self.CCcount)
-                print(self.direction, "  ANTICLOCKWISE   ", self.ANTICLOCKWISE)
+                    print(self.direction, "  ANTICLOCKWISE   ", self.ANTICLOCKWISE)
             else:
                 if self.counterotationdelay():
                     self.direction = self.ANTICLOCKWISE
                 # self.CCcount = 0
-                print(self.direction, "  ANTICLOCKWISE   ", self.ANTICLOCKWISE)
+                    print(self.direction, "  ANTICLOCKWISE   ", self.ANTICLOCKWISE)
         #print("detected", event, )
         if self.event > 0:
             if self.event == 1:
