@@ -146,7 +146,7 @@ class RotaryEncoder:
                 else:
                     self.direction = self.ANTICLOCKWISE
                     print(self.direction, "  changed to ANTICLOCKWISE   ", self.ANTICLOCKWISE)
-                 test_vary.lastdirection = 0
+                test_vary.lastdirection = 0
 
 
         if self.event > 0:
