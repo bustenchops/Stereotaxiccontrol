@@ -13,6 +13,9 @@
 import RPi.GPIO as GPIO
 
 import time
+from testvariables import test_vary
+
+
 class RotaryEncoder:
 
     CLOCKWISE=1
@@ -53,13 +56,20 @@ class RotaryEncoder:
 
         return
 
-    def receive_instance(self, maininstance):
-        self.accessmainprogram = maininstance
+    def eventdelayconfirm(self):
+        print('eventdelay calculation')
+        self.comparetimer = time.time() * 1000
+        if self.comparetimer - test_vary.eventime >= test_vary.eventdelay:
+            test_vary.eventime = self.comparetimer
+            print('delay:', self.comparetimer)
+            return True
+        else:
+            return False
 
     # Call back routine called by switch events
     def switch_event(self,switch):
-        self.eventtime = time.time() * 1000
-        print ('event time:', self.eventtime)
+        # self.eventtime = time.time() * 1000
+        # print ('event time:', self.eventtime)
         # print(f"event detected on {switch}")
 
         if GPIO.input(self.pinA):
@@ -71,15 +81,15 @@ class RotaryEncoder:
             self.rotary_b = 1
         else:
             self.rotary_b = 0
-        
+
         self.rotary_c = self.rotary_a ^ self.rotary_b
         new_state = self.rotary_a * 4 + self.rotary_b * 2 + self.rotary_c * 1
         delta = (new_state - self.last_state) % 4
         self.last_state = new_state
         self.event = 0
- 
+
         if delta == 1:
- 
+
             if self.direction == self.CLOCKWISE:
                 self.event = self.direction
                 # self.deltaonetime = time.time() * 1000
@@ -110,15 +120,23 @@ class RotaryEncoder:
             print(self.direction, "  ANTICLOCKWISE   ", self.ANTICLOCKWISE)
         #print("detected", event, )
         if self.event > 0:
-            if self.event == 1 and self.Ccount >=3:
-                print('ACTION clockwise')
-                # self.Ccount = 0
-                self.sendtoSteppercontrol(self.event)
-            if self.event == 2 and self.CCcount >=3:
-                print('ACTION counterclockwise')
-                # self.CCcount = 0
-                self.sendtoSteppercontrol(self.event)
-
+            if self.eventdelayconfirm():
+                if self.event == 1 and self.Ccount >=3:
+                    self.currectdirection = 1
+                    if self.currectdirection != test_vary.lastdirection and self.comparetimer - test_vary.eventime >= test_vary.backwardrotdelay:
+                        print('ACTION clockwise')
+                        # self.Ccount = 0
+                        test_vary.lastdirection = 1
+                        self.sendtoSteppercontrol(self.event)
+                if self.event == 2 and self.CCcount >=3:
+                    self.currectdirection = 1
+                    if self.currectdirection != test_vary.lastdirection and self.comparetimer - test_vary.eventime >= test_vary.backwardrotdelay:
+                        print('ACTION counterclockwise')
+                        # self.CCcount = 0
+                        test_vary.lastdirection = 0
+                        self.sendtoSteppercontrol(self.event)
+                    else:
+                        return
 
         #    self.callback(event)
             # print('do something count = ',self.count)
