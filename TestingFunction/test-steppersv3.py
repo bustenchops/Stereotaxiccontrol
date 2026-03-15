@@ -51,12 +51,12 @@ class mainprogram:
 
 
     #DEFINE ROTARY ENCODER PINS (NOTE:  may need to change to match actual)
-    rotoA_AP = 25
-    rotoB_AP =  8
-    rotoA_ML = 12
-    rotoB_ML = 16
-    rotoA_DV = 20
-    rotoB_DV = 21
+    rotoA_AP = 20
+    rotoB_AP = 21
+    rotoA_ML = 16
+    rotoB_ML = 12
+    rotoA_DV = 25
+    rotoB_DV = 8
     rotoA_AUX = 14
     rotoB_AUX = 15
 

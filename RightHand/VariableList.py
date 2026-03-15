@@ -56,7 +56,7 @@ class var_list:
 
 #DEFINE EMERGENCY STOP and hard wired buttons
     emergstop = 10
-    misc_eventbuttonA = 16
+    misc_eventbuttonA = 26
     misc_eventbuttonB = 11
 
 #DEFINE SHIFT REGISTER PINS

@@ -11,21 +11,22 @@ class mainprogram:
 
     #BUTTON POSITION IN SHIFT REGISTER ARRAY
         # 2 position switch (3 states 1/2 and all off)
-    movefast = 0
-    moveslow = 1
-    buttontohome = 2
-    relativeALL = 3
-    relativeAP = 4
-    relativeMV = 5
-    relativeDV = 6
-    buttonaction = 7
-    miscbuttonC = 8
-    miscbuttonD = 9
-    miscbuttonE = 10
-    zerobutton = 11
-    calibratebutton = 12
-    miscbuttonA = 13
-    miscbuttonB = 14
+    movefast = 6
+    bregmahome = 14
+    relativeML = 11
+    relativeAP = 9
+    moveslow = 7
+    homeABSzero =
+    recalibrate = 10
+    miscbuttonA =  1# speciesselect
+    miscbuttonB =  3 # gotoworking preset
+    fiberoff = 4
+    needleoff = 15
+    drilloff = 5
+    relativeDV = 0
+    relativeALL = 13
+    homeRELzero = 12 #gotolambda
+    miscbuttonC = 2 #unassigned
 
 
     # setup GPIO
@@ -34,9 +35,9 @@ class mainprogram:
 
 
     #DEFINE EMERGENCY STOP and hard wired buttons
-    emergstop = 11
-    misc_eventbuttonA = 10
-    misc_eventbuttonB = 26
+    emergstop = 10
+    misc_eventbuttonA = 26
+    misc_eventbuttonB = 11
 
     #DEFINE SHIFT REGISTER PINS
     latchpin = 18

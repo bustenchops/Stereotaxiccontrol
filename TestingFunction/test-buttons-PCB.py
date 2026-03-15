@@ -14,22 +14,22 @@ class mainprogram:
     lastbuttonstate = [0 for x in range(len(buttonarray))]
 
     # BUTTON POSITION IN SHIFT REGISTER ARRAY
-    movefast = 1
-    bregmahome = 2
-    relativeML = 3
-    relativeAP = 4
-    moveslow = 5
-    homeABSzero = 6
-    recalibrate = 7
-    miscbuttonA = 8
-    miscbuttonB = 9
-    fiberoff = 10
-    needleoff = 11
-    drilloff = 12
-    relativeDV = 13
-    relativeALL = 14
-    homeRELzero = 15
-    miscbuttonC = 0
+    movefast = 6
+    bregmahome = 14
+    relativeML = 11
+    relativeAP = 9
+    moveslow = 7
+    homeABSzero =
+    recalibrate = 10
+    miscbuttonA =  1# speciesselect
+    miscbuttonB =  3 # gotoworking preset
+    fiberoff = 4
+    needleoff = 15
+    drilloff = 5
+    relativeDV = 0
+    relativeALL = 13
+    homeRELzero = 12 #gotolambda
+    miscbuttonC = 2 #unassigned
 
 
     # setup GPIO
