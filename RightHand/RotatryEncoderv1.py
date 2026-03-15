@@ -57,6 +57,7 @@ class RotaryEncoder:
 
     def stateanddelay(self, rotdata):
         print(var_list.eventime)
+        print('first:', var_list.firstandonly)
         print('state and delay calculation')
         self.comparetimer = time.time() * 1000
         if var_list.lastdirection == rotdata:

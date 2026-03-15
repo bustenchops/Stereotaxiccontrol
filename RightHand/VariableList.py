@@ -158,6 +158,7 @@ class var_list:
     backwardrotdelay = 400
     lastdirection = 0 #3 = counterclock, 1 = clock
     thecount = 0
+    firstandonly = 0
 
 #DEFINE STEPPER DIRECTIONS
     APback = 0
