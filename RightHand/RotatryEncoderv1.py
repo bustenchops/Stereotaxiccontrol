@@ -71,8 +71,10 @@ class RotaryEncoder:
                 print('event delay fail.....time:', self.testtime)
                 return False
         elif var_list.lastdirection != rotdata:
+            print('test3')
             self.testtime = self.comparetimer - var_list.eventime
             if self.testtime >= var_list.backwardrotdelay:
+                print('test4')
                 var_list.eventime = self.comparetimer
                 print('delay:', self.testtime)
                 return True
