@@ -38,11 +38,6 @@ class buttonprogram:
     def buttonvalues(self, lastbut, newbut, butarr):
         x = len(lastbut)
         y = len(newbut)
-
-        #temp
-        for q in range(x):
-            print (butarr[q], ' in position ', q)
-
         if x != y:
             print("Button Array detected state change")
 
@@ -52,8 +47,6 @@ class buttonprogram:
                 print("button ", butarr[i], " state change", lastbut[i], ' to ', newbut[i])
 
                 if var_list.engagebutton == 1:
-                    #temp
-                    print('passed engage button if statement line 56')
                     # #full retract
                     # if lastbut[var_list.fullretractbut] == 1:
                     #     if var_list.safetybutton == 1:
@@ -64,10 +57,9 @@ class buttonprogram:
                     #
                     #
                     # #set relative zero for ALL
-                    # if lastbut[var_list.relativeALL] == 1:
-                    #     print('set relative positions for all axis')
-                    #     self.setrelforall()
-                    #         # and then update LCDS
+                    if lastbut[var_list.relativeALL] == 1:
+                        print('set relative positions for all axis')
+                        self.setrelforall()
                     #
                     #set only AP relative zero
                     if lastbut[var_list.relativeAP] == 1:
@@ -75,14 +67,14 @@ class buttonprogram:
                         self.setrelforAP()
                     #
                     # # set only ML relative zero
-                    # if lastbut[var_list.relativeML] == 1:
-                    #     print('set relative ML')
-                    #     self.setrelforML()
+                    if lastbut[var_list.relativeML] == 1:
+                        print('set relative ML')
+                        self.setrelforML()
                     #
                     # # set only DV relative zero
-                    # if lastbut[var_list.relativeDV] == 1:
-                    #     print('set relative DV')
-                    #     self.setrelforDV()
+                    if lastbut[var_list.relativeDV] == 1:
+                        print('set relative DV')
+                        self.setrelforDV()
                     #
                     # #gotolambda
                     # if lastbut[var_list.gotolambdabut] == 1:
