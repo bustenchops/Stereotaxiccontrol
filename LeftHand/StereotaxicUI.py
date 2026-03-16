@@ -763,7 +763,8 @@ class MainWindow(QMainWindow):
         print('steppers are a go')
         var_list.AUXmove = Steppercontrol(var_list.enableAll,var_list.stepAUX,var_list.directionAUX,var_list.limitAUX,3,var_list.AuxDown,var_list.AuxUP, window)
         print('steppers are a go')
-
+        var_list.eventime = time.time() * 1000
+        var_list.firstandonly = time.time() * 1000
 
 
 # concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)

@@ -1,6 +1,7 @@
 import time
 import RPi.GPIO as GPIO
 from rotary_classv2 import RotaryEncoder
+import VariableList as var_list
 
 class mainprogram:
     #Main while loop condition
@@ -183,7 +184,7 @@ class mainprogram:
         return
 
     def executerrrr(self):
-        # quest=input('TEST limitswitches - any key to cont')
+        quest=input('TEST limitswitches - any key to cont')
         print('starting limitswitch test')
         print('hit individually OR AP and ML simultaneously to move on')
         stateAP = GPIO.input(mainprogram.limitAP)
@@ -332,7 +333,8 @@ class mainprogram:
         self.DVroto = RotaryEncoder(mainprogram.rotoA_DV, mainprogram.rotoB_DV, mainprogram.misc_eventbuttonB,Letsgonow.DV_event)
         self.AUXroto = RotaryEncoder(mainprogram.rotoA_AUX, mainprogram.rotoB_AUX, mainprogram.misc_eventbuttonB,Letsgonow.AUX_event())
         print('done')
-
+        var_list.eventime = time.time() * 1000
+        var_list.firstandonly = time.time() * 1000
 
 Letsgonow = mainprogram()
 #  RotaryEncoder.receive_instance(Letsgonow)

@@ -154,8 +154,6 @@ class RotaryEncoder:
         # print('button pressed')
         # self.sendtoThreadedControl(self.event)
 
-        self.callback(self.event)
-        print('button')
         return
 
 
