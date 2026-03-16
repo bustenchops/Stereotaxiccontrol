@@ -45,7 +45,7 @@ class buttonprogram:
 
                 print("button ", butarr[i], " state change", lastbut[i], ' to ', newbut[i])
 
-                if var_list.engagebuttons == 1:
+                if var_list.engagebutton == 1:
                     #full retract
                     if lastbut[var_list.fullretract] == 1:
                         if var_list.safetybutton == 1:
