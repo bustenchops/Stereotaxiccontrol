@@ -68,9 +68,9 @@ class buttonprogram:
                         self.setrelforAP()
                     #
                     # # set only ML relative zero
-                    # if lastbut[var_list.relativeML] == 1:
-                    #     print('set relative ML')
-                    #     self.setrelforML()
+                    if lastbut[var_list.relativeML] == 1:
+                        print('set relative ML')
+                        self.setrelforML()
                     #
                     # # set only DV relative zero
                     # if lastbut[var_list.relativeDV] == 1:
