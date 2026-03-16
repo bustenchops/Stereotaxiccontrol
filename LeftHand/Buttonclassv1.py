@@ -46,11 +46,12 @@ class buttonprogram:
                 print("button ", butarr[i], " state change", lastbut[i], ' to ', newbut[i])
 
                 if var_list.engagebutton == 1:
+                    print('engagebutton equals 1')
                     #full retract
                     if lastbut[var_list.fullretractbut] == 1:
                         if var_list.safetybutton == 1:
                             print('retract all manipulators')
-                            self.fullretract()
+                            self.fullretractmove()
                             # var_list.safetybutton = 0
                             self.sendtoUI.uncheckstuff(4)
 
@@ -146,13 +147,13 @@ class buttonprogram:
                             if var_list.offtoggleold != var_list.TOGGLEoff:
                                 var_list.offtoggleold = var_list.TOGGLEoff
                                 if var_list.offtoggleold == 1:
-                                    var_list.drillmovetooffset()
+                                    self.drillmovetooffset()
                                     print('send to drill working')
                                 if var_list.offtoggleold == 2:
-                                    var_list.needlemovetooffset()
+                                    self.needlemovetooffset()
                                     print('send to needle working')
                                 if var_list.offtoggleold == 3:
-                                    var_list.fibermovetooffset()
+                                    self.fibermovetooffset()
                                     print('send to probe working')
 
                             else:
@@ -439,7 +440,7 @@ class buttonprogram:
             var_list.DVinitREL_holdvalue = var_list.DVsteps
         var_list.DVmove.PosRelAbsCalc()
 
-    def fullretract(self):
+    def fullretractmove(self):
         print('fullretraction')
         for x in range(var_list.DVsteps):
             var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
