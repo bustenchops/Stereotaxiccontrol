@@ -38,239 +38,242 @@ class buttonprogram:
     def buttonvalues(self, lastbut, newbut, butarr):
         x = len(lastbut)
         y = len(newbut)
+        print(butarr[i], ' in position ', i)
+
         if x != y:
             print("Button Array detected state change")
+
         for i in range(x):
             if lastbut[i] != newbut[i]:
-
                 print("button ", butarr[i], " state change", lastbut[i], ' to ', newbut[i])
 
                 if var_list.engagebutton == 1:
-                    #full retract
-                    if lastbut[var_list.fullretractbut] == 1:
-                        if var_list.safetybutton == 1:
-                            print('retract all manipulators')
-                            self.fullretractmove()
-                            # var_list.safetybutton = 0
-                            self.sendtoUI.uncheckstuff(4)
-
-
-                    #set relative zero for ALL
-                    if lastbut[var_list.relativeALL] == 1:
-                        print('set relative positions for all axis')
-                        self.setrelforall()
-                            # and then update LCDS
-
+                    print('buttons engage check passed')
+                #     #full retract
+                #     if lastbut[var_list.fullretractbut] == 1:
+                #         if var_list.safetybutton == 1:
+                #             print('retract all manipulators')
+                #             self.fullretractmove()
+                #             # var_list.safetybutton = 0
+                #             self.sendtoUI.uncheckstuff(4)
+                #
+                #
+                #     #set relative zero for ALL
+                #     if lastbut[var_list.relativeALL] == 1:
+                #         print('set relative positions for all axis')
+                #         self.setrelforall()
+                #             # and then update LCDS
+                #
                     #set only AP relative zero
                     if lastbut[var_list.relativeAP] == 1:
                         print('set relative AP')
                         self.setrelforAP()
-
-                    # set only ML relative zero
-                    if lastbut[var_list.relativeML] == 1:
-                        print('set relative ML')
-                        self.setrelforML()
-
-                    # set only DV relative zero
-                    if lastbut[var_list.relativeDV] == 1:
-                        print('set relative DV')
-                        self.setrelforDV()
-
-                    #gotolambda
-                    if lastbut[var_list.gotolambdabut] == 1:
-                        if var_list.safetybutton == 1:
-                            print('DV up AP and ML homed to rel')
-                            self.gotolambda()
-                            # var_list.safetybutton = 0
-                            self.sendtoUI.uncheckstuff(4)
-
-                    #offset select
-                    if lastbut[var_list.offposone] == 1 & lastbut[var_list.offpostwo] == 0:
-                        var_list.TOGGLEoff = 1
-                    if lastbut[var_list.offposone] == 0 & lastbut[var_list.offpostwo] == 0:
-                        var_list.TOGGLEoff = 2
-                    if lastbut[var_list.offposone] == 0 & lastbut[var_list.offpostwo] == 1:
-                        var_list.TOGGLEoff = 3
-
-                    #ratormouse select
-                    if lastbut[var_list.ratselect] == 1 & lastbut[var_list.mouseselect] == 0:
-                        var_list.ratormouseselect = 1
-                        self.ratormouse()
-                    if lastbut[var_list.offposone] == 0 & lastbut[var_list.offpostwo] == 0:
-                        var_list.ratormouseselect = 3
-                    if lastbut[var_list.ratselect] == 0 & lastbut[var_list.mouseselect] == 1:
-                        var_list.ratormouseselect = 2
-                        self.ratormouse()
-
-
-                    #home to bregma (relative) moves DV up by value in variable list, positions AP and ML to relative home
-                    if lastbut[var_list.bregmahome] == 1:
-                        if var_list.safetybutton == 1:
-                            print("Home to Bregma (DV up buy set value)")
-                            self.bregmahome()
-                            # var_list.safetybutton = 0
-                            self.sendtoUI.uncheckstuff(4)
-
-                    #rezero button
-                    if lastbut[var_list.rezero] == 1:
-                        if var_list.safetybutton == 1:
-                            print("Re-Zero the steppers")
-                            self.sendtoUI.recalibrateaxis()
-                            # var_list.safetybutton = 0
-                            self.sendtoUI.uncheckstuff(4)
-
-                    #home to ABS zero
-                    if lastbut[var_list.ABSzero] == 1:
-                        if var_list.safetybutton == 1:
-                            self.hometoABSzero()
-                            # var_list.safetybutton = 0
-                            self.sendtoUI.uncheckstuff(4)
-
-                    #home AP and ML, DV goes to ABS
-                    if lastbut[var_list.bregmahomeDVabs] == 1:
-                        if var_list.safetybutton == 1:
-                            self.upDVrelhomeAP_ML()
-                            # var_list.safetybutton = 0
-                            self.sendtoUI.uncheckstuff(4)
-
-                    #Hmome AP and ML to bregma and DV up 5.
-                    if lastbut[var_list.bregmahomeDVupfive] == 1:
-                        if var_list.safetybutton == 1:
-                            self.homeDVupfive()
-                            # var_list.safetybutton = 0
-                            self.sendtoUI.uncheckstuff(4)
-
-                    #go to preset
-                    if lastbut[var_list.gotopreset] == 1:
-                        if var_list.safetybutton == 1:
-                            if var_list.offtoggleold != var_list.TOGGLEoff:
-                                var_list.offtoggleold = var_list.TOGGLEoff
-                                if var_list.offtoggleold == 1:
-                                    self.drillmovetooffset()
-                                    print('send to drill working')
-                                if var_list.offtoggleold == 2:
-                                    self.needlemovetooffset()
-                                    print('send to needle working')
-                                if var_list.offtoggleold == 3:
-                                    self.fibermovetooffset()
-                                    print('send to probe working')
-
-                            else:
-                                self.sendtoworking()
-                            # var_list.safetybutton = 0
-                            self.sendtoUI.uncheckstuff(4)
-
-
-                    #selectup
-                    if lastbut[var_list.selectup] == 1:
-                        if var_list.list_toggle == 9999:
-                            var_list.list_toggle = var_list.countoflistwidget - 1
-                        elif var_list.list_toggle == 0:
-                            var_list.list_toggle = var_list.countoflistwidget - 1
-                        else:
-                            var_list.list_toggle -= 1
-                        self.sendtoUI.selecrowtoggle(var_list.list_toggle)
-
-                    #selectdown
-                    if lastbut[var_list.selectdown] == 1:
-                        if var_list.list_toggle == 9999:
-                            var_list.list_toggle = 0
-                        elif var_list.list_toggle == var_list.countoflistwidget - 1:
-                            var_list.list_toggle = 0
-                        else:
-                            var_list.list_toggle += 1
-                        self.sendtoUI.selecrowtoggle(var_list.list_toggle)
-
-                    #armbut
-                    if lastbut[var_list.armbut] == 1:
-                        self.sendtoUI.selectlistcoordinates()
-
-                    # makeitsobut
-                    if lastbut[var_list.makeitsobut] == 1:
-                        if var_list.safetybutton == 1:
-                            self.sendtoUI.checkstuff(1)
-                            self.sendtoUI.on_makeitso_changed()
-                            # var_list.safetybutton = 0
-                            self.sendtoUI.uncheckstuff(4)
-
-                    #DVinsert
-                    if lastbut[var_list.DVinsert] == 1:
-                        if var_list.safetybutton == 1:
-                            self.sendtoUI.checkstuff(2)
-                            # self.sendtoUI.on_DVinsert_changed()
-                            # var_list.safetybutton = 0
-                            self.sendtoUI.uncheckstuff(4)
-
-                    #withdrawl
-                    if lastbut[var_list.withdrawl] == 1:
-                        if var_list.safetybutton == 1:
-                            self.sendtoUI.checkstuff(3)
-                            #self.sendtoUI.on_DVinsert_changed()
-                            # var_list.safetybutton = 0
-                            self.sendtoUI.uncheckstuff(4)
-
-                    #engagebut
-                    if lastbut[var_list.engagebut] == 1:
-                        self.sendtoUI.engagemovement()
-
-                    #retractAP
-                    if lastbut[var_list.retractAP] == 1:
-                        if var_list.safetybutton == 1:
-                            self.sendtoUI.APretractmovent()
-                            self.sendtoUI.uncheckstuff(4)
-
-
-                    #returnAP
-                    if lastbut[var_list.returnAP] == 1:
-                        if var_list.safetybutton == 1:
-                            self.sendtoUI.APreturnmovement()
-                            self.sendtoUI.uncheckstuff(4)
-
-                    #retractDV
-                    if lastbut[var_list.retractDV] == 1:
-                        if var_list.safetybutton == 1:
-                            self.sendtoUI.DVreturnmovement()
-                            self.sendtoUI.uncheckstuff(4)
-
-                    #returnDV
-                    if lastbut[var_list.returnDV] == 1:
-                        if var_list.safetybutton == 1:
-                            self.sendtoUI.DVreturnmovement()
-                            self.sendtoUI.uncheckstuff(4)
-
-                    #functionone
-                    if lastbut[var_list.functionone] == 1:
-                        if var_list.safetybutton == 1:
-                            self.sendtoUI.functiononebutton()
-                            self.sendtoUI.uncheckstuff(4)
-
-                    #functiontwo
-                    if lastbut[var_list.functiontwo] == 1:
-                        if var_list.safetybutton == 1:
-                            self.sendtoUI.functiontwobutton()
-                            self.sendtoUI.uncheckstuff(4)
-
-                # Speed switch
-                if lastbut[var_list.movefast] == 0 and lastbut[var_list.moveslow] == 0:
-                    if var_list.stepper_speed != var_list.normalspeed:
-                        var_list.stepper_speed = var_list.normalspeed
-                        print('Speed set to: ', var_list.normalspeed)
-                        self.sendtoUI.currentspeed(var_list.stepper_speed)
-                        self.sendtoUI.setmedspeed()
-                elif lastbut[var_list.movefast] == 1 and lastbut[var_list.moveslow] == 0:
-                    if var_list.stepper_speed != var_list.fastspeed:
-                        var_list.stepper_speed = var_list.fastspeed
-                        print('Speed set to: ', var_list.fastspeed)
-                        self.sendtoUI.currentspeed(var_list.stepper_speed)
-                        self.sendtoUI.setcoarsespeed()
-                elif lastbut[var_list.movefast] == 0 and lastbut[var_list.moveslow] == 1:
-                    if var_list.stepper_speed != var_list.finespeed:
-                        var_list.stepper_speed = var_list.finespeed
-                        print('Speed set to: ', var_list.finespeed)
-                        self.sendtoUI.currentspeed(var_list.stepper_speed)
-                        self.sendtoUI.setfinespeed()
-                else:
-                    print('speedswitch not working right')
+                #
+                #     # set only ML relative zero
+                #     if lastbut[var_list.relativeML] == 1:
+                #         print('set relative ML')
+                #         self.setrelforML()
+                #
+                #     # set only DV relative zero
+                #     if lastbut[var_list.relativeDV] == 1:
+                #         print('set relative DV')
+                #         self.setrelforDV()
+                #
+                #     #gotolambda
+                #     if lastbut[var_list.gotolambdabut] == 1:
+                #         if var_list.safetybutton == 1:
+                #             print('DV up AP and ML homed to rel')
+                #             self.gotolambda()
+                #             # var_list.safetybutton = 0
+                #             self.sendtoUI.uncheckstuff(4)
+                #
+                #     #offset select
+                #     if lastbut[var_list.offposone] == 1 & lastbut[var_list.offpostwo] == 0:
+                #         var_list.TOGGLEoff = 1
+                #     if lastbut[var_list.offposone] == 0 & lastbut[var_list.offpostwo] == 0:
+                #         var_list.TOGGLEoff = 2
+                #     if lastbut[var_list.offposone] == 0 & lastbut[var_list.offpostwo] == 1:
+                #         var_list.TOGGLEoff = 3
+                #
+                #     #ratormouse select
+                #     if lastbut[var_list.ratselect] == 1 & lastbut[var_list.mouseselect] == 0:
+                #         var_list.ratormouseselect = 1
+                #         self.ratormouse()
+                #     if lastbut[var_list.offposone] == 0 & lastbut[var_list.offpostwo] == 0:
+                #         var_list.ratormouseselect = 3
+                #     if lastbut[var_list.ratselect] == 0 & lastbut[var_list.mouseselect] == 1:
+                #         var_list.ratormouseselect = 2
+                #         self.ratormouse()
+                #
+                #
+                #     #home to bregma (relative) moves DV up by value in variable list, positions AP and ML to relative home
+                #     if lastbut[var_list.bregmahome] == 1:
+                #         if var_list.safetybutton == 1:
+                #             print("Home to Bregma (DV up buy set value)")
+                #             self.bregmahome()
+                #             # var_list.safetybutton = 0
+                #             self.sendtoUI.uncheckstuff(4)
+                #
+                #     #rezero button
+                #     if lastbut[var_list.rezero] == 1:
+                #         if var_list.safetybutton == 1:
+                #             print("Re-Zero the steppers")
+                #             self.sendtoUI.recalibrateaxis()
+                #             # var_list.safetybutton = 0
+                #             self.sendtoUI.uncheckstuff(4)
+                #
+                #     #home to ABS zero
+                #     if lastbut[var_list.ABSzero] == 1:
+                #         if var_list.safetybutton == 1:
+                #             self.hometoABSzero()
+                #             # var_list.safetybutton = 0
+                #             self.sendtoUI.uncheckstuff(4)
+                #
+                #     #home AP and ML, DV goes to ABS
+                #     if lastbut[var_list.bregmahomeDVabs] == 1:
+                #         if var_list.safetybutton == 1:
+                #             self.upDVrelhomeAP_ML()
+                #             # var_list.safetybutton = 0
+                #             self.sendtoUI.uncheckstuff(4)
+                #
+                #     #Hmome AP and ML to bregma and DV up 5.
+                #     if lastbut[var_list.bregmahomeDVupfive] == 1:
+                #         if var_list.safetybutton == 1:
+                #             self.homeDVupfive()
+                #             # var_list.safetybutton = 0
+                #             self.sendtoUI.uncheckstuff(4)
+                #
+                #     #go to preset
+                #     if lastbut[var_list.gotopreset] == 1:
+                #         if var_list.safetybutton == 1:
+                #             if var_list.offtoggleold != var_list.TOGGLEoff:
+                #                 var_list.offtoggleold = var_list.TOGGLEoff
+                #                 if var_list.offtoggleold == 1:
+                #                     self.drillmovetooffset()
+                #                     print('send to drill working')
+                #                 if var_list.offtoggleold == 2:
+                #                     self.needlemovetooffset()
+                #                     print('send to needle working')
+                #                 if var_list.offtoggleold == 3:
+                #                     self.fibermovetooffset()
+                #                     print('send to probe working')
+                #
+                #             else:
+                #                 self.sendtoworking()
+                #             # var_list.safetybutton = 0
+                #             self.sendtoUI.uncheckstuff(4)
+                #
+                #
+                #     #selectup
+                #     if lastbut[var_list.selectup] == 1:
+                #         if var_list.list_toggle == 9999:
+                #             var_list.list_toggle = var_list.countoflistwidget - 1
+                #         elif var_list.list_toggle == 0:
+                #             var_list.list_toggle = var_list.countoflistwidget - 1
+                #         else:
+                #             var_list.list_toggle -= 1
+                #         self.sendtoUI.selecrowtoggle(var_list.list_toggle)
+                #
+                #     #selectdown
+                #     if lastbut[var_list.selectdown] == 1:
+                #         if var_list.list_toggle == 9999:
+                #             var_list.list_toggle = 0
+                #         elif var_list.list_toggle == var_list.countoflistwidget - 1:
+                #             var_list.list_toggle = 0
+                #         else:
+                #             var_list.list_toggle += 1
+                #         self.sendtoUI.selecrowtoggle(var_list.list_toggle)
+                #
+                #     #armbut
+                #     if lastbut[var_list.armbut] == 1:
+                #         self.sendtoUI.selectlistcoordinates()
+                #
+                #     # makeitsobut
+                #     if lastbut[var_list.makeitsobut] == 1:
+                #         if var_list.safetybutton == 1:
+                #             self.sendtoUI.checkstuff(1)
+                #             self.sendtoUI.on_makeitso_changed()
+                #             # var_list.safetybutton = 0
+                #             self.sendtoUI.uncheckstuff(4)
+                #
+                #     #DVinsert
+                #     if lastbut[var_list.DVinsert] == 1:
+                #         if var_list.safetybutton == 1:
+                #             self.sendtoUI.checkstuff(2)
+                #             # self.sendtoUI.on_DVinsert_changed()
+                #             # var_list.safetybutton = 0
+                #             self.sendtoUI.uncheckstuff(4)
+                #
+                #     #withdrawl
+                #     if lastbut[var_list.withdrawl] == 1:
+                #         if var_list.safetybutton == 1:
+                #             self.sendtoUI.checkstuff(3)
+                #             #self.sendtoUI.on_DVinsert_changed()
+                #             # var_list.safetybutton = 0
+                #             self.sendtoUI.uncheckstuff(4)
+                #
+                #     #engagebut
+                #     if lastbut[var_list.engagebut] == 1:
+                #         self.sendtoUI.engagemovement()
+                #
+                #     #retractAP
+                #     if lastbut[var_list.retractAP] == 1:
+                #         if var_list.safetybutton == 1:
+                #             self.sendtoUI.APretractmovent()
+                #             self.sendtoUI.uncheckstuff(4)
+                #
+                #
+                #     #returnAP
+                #     if lastbut[var_list.returnAP] == 1:
+                #         if var_list.safetybutton == 1:
+                #             self.sendtoUI.APreturnmovement()
+                #             self.sendtoUI.uncheckstuff(4)
+                #
+                #     #retractDV
+                #     if lastbut[var_list.retractDV] == 1:
+                #         if var_list.safetybutton == 1:
+                #             self.sendtoUI.DVreturnmovement()
+                #             self.sendtoUI.uncheckstuff(4)
+                #
+                #     #returnDV
+                #     if lastbut[var_list.returnDV] == 1:
+                #         if var_list.safetybutton == 1:
+                #             self.sendtoUI.DVreturnmovement()
+                #             self.sendtoUI.uncheckstuff(4)
+                #
+                #     #functionone
+                #     if lastbut[var_list.functionone] == 1:
+                #         if var_list.safetybutton == 1:
+                #             self.sendtoUI.functiononebutton()
+                #             self.sendtoUI.uncheckstuff(4)
+                #
+                #     #functiontwo
+                #     if lastbut[var_list.functiontwo] == 1:
+                #         if var_list.safetybutton == 1:
+                #             self.sendtoUI.functiontwobutton()
+                #             self.sendtoUI.uncheckstuff(4)
+                #
+                # # Speed switch
+                # if lastbut[var_list.movefast] == 0 and lastbut[var_list.moveslow] == 0:
+                #     if var_list.stepper_speed != var_list.normalspeed:
+                #         var_list.stepper_speed = var_list.normalspeed
+                #         print('Speed set to: ', var_list.normalspeed)
+                #         self.sendtoUI.currentspeed(var_list.stepper_speed)
+                #         self.sendtoUI.setmedspeed()
+                # elif lastbut[var_list.movefast] == 1 and lastbut[var_list.moveslow] == 0:
+                #     if var_list.stepper_speed != var_list.fastspeed:
+                #         var_list.stepper_speed = var_list.fastspeed
+                #         print('Speed set to: ', var_list.fastspeed)
+                #         self.sendtoUI.currentspeed(var_list.stepper_speed)
+                #         self.sendtoUI.setcoarsespeed()
+                # elif lastbut[var_list.movefast] == 0 and lastbut[var_list.moveslow] == 1:
+                #     if var_list.stepper_speed != var_list.finespeed:
+                #         var_list.stepper_speed = var_list.finespeed
+                #         print('Speed set to: ', var_list.finespeed)
+                #         self.sendtoUI.currentspeed(var_list.stepper_speed)
+                #         self.sendtoUI.setfinespeed()
+                # else:
+                #     print('speedswitch not working right')
 
                 lastbut[i] = newbut[i]
 
