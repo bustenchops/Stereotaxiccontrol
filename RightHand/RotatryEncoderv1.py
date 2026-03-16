@@ -110,6 +110,7 @@ class RotaryEncoder:
                     self.event = self.direction
                     print(self.direction, "  CLOCKWISE   ", self.CLOCKWISE)
                 else:
+                    self.direction = self.CLOCKWISE
                     print(self.direction, "  change to CLOCKWISE   ", self.CLOCKWISE)
                 var_list.lastdirection = delta
 
