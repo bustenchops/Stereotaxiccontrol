@@ -58,7 +58,7 @@ class var_list:
     relativeML = 20
     relativeDV = 31
     relativeALL = 25
-    fullretract = 2
+    fullretractbut = 2
 
     bregmahome = 14
     bregmahomeDVabs = 5

@@ -47,7 +47,7 @@ class buttonprogram:
 
                 if var_list.engagebutton == 1:
                     #full retract
-                    if lastbut[var_list.fullretract] == 1:
+                    if lastbut[var_list.fullretractbut] == 1:
                         if var_list.safetybutton == 1:
                             print('retract all manipulators')
                             self.fullretract()
