@@ -154,7 +154,7 @@ class var_list:
 
 #ENCODER CALC VARIABLES
     eventime = 0
-    eventdelay = 175
+    eventdelay = 150
     backwardrotdelay = 400
     lastdirection = 0 #3 = counterclock, 1 = clock
     thecount = 0
