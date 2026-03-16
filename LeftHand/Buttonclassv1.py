@@ -944,6 +944,5 @@ class buttonprogram:
         print('Button thread started')
         while var_list.keepalive:
         #reading the buttons
-            print('button check line 947')
             newbuttonstate = self.getshiftregisterdata()
             var_list.lastbuttonstate = self.buttonvalues(var_list.lastbuttonstate, newbuttonstate, var_list.buttonarray)
