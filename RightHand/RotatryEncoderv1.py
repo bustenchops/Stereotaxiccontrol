@@ -59,28 +59,28 @@ class RotaryEncoder:
         print('state and delay calculation')
         self.comparetimer = time.time() * 1000
         if var_list.lastdirection == rotdata:
-            print('first:', var_list.firstandonly)
-            print('varlist time:',var_list.eventime)
-            print('newest time:', self.comparetimer)
+            # print('first:', var_list.firstandonly)
+            # print('varlist time:',var_list.eventime)
+            # print('newest time:', self.comparetimer)
             self.testtime = self.comparetimer - var_list.eventime
             if self.testtime >= var_list.eventdelay:
-                print('test2')
+                # print('test2')
                 var_list.eventime = self.comparetimer
-                print('delay:', self.testtime)
+                # print('delay:', self.testtime)
                 return True
             else:
-                print('event delay fail.....time:', self.testtime)
+                # print('event delay fail.....time:', self.testtime)
                 return False
         elif var_list.lastdirection != rotdata:
-            print('test3')
+            # print('test3')
             self.testtime = self.comparetimer - var_list.eventime
             if self.testtime >= var_list.backwardrotdelay:
-                print('test4')
+                # print('test4')
                 var_list.eventime = self.comparetimer
-                print('delay:', self.testtime)
+                # print('delay:', self.testtime)
                 return True
             else:
-                print('event changerotation delay fail.....time:', self.testtime)
+                # print('event changerotation delay fail.....time:', self.testtime)
                 return False
 
 

@@ -148,6 +148,18 @@ class var_list:
     rotoA_DV = 20
     rotoB_DV = 21
 
+
+rotoA_AUX = 14
+rotoB_AUX = 15
+
+#ENCODER CALC VARIABLES
+    eventime = 0
+    eventdelay = 200
+    backwardrotdelay = 400
+    lastdirection = 0 #3 = counterclock, 1 = clock
+    thecount = 0
+    firstandonly = 0
+
 #DEFINE STEPPER DIRECTIONS
     APback = 1
     APforward = 0

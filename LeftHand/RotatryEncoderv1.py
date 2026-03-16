@@ -13,6 +13,7 @@
 import RPi.GPIO as GPIO
 
 import time
+from VariableList import var_list
 
 
 class RotaryEncoder:
@@ -43,8 +44,8 @@ class RotaryEncoder:
         # The following lines enable the internal pull-up resistors
         # on version 2 (latest) boards
         GPIO.setwarnings(False)
-        GPIO.setup(self.pinA, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-        GPIO.setup(self.pinB, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        GPIO.setup(self.pinA, GPIO.IN) # pull_up_down=GPIO.PUD_DOWN)
+        GPIO.setup(self.pinB, GPIO.IN) # pull_up_down=GPIO.PUD_DOWN)
         GPIO.setup(self.button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
         # Add event detection to the GPIO inputs
@@ -54,9 +55,37 @@ class RotaryEncoder:
 
         return
 
+    def stateanddelay(self, rotdata):
+        print('state and delay calculation')
+        self.comparetimer = time.time() * 1000
+        if var_list.lastdirection == rotdata:
+            # print('first:', var_list.firstandonly)
+            # print('varlist time:',var_list.eventime)
+            # print('newest time:', self.comparetimer)
+            self.testtime = self.comparetimer - var_list.eventime
+            if self.testtime >= var_list.eventdelay:
+                # print('test2')
+                var_list.eventime = self.comparetimer
+                # print('delay:', self.testtime)
+                return True
+            else:
+                # print('event delay fail.....time:', self.testtime)
+                return False
+        elif var_list.lastdirection != rotdata:
+            # print('test3')
+            self.testtime = self.comparetimer - var_list.eventime
+            if self.testtime >= var_list.backwardrotdelay:
+                # print('test4')
+                var_list.eventime = self.comparetimer
+                # print('delay:', self.testtime)
+                return True
+            else:
+                # print('event changerotation delay fail.....time:', self.testtime)
+                return False
+
+
     # Call back routine called by switch events
     def switch_event(self, switch):
-        self.eventtime = time.time() * 1000
         # print(f"event detected on {switch}")
 
         if GPIO.input(self.pinA):
@@ -76,40 +105,33 @@ class RotaryEncoder:
         self.event = 0
 
         if delta == 1:
-
-            if self.direction == self.CLOCKWISE:
-                self.event = self.direction
-                self.deltaonetime = time.time() * 1000
-                if (self.deltaonetime - self.eventtime) < 200:
-                    self.Ccount += 1
-                    print(self.Ccount)
+            if self.stateanddelay(delta):
+                if self.direction == self.CLOCKWISE:
+                    self.event = self.direction
+                    print(self.direction, "  CLOCKWISE   ", self.CLOCKWISE)
                 else:
-                    self.Ccount = 0
-            else:
-                self.direction = self.CLOCKWISE
-                self.Ccount = 0
-            # print(self.direction, "  CLOCKWISE   ", self.CLOCKWISE)
-        elif delta == 3:
+                    self.direction = self.CLOCKWISE
+                    print(self.direction, "  change to CLOCKWISE   ", self.CLOCKWISE)
+                var_list.lastdirection = delta
 
-            if self.direction == self.ANTICLOCKWISE:
-                self.event = self.direction
-                self.deltathreetime = time.time() * 1000
-                if (self.deltathreetime - self.eventtime) < 200:
-                    self.CCcount += 1
-                    print(self.CCcount)
-            else:
-                self.direction = self.ANTICLOCKWISE
-                self.CCcount = 0
+        elif delta == 3:
+            if self.stateanddelay(delta):
+                if self.direction == self.ANTICLOCKWISE:
+                    self.event = self.direction
+                    print(self.direction, "  ANTICLOCKWISE   ", self.ANTICLOCKWISE)
+                else:
+                    self.direction = self.ANTICLOCKWISE
+                    print(self.direction, "  changed to ANTICLOCKWISE   ", self.ANTICLOCKWISE)
+                var_list.lastdirection = delta
+
             # print(self.direction, "  ANTICLOCKWISE   ", self.ANTICLOCKWISE)
-        # print("detected", event, )
+
         if self.event > 0:
-            if self.event == 1 and self.Ccount >= 3:
+            if self.event == 1:
                 print('ACTION clockwise')
-                self.Ccount = 0
                 self.sendtoThreadedControl(self.event)
-            if self.event == 2 and self.CCcount >= 3:
+            if self.event == 2:
                 print('ACTION counterclockwise')
-                self.CCcount = 0
                 self.sendtoThreadedControl(self.event)
 
         #    self.callback(event)

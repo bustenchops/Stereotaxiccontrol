@@ -15,9 +15,6 @@ class threadedcontrols:
     def __init__(self, UIinstance):
         self.sendtoUI = UIinstance
 
-        self.countpush = 0
-        self.lasttime = 0
-
 #Import the offset values from file
         self.offsetimport = []
         self.importfile_name = var_list.offsetfilename
@@ -43,22 +40,12 @@ class threadedcontrols:
 
 # Shuts down steppers regardless of what they were doing direction - restart by re-zeroing
     def emergencystop(self):
-        # doubleclicktime = 0.6                       #remove later
-        # now = time.time()                           #remove later
-        # if now - self.lasttime > doubleclicktime:   #remove later
-        #     self.countpush += 1                     #remove later
-        # else:                                       #remove later
-        #     self.countpush = 1                      #remove later
-        #     self.lasttime = now                     #remove later
-        #
-        # if self.countpush == 3:                     #remove later
-            GPIO.output(var_list.enableAll, 1)
-            var_list.lastenablestate = 1
-            var_list.emergencystopflag = 1
-            print("!EMERGENCY STOP!")
-            print("Re-zero axis to enable movement again")
-            # self.countpush = 0                      #remove later
-            return
+        GPIO.output(var_list.enableAll, 1)
+        var_list.lastenablestate = 1
+        var_list.emergencystopflag = 1
+        print("!EMERGENCY STOP!")
+        print("Re-zero axis to enable movement again")
+        return
 
 # Event handling for the encoders and hard wired buttons each encoder
     def AP_event(self, event):
