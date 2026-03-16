@@ -62,6 +62,8 @@ class RotaryEncoder:
         self.comparetimer = time.time() * 1000
         if var_list.lastdirection == rotdata:
             print('test1')
+            print('varlist time:',var_list.eventime)
+            print('newest time:', self.comparetimer)
             self.testtime = self.comparetimer - var_list.eventime
             if self.testtime >= var_list.eventdelay:
                 print('test2')
