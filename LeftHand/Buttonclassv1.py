@@ -10,6 +10,7 @@ class buttonprogram:
         GPIO.setup(var_list.latchpin, GPIO.OUT)
         GPIO.setup(var_list.clockpin, GPIO.OUT)
         GPIO.setup(var_list.datapin, GPIO.IN)
+        print('Button Class Initialized')
 
 
 #Get the shift register data
@@ -943,5 +944,6 @@ class buttonprogram:
         print('Button thread started')
         while var_list.keepalive:
         #reading the buttons
+            print('button check line 947')
             newbuttonstate = self.getshiftregisterdata()
             var_list.lastbuttonstate = self.buttonvalues(var_list.lastbuttonstate, newbuttonstate, var_list.buttonarray)
