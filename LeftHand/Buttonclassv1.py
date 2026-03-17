@@ -266,19 +266,22 @@ class buttonprogram:
                     else:
                         print('speedswitch not working right')
 
-                    # #ratormouse select
+                    # ratormouse select
                     if lastbut[var_list.ratselect] == 0 & lastbut[var_list.mouseselect] == 0:
                         print('ratmouse=0', lastbut[var_list.ratselect], ' and ratmouse2=0',lastbut[var_list.mouseselect])
-                        var_list.ratormouseselect = 3
-                        self.ratormouse()
+                        if var_list.ratormouseselect != 3:
+                            var_list.ratormouseselect = 3
+                            self.ratormouse()
                     elif lastbut[var_list.ratselect] == 1 & lastbut[var_list.mouseselect] == 0:
                         print('ratmouse=1', lastbut[var_list.ratselect], ' and ratmouse2=0',lastbut[var_list.mouseselect])
-                        var_list.ratormouseselect = 1
-                        self.ratormouse()
+                        if var_list.ratormouseselect != 1:
+                            var_list.ratormouseselect = 1
+                            self.ratormouse()
                     elif lastbut[var_list.ratselect] == 0 & lastbut[var_list.mouseselect] == 1:
                         print('ratmouse=0', lastbut[var_list.ratselect], ' and ratmouse2=1',lastbut[var_list.mouseselect])
-                        var_list.ratormouseselect = 2
-                        self.ratormouse()
+                        if var_list.ratormouseselect != 2:
+                            var_list.ratormouseselect = 2
+                            self.ratormouse()
                     else:
                         print('species select not working right')
 
