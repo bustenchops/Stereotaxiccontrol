@@ -46,6 +46,8 @@ class buttonprogram:
 
                 print("button ", butarr[i], " state change", lastbut[i], ' to ', newbut[i])
 
+                lastbut[i] = newbut[i]
+
                 if var_list.engagebutton == 1:
                     # #full retract
                     # if lastbut[var_list.fullretractbut] == 1:
@@ -250,6 +252,8 @@ class buttonprogram:
                     #         self.sendtoUI.functiontwobutton()
                     #         self.sendtoUI.uncheckstuff(4)
                     #
+
+                    lastbut[i] = newbut[i]
                     # # Speed switch
                     if lastbut[var_list.movefast] == 0 and lastbut[var_list.moveslow] == 0:
                         print('movefast=', lastbut[var_list.movefast], ' and moveslow=',lastbut[var_list.moveslow])
@@ -275,7 +279,7 @@ class buttonprogram:
                     else:
                         print('speedswitch not working right')
 
-                lastbut[i] = newbut[i]
+
 
         return lastbut
 
