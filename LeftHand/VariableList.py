@@ -42,8 +42,8 @@ class var_list:
                     'selectdown', 'selectup', 'retractAP', 'returnAP', 'bregmahome',
                    'gotolambdabut', 'ratselect', 'mouseselect', 'functionone', 'armbut',
                    'relativeML', 'retractDV', 'returnDV', 'functiontwo', 'relativeAP',
-                   'relativeALLset', 'offpostwo', 'offposone' 'movefast', 'moveslow',
-                   'relativeDV', 'unassigned']
+                   'relativeALLset', 'offpostwo', 'offposone', 'unassigned', 'movefast', 'moveslow',
+                   'relativeDV']
 
     lastbuttonstate = [0 for x in range(len(buttonarray))]
 
