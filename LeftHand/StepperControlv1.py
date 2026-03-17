@@ -37,9 +37,10 @@ class Steppercontrol:
             #print('stop flag cleared and zero limit cleared')
             if var_list.lastenablestate == 1:
                 GPIO.output(self.enable, 0)
+                var_list.lastenablestate = 0
 
             for x in range (speed):
-
+                var_list.steppercooltimeouttime = time.time()
                 if not GPIO.input(self.limit):
                     GPIO.output(self.direction,move_direction)
                     GPIO.output(self.step, 1)
@@ -109,10 +110,12 @@ class Steppercontrol:
     def backoffafterzero(self, backoff, speed, btwnsteps):
         if var_list.lastenablestate == 1:
             GPIO.output(self.enable, 0)
+            var_list.lastenablestate = 0
 
         if self.axis == 1:
             print('backoff AP:',backoff,' steps')
             for x in range(backoff):
+                var_list.steppercooltimeouttime = time.time()
                 GPIO.output(self.direction, var_list.APback)
                 GPIO.output(self.step, 1)
                 time.sleep(btwnsteps)
@@ -121,6 +124,7 @@ class Steppercontrol:
         elif self.axis == 2:
             print('backoff ML',backoff,' steps')
             for x in range(backoff):
+                var_list.steppercooltimeouttime = time.time()
                 GPIO.output(self.direction, var_list.MLleft)
                 GPIO.output(self.step, 1)
                 time.sleep(btwnsteps)
@@ -129,45 +133,64 @@ class Steppercontrol:
         elif self.axis == 3:
             print('backoff DV',backoff,' steps')
             for x in range(backoff):
+                var_list.steppercooltimeouttime = time.time()
                 GPIO.output(self.direction, var_list.DVdown)
                 GPIO.output(self.step, 1)
                 time.sleep(btwnsteps)
                 GPIO.output(self.step, 0)
                 time.sleep(btwnsteps)
 
+        GPIO.output(self.enable, 1)
+        var_list.lastenablestate = 1
+
 #at calibration further advances the steps so there is a bit of working room
     def APadvanceafterbackoff(self, speed, btwnsteps):
         if var_list.lastenablestate == 1:
             GPIO.output(self.enable, 0)
+            var_list.lastenablestate = 0
 
         for x in range(var_list.APadvance):
+            var_list.steppercooltimeouttime = time.time()
             GPIO.output(self.direction, var_list.APback)
             GPIO.output(self.step, 1)
             time.sleep(btwnsteps)
             GPIO.output(self.step, 0)
             time.sleep(btwnsteps)
 
+        GPIO.output(self.enable, 1)
+        var_list.lastenablestate = 1
+
     def DVadvanceafterbackoff(self, speed, btwnsteps):
         if var_list.lastenablestate == 1:
             GPIO.output(self.enable, 0)
+            var_list.lastenablestate = 0
 
         for x in range(var_list.DVadvance):
+            var_list.steppercooltimeouttime = time.time()
             GPIO.output(self.direction, var_list.DVdown)
             GPIO.output(self.step, 1)
             time.sleep(btwnsteps)
             GPIO.output(self.step, 0)
             time.sleep(btwnsteps)
 
+        GPIO.output(self.enable, 1)
+        var_list.lastenablestate = 1
+
     def MLadvanceafterbackoff(self, speed, btwnsteps):
         if var_list.lastenablestate == 1:
             GPIO.output(self.enable, 0)
+            var_list.lastenablestate = 0
 
         for x in range(var_list.MLadvance):
+            var_list.steppercooltimeouttime = time.time()
             GPIO.output(self.direction, var_list.MLleft)
             GPIO.output(self.step, 1)
             time.sleep(btwnsteps)
             GPIO.output(self.step, 0)
             time.sleep(btwnsteps)
+
+        GPIO.output(self.enable, 1)
+        var_list.lastenablestate = 1
 
 
     def PosRelAbsCalc(self):

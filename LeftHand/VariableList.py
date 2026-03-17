@@ -236,10 +236,13 @@ class var_list:
 
 # For timerthread safety timeouts
     timeoutlength = 3
+    steppertimeoutlength = 10
 
     DVinserttimeouttime = None
     Safetytimeouttime = None
     Withdrawltimeouttime = None
     Makeitsobuttimeouttime = None
+    steppercooltimeouttime = None
+
 
 # concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)
