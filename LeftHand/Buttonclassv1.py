@@ -242,7 +242,8 @@ class buttonprogram:
                     #
 
                     lastbut[i] = newbut[i]
-                    # # Speed switch
+
+                    # Speed switch
                     if lastbut[var_list.movefast] == 0 and lastbut[var_list.moveslow] == 0:
                         #print('movefast=', lastbut[var_list.movefast], ' and moveslow=',lastbut[var_list.moveslow])
                         if var_list.stepper_speed != var_list.normalspeed:
@@ -269,15 +270,15 @@ class buttonprogram:
 
                     # #ratormouse select
                     if lastbut[var_list.ratselect] == 1 & lastbut[var_list.mouseselect] == 0:
-                        print('ratmouse=', lastbut[var_list.movefast], ' and ratmouse2=',lastbut[var_list.moveslow])
+                        print('ratmouse=', lastbut[var_list.ratselect], ' and ratmouse2=',lastbut[var_list.mouseselect])
                         var_list.ratormouseselect = 1
                         self.ratormouse()
                     if lastbut[var_list.offposone] == 0 & lastbut[var_list.offpostwo] == 0:
-                        print('ratmouse=', lastbut[var_list.movefast], ' and ratmouse2=',lastbut[var_list.moveslow])
+                        print('ratmouse=', lastbut[var_list.ratselect], ' and ratmouse2=',lastbut[var_list.mouseselect])
                         var_list.ratormouseselect = 3
                         self.ratormouse()
                     if lastbut[var_list.ratselect] == 0 & lastbut[var_list.mouseselect] == 1:
-                        print('ratmouse=', lastbut[var_list.movefast], ' and ratmouse2=',lastbut[var_list.moveslow])
+                        print('ratmouse=', lastbut[var_list.ratselect], ' and ratmouse2=',lastbut[var_list.mouseselect])
                         var_list.ratormouseselect = 2
                         self.ratormouse()
 
@@ -288,10 +289,13 @@ class buttonprogram:
 #Button executes
     def ratormouse(self):
         if var_list.ratormouseselect == 1:
+            print('mouse selected')
             self.sendtoUI.mouseselected()
         elif var_list.ratormouseselect == 2:
+            print('rat selected')
             self.sendtoUI.ratselected()
         elif var_list.ratormouseselect == 3:
+            print('nul selected')
             self.sendtoUI.noneselected()
 
 

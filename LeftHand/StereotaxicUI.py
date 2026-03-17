@@ -714,6 +714,10 @@ class MainWindow(QMainWindow):
     def mouseselected(self):
         self.mouseradio.toggle()
 
+    @Slot()
+    def noneselected(self):
+        self.nullradio.toggle()
+
 #controls the toggles for the drill, needle and probe
     @Slot()
     def setfinespeed(self):
