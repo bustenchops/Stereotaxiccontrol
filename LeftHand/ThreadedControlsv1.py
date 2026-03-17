@@ -79,11 +79,11 @@ class threadedcontrols:
             # print("hardwired event button A clicked")
             print('safety disengaged')
             if var_list.withdrawinsertstop == 1:
+                print('withdraw stop')
                 var_list.withdrawinsertstop = 0
-                return
             if var_list.dvinsertstop == 1:
+                print('insert stop')
                 var_list.dvinsertstop = 0
-                return
             else:
                 self.sendtoUI.checkstuff(4)
                 # var_list.safetybutton = 1
