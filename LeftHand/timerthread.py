@@ -16,7 +16,7 @@ class threadedtimer:
         self.Safetytimeout = None
         self.Makeitsotimeout = None
         self.timerlength = var_list.timeoutlength
-        self.steppertimerlength = var_list.steppertimeoutlength
+
         print("timer thread started")
 
     def runtimerthread(self):
@@ -24,7 +24,7 @@ class threadedtimer:
         self.Withdrawtimeout = var_list.Withdrawltimeouttime
         self.Safetytimeout = var_list.Safetytimeouttime
         self.Makeitsotimeout = var_list.Makeitsobuttimeouttime
-        self.steppercool = var_list.steppercooltimeouttime
+
         counter = 0
         while True:
             # check to see if the box is checked first then run the checks
@@ -76,6 +76,8 @@ class threadedtimer:
                     print('Makeitso checkbox timed out')
                     var_list.Makeitsoindicator = 0
                     self.sendtoUI.uncheckstuff(1)
+
+
 
             counter += 1
 

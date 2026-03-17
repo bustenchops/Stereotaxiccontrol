@@ -40,7 +40,6 @@ class Steppercontrol:
                 var_list.lastenablestate = 0
 
             for x in range (speed):
-                var_list.steppercooltimeouttime = time.time()
                 if not GPIO.input(self.limit):
                     GPIO.output(self.direction,move_direction)
                     GPIO.output(self.step, 1)
@@ -115,7 +114,6 @@ class Steppercontrol:
         if self.axis == 1:
             print('backoff AP:',backoff,' steps')
             for x in range(backoff):
-                var_list.steppercooltimeouttime = time.time()
                 GPIO.output(self.direction, var_list.APback)
                 GPIO.output(self.step, 1)
                 time.sleep(btwnsteps)
@@ -124,7 +122,6 @@ class Steppercontrol:
         elif self.axis == 2:
             print('backoff ML',backoff,' steps')
             for x in range(backoff):
-                var_list.steppercooltimeouttime = time.time()
                 GPIO.output(self.direction, var_list.MLleft)
                 GPIO.output(self.step, 1)
                 time.sleep(btwnsteps)
@@ -133,7 +130,6 @@ class Steppercontrol:
         elif self.axis == 3:
             print('backoff DV',backoff,' steps')
             for x in range(backoff):
-                var_list.steppercooltimeouttime = time.time()
                 GPIO.output(self.direction, var_list.DVdown)
                 GPIO.output(self.step, 1)
                 time.sleep(btwnsteps)
@@ -150,7 +146,6 @@ class Steppercontrol:
             var_list.lastenablestate = 0
 
         for x in range(var_list.APadvance):
-            var_list.steppercooltimeouttime = time.time()
             GPIO.output(self.direction, var_list.APback)
             GPIO.output(self.step, 1)
             time.sleep(btwnsteps)
@@ -166,7 +161,6 @@ class Steppercontrol:
             var_list.lastenablestate = 0
 
         for x in range(var_list.DVadvance):
-            var_list.steppercooltimeouttime = time.time()
             GPIO.output(self.direction, var_list.DVdown)
             GPIO.output(self.step, 1)
             time.sleep(btwnsteps)
@@ -182,7 +176,6 @@ class Steppercontrol:
             var_list.lastenablestate = 0
 
         for x in range(var_list.MLadvance):
-            var_list.steppercooltimeouttime = time.time()
             GPIO.output(self.direction, var_list.MLleft)
             GPIO.output(self.step, 1)
             time.sleep(btwnsteps)

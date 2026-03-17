@@ -229,6 +229,7 @@ class var_list:
     Withdrawlindicator = 0
     Makeitsoindicator = 0
 
+
     ratormouseselect = 1  #1 is mouse 2 is rat (mouse default)
     ratlambda = 1208   # steps for 9mm at 0.0745 per step
     mouselambda = 550  # steps for 4.1mm at 0.0745 per step
@@ -236,11 +237,11 @@ class var_list:
 
 # For timerthread safety timeouts
     timeoutlength = 3
-    steppertimeoutlength = 10
+
 
     DVinserttimeouttime = None
     Safetytimeouttime = None
     Withdrawltimeouttime = None
     Makeitsobuttimeouttime = None
-    steppercooltimeouttime = None
+
 # concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)
