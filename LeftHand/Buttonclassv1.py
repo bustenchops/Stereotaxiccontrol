@@ -216,17 +216,16 @@ class buttonprogram:
                     #     self.sendtoUI.engagemovement()
                     #
                     # #retractAP
-                    # if lastbut[var_list.retractAP] == 1:
-                    #     if var_list.safetybutton == 1:
-                    #         self.sendtoUI.APretractmovent()
-                    #         self.sendtoUI.uncheckstuff(4)
-                    #
-                    #
+                    if lastbut[var_list.retractAP] == 1:
+                        if var_list.safetybutton == 1:
+                            self.sendtoUI.APretractmovent()
+                            self.sendtoUI.uncheckstuff(4)
+
                     # #returnAP
-                    # if lastbut[var_list.returnAP] == 1:
-                    #     if var_list.safetybutton == 1:
-                    #         self.sendtoUI.APreturnmovement()
-                    #         self.sendtoUI.uncheckstuff(4)
+                    if lastbut[var_list.returnAP] == 1:
+                        if var_list.safetybutton == 1:
+                            self.sendtoUI.APreturnmovement()
+                            self.sendtoUI.uncheckstuff(4)
                     #
                     # #retractDV
                     # if lastbut[var_list.retractDV] == 1:
