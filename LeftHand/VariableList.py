@@ -243,6 +243,4 @@ class var_list:
     Withdrawltimeouttime = None
     Makeitsobuttimeouttime = None
     steppercooltimeouttime = None
-
-
 # concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)
