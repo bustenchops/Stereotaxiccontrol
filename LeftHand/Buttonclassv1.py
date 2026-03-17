@@ -73,9 +73,9 @@ class buttonprogram:
                         self.setrelforML()
                     #
                     # # set only DV relative zero
-                    # if lastbut[var_list.relativeDV] == 1:
-                    #     print('set relative DV')
-                    #     self.setrelforDV()
+                    if lastbut[var_list.relativeDV] == 1:
+                        print('set relative DV')
+                        self.setrelforDV()
                     #
                     # #gotolambda
                     # if lastbut[var_list.gotolambdabut] == 1:
