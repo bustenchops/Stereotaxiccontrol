@@ -205,16 +205,16 @@ class buttonprogram:
                     #     self.sendtoUI.engagemovement()
                     #
                     # #retractAP
-                    if lastbut[var_list.retractAP] == 1:
-                        if var_list.safetybutton == 1:
-                            self.sendtoUI.APretractmovent()
-                            self.sendtoUI.uncheckstuff(4)
-
+                    # if lastbut[var_list.retractAP] == 1:
+                    #     if var_list.safetybutton == 1:
+                    #         self.sendtoUI.APretractmovent()
+                    #         self.sendtoUI.uncheckstuff(4)
+                    #
                     # #returnAP
-                    if lastbut[var_list.returnAP] == 1:
-                        if var_list.safetybutton == 1:
-                            self.sendtoUI.APreturnmovement()
-                            self.sendtoUI.uncheckstuff(4)
+                    # if lastbut[var_list.returnAP] == 1:
+                    #     if var_list.safetybutton == 1:
+                    #         self.sendtoUI.APreturnmovement()
+                    #         self.sendtoUI.uncheckstuff(4)
                     #
                     # #retractDV
                     # if lastbut[var_list.retractDV] == 1:
@@ -240,8 +240,6 @@ class buttonprogram:
                     #         self.sendtoUI.functiontwobutton()
                     #         self.sendtoUI.uncheckstuff(4)
                     #
-
-                    lastbut[i] = newbut[i]
 
                     # Speed switch
                     if lastbut[var_list.movefast] == 0 and lastbut[var_list.moveslow] == 0:
@@ -269,18 +267,20 @@ class buttonprogram:
                         print('speedswitch not working right')
 
                     # #ratormouse select
-                    if lastbut[var_list.ratselect] == 1 & lastbut[var_list.mouseselect] == 0:
-                        print('ratmouse=', lastbut[var_list.ratselect], ' and ratmouse2=',lastbut[var_list.mouseselect])
-                        var_list.ratormouseselect = 1
-                        self.ratormouse()
-                    if lastbut[var_list.offposone] == 0 & lastbut[var_list.offpostwo] == 0:
-                        print('ratmouse=', lastbut[var_list.ratselect], ' and ratmouse2=',lastbut[var_list.mouseselect])
+                    if lastbut[var_list.ratselect] == 0 & lastbut[var_list.mouseselect] == 0:
+                        print('ratmouse=0', lastbut[var_list.ratselect], ' and ratmouse2=0',lastbut[var_list.mouseselect])
                         var_list.ratormouseselect = 3
                         self.ratormouse()
-                    if lastbut[var_list.ratselect] == 0 & lastbut[var_list.mouseselect] == 1:
-                        print('ratmouse=', lastbut[var_list.ratselect], ' and ratmouse2=',lastbut[var_list.mouseselect])
+                    elif lastbut[var_list.ratselect] == 1 & lastbut[var_list.mouseselect] == 0:
+                        print('ratmouse=1', lastbut[var_list.ratselect], ' and ratmouse2=0',lastbut[var_list.mouseselect])
+                        var_list.ratormouseselect = 1
+                        self.ratormouse()
+                    elif lastbut[var_list.ratselect] == 0 & lastbut[var_list.mouseselect] == 1:
+                        print('ratmouse=0', lastbut[var_list.ratselect], ' and ratmouse2=1',lastbut[var_list.mouseselect])
                         var_list.ratormouseselect = 2
                         self.ratormouse()
+                    else:
+                        print('species select not working right')
 
 
 
