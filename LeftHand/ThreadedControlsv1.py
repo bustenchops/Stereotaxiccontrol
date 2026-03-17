@@ -77,7 +77,7 @@ class threadedcontrols:
             var_list.MLmove.PosRelAbsCalc()
         elif event == RotaryEncoder.BUTTONDOWN:
             # print("Safety button clicked")
-            print('safety disengaged')
+            print('safety button press - safety disengaged')
             if var_list.withdrawinsertstop == 1:
                 print('withdraw stop')
                 var_list.withdrawinsertstop = 0
@@ -85,6 +85,7 @@ class threadedcontrols:
                 print('insert stop')
                 var_list.dvinsertstop = 0
             else:
+                print('send to UI checkstuff')
                 self.sendtoUI.checkstuff(4)
                 # var_list.safetybutton = 1
             return
