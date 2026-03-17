@@ -76,7 +76,7 @@ class threadedcontrols:
             var_list.MLmove.steppgo(var_list.MLleft, var_list.stepper_speed, var_list.btnSteps)
             var_list.MLmove.PosRelAbsCalc()
         elif event == RotaryEncoder.BUTTONDOWN:
-            # print("hardwired event button A clicked")
+            # print("Safety button clicked")
             print('safety disengaged')
             if var_list.withdrawinsertstop == 1:
                 print('withdraw stop')
