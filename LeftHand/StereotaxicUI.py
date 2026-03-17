@@ -390,7 +390,7 @@ class MainWindow(QMainWindow):
 
         self.speedgrouplabel = QLabel("Current Speed:", self)
         self.speedgrouplabel.setObjectName(u"speedgrouplabel")
-        self.speedgrouplabel.setGeometry(QRect(855, 35, 111, 16))
+        self.speedgrouplabel.setGeometry(QRect(855, 35, 120, 16))
         self.speedgrouplabel.setFont(radiobuttonfont)
 
         self.finespeedset = QRadioButton("Fine", self)
