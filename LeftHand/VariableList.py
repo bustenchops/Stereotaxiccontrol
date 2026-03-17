@@ -230,7 +230,7 @@ class var_list:
     Makeitsoindicator = 0
 
 
-    ratormouseselect = 1  #1 is mouse 2 is rat (mouse default)
+    ratormouseselect = 1  #1 is mouse 2 is rat 3 is null(mouse default)
     ratlambda = 1208   # steps for 9mm at 0.0745 per step
     mouselambda = 550  # steps for 4.1mm at 0.0745 per step
     rellambda = 0
