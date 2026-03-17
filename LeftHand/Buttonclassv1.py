@@ -93,19 +93,7 @@ class buttonprogram:
                     #     var_list.TOGGLEoff = 2
                     # if lastbut[var_list.offposone] == 0 & lastbut[var_list.offpostwo] == 1:
                     #     var_list.TOGGLEoff = 3
-                    #
-                    # #ratormouse select
-                    if lastbut[var_list.ratselect] == 1 & lastbut[var_list.mouseselect] == 0:
-                        var_list.ratormouseselect = 1
-                        self.ratormouse()
-                    if lastbut[var_list.offposone] == 0 & lastbut[var_list.offpostwo] == 0:
-                        var_list.ratormouseselect = 3
-                        self.ratormouse()
-                    if lastbut[var_list.ratselect] == 0 & lastbut[var_list.mouseselect] == 1:
-                        var_list.ratormouseselect = 2
-                        self.ratormouse()
-                    #
-                    #
+                    #                    #
                     # #home to bregma (relative) moves DV up by value in variable list, positions AP and ML to relative home
                     # if lastbut[var_list.bregmahome] == 1:
                     #     if var_list.safetybutton == 1:
@@ -256,21 +244,21 @@ class buttonprogram:
                     lastbut[i] = newbut[i]
                     # # Speed switch
                     if lastbut[var_list.movefast] == 0 and lastbut[var_list.moveslow] == 0:
-                        print('movefast=', lastbut[var_list.movefast], ' and moveslow=',lastbut[var_list.moveslow])
+                        #print('movefast=', lastbut[var_list.movefast], ' and moveslow=',lastbut[var_list.moveslow])
                         if var_list.stepper_speed != var_list.normalspeed:
                             var_list.stepper_speed = var_list.normalspeed
                             print('Speed set to: ', var_list.normalspeed)
                             self.sendtoUI.currentspeed(var_list.stepper_speed)
                             self.sendtoUI.setmedspeed()
                     elif lastbut[var_list.movefast] == 1 and lastbut[var_list.moveslow] == 0:
-                        print('movefast=', lastbut[var_list.movefast], ' and moveslow=',lastbut[var_list.moveslow])
+                        #print('movefast=', lastbut[var_list.movefast], ' and moveslow=',lastbut[var_list.moveslow])
                         if var_list.stepper_speed != var_list.fastspeed:
                             var_list.stepper_speed = var_list.fastspeed
                             print('Speed set to: ', var_list.fastspeed)
                             self.sendtoUI.currentspeed(var_list.stepper_speed)
                             self.sendtoUI.setcoarsespeed()
                     elif lastbut[var_list.movefast] == 0 and lastbut[var_list.moveslow] == 1:
-                        print('movefast=', lastbut[var_list.movefast], ' and moveslow=',lastbut[var_list.moveslow])
+                        #print('movefast=', lastbut[var_list.movefast], ' and moveslow=',lastbut[var_list.moveslow])
                         if var_list.stepper_speed != var_list.finespeed:
                             var_list.stepper_speed = var_list.finespeed
                             print('Speed set to: ', var_list.finespeed)
@@ -278,6 +266,20 @@ class buttonprogram:
                             self.sendtoUI.setfinespeed()
                     else:
                         print('speedswitch not working right')
+
+                    # #ratormouse select
+                    if lastbut[var_list.ratselect] == 1 & lastbut[var_list.mouseselect] == 0:
+                        print('ratmouse=', lastbut[var_list.movefast], ' and ratmouse2=',lastbut[var_list.moveslow])
+                        var_list.ratormouseselect = 1
+                        self.ratormouse()
+                    if lastbut[var_list.offposone] == 0 & lastbut[var_list.offpostwo] == 0:
+                        print('ratmouse=', lastbut[var_list.movefast], ' and ratmouse2=',lastbut[var_list.moveslow])
+                        var_list.ratormouseselect = 3
+                        self.ratormouse()
+                    if lastbut[var_list.ratselect] == 0 & lastbut[var_list.mouseselect] == 1:
+                        print('ratmouse=', lastbut[var_list.movefast], ' and ratmouse2=',lastbut[var_list.moveslow])
+                        var_list.ratormouseselect = 2
+                        self.ratormouse()
 
 
 
