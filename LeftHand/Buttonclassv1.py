@@ -252,18 +252,21 @@ class buttonprogram:
                     #
                     # # Speed switch
                     if lastbut[var_list.movefast] == 0 and lastbut[var_list.moveslow] == 0:
+                        print('movefast=', lastbut[var_list.movefast], ' and moveslow=',lastbut[var_list.moveslow])
                         if var_list.stepper_speed != var_list.normalspeed:
                             var_list.stepper_speed = var_list.normalspeed
                             print('Speed set to: ', var_list.normalspeed)
                             self.sendtoUI.currentspeed(var_list.stepper_speed)
                             self.sendtoUI.setmedspeed()
                     elif lastbut[var_list.movefast] == 1 and lastbut[var_list.moveslow] == 0:
+                        print('movefast=', lastbut[var_list.movefast], ' and moveslow=',lastbut[var_list.moveslow])
                         if var_list.stepper_speed != var_list.fastspeed:
                             var_list.stepper_speed = var_list.fastspeed
                             print('Speed set to: ', var_list.fastspeed)
                             self.sendtoUI.currentspeed(var_list.stepper_speed)
                             self.sendtoUI.setcoarsespeed()
                     elif lastbut[var_list.movefast] == 0 and lastbut[var_list.moveslow] == 1:
+                        print('movefast=', lastbut[var_list.movefast], ' and moveslow=',lastbut[var_list.moveslow])
                         if var_list.stepper_speed != var_list.finespeed:
                             var_list.stepper_speed = var_list.finespeed
                             print('Speed set to: ', var_list.finespeed)
