@@ -57,21 +57,20 @@ class buttonprogram:
                     #
                     #
                     # #set relative zero for ALL
-                    # if lastbut[var_list.relativeALL] == 1:
-                    #     print('set relative positions for all axis')
-                    #     self.setrelforall()
-                    #         # and then update LCDS
-                    #
+                    if lastbut[var_list.relativeALL] == 1:
+                        print('set relative positions for all axis')
+                        self.setrelforall()
+
                     #set only AP relative zero
                     if lastbut[var_list.relativeAP] == 1:
                         print('set relative AP')
                         self.setrelforAP()
-                    #
+
                     # # set only ML relative zero
                     if lastbut[var_list.relativeML] == 1:
                         print('set relative ML')
                         self.setrelforML()
-                    #
+
                     # # set only DV relative zero
                     if lastbut[var_list.relativeDV] == 1:
                         print('set relative DV')
