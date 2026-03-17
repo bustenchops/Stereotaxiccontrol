@@ -125,25 +125,24 @@ class buttonprogram:
                     #         # var_list.safetybutton = 0
                     #         self.sendtoUI.uncheckstuff(4)
                     #
-                    # #go to preset
-                    # if lastbut[var_list.gotopreset] == 1:
-                    #     if var_list.safetybutton == 1:
-                    #         if var_list.offtoggleold != var_list.TOGGLEoff:
-                    #             var_list.offtoggleold = var_list.TOGGLEoff
-                    #             if var_list.offtoggleold == 1:
-                    #                 self.drillmovetooffset()
-                    #                 print('send to drill working')
-                    #             if var_list.offtoggleold == 2:
-                    #                 self.needlemovetooffset()
-                    #                 print('send to needle working')
-                    #             if var_list.offtoggleold == 3:
-                    #                 self.fibermovetooffset()
-                    #                 print('send to probe working')
-                    #
-                    #         else:
-                    #             self.sendtoworking()
-                    #         # var_list.safetybutton = 0
-                    #         self.sendtoUI.uncheckstuff(4)
+                    # go to preset
+                    if lastbut[var_list.gotopreset] == 1:
+                        if var_list.safetybutton == 1:
+                            if var_list.offtoggleold != var_list.TOGGLEoff:
+                                var_list.offtoggleold = var_list.TOGGLEoff
+                                if var_list.offtoggleold == 1:
+                                    self.drillmovetooffset()
+                                    print('send to drill working')
+                                if var_list.offtoggleold == 2:
+                                    self.needlemovetooffset()
+                                    print('send to needle working')
+                                if var_list.offtoggleold == 3:
+                                    self.fibermovetooffset()
+                                    print('send to probe working')
+                            else:
+                                self.sendtoworking()
+                            # var_list.safetybutton = 0
+                            self.sendtoUI.uncheckstuff(4)
                     #
                     #
                     # #selectup
