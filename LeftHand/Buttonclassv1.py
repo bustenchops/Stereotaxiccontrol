@@ -95,14 +95,15 @@ class buttonprogram:
                     #     var_list.TOGGLEoff = 3
                     #
                     # #ratormouse select
-                    # if lastbut[var_list.ratselect] == 1 & lastbut[var_list.mouseselect] == 0:
-                    #     var_list.ratormouseselect = 1
-                    #     self.ratormouse()
-                    # if lastbut[var_list.offposone] == 0 & lastbut[var_list.offpostwo] == 0:
-                    #     var_list.ratormouseselect = 3
-                    # if lastbut[var_list.ratselect] == 0 & lastbut[var_list.mouseselect] == 1:
-                    #     var_list.ratormouseselect = 2
-                    #     self.ratormouse()
+                    if lastbut[var_list.ratselect] == 1 & lastbut[var_list.mouseselect] == 0:
+                        var_list.ratormouseselect = 1
+                        self.ratormouse()
+                    if lastbut[var_list.offposone] == 0 & lastbut[var_list.offpostwo] == 0:
+                        var_list.ratormouseselect = 3
+                        self.ratormouse()
+                    if lastbut[var_list.ratselect] == 0 & lastbut[var_list.mouseselect] == 1:
+                        var_list.ratormouseselect = 2
+                        self.ratormouse()
                     #
                     #
                     # #home to bregma (relative) moves DV up by value in variable list, positions AP and ML to relative home
@@ -284,12 +285,12 @@ class buttonprogram:
 
 #Button executes
     def ratormouse(self):
-        if var_list.ratormouseselect == 2:
-            var_list.ratormouseselect = 1
+        if var_list.ratormouseselect == 1:
             self.sendtoUI.mouseselected()
-        elif var_list.ratormouseselect == 1:
-            var_list.ratormouseselect = 2
+        elif var_list.ratormouseselect == 2:
             self.sendtoUI.ratselected()
+        elif var_list.ratormouseselect == 3:
+            self.sendtoUI.noneselected()
 
 
     def gotolambda(self):

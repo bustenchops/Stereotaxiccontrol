@@ -360,12 +360,18 @@ class MainWindow(QMainWindow):
         self.ratradio.setGeometry(QRect(580, 65, 92, 20))
         self.ratradio.setFont(radiobuttonfont)
 
-        self.mouseradio = QRadioButton("Mouse", self)
+        self.nullradio = QRadioButton("Null", self)
         self.mouseradio.setGeometry(QRect(580, 95, 92, 20))
+        self.mouseradio.setFont(radiobuttonfont)
+
+
+        self.mouseradio = QRadioButton("Mouse", self)
+        self.mouseradio.setGeometry(QRect(580, 125, 92, 20))
         self.mouseradio.setFont(radiobuttonfont)
 
         self.speciesgroup.addButton(self.ratradio)
         self.speciesgroup.addButton(self.mouseradio)
+        self.speciesgroup.addButton(self.nullradio)
 
         self.offsetgrouplabel = QLabel("Current Offset:", self)
         self.offsetgrouplabel.setObjectName(u"offsetgrouplabel")
