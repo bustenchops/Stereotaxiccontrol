@@ -86,13 +86,7 @@ class buttonprogram:
                     #         # var_list.safetybutton = 0
                     #         self.sendtoUI.uncheckstuff(4)
                     #
-                    # #offset select
-                    # if lastbut[var_list.offposone] == 1 & lastbut[var_list.offpostwo] == 0:
-                    #     var_list.TOGGLEoff = 1
-                    # if lastbut[var_list.offposone] == 0 & lastbut[var_list.offpostwo] == 0:
-                    #     var_list.TOGGLEoff = 2
-                    # if lastbut[var_list.offposone] == 0 & lastbut[var_list.offpostwo] == 1:
-                    #     var_list.TOGGLEoff = 3
+
                     #                    #
                     # #home to bregma (relative) moves DV up by value in variable list, positions AP and ML to relative home
                     # if lastbut[var_list.bregmahome] == 1:
@@ -268,20 +262,32 @@ class buttonprogram:
 
                     # ratormouse select
                     if lastbut[var_list.ratselect] == 0 and lastbut[var_list.mouseselect] == 0:
-                        print('ratmouse=0', lastbut[var_list.ratselect], ' and ratmouse2=0',lastbut[var_list.mouseselect])
+                        #print('ratmouse=0', lastbut[var_list.ratselect], ' and ratmouse2=0',lastbut[var_list.mouseselect])
                         var_list.ratormouseselect = 3
                         self.ratormouse()
                     elif lastbut[var_list.ratselect] == 1 and lastbut[var_list.mouseselect] == 0:
-                        print('ratmouse=1', lastbut[var_list.ratselect], ' and ratmouse2=0',lastbut[var_list.mouseselect])
+                        #print('ratmouse=1', lastbut[var_list.ratselect], ' and ratmouse2=0',lastbut[var_list.mouseselect])
                         var_list.ratormouseselect = 1
                         self.ratormouse()
                     elif lastbut[var_list.ratselect] == 0 and lastbut[var_list.mouseselect] == 1:
-                        print('ratmouse=0', lastbut[var_list.ratselect], ' and ratmouse2=1',lastbut[var_list.mouseselect])
+                        #print('ratmouse=0', lastbut[var_list.ratselect], ' and ratmouse2=1',lastbut[var_list.mouseselect])
                         var_list.ratormouseselect = 2
                         self.ratormouse()
                     else:
                         print('species select not working right')
 
+                    # offset select
+                    if lastbut[var_list.offposone] == 1 and lastbut[var_list.offpostwo] == 0:
+                        print('drill selected')
+                        var_list.TOGGLEoff = 1
+                    elif lastbut[var_list.offposone] == 0 and lastbut[var_list.offpostwo] == 0:
+                        print('needle selected')
+                        var_list.TOGGLEoff = 2
+                    elif lastbut[var_list.offposone] == 0 and lastbut[var_list.offpostwo] == 1:
+                        print('syringe selected')
+                        var_list.TOGGLEoff = 3
+                    else:
+                        print('offset not working right')
 
 
         return lastbut
