@@ -81,7 +81,7 @@ class threadedtimer:
                 self.steppercool = var_list.steppercooltimeouttime
             currenttime = time.time()
             timecrunchersteppercool = currenttime - self.steppercool
-            if timecruncherMakeit > self.timerlength:
+            if timecrunchersteppercool > self.timerlength:
                 print('Disable stepper timeout from thread')
                 var_list.enableAll = 1
                 var_list.lastenablestate = 1
