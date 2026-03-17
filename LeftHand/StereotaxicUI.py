@@ -369,7 +369,7 @@ class MainWindow(QMainWindow):
 
         self.offsetgrouplabel = QLabel("Current Offset:", self)
         self.offsetgrouplabel.setObjectName(u"offsetgrouplabel")
-        self.offsetgrouplabel.setGeometry(QRect(706, 35, 111, 16))
+        self.offsetgrouplabel.setGeometry(QRect(706, 35, 120, 16))
         self.offsetgrouplabel.setFont(radiobuttonfont)
 
         self.drillradio = QRadioButton("Drill", self)
