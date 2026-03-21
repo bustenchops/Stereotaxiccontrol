@@ -103,7 +103,7 @@ class Steppercontrol:
                             var_list.AUXsteps += 1
 
         else:
-            print("Emergency Stopped - Cannot move until re-zeroed")
+            # print("Emergency Stopped - Cannot move until re-zeroed")
 
 # to clear the limit switch and zeros
     def backoffafterzero(self, backoff, speed, btwnsteps):
