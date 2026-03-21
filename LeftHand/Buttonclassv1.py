@@ -940,9 +940,12 @@ class buttonprogram:
             for x in range(self.DVstepdiff):
                 var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
 
-        var_list.APrelpos = var_list.APsteps
-        var_list.MLrelpos = var_list.MLsteps
-        var_list.DVrelpos = var_list.DVsteps
+        if var_list.APrelpos == 0:
+            var_list.APrelpos = var_list.APsteps
+        if var_list.MLrelpos == 0:
+            var_list.MLrelpos = var_list.MLsteps
+        if var_list.DVrelpos == 0:
+            var_list.DVrelpos = var_list.DVsteps
 
         var_list.APmove.PosRelAbsCalc()
         var_list.MLmove.PosRelAbsCalc()
