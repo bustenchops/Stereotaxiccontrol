@@ -49,15 +49,15 @@ class buttonprogram:
                 lastbut[i] = newbut[i]
 
                 if var_list.engagebutton == 1:
-                    # #full retract
-                    # if lastbut[var_list.fullretractbut] == 1:
-                    #     if var_list.safetybutton == 1:
-                    #         print('retract all manipulators')
-                    #         self.fullretractmove()
-                    #         # var_list.safetybutton = 0
-                    #         self.sendtoUI.uncheckstuff(4)
-                    #
-                    #
+                    #full retract
+                    if lastbut[var_list.fullretractbut] == 1:
+                        if var_list.safetybutton == 1:
+                            print('retract all manipulators')
+                            self.fullretractmove()
+                            # var_list.safetybutton = 0
+                            self.sendtoUI.uncheckstuff(4)
+
+
                     # #set relative zero for ALL
                     if lastbut[var_list.relativeALL] == 1:
                         print('set relative positions for all axis')
@@ -77,7 +77,7 @@ class buttonprogram:
                     if lastbut[var_list.relativeDV] == 1:
                         print('set relative DV')
                         self.setrelforDV()
-                    #
+
                     #gotolambda
                     if lastbut[var_list.gotolambdabut] == 1:
                         if var_list.safetybutton == 1:
@@ -85,9 +85,8 @@ class buttonprogram:
                             self.gotolambda()
                             # var_list.safetybutton = 0
                             self.sendtoUI.uncheckstuff(4)
-                    #
 
-                    #                    #
+
                     #home to bregma (relative) moves DV up by value in variable list, positions AP and ML to relative home
                     if lastbut[var_list.bregmahome] == 1:
                         if var_list.safetybutton == 1:
