@@ -265,11 +265,11 @@ class buttonprogram:
                     var_list.ratormouseselect = 3
                     self.ratormouse()
             elif lastbut[var_list.ratselect] == 1 and lastbut[var_list.mouseselect] == 0:
-                if var_list.ratormouseselect != 3:
+                if var_list.ratormouseselect != 2:
                     var_list.ratormouseselect = 2
                     self.ratormouse()
             elif lastbut[var_list.ratselect] == 0 and lastbut[var_list.mouseselect] == 1:
-                if var_list.ratormouseselect != 3:
+                if var_list.ratormouseselect != 1:
                     var_list.ratormouseselect = 1
                     self.ratormouse()
             else:
@@ -281,11 +281,11 @@ class buttonprogram:
                     print('drill selected')
                     var_list.TOGGLEoff = 1
             elif lastbut[var_list.offposone] == 0 and lastbut[var_list.offpostwo] == 0:
-                if var_list.TOGGLEoff != 1:
+                if var_list.TOGGLEoff != 2:
                     print('needle selected')
                     var_list.TOGGLEoff = 2
             elif lastbut[var_list.offposone] == 0 and lastbut[var_list.offpostwo] == 1:
-                if var_list.TOGGLEoff != 1:
+                if var_list.TOGGLEoff != 3:
                     print('probe selected')
                     var_list.TOGGLEoff = 3
             else:
