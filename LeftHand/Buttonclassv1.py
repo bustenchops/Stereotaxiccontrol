@@ -234,59 +234,59 @@ class buttonprogram:
                     #         self.sendtoUI.uncheckstuff(4)
                     #
 
-                    # Speed switch
-                    if lastbut[var_list.movefast] == 0 and lastbut[var_list.moveslow] == 0:
-                        #print('movefast=', lastbut[var_list.movefast], ' and moveslow=',lastbut[var_list.moveslow])
-                        if var_list.stepper_speed != var_list.normalspeed:
-                            var_list.stepper_speed = var_list.normalspeed
-                            print('Speed set to: ', var_list.normalspeed)
-                            self.sendtoUI.currentspeed(var_list.stepper_speed)
-                            self.sendtoUI.setmedspeed()
-                    elif lastbut[var_list.movefast] == 1 and lastbut[var_list.moveslow] == 0:
-                        #print('movefast=', lastbut[var_list.movefast], ' and moveslow=',lastbut[var_list.moveslow])
-                        if var_list.stepper_speed != var_list.fastspeed:
-                            var_list.stepper_speed = var_list.fastspeed
-                            print('Speed set to: ', var_list.fastspeed)
-                            self.sendtoUI.currentspeed(var_list.stepper_speed)
-                            self.sendtoUI.setcoarsespeed()
-                    elif lastbut[var_list.movefast] == 0 and lastbut[var_list.moveslow] == 1:
-                        #print('movefast=', lastbut[var_list.movefast], ' and moveslow=',lastbut[var_list.moveslow])
-                        if var_list.stepper_speed != var_list.finespeed:
-                            var_list.stepper_speed = var_list.finespeed
-                            print('Speed set to: ', var_list.finespeed)
-                            self.sendtoUI.currentspeed(var_list.stepper_speed)
-                            self.sendtoUI.setfinespeed()
-                    else:
-                        print('speedswitch not working right')
+                # Speed switch
+            if lastbut[var_list.movefast] == 0 and lastbut[var_list.moveslow] == 0:
+                #print('movefast=', lastbut[var_list.movefast], ' and moveslow=',lastbut[var_list.moveslow])
+                if var_list.stepper_speed != var_list.normalspeed:
+                    var_list.stepper_speed = var_list.normalspeed
+                    print('Speed set to: ', var_list.normalspeed)
+                    self.sendtoUI.currentspeed(var_list.stepper_speed)
+                    self.sendtoUI.setmedspeed()
+            elif lastbut[var_list.movefast] == 1 and lastbut[var_list.moveslow] == 0:
+                #print('movefast=', lastbut[var_list.movefast], ' and moveslow=',lastbut[var_list.moveslow])
+                if var_list.stepper_speed != var_list.fastspeed:
+                    var_list.stepper_speed = var_list.fastspeed
+                    print('Speed set to: ', var_list.fastspeed)
+                    self.sendtoUI.currentspeed(var_list.stepper_speed)
+                    self.sendtoUI.setcoarsespeed()
+            elif lastbut[var_list.movefast] == 0 and lastbut[var_list.moveslow] == 1:
+                #print('movefast=', lastbut[var_list.movefast], ' and moveslow=',lastbut[var_list.moveslow])
+                if var_list.stepper_speed != var_list.finespeed:
+                    var_list.stepper_speed = var_list.finespeed
+                    print('Speed set to: ', var_list.finespeed)
+                    self.sendtoUI.currentspeed(var_list.stepper_speed)
+                    self.sendtoUI.setfinespeed()
+            else:
+                print('speedswitch not working right')
 
-                    # ratormouse select
-                    if lastbut[var_list.ratselect] == 0 and lastbut[var_list.mouseselect] == 0:
-                        #print('ratmouse=0', lastbut[var_list.ratselect], ' and ratmouse2=0',lastbut[var_list.mouseselect])
-                        var_list.ratormouseselect = 3
-                        self.ratormouse()
-                    elif lastbut[var_list.ratselect] == 1 and lastbut[var_list.mouseselect] == 0:
-                        #print('ratmouse=1', lastbut[var_list.ratselect], ' and ratmouse2=0',lastbut[var_list.mouseselect])
-                        var_list.ratormouseselect = 2
-                        self.ratormouse()
-                    elif lastbut[var_list.ratselect] == 0 and lastbut[var_list.mouseselect] == 1:
-                        #print('ratmouse=0', lastbut[var_list.ratselect], ' and ratmouse2=1',lastbut[var_list.mouseselect])
-                        var_list.ratormouseselect = 1
-                        self.ratormouse()
-                    else:
-                        print('species select not working right')
+            # ratormouse select
+            if lastbut[var_list.ratselect] == 0 and lastbut[var_list.mouseselect] == 0:
+                #print('ratmouse=0', lastbut[var_list.ratselect], ' and ratmouse2=0',lastbut[var_list.mouseselect])
+                var_list.ratormouseselect = 3
+                self.ratormouse()
+            elif lastbut[var_list.ratselect] == 1 and lastbut[var_list.mouseselect] == 0:
+                #print('ratmouse=1', lastbut[var_list.ratselect], ' and ratmouse2=0',lastbut[var_list.mouseselect])
+                var_list.ratormouseselect = 2
+                self.ratormouse()
+            elif lastbut[var_list.ratselect] == 0 and lastbut[var_list.mouseselect] == 1:
+                #print('ratmouse=0', lastbut[var_list.ratselect], ' and ratmouse2=1',lastbut[var_list.mouseselect])
+                var_list.ratormouseselect = 1
+                self.ratormouse()
+            else:
+                print('species select not working right')
 
-                    # offset select
-                    if lastbut[var_list.offposone] == 1 and lastbut[var_list.offpostwo] == 0:
-                        print('drill selected')
-                        var_list.TOGGLEoff = 1
-                    elif lastbut[var_list.offposone] == 0 and lastbut[var_list.offpostwo] == 0:
-                        print('needle selected')
-                        var_list.TOGGLEoff = 2
-                    elif lastbut[var_list.offposone] == 0 and lastbut[var_list.offpostwo] == 1:
-                        print('probe selected')
-                        var_list.TOGGLEoff = 3
-                    else:
-                        print('offset not working right')
+            # offset select
+            if lastbut[var_list.offposone] == 1 and lastbut[var_list.offpostwo] == 0:
+                print('drill selected')
+                var_list.TOGGLEoff = 1
+            elif lastbut[var_list.offposone] == 0 and lastbut[var_list.offpostwo] == 0:
+                print('needle selected')
+                var_list.TOGGLEoff = 2
+            elif lastbut[var_list.offposone] == 0 and lastbut[var_list.offpostwo] == 1:
+                print('probe selected')
+                var_list.TOGGLEoff = 3
+            else:
+                print('offset not working right')
 
 
         return lastbut
