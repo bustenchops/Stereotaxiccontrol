@@ -283,7 +283,7 @@ class buttonprogram:
                         print('needle selected')
                         var_list.TOGGLEoff = 2
                     elif lastbut[var_list.offposone] == 0 and lastbut[var_list.offpostwo] == 1:
-                        print('syringe selected')
+                        print('probe selected')
                         var_list.TOGGLEoff = 3
                     else:
                         print('offset not working right')
