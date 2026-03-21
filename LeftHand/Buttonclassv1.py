@@ -308,6 +308,7 @@ class buttonprogram:
 
 
     def gotolambda(self):
+        print('goto lambda function in action')
         if var_list.ratormouseselect == 1:
             var_list.rellambda = var_list.APrelpos - var_list.mouselambda
         if var_list.ratormouseselect == 2:
