@@ -947,8 +947,8 @@ class buttonprogram:
 
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
-        self.sendtoUI.drilloffset()
-        var_list.TOGGLEoff = 1
+        # self.sendtoUI.drilloffset()
+        # var_list.TOGGLEoff = 1
         self.sendtoUI.uncheckstuff(4)
 
 # concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)
