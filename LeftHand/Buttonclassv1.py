@@ -78,23 +78,23 @@ class buttonprogram:
                         print('set relative DV')
                         self.setrelforDV()
                     #
-                    # #gotolambda
-                    # if lastbut[var_list.gotolambdabut] == 1:
-                    #     if var_list.safetybutton == 1:
-                    #         print('DV up AP and ML homed to rel')
-                    #         self.gotolambda()
-                    #         # var_list.safetybutton = 0
-                    #         self.sendtoUI.uncheckstuff(4)
+                    #gotolambda
+                    if lastbut[var_list.gotolambdabut] == 1:
+                        if var_list.safetybutton == 1:
+                            print('DV up AP and ML homed to rel')
+                            self.gotolambda()
+                            # var_list.safetybutton = 0
+                            self.sendtoUI.uncheckstuff(4)
                     #
 
                     #                    #
-                    # #home to bregma (relative) moves DV up by value in variable list, positions AP and ML to relative home
-                    # if lastbut[var_list.bregmahome] == 1:
-                    #     if var_list.safetybutton == 1:
-                    #         print("Home to Bregma (DV up buy set value)")
-                    #         self.bregmahome()
-                    #         # var_list.safetybutton = 0
-                    #         self.sendtoUI.uncheckstuff(4)
+                    #home to bregma (relative) moves DV up by value in variable list, positions AP and ML to relative home
+                    if lastbut[var_list.bregmahome] == 1:
+                        if var_list.safetybutton == 1:
+                            print("Home to Bregma (DV up buy set value)")
+                            self.bregmahome()
+                            # var_list.safetybutton = 0
+                            self.sendtoUI.uncheckstuff(4)
                     #
                     # #rezero button
                     # if lastbut[var_list.rezero] == 1:
