@@ -104,6 +104,7 @@ class Steppercontrol:
 
         else:
             # print("Emergency Stopped - Cannot move until re-zeroed")
+            return
 
 # to clear the limit switch and zeros
     def backoffafterzero(self, backoff, speed, btwnsteps):
