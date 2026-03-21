@@ -129,14 +129,14 @@ class buttonprogram:
                     if lastbut[var_list.gotopreset] == 1:
                         if var_list.safetybutton == 1:
                             if var_list.offtoggleold != var_list.TOGGLEoff:
-                                var_list.offtoggleold = var_list.TOGGLEoff
-                                if var_list.offtoggleold == 1:
+                                # var_list.offtoggleold = var_list.TOGGLEoff
+                                if var_list.TOGGLEoff == 1:
                                     self.drillmovetooffset()
                                     print('send to drill working')
-                                if var_list.offtoggleold == 2:
+                                if var_list.TOGGLEoff == 2:
                                     self.needlemovetooffset()
                                     print('send to needle working')
-                                if var_list.offtoggleold == 3:
+                                if var_list.TOGGLEoff == 3:
                                     self.fibermovetooffset()
                                     print('send to probe working')
                             else:
@@ -479,7 +479,7 @@ class buttonprogram:
     def drillmovetooffset(self):
         #print('offset set to DRILL')
         #self.sendtoUI.uitest()
-        print('Moving to home position first')
+        # print('Moving to home position first')
         self.bregmahome()
         print('Move to drill offset')
         self.sendtoUI.drilloffset()
@@ -488,7 +488,7 @@ class buttonprogram:
         self.DrillMLmm = var_list.DrillMLmm
         self.DrillDVmm = var_list.DrillDVmm
 
-        if var_list.TOGGLEoff != 1:
+        if var_list.offtoggleold != 1:
 
             self.AP_Doffsetcalc = int(self.DrillAPmm / var_list.APstepdistance)
             self.ML_Doffsetcalc = int(self.DrillMLmm / var_list.MLstepdistance)
@@ -552,13 +552,13 @@ class buttonprogram:
 
             GPIO.output(var_list.enableAll, 1)
             var_list.lastenablestate = 1
-            var_list.TOGGLEoff = 1
+            var_list.offtoggleold = 1
         self.sendtoUI.uncheckstuff(4)
 
     def needlemovetooffset(self):
         # print('offset set to Needle')
         # self.sendtoUI.uitest()
-        print('Moving to home position first')
+        # print('Moving to home position first')
         self.bregmahome()
         print('Move to Syringe Offset')
         self.sendtoUI.needleoffset()
@@ -567,7 +567,7 @@ class buttonprogram:
         self.NeedleMLmm = var_list.NeedleMLmm
         self.NeedleDVmm = var_list.NeedleDVmm
 
-        if var_list.TOGGLEoff != 2:
+        if var_list.offtoggleold != 2:
 
             print (self.NeedleAPmm)
             print (self.NeedleMLmm)
@@ -637,7 +637,7 @@ class buttonprogram:
 
             GPIO.output(var_list.enableAll, 1)
             var_list.lastenablestate = 1
-            var_list.TOGGLEoff = 2
+            var_list.offtoggleold = 2
         self.sendtoUI.uncheckstuff(4)
 
     def fibermovetooffset(self):
@@ -652,7 +652,7 @@ class buttonprogram:
         self.FiberMLmm = var_list.FiberMLmm
         self.FiberDVmm = var_list.FiberDVmm
 
-        if var_list.TOGGLEoff != 3:
+        if var_list.offtoggleold != 3:
 
             print (self.FiberAPmm)
             print (self.FiberMLmm)
@@ -723,7 +723,7 @@ class buttonprogram:
 
             GPIO.output(var_list.enableAll, 1)
             var_list.lastenablestate = 1
-            var_list.TOGGLEoff = 3
+            var_list.offtoggleold = 3
         self.sendtoUI.uncheckstuff(4)
 
     def homeDVupfive(self):
