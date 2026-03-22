@@ -803,7 +803,7 @@ threadpool.start(mainbuttonthread.runbuttonthread)
 threadpool.start(controlthread.runcontrolthread)
 threadpool.start(timedthread.runtimerthread)
 
-window.start_signals()
+# window.start_signals()
 
 window.show()
 
