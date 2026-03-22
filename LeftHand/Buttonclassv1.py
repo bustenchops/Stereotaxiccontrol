@@ -94,14 +94,14 @@ class buttonprogram:
                             self.bregmahome()
                             # var_list.safetybutton = 0
                             self.sendtoUI.uncheckstuff(4)
-                    #
-                    # #rezero button
-                    # if lastbut[var_list.rezero] == 1:
-                    #     if var_list.safetybutton == 1:
-                    #         print("Re-Zero the steppers")
-                    #         self.sendtoUI.recalibrateaxis()
-                    #         # var_list.safetybutton = 0
-                    #         self.sendtoUI.uncheckstuff(4)
+
+                    #rezero button
+                    if lastbut[var_list.rezero] == 1:
+                        if var_list.safetybutton == 1:
+                            print("Re-Zero the steppers")
+                            self.sendtoUI.recalibrateaxis()
+                            # var_list.safetybutton = 0
+                            self.sendtoUI.uncheckstuff(4)
                     #
                     # #home to ABS zero
                     # if lastbut[var_list.ABSzero] == 1:
@@ -192,7 +192,7 @@ class buttonprogram:
                     #         # var_list.safetybutton = 0
                     #         self.sendtoUI.uncheckstuff(4)
                     #
-                    # #engagebut
+                    # #engage! button
                     # if lastbut[var_list.engagebut] == 1:
                     #     self.sendtoUI.engagemovement()
                     #
