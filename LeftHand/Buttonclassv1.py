@@ -164,17 +164,17 @@ class buttonprogram:
                             var_list.list_toggle += 1
                         self.sendtoUI.selecrowtoggle(var_list.list_toggle)
 
-                    # #armbut
-                    # if lastbut[var_list.armbut] == 1:
-                    #     self.sendtoUI.selectlistcoordinates()
-                    #
-                    # # makeitsobut
-                    # if lastbut[var_list.makeitsobut] == 1:
-                    #     if var_list.safetybutton == 1:
-                    #         self.sendtoUI.checkstuff(1)
-                    #         self.sendtoUI.on_makeitso_changed()
-                    #         # var_list.safetybutton = 0
-                    #         self.sendtoUI.uncheckstuff(4)
+                    #armbut
+                    if lastbut[var_list.armbut] == 1:
+                        self.sendtoUI.selectlistcoordinates()
+
+                    # makeitsobut
+                    if lastbut[var_list.makeitsobut] == 1:
+                        if var_list.safetybutton == 1:
+                            self.sendtoUI.checkstuff(1)
+                            self.sendtoUI.on_makeitso_changed()
+                            # var_list.safetybutton = 0
+                            self.sendtoUI.uncheckstuff(4)
                     #
                     # #DVinsert
                     # if lastbut[var_list.DVinsert] == 1:
