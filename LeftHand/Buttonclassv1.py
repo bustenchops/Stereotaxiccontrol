@@ -102,27 +102,27 @@ class buttonprogram:
                             self.sendtoUI.recalibrateaxis()
                             # var_list.safetybutton = 0
                             self.sendtoUI.uncheckstuff(4)
-                    #
-                    # #home to ABS zero
-                    # if lastbut[var_list.ABSzero] == 1:
-                    #     if var_list.safetybutton == 1:
-                    #         self.hometoABSzero()
-                    #         # var_list.safetybutton = 0
-                    #         self.sendtoUI.uncheckstuff(4)
-                    #
-                    # #home AP and ML, DV goes to ABS
-                    # if lastbut[var_list.bregmahomeDVabs] == 1:
-                    #     if var_list.safetybutton == 1:
-                    #         self.upDVrelhomeAP_ML()
-                    #         # var_list.safetybutton = 0
-                    #         self.sendtoUI.uncheckstuff(4)
-                    #
-                    # #Hmome AP and ML to bregma and DV up 5.
-                    # if lastbut[var_list.bregmahomeDVupfive] == 1:
-                    #     if var_list.safetybutton == 1:
-                    #         self.homeDVupfive()
-                    #         # var_list.safetybutton = 0
-                    #         self.sendtoUI.uncheckstuff(4)
+
+                    #home to ABS zero
+                    if lastbut[var_list.ABSzero] == 1:
+                        if var_list.safetybutton == 1:
+                            self.hometoABSzero()
+                            # var_list.safetybutton = 0
+                            self.sendtoUI.uncheckstuff(4)
+
+                    #home AP and ML, DV goes to ABS
+                    if lastbut[var_list.bregmahomeDVabs] == 1:
+                        if var_list.safetybutton == 1:
+                            self.upDVrelhomeAP_ML()
+                            # var_list.safetybutton = 0
+                            self.sendtoUI.uncheckstuff(4)
+
+                    #Hmome AP and ML to bregma and DV up 5.
+                    if lastbut[var_list.bregmahomeDVupfive] == 1:
+                        if var_list.safetybutton == 1:
+                            self.homeDVupfive()
+                            # var_list.safetybutton = 0
+                            self.sendtoUI.uncheckstuff(4)
                     #
                     # go to preset
                     if lastbut[var_list.gotopreset] == 1:
