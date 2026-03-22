@@ -674,8 +674,8 @@ class MainWindow(QMainWindow):
         self.withdrawtotpause.setPlainText(parts[14])
 
     @Slot(int)
-    def selecrowtoggle(self, fromtoggle):
-        self.listWidget.setCurrentRow(fromtoggle)
+    def selecrowtoggle(self):
+        self.listWidget.setCurrentRow(var_list.list_toggle)
 
     # note I dont think this is going to be used...keep for now though.
     # @Slot(int)
@@ -746,7 +746,7 @@ class MainWindow(QMainWindow):
         self.fiberradio.toggle()
 
 # Report Current Speed
-    @Slot(int)
+    @Slot()
     def currentspeed(self, stepsper):  # not used yet but plan is to put it in the interface
         self.stepperstepsper = stepsper
 
@@ -778,9 +778,9 @@ class MainWindow(QMainWindow):
         var_list.eventime = time.time() * 1000
         var_list.firstandonly = time.time() * 1000
 
-    def start_signals(self):
-        mainbuttonthread.selectlistcoordinates_signal.connect(self.selectlistcoordinates)
-        mainbuttonthread.selecrowtoggle_signal.connect(self.selectrowtoggle)
+    # def start_signals(self):
+    #     mainbuttonthread.selectlistcoordinates_signal.connect(self.selectlistcoordinates)
+    #     mainbuttonthread.selecrowtoggle_signal.connect(self.selectrowtoggle)
 
 # concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)
 
@@ -803,10 +803,10 @@ threadpool.start(mainbuttonthread.runbuttonthread)
 threadpool.start(controlthread.runcontrolthread)
 threadpool.start(timedthread.runtimerthread)
 
-mainbuttonthread.selectlistcoordinates_signal.connect(window.selectlistcoordinates)
-print('connect 1')
-mainbuttonthread.selecrowtoggle_signal.connect(window.selectrowtoggle)
-print('connect 2')
+# mainbuttonthread.selectlistcoordinates_signal.connect(window.selectlistcoordinates)
+# print('connect 1')
+# mainbuttonthread.selecrowtoggle_signal.connect(window.selectrowtoggle)
+# print('connect 2')
 # window.start_signals()
 
 window.show()

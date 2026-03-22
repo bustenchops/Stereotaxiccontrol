@@ -1,11 +1,8 @@
-from PySide6.QtCore import (QRect, QThreadPool, Slot, QObject, Signal, QThread, Qt)
 import time
 import RPi.GPIO as GPIO
 from VariableList import var_list
 
-class buttonprogram(QObject):
-    selectlistcoordinates_signal = Signal(bool)
-    selecrowtoggle_signal = Signal(int)
+class buttonprogram:
 
     def __init__(self, UIinstance):
         self.sendtoUI = UIinstance
@@ -156,9 +153,7 @@ class buttonprogram(QObject):
                             var_list.list_toggle = var_list.countoflistwidget - 1
                         else:
                             var_list.list_toggle -= 1
-                        self.selectupdownhit()
-
-                        # self.sendtoUI.selecrowtoggle(var_list.list_toggle)
+                        self.sendtoUI.selecrowtoggle()
 
                     #selectdown
                     if lastbut[var_list.selectdown] == 1:
@@ -168,14 +163,11 @@ class buttonprogram(QObject):
                             var_list.list_toggle = 0
                         else:
                             var_list.list_toggle += 1
-                        self.selectupdownhit()
-
-                        # self.sendtoUI.selecrowtoggle(var_list.list_toggle)
+                        self.sendtoUI.selecrowtoggle()
 
                     #armbut
                     if lastbut[var_list.armbut] == 1:
-                        self.armbuttonpressed()
-                        # self.sendtoUI.selectlistcoordinates()
+                        self.sendtoUI.selectlistcoordinates()
 
                     # makeitsobut
                     if lastbut[var_list.makeitsobut] == 1:
@@ -967,14 +959,14 @@ class buttonprogram(QObject):
         # var_list.TOGGLEoff = 1
         self.sendtoUI.uncheckstuff(4)
 
-    #send the selection toggle number to the UI
-    def selectupdownhit(self):
-        self.selecrowtoggle_signal.emit(var_list.list_toggle)
-
-    def armbuttonpressed(self):
-        self.selectlistcoordinates_signal.emit(True)
-        time.sleep(0.1)
-        self.selectlistcoordinates_signal.emit(False)
+    # #send the selection toggle number to the UI - some signal/slot stuff I cant figure out right now.
+    # def selectupdownhit(self):
+    #     self.selecrowtoggle_signal.emit(var_list.list_toggle)
+    #
+    # def armbuttonpressed(self):
+    #     self.selectlistcoordinates_signal.emit(True)
+    #     time.sleep(0.1)
+    #     self.selectlistcoordinates_signal.emit(False)
 
 # concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)
 
