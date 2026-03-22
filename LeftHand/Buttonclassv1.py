@@ -1,10 +1,14 @@
 import time
 import RPi.GPIO as GPIO
+from PySide6.QtCore import (Slot, QObject, Signal, Qt)
 from VariableList import var_list
 
-class buttonprogram:
+class buttonprogram(QObject):
+
+    selectlistcoordinates_signal = Signal(bool)
 
     def __init__(self, UIinstance):
+        super().__init__()
         self.sendtoUI = UIinstance
         #INITIALIZE PINS
         GPIO.setup(var_list.latchpin, GPIO.OUT)

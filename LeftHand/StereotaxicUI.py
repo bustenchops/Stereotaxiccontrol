@@ -645,8 +645,8 @@ class MainWindow(QMainWindow):
         print(var_list.countoflistwidget)
 
     #loads the coordinates from the list to the text boxes
-    @Slot()
-    def selectlistcoordinates(self):
+    @Slot(bool)
+    def selectlistcoordinates(self, running):
         print('loading the selected coordinates')
         selected_items = self.listWidget.selectedItems()
         selected_text = selected_items[0].text()
@@ -779,8 +779,9 @@ class MainWindow(QMainWindow):
         var_list.eventime = time.time() * 1000
         var_list.firstandonly = time.time() * 1000
 
-    # def start_signals(self):
-    #     mainbuttonthread.selectlistcoordinates_signal.connect(self.selectlistcoordinates)
+    def start_signals(self):
+        print('start signals')
+        mainbuttonthread.selectlistcoordinates_signal.connect(self.selectlistcoordinates)
     #     mainbuttonthread.selecrowtoggle_signal.connect(self.selectrowtoggle)
 
 # concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)
@@ -808,7 +809,7 @@ threadpool.start(timedthread.runtimerthread)
 # print('connect 1')
 # mainbuttonthread.selecrowtoggle_signal.connect(window.selectrowtoggle)
 # print('connect 2')
-# window.start_signals()
+window.start_signals()
 
 window.show()
 
