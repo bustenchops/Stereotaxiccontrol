@@ -803,6 +803,8 @@ threadpool.start(mainbuttonthread.runbuttonthread)
 threadpool.start(controlthread.runcontrolthread)
 threadpool.start(timedthread.runtimerthread)
 
+mainbuttonthread.selectlistcoordinates_signal.connect(window.selectlistcoordinates)
+mainbuttonthread.selecrowtoggle_signal.connect(window.selectrowtoggle)
 # window.start_signals()
 
 window.show()
