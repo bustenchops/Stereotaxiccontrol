@@ -3,7 +3,7 @@ import time
 import RPi.GPIO as GPIO
 from VariableList import var_list
 
-class buttonprogram:
+class buttonprogram(QObject):
     selectlistcoordinates_signal = Signal(bool)
     selecrowtoggle_signal = Signal(int)
 
@@ -159,7 +159,8 @@ class buttonprogram:
                             var_list.list_toggle = var_list.countoflistwidget - 1
                         else:
                             var_list.list_toggle -= 1
-                        self.selecrowtoggle_signal.emit(var_list.list_toggle)
+                        self.selectupdownhit()
+
                         # self.sendtoUI.selecrowtoggle(var_list.list_toggle)
 
                     #selectdown
@@ -170,14 +171,14 @@ class buttonprogram:
                             var_list.list_toggle = 0
                         else:
                             var_list.list_toggle += 1
-                        self.selecrowtoggle_signal.emit(var_list.list_toggle)
+                        self.selectupdownhit()
+
                         # self.sendtoUI.selecrowtoggle(var_list.list_toggle)
 
                     #armbut
                     if lastbut[var_list.armbut] == 1:
-                        self.selectlistcoordinates_signal.emit(True)
-                        time.sleep(0.1)
-                        self.selectlistcoordinates_signal.emit(False)# self.sendtoUI.selectlistcoordinates()
+                        self.armbuttonpressed()
+                        # self.sendtoUI.selectlistcoordinates()
 
                     # makeitsobut
                     if lastbut[var_list.makeitsobut] == 1:
@@ -968,6 +969,15 @@ class buttonprogram:
         # self.sendtoUI.drilloffset()
         # var_list.TOGGLEoff = 1
         self.sendtoUI.uncheckstuff(4)
+
+    #send the selection toggle number to the UI
+    def selectupdownhit(self):
+        self.selecrowtoggle_signal.emit(var_list.list_toggle)
+
+    def armbuttonpressed(self):
+        self.selectlistcoordinates_signal.emit(True)
+        time.sleep(0.1)
+        self.selectlistcoordinates_signal.emit(False)
 
 # concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)
 
