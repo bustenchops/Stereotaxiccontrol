@@ -779,8 +779,8 @@ class MainWindow(QMainWindow):
         var_list.firstandonly = time.time() * 1000
 
     def start_signals(self):
-        self.mainbuttonthread.selectlistcoordinates_signal.connect(self.selectlistcoordinates)
-        self.mainbuttonthread.selecrowtoggle_signal.connect(self.selectrowtoggle)
+        mainbuttonthread.selectlistcoordinates_signal.connect(self.selectlistcoordinates)
+        mainbuttonthread.selecrowtoggle_signal.connect(self.selectrowtoggle)
 
 # concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)
 
