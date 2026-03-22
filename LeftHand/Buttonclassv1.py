@@ -4,8 +4,6 @@ import RPi.GPIO as GPIO
 from VariableList import var_list
 
 class buttonprogram(QObject):
-    selectlistcoordinates_signal = Signal(bool)
-    selecrowtoggle_signal = Signal(int)
 
     def __init__(self, UIinstance):
         self.sendtoUI = UIinstance
@@ -13,6 +11,9 @@ class buttonprogram(QObject):
         GPIO.setup(var_list.latchpin, GPIO.OUT)
         GPIO.setup(var_list.clockpin, GPIO.OUT)
         GPIO.setup(var_list.datapin, GPIO.IN)
+
+        selectlistcoordinates_signal = Signal(bool)
+        selecrowtoggle_signal = Signal(int)
 
 
 
