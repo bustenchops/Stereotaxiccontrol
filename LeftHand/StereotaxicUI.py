@@ -804,7 +804,9 @@ threadpool.start(controlthread.runcontrolthread)
 threadpool.start(timedthread.runtimerthread)
 
 mainbuttonthread.selectlistcoordinates_signal.connect(window.selectlistcoordinates)
+print('connect 1')
 mainbuttonthread.selecrowtoggle_signal.connect(window.selectrowtoggle)
+print('connect 2')
 # window.start_signals()
 
 window.show()
