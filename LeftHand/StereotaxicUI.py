@@ -456,6 +456,8 @@ class MainWindow(QMainWindow):
         self.statusbar = QStatusBar()
         self.setCentralWidget(self.widget)
 
+
+
 #Checkbox control
     def uncheckstuff(self, whichone):
         print("unchecking")
@@ -643,8 +645,8 @@ class MainWindow(QMainWindow):
         print(var_list.countoflistwidget)
 
     #loads the coordinates from the list to the text boxes
-    @Slot()
-    def selectlistcoordinates(self):
+    @Slot(bool)
+    def selectlistcoordinates(self, running):
         selected_items = self.listWidget.selectedItems()
         selected_text = selected_items[0].text()
         parts = selected_text.split(',')
@@ -671,39 +673,39 @@ class MainWindow(QMainWindow):
         self.withdrawfirstwait.setPlainText(parts[13])
         self.withdrawtotpause.setPlainText(parts[14])
 
-    @Slot()
+    @Slot(int)
     def selecrowtoggle(self, fromtoggle):
         self.listWidget.setCurrentRow(fromtoggle)
 
     # note I dont think this is going to be used...keep for now though.
-    @Slot()
-    def toggleselectlist(self, toglistnum):
-    #to enumerate the items and put them in the list.
-        selected_items = self.listWidget.item(toglistnum)
-        selected_text = selected_items[0].text()
-        parts = selected_text.split(',')
-        if len(parts) != 15:
-            print('not enough comma sep values')
-            return
-        for i, p in enumerate(parts):
-            print(f"Part{i}: {p}")
-        # name, APlist, MLlist, DVlist, DVsafe, compensat, DVrate, DVpause, DVpausetime, WDrate, WDpause, WDpausetime, WDfirstWD = selected_text.split(',')
-        # , WDfirstwait, WDtotwait
-        self.targetname.setPlainText(parts[0])
-        self.APmanualenter.setPlainText(parts[1])
-        self.MLmanualenter.setPlainText(parts[2])
-        self.DVmanualenter.setPlainText(parts[4])
-        self.DVinserttarget.setPlainText(parts[3])
-        self.DVinsertcompens.setPlainText(parts[5])
-        self.DVinsertmanrate.setPlainText(parts[6])
-        self.DVinsertnumpause.setPlainText(parts[7])
-        self.DVinsertpausetime.setPlainText(parts[8])
-        self.withdrawmanrate.setPlainText(parts[9])
-        self.withdrawnumpause.setPlainText(parts[10])
-        self.withdrawpausetime.setPlainText(parts[11])
-        self.withdrawfirstdist.setPlainText(parts[12])
-        self.withdrawfirstwait.setPlainText(parts[13])
-        self.withdrawtotpause.setPlainText(parts[14])
+    # @Slot(int)
+    # def toggleselectlist(self, toglistnum):
+    # #to enumerate the items and put them in the list.
+    #     selected_items = self.listWidget.item(toglistnum)
+    #     selected_text = selected_items[0].text()
+    #     parts = selected_text.split(',')
+    #     if len(parts) != 15:
+    #         print('not enough comma sep values')
+    #         return
+    #     for i, p in enumerate(parts):
+    #         print(f"Part{i}: {p}")
+    #     # name, APlist, MLlist, DVlist, DVsafe, compensat, DVrate, DVpause, DVpausetime, WDrate, WDpause, WDpausetime, WDfirstWD = selected_text.split(',')
+    #     # , WDfirstwait, WDtotwait
+    #     self.targetname.setPlainText(parts[0])
+    #     self.APmanualenter.setPlainText(parts[1])
+    #     self.MLmanualenter.setPlainText(parts[2])
+    #     self.DVmanualenter.setPlainText(parts[4])
+    #     self.DVinserttarget.setPlainText(parts[3])
+    #     self.DVinsertcompens.setPlainText(parts[5])
+    #     self.DVinsertmanrate.setPlainText(parts[6])
+    #     self.DVinsertnumpause.setPlainText(parts[7])
+    #     self.DVinsertpausetime.setPlainText(parts[8])
+    #     self.withdrawmanrate.setPlainText(parts[9])
+    #     self.withdrawnumpause.setPlainText(parts[10])
+    #     self.withdrawpausetime.setPlainText(parts[11])
+    #     self.withdrawfirstdist.setPlainText(parts[12])
+    #     self.withdrawfirstwait.setPlainText(parts[13])
+    #     self.withdrawtotpause.setPlainText(parts[14])
 
     #sets the radio button for rat or mouse
     @Slot()
@@ -776,6 +778,9 @@ class MainWindow(QMainWindow):
         var_list.eventime = time.time() * 1000
         var_list.firstandonly = time.time() * 1000
 
+    def start_signals(self):
+        self.mainbuttonthread.selectlistcoordinates_signal.connect(self.selectlistcoordinates)
+        self.mainbuttonthread.selecrowtoggle_signal.connect(self.selectrowtoggle)
 
 # concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)
 
@@ -797,6 +802,9 @@ threadpool = QThreadPool()
 threadpool.start(mainbuttonthread.runbuttonthread)
 threadpool.start(controlthread.runcontrolthread)
 threadpool.start(timedthread.runtimerthread)
+
+window.start_signals()
+
 window.show()
 
 app.exec()

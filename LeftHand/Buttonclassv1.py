@@ -1,8 +1,11 @@
+from PySide6.QtCore import (QRect, QThreadPool, Slot, QObject, Signal, QThread, Qt)
 import time
 import RPi.GPIO as GPIO
 from VariableList import var_list
 
 class buttonprogram:
+    selectlistcoordinates_signal = Signal(bool)
+    selecrowtoggle_signal = Signal(int)
 
     def __init__(self, UIinstance):
         self.sendtoUI = UIinstance
@@ -10,7 +13,11 @@ class buttonprogram:
         GPIO.setup(var_list.latchpin, GPIO.OUT)
         GPIO.setup(var_list.clockpin, GPIO.OUT)
         GPIO.setup(var_list.datapin, GPIO.IN)
+
+
+
         print('Button Class Initialized')
+
 
 
 #Get the shift register data
@@ -152,7 +159,8 @@ class buttonprogram:
                             var_list.list_toggle = var_list.countoflistwidget - 1
                         else:
                             var_list.list_toggle -= 1
-                        self.sendtoUI.selecrowtoggle(var_list.list_toggle)
+                        self.selecrowtoggle_signal.emit(var_list.list_toggle)
+                        # self.sendtoUI.selecrowtoggle(var_list.list_toggle)
 
                     #selectdown
                     if lastbut[var_list.selectdown] == 1:
@@ -162,11 +170,14 @@ class buttonprogram:
                             var_list.list_toggle = 0
                         else:
                             var_list.list_toggle += 1
-                        self.sendtoUI.selecrowtoggle(var_list.list_toggle)
+                        self.selecrowtoggle_signal.emit(var_list.list_toggle)
+                        # self.sendtoUI.selecrowtoggle(var_list.list_toggle)
 
                     #armbut
                     if lastbut[var_list.armbut] == 1:
-                        self.sendtoUI.selectlistcoordinates()
+                        self.selectlistcoordinates_signal.emit(True)
+                        time.sleep(0.1)
+                        self.selectlistcoordinates_signal.emit(False)# self.sendtoUI.selectlistcoordinates()
 
                     # makeitsobut
                     if lastbut[var_list.makeitsobut] == 1:
