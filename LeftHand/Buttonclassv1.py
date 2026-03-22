@@ -171,7 +171,10 @@ class buttonprogram(QObject):
 
                     #armbut
                     if lastbut[var_list.armbut] == 1:
-                        self.sendtoUI.selectlistcoordinates()
+                        print('armimg button hit')
+                        self.armbuttonpressed()
+                        print('armimg button hit')
+                        # self.sendtoUI.selectlistcoordinates()
 
                     # makeitsobut
                     if lastbut[var_list.makeitsobut] == 1:
@@ -967,10 +970,10 @@ class buttonprogram(QObject):
     # def selectupdownhit(self):
     #     self.selecrowtoggle_signal.emit(var_list.list_toggle)
     #
-    # def armbuttonpressed(self):
-    #     self.selectlistcoordinates_signal.emit(True)
-    #     time.sleep(0.1)
-    #     self.selectlistcoordinates_signal.emit(False)
+    def armbuttonpressed(self):
+        self.selectlistcoordinates_signal.emit(True)
+        time.sleep(0.1)
+        self.selectlistcoordinates_signal.emit(False)
 
 # concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)
 
