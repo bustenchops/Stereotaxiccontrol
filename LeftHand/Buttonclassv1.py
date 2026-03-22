@@ -142,28 +142,28 @@ class buttonprogram:
                                 self.sendtoworking()
                             # var_list.safetybutton = 0
                             self.sendtoUI.uncheckstuff(4)
-                    #
-                    #
-                    # #selectup
-                    # if lastbut[var_list.selectup] == 1:
-                    #     if var_list.list_toggle == 9999:
-                    #         var_list.list_toggle = var_list.countoflistwidget - 1
-                    #     elif var_list.list_toggle == 0:
-                    #         var_list.list_toggle = var_list.countoflistwidget - 1
-                    #     else:
-                    #         var_list.list_toggle -= 1
-                    #     self.sendtoUI.selecrowtoggle(var_list.list_toggle)
-                    #
-                    # #selectdown
-                    # if lastbut[var_list.selectdown] == 1:
-                    #     if var_list.list_toggle == 9999:
-                    #         var_list.list_toggle = 0
-                    #     elif var_list.list_toggle == var_list.countoflistwidget - 1:
-                    #         var_list.list_toggle = 0
-                    #     else:
-                    #         var_list.list_toggle += 1
-                    #     self.sendtoUI.selecrowtoggle(var_list.list_toggle)
-                    #
+
+
+                    #selectup
+                    if lastbut[var_list.selectup] == 1:
+                        if var_list.list_toggle == 9999:
+                            var_list.list_toggle = var_list.countoflistwidget - 1
+                        elif var_list.list_toggle == 0:
+                            var_list.list_toggle = var_list.countoflistwidget - 1
+                        else:
+                            var_list.list_toggle -= 1
+                        self.sendtoUI.selecrowtoggle(var_list.list_toggle)
+
+                    #selectdown
+                    if lastbut[var_list.selectdown] == 1:
+                        if var_list.list_toggle == 9999:
+                            var_list.list_toggle = 0
+                        elif var_list.list_toggle == var_list.countoflistwidget - 1:
+                            var_list.list_toggle = 0
+                        else:
+                            var_list.list_toggle += 1
+                        self.sendtoUI.selecrowtoggle(var_list.list_toggle)
+
                     # #armbut
                     # if lastbut[var_list.armbut] == 1:
                     #     self.sendtoUI.selectlistcoordinates()
