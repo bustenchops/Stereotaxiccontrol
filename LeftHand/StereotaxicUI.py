@@ -645,8 +645,9 @@ class MainWindow(QMainWindow):
         print(var_list.countoflistwidget)
 
     #loads the coordinates from the list to the text boxes
-    @Slot(bool)
-    def selectlistcoordinates(self, running):
+    @Slot()
+    def selectlistcoordinates(self):
+        print('loading the selected coordinates')
         selected_items = self.listWidget.selectedItems()
         selected_text = selected_items[0].text()
         parts = selected_text.split(',')
@@ -673,7 +674,7 @@ class MainWindow(QMainWindow):
         self.withdrawfirstwait.setPlainText(parts[13])
         self.withdrawtotpause.setPlainText(parts[14])
 
-    @Slot(int)
+    @Slot()
     def selecrowtoggle(self):
         self.listWidget.setCurrentRow(var_list.list_toggle)
 
