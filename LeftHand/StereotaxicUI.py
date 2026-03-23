@@ -254,6 +254,12 @@ class MainWindow(QMainWindow):
         self.DVinsertcompenslabel.setGeometry(QRect(615, 473, 130, 20))
         self.DVinsertcompenslabel.setFont(smalllabelfont)
 
+        self.timertimereportlabel = QLabel("Countdown:", self)
+        self.timertimereportlabel.setObjectName(u"timertimereportlabel")
+        self.timertimereportlabel.setGeometry(QRect(615, 701, 130, 20))
+        self.timertimereportlabel.setFont(smalllabelfont)
+
+
         self.DVinsertmanrate = QPlainTextEdit(self.widget)
         self.DVinsertmanrate.setObjectName(u"DVinsertmanrate")
         self.DVinsertmanrate.setGeometry(QRect(627, 385, 50, 31))
@@ -279,7 +285,7 @@ class MainWindow(QMainWindow):
         self.DVinsertpausetime.setGeometry(QRect(711, 438, 50, 31))
         self.DVinsertpausetime.setFont(smalllmanualfont)
 
-        self.timertimereport = QPlainTextEdit("Countdown:", self.widget)
+        self.timertimereport = QPlainTextEdit(self.widget)
         self.timertimereport.setObjectName(u"countdowtimer")
         self.timertimereport.setGeometry(QRect(711, 493, 50, 31))
         self.timertimereport.setFont(smalllmanualfont)
