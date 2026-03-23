@@ -256,7 +256,7 @@ class MainWindow(QMainWindow):
 
         self.timertimereportlabel = QLabel("Countdown:", self)
         self.timertimereportlabel.setObjectName(u"timertimereportlabel")
-        self.timertimereportlabel.setGeometry(QRect(615, 701, 130, 20))
+        self.timertimereportlabel.setGeometry(QRect(701, 473, 130, 20))
         self.timertimereportlabel.setFont(smalllabelfont)
 
 
