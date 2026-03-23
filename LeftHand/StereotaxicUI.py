@@ -589,7 +589,9 @@ class MainWindow(QMainWindow):
 
     @Slot()
     def engagemovement(self):
+        print('engage movement')
         if self.makeitsoBox.isChecked():
+            print('target')
             APcooord = self.APmanualenter.toPlainText()
             MLcooord = self.MLmanualenter.toPlainText()
             DVcooord = self.DVmanualenter.toPlainText()
@@ -598,6 +600,7 @@ class MainWindow(QMainWindow):
             self.uncheckstuff(1)
 
         if self.DVinsertcheckbox.isChecked():
+            print('DV insert')
             self.var_list.dvinsertstop = 1
             targetdepth = self.DVinserttarget.toPlainText()
             compensateforbev = self.DVinsertcompens.toPlainText()
@@ -609,6 +612,7 @@ class MainWindow(QMainWindow):
             self.uncheckstuff(2)
 
         if self.withdrawcheckbox.isChecked():
+            print('withdraw')
             self.var_list.withdrawinsertstop = 1
             withdrrate = self.withdrawmanrate.toPlainText()
             withnumpause= self.withdrawnumpause.toPlainText()
