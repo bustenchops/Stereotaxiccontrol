@@ -195,10 +195,10 @@ class buttonprogram(QObject):
                         if var_list.safetybutton == 1:
                             self.sendtoUI.checkstuff(3)
                             self.sendtoUI.uncheckstuff(4)
-                    #
+
                     # #engage! button
-                    # if lastbut[var_list.engagebut] == 1:
-                    #     self.sendtoUI.engagemovement()
+                    if lastbut[var_list.engagebut] == 1:
+                        self.sendtoUI.engagemovement()
                     #
                     # #retractAP
                     # if lastbut[var_list.retractAP] == 1:
