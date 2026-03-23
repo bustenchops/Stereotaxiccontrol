@@ -229,12 +229,12 @@ class buttonprogram(QObject):
                         if var_list.safetybutton == 1:
                             self.sendtoUI.functiononebutton()
                             self.sendtoUI.uncheckstuff(4)
-                    #
+
                     # #functiontwo
-                    # if lastbut[var_list.functiontwo] == 1:
-                    #     if var_list.safetybutton == 1:
-                    #         self.sendtoUI.functiontwobutton()
-                    #         self.sendtoUI.uncheckstuff(4)
+                    if lastbut[var_list.functiontwo] == 1:
+                        if var_list.safetybutton == 1:
+                            self.sendtoUI.functiontwobutton()
+                            self.sendtoUI.uncheckstuff(4)
                     #
 
                 # Speed switch
