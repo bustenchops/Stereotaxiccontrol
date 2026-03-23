@@ -223,12 +223,12 @@ class buttonprogram(QObject):
                     #     if var_list.safetybutton == 1:
                     #         self.sendtoUI.DVreturnmovement()
                     #         self.sendtoUI.uncheckstuff(4)
-                    #
-                    # #functionone
-                    # if lastbut[var_list.functionone] == 1:
-                    #     if var_list.safetybutton == 1:
-                    #         self.sendtoUI.functiononebutton()
-                    #         self.sendtoUI.uncheckstuff(4)
+
+                    #functionone
+                    if lastbut[var_list.functionone] == 1:
+                        if var_list.safetybutton == 1:
+                            self.sendtoUI.functiononebutton()
+                            self.sendtoUI.uncheckstuff(4)
                     #
                     # #functiontwo
                     # if lastbut[var_list.functiontwo] == 1:

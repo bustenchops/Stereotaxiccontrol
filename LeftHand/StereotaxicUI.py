@@ -594,12 +594,13 @@ class MainWindow(QMainWindow):
         if self.DVinsertcheckbox.isChecked():
             self.var_list.dvinsertstop = 1
             targetdepth = self.DVinserttarget.toPlainText()
-            finaltargetdepth = targetdepth - self.DVinsertcompens.toPlainText()
+            compensateforbev = self.DVinsertcompens.toPlainText()
             insertrate = self.DVinsertmanrate.toPlainText()
             numberofpauses = self.DVinsertnumpause.toPlainText()
             lengthofpauses = self.DVinsertpausetime.toPlainText()
             print('DV insert started')
-            controlthread.dvinsertauto(finaltargetdepth, insertrate, numberofpauses, lengthofpauses)
+            controlthread.insertbevelcompenstation(compensateforbev)
+            # controlthread.dvinsertauto(compensateforbev, targetdepth, insertrate, numberofpauses, lengthofpauses)
             self.uncheckstuff(2)
 
         if self.withdrawcheckbox.isChecked():

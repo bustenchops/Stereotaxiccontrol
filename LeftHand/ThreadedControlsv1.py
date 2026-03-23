@@ -415,7 +415,12 @@ class threadedcontrols:
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
 
-    def dvinsertauto(self, ftargetdepth, insrate, numberopauses, lengpauses):
+    def insertbevelcompenstation(self, compensation):
+        self.bevelcomp = float(compensation)
+        self.sendtoUI.compcheck()
+
+
+    def dvinsertauto(self, targetdepth, insrate, numberopauses, lengpauses):
 
         print('moving to DV insertion target')
         if insrate == 0:
@@ -427,13 +432,15 @@ class threadedcontrols:
         elif numberopauses == None:
             return
 
-        self.intftargetdepth = float(ftargetdepth)
+
+        self.inttargetdepth = float(targetdepth)
         self.intinsrate = float(insrate)
         self.intnumberopauses = numberopauses
         self.intlengpauses = lengpauses
         self.countdowntim = self.intlengpauses
 
-        self.reltargetdiff = abs(self.intftargetdepth - var_list.DVcurRELdist)
+
+        self.reltargetdiff = abs(self.inttargetdepth - var_list.DVcurRELdist)
 
         print('difference')
         print(self.reltargetdiff)
