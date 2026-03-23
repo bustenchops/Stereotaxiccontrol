@@ -6,6 +6,7 @@ from VariableList import var_list
 class buttonprogram(QObject):
 
     selectlistcoordinates_signal = Signal(bool)
+    engagemovement_signal = Signal(bool)
 
     def __init__(self, UIinstance):
         super().__init__()
@@ -198,7 +199,10 @@ class buttonprogram(QObject):
 
                     # #engage! button
                     if lastbut[var_list.engagebut] == 1:
-                        self.sendtoUI.engagemovement()
+                        self.engagemovement_signal.emit(True)
+                        time.sleep(0.1)
+                        self.engagemovement_signal.emit(False)
+
                     #
                     # #retractAP
                     # if lastbut[var_list.retractAP] == 1:

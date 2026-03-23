@@ -587,7 +587,7 @@ class MainWindow(QMainWindow):
     def timercountdownupdate(self,lefttime):
         self.timertimereport.setPlainText(lefttime)
 
-    @Slot()
+    @Slot(bool)
     def engagemovement(self):
         print('engage movement')
         if self.makeitsoBox.isChecked():
@@ -792,7 +792,9 @@ class MainWindow(QMainWindow):
     def start_signals(self):
         print('start signals')
         mainbuttonthread.selectlistcoordinates_signal.connect(self.selectlistcoordinates)
+        mainbuttonthread.engagemovent_signal.connect(self.engagemovement)
         controlthread.timerupdate_signal.connect(self.timercountdownupdate)
+
     #     mainbuttonthread.selecrowtoggle_signal.connect(self.selectrowtoggle)
 
 # concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)
