@@ -183,22 +183,18 @@ class buttonprogram(QObject):
                             self.sendtoUI.on_makeitso_changed()
                             # var_list.safetybutton = 0
                             self.sendtoUI.uncheckstuff(4)
-                    #
-                    # #DVinsert
-                    # if lastbut[var_list.DVinsert] == 1:
-                    #     if var_list.safetybutton == 1:
-                    #         self.sendtoUI.checkstuff(2)
-                    #         # self.sendtoUI.on_DVinsert_changed()
-                    #         # var_list.safetybutton = 0
-                    #         self.sendtoUI.uncheckstuff(4)
-                    #
-                    # #withdrawl
-                    # if lastbut[var_list.withdrawl] == 1:
-                    #     if var_list.safetybutton == 1:
-                    #         self.sendtoUI.checkstuff(3)
-                    #         #self.sendtoUI.on_DVinsert_changed()
-                    #         # var_list.safetybutton = 0
-                    #         self.sendtoUI.uncheckstuff(4)
+
+                    #DVinsert
+                    if lastbut[var_list.DVinsert] == 1:
+                        if var_list.safetybutton == 1:
+                            self.sendtoUI.checkstuff(2)
+                            self.sendtoUI.uncheckstuff(4)
+
+                    #withdrawl
+                    if lastbut[var_list.withdrawl] == 1:
+                        if var_list.safetybutton == 1:
+                            self.sendtoUI.checkstuff(3)
+                            self.sendtoUI.uncheckstuff(4)
                     #
                     # #engage! button
                     # if lastbut[var_list.engagebut] == 1:
