@@ -1,18 +1,20 @@
 import time
 import RPi.GPIO as GPIO
-
+from PySide6.QtCore import (Slot, QObject, Signal, Qt)
 from VariableList import var_list
 from RotatryEncoderv1 import RotaryEncoder
 import tkinter as tk
 from tkinter import simpledialog
 
-class threadedcontrols:
+class threadedcontrols(QObject):
 
 # setup GPIO
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
+    timerupdate_signal = Signal(int)
 
     def __init__(self, UIinstance):
+        super().__init__()
         self.sendtoUI = UIinstance
 
 #Import the offset values from file
@@ -417,8 +419,7 @@ class threadedcontrols:
 
     def dvinsertauto(self, compensation, targetdepth, insrate, numberopauses, lengpauses):
 
-        bevelcompquestion = self.get_user_input('Bevel Comp. Check:',
-                                                'Check Bevel Comp. Adjust if needed and press OK.')
+
 
         print('moving to DV insertion target')
         if insrate == 0:
@@ -437,25 +438,48 @@ class threadedcontrols:
         self.intlengpauses = lengpauses
         self.countdowntim = self.intlengpauses
 
-        self.reltargetdiff = abs(self.inttargetdepth - var_list.DVcurRELdist)
+        #does bevel comp calc and moves to position, asks for adjustment and then proceeds.
+
+        bevelcompcalc = self.bevelcomp / var_list.DVstepdistance
+        #note if bevelcompcalc is negative means need to add steps so next calc mean substract the negative.
+
+        if var_list.DVrelpos >= var_list.DVsteps:
+            stepsbevelcomp = (var_list.DVrelpos - var_list.DVsteps) - round(bevelcompcalc)
+        elif var_list.DVrelpos < var_list.DVsteps:
+            stepsbevelcomp = (var_list.DVsteps - var_list.DVrelpos) - round(bevelcompcalc)
+        if stepsbevelcomp > var_list.DVrelpos:
+            var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
+        elif stepsbevelcomp < var_list.DVrelpos:
+            var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+
+        bevelcompquestion = self.get_user_input('Bevel Comp. Check:',
+                                                'Check Bevel Comp. Adjust if needed and press OK.')
+
+        reportcomp = self.get_user_input('Offset:', f"Current offset: {var_list.DVcurRELdist}.")
+
+
+        reltargetdiff = abs(self.inttargetdepth - var_list.DVcurRELdist)
 
         print('difference')
-        print(self.reltargetdiff)
+        print(reltargetdiff)
 
-        self.instepstotargetDV = self.reltargetdiff / var_list.DVstepdistance
+        instepstotargetDV = reltargetdiff / var_list.DVstepdistance
 
-        self.instepstarget_int = int(self.instepstotargetDV)
+        instepstarget_int = int(instepstotargetDV)
+        print('steps needed to move to desired depth: ', instepstarget_int)
 
-        print('steps needed')
-        print(self.instepstarget_int)
+        totalstepdistance = instepstarget_int + var_list.DVsteps
 
-        stepbtwnpauses = self.instepstotargetDV / self.intnumberopauses
-        remainderpause = self.instepstotargetDV % self.intnumberopauses
-        insertrate = 1 / (self.intinsrate * ( 1 / var_list.DVstepdistance ) / 60)
-        roundinsertrate = round(insertrate, 3)
+        print('steps needed to move to desired depth: ', instepstarget_int)
 
 
-        if var_list.DVcurRELdist > self.intftargetdepth:
+        stepbtwnpauses = instepstotargetDV / (self.intnumberopauses)
+        remainderpause = instepstotargetDV % self.intnumberopauses
+        insertratesteppersec = 1 / (self.intinsrate * ( 1 / var_list.DVstepdistance ) / 60)
+        roundinsertrate = round(insertratesteppersec, 3)
+
+
+        if var_list.DVsteps < instepstotargetDV:
             print('DV down')
             for y in range(self.intnumberopauses):
                 for x in range(stepbtwnpauses):
@@ -467,14 +491,14 @@ class threadedcontrols:
                     else:
                         var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
                         time.sleep(roundinsertrate)
-                var_list.DVmove.PosRelAbsCalc()
+                    var_list.DVmove.PosRelAbsCalc()
                 for t in range(self.intlengpauses):
                     if var_list.dvinsertstop == 0:
                         var_list.DVmove.PosRelAbsCalc()
                         self.sendtoUI.uncheckstuff(2)
                         self.sendtoUI.uncheckstuff(4)
                     else:
-                        self.sendtoUI.timercountdownupdate(self.countdowntim)
+                        self.selectlistcoordinates_signal.emit(self.countdowntim)
                         time.sleep(1)
                         self.countdowntim -= 1
             for f in range(remainderpause):
@@ -487,12 +511,9 @@ class threadedcontrols:
                     var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
                     time.sleep(roundinsertrate)
 
-        elif var_list.DVcurRELdist < self.intftargetdepth:
-            print('DV up')
-            for x in range(self.instepsDV_int):
-                var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
-        else:
-            print('DV not moving')
+        elif var_list.DVsteps >= instepstotargetDV:
+            print('DV already at depth of too deep')
+
 
         var_list.DVmove.PosRelAbsCalc()
 

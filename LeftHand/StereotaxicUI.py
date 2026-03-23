@@ -239,7 +239,7 @@ class MainWindow(QMainWindow):
         self.DVinsertpausetimelabel.setGeometry(QRect(701, 418, 130, 20))
         self.DVinsertpausetimelabel.setFont(smalllabelfont)
 
-        self.DVinsertpauselabel = QLabel("Num. pauses:", self)
+        self.DVinsertpauselabel = QLabel("Num.Bursts:", self)
         self.DVinsertpauselabel.setObjectName(u"dvnumpauses")
         self.DVinsertpauselabel.setGeometry(QRect(701, 365, 130, 20))
         self.DVinsertpauselabel.setFont(smalllabelfont)
@@ -306,7 +306,7 @@ class MainWindow(QMainWindow):
         self.withdrawpausetimelabel.setGeometry(QRect(787, 473, 130, 20))
         self.withdrawpausetimelabel.setFont(smalllabelfont)
 
-        self.withdrawnumpauselabel = QLabel("Num. pauses:", self)
+        self.withdrawnumpauselabel = QLabel("Num.Bursts:", self)
         self.withdrawnumpauselabel.setObjectName(u"withdrawnumpauselabel")
         self.withdrawnumpauselabel.setGeometry(QRect(787, 418, 130, 20))
         self.withdrawnumpauselabel.setFont(smalllabelfont)
@@ -583,7 +583,7 @@ class MainWindow(QMainWindow):
         print('the send to UI was good')
 
 #grabs the plaintext from the text boxes only if the checkbox is selected
-    @Slot()
+    @Slot(int)
     def timercountdownupdate(self,lefttime):
         self.timertimereport.setPlainText(lefttime)
 
@@ -788,6 +788,7 @@ class MainWindow(QMainWindow):
     def start_signals(self):
         print('start signals')
         mainbuttonthread.selectlistcoordinates_signal.connect(self.selectlistcoordinates)
+        controlthread.timerupdate_signal.connect(self.timercountdownupdate)
     #     mainbuttonthread.selecrowtoggle_signal.connect(self.selectrowtoggle)
 
 # concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)
