@@ -3,7 +3,7 @@ cd ..
 
 source ./venv1/bin/activate
 
-rclone copy -P onedrive:'**fulldirectory/finalfolder**' /home/**rest_of_directory_to**/TargetLists
+# rclone copy -P onedrive:'**fulldirectory/finalfolder**' /home/**rest_of_directory_to**/TargetLists
 
 cd /home/**rest_of_directory_to**/Stereotaxiccontrol
 
