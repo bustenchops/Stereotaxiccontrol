@@ -153,18 +153,18 @@ class threadedcontrols:
         root.withdraw()  # Hide the root window
         # print('withdraw1')
         # Prompt the user for input
-        user_input = simpledialog.askstring(title=giventitle, prompt=givenprompt)
-        # print('should see window')
-        # Print the user input
-        if user_input is not None:
-            print(f"User input: {user_input}")
-            return user_input
-
-        else:
-            print("No input provided")
-
-        # Destroy the root window
-        root.destroy()
+        try:
+            user_input = simpledialog.askstring(title=giventitle, prompt=givenprompt)
+            # print('should see window')
+            # Print the user input
+            if user_input is not None:
+                print(f"User input: {user_input}")
+                return user_input
+            else:
+                print("No input provided")
+        finally:
+            # Destroy the root window
+            root.destroy()
 
     def questionzerosteppers(self):
         print('UI sent this to control thread')
