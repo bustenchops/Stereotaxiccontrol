@@ -474,29 +474,16 @@ class threadedcontrols(QObject):
         var_list.MLmove.PosRelAbsCalc()
         var_list.DVmove.PosRelAbsCalc()
 
-        reltargetdiff = abs(self.inttargetdepth - var_list.DVcurRELdist)
+        stepstotargetDV = abs(round(self.inttargetdepth / var_list.DVstepdistance))
 
-        print('difference')
-        print(reltargetdiff)
+        if self.intargetdepth > var_list.DVcurRELdist:
+            print('DV to low already')
+        elif self.inttargetdepth < var_list.DVcurRELdist:
+            stepbtwnpauses = int(stepstotargetDV / (self.intnumberopauses))
+            remainderpause = stepstotargetDV % self.intnumberopauses
+            insertratesteppersec = 1 / (self.intinsrate * ( 1 / var_list.DVstepdistance ) / 60)
+            roundinsertrate = round(insertratesteppersec, 3)
 
-        instepstotargetDV = reltargetdiff / var_list.DVstepdistance
-
-        instepstarget_int = int(instepstotargetDV)
-        print('steps needed to move to desired depth: ', instepstarget_int)
-
-        totalstepdistance = instepstarget_int + var_list.DVsteps
-
-        print('steps needed to move to desired depth: ', instepstarget_int)
-
-
-        stepbtwnpauses = int(instepstotargetDV / (self.intnumberopauses))
-        remainderpause = instepstotargetDV % self.intnumberopauses
-        insertratesteppersec = 1 / (self.intinsrate * ( 1 / var_list.DVstepdistance ) / 60)
-        roundinsertrate = round(insertratesteppersec, 3)
-
-
-        if var_list.DVsteps < instepstotargetDV:
-            print('DV down')
             for y in range(self.intnumberopauses):
                 for x in range(stepbtwnpauses):
                     if var_list.dvinsertstop == 0:
@@ -514,7 +501,7 @@ class threadedcontrols(QObject):
                         self.sendtoUI.uncheckstuff(2)
                         self.sendtoUI.uncheckstuff(4)
                     else:
-                        self.timerupdate_signal_signal.emit(self.countdowntim)
+                        self.timerupdate_signal.emit(self.countdowntim)
                         time.sleep(1)
                         self.countdowntim -= 1
             for f in range(remainderpause):
@@ -526,11 +513,10 @@ class threadedcontrols(QObject):
                 else:
                     var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
                     time.sleep(roundinsertrate)
+            var_list.DVmove.PosRelAbsCalc()
 
-        elif var_list.DVsteps >= instepstotargetDV:
-            print('DV already at depth of too deep')
-
-
+        var_list.APmove.PosRelAbsCalc()
+        var_list.MLmove.PosRelAbsCalc()
         var_list.DVmove.PosRelAbsCalc()
 
         GPIO.output(var_list.enableAll, 1)
