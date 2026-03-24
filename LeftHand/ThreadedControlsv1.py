@@ -443,22 +443,23 @@ class threadedcontrols(QObject):
         bevlsubfromrelpos = var_list.DVrelpos - bevelcompcalc
         print('bevel compensation:', bevelcompcalc)
         print('final position', bevlsubfromrelpos)
+        print('currrentSteps:' var_list.DVsteps)
         #note if bevelcompcalc is negative means need to add steps so next calc mean substract the negative.
         if bevlsubfromrelpos <= var_list.DVsteps:
-            stepsbevelcomp = bevlsubfromrelpos - var_list.DVsteps
-            print(stepsbevelcomp, 'number of steps to move down')
-            absstepsbevcomp = abs(stepsbevelcomp)
-            for r in range (absstepsbevcomp):
-                var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
-                print('downtocomp')
-            var_list.DVmove.PosRelAbsCalc()
-        elif bevlsubfromrelpos > var_list.DVsteps:
             stepsbevelcomp = var_list.DVsteps - bevlsubfromrelpos
             print(stepsbevelcomp, 'number of steps to move up')
             absstepsbevcomp = abs(stepsbevelcomp)
-            for r in range(absstepsbevcomp):
+            for r in range (absstepsbevcomp):
                 var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
                 print('uptocomp')
+            var_list.DVmove.PosRelAbsCalc()
+        elif bevlsubfromrelpos > var_list.DVsteps:
+            stepsbevelcomp = bevlsubfromrelpos - var_list.DVsteps
+            print(stepsbevelcomp, 'number of steps to move down')
+            absstepsbevcomp = abs(stepsbevelcomp)
+            for r in range(absstepsbevcomp):
+                var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
+                print('downtocomp')
             var_list.DVmove.PosRelAbsCalc()
 
         GPIO.output(var_list.enableAll, 1)
