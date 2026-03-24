@@ -558,28 +558,28 @@ class MainWindow(QMainWindow):
             var_list.safetybutton = 0
 
 # UPDATE the LCDS
-    @Slot(bool)
-    def updateAPLCD(self, running):
+    @Slot()
+    def updateAPLCD(self, steps, curABS, curREL):
         print('updated AP steps')
-        self.APstepLCD.display(var_list.APsteps)
-        self.APABSposLCD.display(var_list.APcurABSdist)
-        self.APRelposLCD.display(var_list.APcurRELdist)
+        self.APstepLCD.display(steps)
+        self.APABSposLCD.display(curABS)
+        self.APRelposLCD.display(curREL)
         return
 
-    @Slot(bool)
-    def updateMLLCD(self, running):
+    @Slot()
+    def updateMLLCD(self, steps, curABS, curREL):
         print('updated ML steps')
-        self.MLstepLCD.display(var_list.MLsteps)
-        self.MLABSposLCD.display(var_list.MLcurABSdist)
-        self.MLRelposLCD.display(var_list.MLcurRELdist)
+        self.MLstepLCD.display(steps)
+        self.MLABSposLCD.display(curABS)
+        self.MLRelposLCD.display(curREL)
         return
 
-    @Slot(bool)
-    def updateDVLCD(self, running):
+    @Slot()
+    def updateDVLCD(self, steps, curABS, curREL):
         print('updated DV steps')
-        self.DVstepLCD.display(var_list.DVsteps)
-        self.DVABSposLCD.display(var_list.DVcurABSdist)
-        self.DVRelposLCD.display(var_list.DVcurRELdist)
+        self.DVstepLCD.display(steps)
+        self.DVABSposLCD.display(curABS)
+        self.DVRelposLCD.display(curREL)
         return
 
     def uitest(self):
@@ -797,11 +797,6 @@ class MainWindow(QMainWindow):
         mainbuttonthread.selectlistcoordinates_signal.connect(self.selectlistcoordinates)
         mainbuttonthread.engagemovement_signal.connect(self.engagemovement)
         controlthread.timerupdate_signal.connect(self.timercountdownupdate)
-        var_list.APmove.APlcd_signal.connect(self.updateAPLCD)
-        var_list.MLmove.MLlcd_signal.connect(self.updateMLLCD)
-        var_list.DVmove.DVlcd_signal.connect(self.updateDVLCD)
-
-
 
     #     mainbuttonthread.selecrowtoggle_signal.connect(self.selectrowtoggle)
 
