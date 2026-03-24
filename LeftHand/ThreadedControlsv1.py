@@ -436,15 +436,16 @@ class threadedcontrols():
         self.intlengpauses = int(lengpauses)
         self.countdowntime = self.intlengpauses
 
+
         #does bevel comp calc and moves to position, asks for adjustment and then proceeds.
 
         bevelcompcalc = round(int(self.bevelcomp / var_list.DVstepdistance))
-        #note if bevelcompcalc is negative means need to add steps so next calc mean substract the negative.
+        #note if bevelcompcalc is negative means need to add steps so next calc mean subtract the negative.
         bevlsubfromrelpos = var_list.DVrelpos - bevelcompcalc
         print('bevel compensation:', bevelcompcalc)
         print('final position', bevlsubfromrelpos)
         print('currrentSteps:', var_list.DVsteps)
-        #note if bevelcompcalc is negative means need to add steps so next calc mean substract the negative.
+        #note if bevelcompcalc is negative means need to add steps so next calc mean subtract the negative.
         if bevlsubfromrelpos <= var_list.DVsteps:
             stepsbevelcomp = var_list.DVsteps - bevlsubfromrelpos
             print(stepsbevelcomp, 'number of steps to move up')
@@ -502,10 +503,10 @@ class threadedcontrols():
                         self.sendtoUI.uncheckstuff(4)
                     else:
                         print(self.countdowntime)
-                        intcountdown = str(self.countdowntime)
-                        # self.timerupdate_signal.emit(intcountdown)
+                        # self.timerupdate_signal.emit(self.countdowntime)
                         time.sleep(1)
                         self.countdowntime -= 1
+                self.countdowntime = self.intlengpause
             for f in range(remainderpause):
                 if var_list.dvinsertstop == 0:
                     var_list.DVmove.PosRelAbsCalc()
@@ -544,14 +545,13 @@ class threadedcontrols():
         self.withstepsperpause = self.withdrawdist / withnumpause
         self.withstepsperpauseremainder = self.withdrawdist % withnumpause
         self.secondpause = withtotalpause - withfirstwait
+        self.secondtimer = self.secondpause
         self.countdowntimA = withfirstwait
         self.countdowntimB = self.secondpause
         self.wdptime = withpausetime
 
-
         wdrate = 1 / (withdrrate * ( 1 / var_list.DVstepdistance ) / 60)
         roundwdrate = round(wdrate, 3)
-
 
         if var_list.DVsteps > var_list.DVrelpos:
             print('DV down')
@@ -561,7 +561,8 @@ class threadedcontrols():
                     self.sendtoUI.uncheckstuff(4)
                     return
                 else:
-                    self.sendtoUI.timercountdownupdate(self.countdowntimA)
+                    print(self.countdowntimA)
+                    # self.sendtoUI.timercountdownupdate(self.countdowntimA)
                     time.sleep(1)
                     self.countdowntimA -= 1
             for f in range(self.wdfirstdist):
@@ -579,9 +580,10 @@ class threadedcontrols():
                     self.sendtoUI.uncheckstuff(4)
                     return
                 else:
-                    self.sendtoUI.timercountdownupdate(self.countdowntimB)
+                    print(self.secondtimer)
+                    # self.sendtoUI.timercountdownupdate(self.countdowntimB)
                     time.sleep(1)
-                    self.countdowntimB -= 1
+                    self.secondtimer -= 1
             for y in range(withnumpause):
                 for x in range(self.withdrawdist):
                     if var_list.withdrawinsertstop == 0:
@@ -598,9 +600,11 @@ class threadedcontrols():
                         self.sendtoUI.uncheckstuff(4)
                         return
                     else:
-                        self.sendtoUI.timercountdownupdate(self.wdptime)
+                        print(self.wdptime)
+                        # self.sendtoUI.timercountdownupdate(self.wdptime)
                         time.sleep(1)
                         self.wdptime -= 1
+                self.wdptime = withpausetime
             for f in range(self.withstepsperpauseremainder):
                 if var_list.withdrawinsertstop == 0:
                     self.sendtoUI.uncheckstuff(3)
@@ -611,6 +615,14 @@ class threadedcontrols():
                     time.sleep(roundwdrate)
 
         var_list.DVmove.PosRelAbsCalc()
+
+        # for g in range (var_list.DVup_bregramhome):
+        #     var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+
+        var_list.APmove.PosRelAbsCalc()
+        var_list.MLmove.PosRelAbsCalc()
+        var_list.DVmove.PosRelAbsCalc()
+
 
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
