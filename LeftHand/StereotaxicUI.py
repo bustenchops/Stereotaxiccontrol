@@ -559,25 +559,25 @@ class MainWindow(QMainWindow):
 
 # UPDATE the LCDS
     @Slot()
-    def updateAPLCD(self, steps, curABS, curREL):
+    def updateAPLCD(self, stepsupdate, curABS, curREL):
         print('updated AP steps')
-        self.APstepLCD.display(steps)
+        self.APstepLCD.display(stepsupdate)
         self.APABSposLCD.display(curABS)
         self.APRelposLCD.display(curREL)
         return
 
     @Slot()
-    def updateMLLCD(self, steps, curABS, curREL):
+    def updateMLLCD(self, stepsupdate, curABS, curREL):
         print('updated ML steps')
-        self.MLstepLCD.display(steps)
+        self.MLstepLCD.display(stepsupdate)
         self.MLABSposLCD.display(curABS)
         self.MLRelposLCD.display(curREL)
         return
 
     @Slot()
-    def updateDVLCD(self, steps, curABS, curREL):
+    def updateDVLCD(self, stepsupdate, curABS, curREL):
         print('updated DV steps')
-        self.DVstepLCD.display(steps)
+        self.DVstepLCD.display(stepsupdate)
         self.DVABSposLCD.display(curABS)
         self.DVRelposLCD.display(curREL)
         return
