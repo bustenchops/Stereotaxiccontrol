@@ -432,13 +432,14 @@ class threadedcontrols(QObject):
         self.bevelcomp = float(compensation)
         self.inttargetdepth = float(targetdepth)
         self.intinsrate = float(insrate)
-        self.intnumberopauses = numberopauses
-        self.intlengpauses = lengpauses
+        self.intnumberopauses = int(numberopauses)
+        self.intlengpauses = int(lengpauses)
         self.countdowntim = self.intlengpauses
 
         #does bevel comp calc and moves to position, asks for adjustment and then proceeds.
 
         bevelcompcalc = self.bevelcomp / var_list.DVstepdistance
+        print('bevel compensation:', bevelcompcalc)
         #note if bevelcompcalc is negative means need to add steps so next calc mean substract the negative.
 
         if var_list.DVrelpos >= var_list.DVsteps:
