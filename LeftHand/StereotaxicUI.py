@@ -798,7 +798,7 @@ class MainWindow(QMainWindow):
         mainbuttonthread.engagemovement_signal.connect(self.engagemovement)
         controlthread.timerupdate_signal.connect(self.timercountdownupdate)
         var_list.APmove.APlcd_signal.connect(self.updateAPLCD)
-        var_list.MLmove.MLlcd_signal.connect(self.updateMLLCDd)
+        var_list.MLmove.MLlcd_signal.connect(self.updateMLLCD)
         var_list.DVmove.DVlcd_signal.connect(self.updateDVLCD)
 
 
