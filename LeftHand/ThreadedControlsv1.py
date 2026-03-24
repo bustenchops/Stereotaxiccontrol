@@ -501,7 +501,7 @@ class threadedcontrols(QObject):
                         self.sendtoUI.uncheckstuff(2)
                         self.sendtoUI.uncheckstuff(4)
                     else:
-                        intcountdown = str(self.coutdowntim)
+                        intcountdown = str(self.countdowntim)
                         self.timerupdate_signal.emit(intcountdown)
                         time.sleep(1)
                         self.countdowntim -= 1
