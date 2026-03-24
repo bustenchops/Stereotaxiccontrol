@@ -494,7 +494,7 @@ class threadedcontrols(QObject):
                     else:
                         var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
                         time.sleep(roundinsertrate)
-                    var_list.DVmove.PosRelAbsCalc()
+                var_list.DVmove.PosRelAbsCalc()
                 for t in range(self.intlengpauses):
                     if var_list.dvinsertstop == 0:
                         var_list.DVmove.PosRelAbsCalc()
