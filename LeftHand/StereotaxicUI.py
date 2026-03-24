@@ -607,7 +607,7 @@ class MainWindow(QMainWindow):
             insertrate = self.DVinsertmanrate.toPlainText()
             numberofpauses = self.DVinsertnumpause.toPlainText()
             lengthofpauses = self.DVinsertpausetime.toPlainText()
-            print('DV insert started target:',target,'comp:',compensateforbev,'rate:',insertrate,'numberofpauses',numberofpauses,'lengthofpauses:',lengthofpauses)
+            print('DV insert started target:',targetdepth,'comp:',compensateforbev,'rate:',insertrate,'numberofpauses',numberofpauses,'lengthofpauses:',lengthofpauses)
             controlthread.dvinsertauto(compensateforbev, targetdepth, insertrate, numberofpauses, lengthofpauses)
             self.uncheckstuff(2)
 
