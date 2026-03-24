@@ -601,7 +601,7 @@ class MainWindow(QMainWindow):
 
         if self.DVinsertcheckbox.isChecked():
             print('DV insert')
-            self.var_list.dvinsertstop = 1
+            var_list.dvinsertstop = 1
             targetdepth = self.DVinserttarget.toPlainText()
             compensateforbev = self.DVinsertcompens.toPlainText()
             insertrate = self.DVinsertmanrate.toPlainText()
