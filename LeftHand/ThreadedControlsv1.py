@@ -443,7 +443,7 @@ class threadedcontrols(QObject):
         bevlsubfromrelpos = var_list.DVrelpos - bevelcompcalc
         print('bevel compensation:', bevelcompcalc)
         print('final position', bevlsubfromrelpos)
-        print('currrentSteps:' var_list.DVsteps)
+        print('currrentSteps:', var_list.DVsteps)
         #note if bevelcompcalc is negative means need to add steps so next calc mean substract the negative.
         if bevlsubfromrelpos <= var_list.DVsteps:
             stepsbevelcomp = var_list.DVsteps - bevlsubfromrelpos
