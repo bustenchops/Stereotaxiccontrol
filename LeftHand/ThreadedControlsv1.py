@@ -453,12 +453,15 @@ class threadedcontrols(QObject):
             for r in range (stepsbevelcomp):
                 var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
                 print('downtocomp')
-            var_list.DVmove.PosRelAbsCalc()
+
         elif stepsbevelcomp < var_list.DVrelpos:
             for r in range(stepsbevelcomp):
                 var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
                 print('uptocomp')
-            var_list.DVmove.PosRelAbsCalc()
+        var_list.DVmove.PosRelAbsCalc()
+
+        GPIO.output(var_list.enableAll, 1)
+        var_list.lastenablestate = 1
 
         bevelcompquestion = self.get_user_input('Bevel Comp. Check:',
                                                 'Check Bevel Comp. Adjust if needed and press OK.')
