@@ -476,7 +476,7 @@ class threadedcontrols(QObject):
 
         stepstotargetDV = abs(round(self.inttargetdepth / var_list.DVstepdistance))
 
-        if self.intargetdepth > var_list.DVcurRELdist:
+        if self.inttargetdepth > var_list.DVcurRELdist:
             print('DV to low already')
         elif self.inttargetdepth < var_list.DVcurRELdist:
             stepbtwnpauses = int(stepstotargetDV / (self.intnumberopauses))
