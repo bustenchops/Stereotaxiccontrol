@@ -438,25 +438,23 @@ class threadedcontrols(QObject):
 
         #does bevel comp calc and moves to position, asks for adjustment and then proceeds.
 
-        bevelcompcalc = int(self.bevelcomp / var_list.DVstepdistance)
-        print('bevel compensation:', bevelcompcalc)
+        bevelcompcalc = round(int(self.bevelcomp / var_list.DVstepdistance))
         #note if bevelcompcalc is negative means need to add steps so next calc mean substract the negative.
-        print(var_list.DVrelpos, 'DVrelpos')
-        print(var_list.DVsteps, 'DVsteps')
-        if var_list.DVrelpos >= var_list.DVsteps:
-            stepsbevelcomp = (var_list.DVrelpos - var_list.DVsteps) - round(bevelcompcalc)
-            print(stepsbevelcomp, 'number of steps to take DVrelpos greater')
-        elif var_list.DVrelpos < var_list.DVsteps:
-            stepsbevelcomp = (var_list.DVsteps - var_list.DVrelpos) - round(bevelcompcalc)
-            print(stepsbevelcomp, 'number of steps to take DVrelpos lesser')
-
-        if stepsbevelcomp > 0:
+        bevlsubfromrelpos = var_list.DVrelpos - bevelcompcalc
+        print('bevel compensation:', bevelcompcalc)
+        print('final position', bevlsubfromrelpos)
+        #note if bevelcompcalc is negative means need to add steps so next calc mean substract the negative.
+        if bevlsubfromrelpos <= var_list.DVsteps:
+            stepsbevelcomp = bevlsubfromrelpos - var_list.DVsteps
+            print(stepsbevelcomp, 'number of steps to move down')
             absstepsbevcomp = abs(stepsbevelcomp)
             for r in range (absstepsbevcomp):
                 var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
                 print('downtocomp')
             var_list.DVmove.PosRelAbsCalc()
-        elif stepsbevelcomp < 0:
+        elif bevlsubfromrelpos > var_list.DVsteps:
+            stepsbevelcomp = var_list.DVsteps - bevlsubfromrelpos
+            print(stepsbevelcomp, 'number of steps to move up')
             absstepsbevcomp = abs(stepsbevelcomp)
             for r in range(absstepsbevcomp):
                 var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
@@ -468,7 +466,9 @@ class threadedcontrols(QObject):
         time.sleep(0.1)
         bevelcompquestion = self.get_user_input('Bevel Comp. Check:',
                                                 'Check Bevel Comp. Adjust if needed and press OK.')
+        var_list.DVmove.PosRelAbsCalc()
         reportcomp = self.get_user_input('Offset:', f"Current offset: {var_list.DVcurRELdist}.")
+
         var_list.APmove.PosRelAbsCalc()
         var_list.MLmove.PosRelAbsCalc()
         var_list.DVmove.PosRelAbsCalc()
