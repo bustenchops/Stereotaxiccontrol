@@ -448,13 +448,16 @@ class threadedcontrols(QObject):
             print(stepsbevelcomp, 'number of steps to take')
         elif var_list.DVrelpos < var_list.DVsteps:
             stepsbevelcomp = (var_list.DVsteps - var_list.DVrelpos) - round(bevelcompcalc)
+
         if stepsbevelcomp > var_list.DVrelpos:
             for r in range (stepsbevelcomp):
                 var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
+                print('downtocomp')
             var_list.DVmove.PosRelAbsCalc()
         elif stepsbevelcomp < var_list.DVrelpos:
             for r in range(stepsbevelcomp):
                 var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+                print('uptocomp')
             var_list.DVmove.PosRelAbsCalc()
 
         bevelcompquestion = self.get_user_input('Bevel Comp. Check:',
