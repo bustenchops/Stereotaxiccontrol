@@ -586,7 +586,7 @@ class MainWindow(QMainWindow):
         print('the send to UI was good')
 
 #grabs the plaintext from the text boxes only if the checkbox is selected
-    @Slot(int)
+    @Slot(str)
     def timercountdownupdate(self,lefttime):
         self.timertimereport.setPlainText(lefttime)
 

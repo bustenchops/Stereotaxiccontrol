@@ -11,7 +11,7 @@ class threadedcontrols(QObject):
 # setup GPIO
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
-    timerupdate_signal = Signal(int)
+    timerupdate_signal = Signal(str)
 
     def __init__(self, UIinstance):
         super().__init__()
@@ -501,7 +501,8 @@ class threadedcontrols(QObject):
                         self.sendtoUI.uncheckstuff(2)
                         self.sendtoUI.uncheckstuff(4)
                     else:
-                        self.timerupdate_signal.emit(self.countdowntim)
+                        intcountdown = str(self.coutdowntim)
+                        self.timerupdate_signal.emit(intcountdown)
                         time.sleep(1)
                         self.countdowntim -= 1
             for f in range(remainderpause):
