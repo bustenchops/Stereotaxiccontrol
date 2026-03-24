@@ -792,7 +792,7 @@ class MainWindow(QMainWindow):
     def start_signals(self):
         print('start signals')
         mainbuttonthread.selectlistcoordinates_signal.connect(self.selectlistcoordinates)
-        mainbuttonthread.engagemovent_signal.connect(self.engagemovement)
+        mainbuttonthread.engagemovement_signal.connect(self.engagemovement)
         controlthread.timerupdate_signal.connect(self.timercountdownupdate)
 
     #     mainbuttonthread.selecrowtoggle_signal.connect(self.selectrowtoggle)
