@@ -6,15 +6,15 @@ from RotatryEncoderv1 import RotaryEncoder
 import tkinter as tk
 from tkinter import simpledialog
 
-class threadedcontrols(QObject):
+class threadedcontrols():
 
 # setup GPIO
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
-    timerupdate_signal = Signal(str)
+    # timerupdate_signal = Signal(str)
 
     def __init__(self, UIinstance):
-        super().__init__()
+        # super().__init__()
         self.sendtoUI = UIinstance
 
 #Import the offset values from file
@@ -434,7 +434,7 @@ class threadedcontrols(QObject):
         self.intinsrate = float(insrate)
         self.intnumberopauses = int(numberopauses)
         self.intlengpauses = int(lengpauses)
-        self.countdowntim = self.intlengpauses
+        self.countdowntime = self.intlengpauses
 
         #does bevel comp calc and moves to position, asks for adjustment and then proceeds.
 
@@ -501,10 +501,11 @@ class threadedcontrols(QObject):
                         self.sendtoUI.uncheckstuff(2)
                         self.sendtoUI.uncheckstuff(4)
                     else:
-                        intcountdown = str(self.countdowntim)
-                        self.timerupdate_signal.emit(intcountdown)
+                        print(self.countdowntime)
+                        intcountdown = str(self.countdowntime)
+                        # self.timerupdate_signal.emit(intcountdown)
                         time.sleep(1)
-                        self.countdowntim -= 1
+                        self.countdowntime -= 1
             for f in range(remainderpause):
                 if var_list.dvinsertstop == 0:
                     var_list.DVmove.PosRelAbsCalc()
@@ -543,7 +544,7 @@ class threadedcontrols(QObject):
         self.withstepsperpause = self.withdrawdist / withnumpause
         self.withstepsperpauseremainder = self.withdrawdist % withnumpause
         self.secondpause = withtotalpause - withfirstwait
-        self.countdowntim = withfirstwait
+        self.countdowntimA = withfirstwait
         self.countdowntimB = self.secondpause
         self.wdptime = withpausetime
 
@@ -560,9 +561,9 @@ class threadedcontrols(QObject):
                     self.sendtoUI.uncheckstuff(4)
                     return
                 else:
-                    self.sendtoUI.timercountdownupdate(self.countdowntim)
+                    self.sendtoUI.timercountdownupdate(self.countdowntimA)
                     time.sleep(1)
-                    self.countdowntim -= 1
+                    self.countdowntimA -= 1
             for f in range(self.wdfirstdist):
                 if var_list.withdrawinsertstop == 0:
                     self.sendtoUI.uncheckstuff(3)

@@ -254,10 +254,10 @@ class MainWindow(QMainWindow):
         self.DVinsertcompenslabel.setGeometry(QRect(615, 473, 130, 20))
         self.DVinsertcompenslabel.setFont(smalllabelfont)
 
-        self.timertimereportlabel = QLabel("Countdown:", self)
-        self.timertimereportlabel.setObjectName(u"timertimereportlabel")
-        self.timertimereportlabel.setGeometry(QRect(701, 473, 130, 20))
-        self.timertimereportlabel.setFont(smalllabelfont)
+        # self.timertimereportlabel = QLabel("Countdown:", self)
+        # self.timertimereportlabel.setObjectName(u"timertimereportlabel")
+        # self.timertimereportlabel.setGeometry(QRect(701, 473, 130, 20))
+        # self.timertimereportlabel.setFont(smalllabelfont)
 
 
         self.DVinsertmanrate = QPlainTextEdit(self.widget)
@@ -285,10 +285,10 @@ class MainWindow(QMainWindow):
         self.DVinsertpausetime.setGeometry(QRect(711, 438, 50, 31))
         self.DVinsertpausetime.setFont(smalllmanualfont)
 
-        self.timertimereport = QPlainTextEdit(self.widget)
-        self.timertimereport.setObjectName(u"countdowtimer")
-        self.timertimereport.setGeometry(QRect(711, 493, 50, 31))
-        self.timertimereport.setFont(smalllmanualfont)
+        # self.timertimereport = QPlainTextEdit(self.widget)
+        # self.timertimereport.setObjectName(u"countdowtimer")
+        # self.timertimereport.setGeometry(QRect(711, 493, 50, 31))
+        # self.timertimereport.setFont(smalllmanualfont)
 
         self.withdrawcheckbox = QCheckBox("Withdraw:", self.widget)
         self.withdrawcheckbox.setObjectName(u"withdrawcheckbox")
@@ -586,9 +586,9 @@ class MainWindow(QMainWindow):
         print('the send to UI was good')
 
 #grabs the plaintext from the text boxes only if the checkbox is selected
-    @Slot(str)
-    def timercountdownupdate(self,lefttime):
-        self.timertimereport.setPlainText(lefttime)
+    # @Slot(str)
+    # def timercountdownupdate(self,lefttime):
+    #     self.timertimereport.setPlainText(lefttime)
 
     @Slot(bool)
     def engagemovement(self):
@@ -796,7 +796,7 @@ class MainWindow(QMainWindow):
         print('start signals')
         mainbuttonthread.selectlistcoordinates_signal.connect(self.selectlistcoordinates)
         mainbuttonthread.engagemovement_signal.connect(self.engagemovement)
-        controlthread.timerupdate_signal.connect(self.timercountdownupdate)
+        # controlthread.timerupdate_signal.connect(self.timercountdownupdate)
 
     #     mainbuttonthread.selecrowtoggle_signal.connect(self.selectrowtoggle)
 
