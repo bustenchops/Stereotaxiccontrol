@@ -445,12 +445,17 @@ class threadedcontrols(QObject):
         print(var_list.DVsteps, 'DVsteps')
         if var_list.DVrelpos >= var_list.DVsteps:
             stepsbevelcomp = (var_list.DVrelpos - var_list.DVsteps) - round(bevelcompcalc)
+            print(stepsbevelcomp, 'number of steps to take')
         elif var_list.DVrelpos < var_list.DVsteps:
             stepsbevelcomp = (var_list.DVsteps - var_list.DVrelpos) - round(bevelcompcalc)
         if stepsbevelcomp > var_list.DVrelpos:
-            var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
+            for r in range (stepsbevelcomp):
+                var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
+            var_list.DVmove.PosRelAbsCalc()
         elif stepsbevelcomp < var_list.DVrelpos:
-            var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+            for r in range(stepsbevelcomp):
+                var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+            var_list.DVmove.PosRelAbsCalc()
 
         bevelcompquestion = self.get_user_input('Bevel Comp. Check:',
                                                 'Check Bevel Comp. Adjust if needed and press OK.')
@@ -498,7 +503,7 @@ class threadedcontrols(QObject):
                         self.sendtoUI.uncheckstuff(2)
                         self.sendtoUI.uncheckstuff(4)
                     else:
-                        self.selectlistcoordinates_signal.emit(self.countdowntim)
+                        self.timerupdate_signal_signal.emit(self.countdowntim)
                         time.sleep(1)
                         self.countdowntim -= 1
             for f in range(remainderpause):

@@ -558,25 +558,28 @@ class MainWindow(QMainWindow):
             var_list.safetybutton = 0
 
 # UPDATE the LCDS
-    def updateAPLCD(self, stepAP,ABS_AP,REL_AP):
+    @Slot(bool)
+    def updateAPLCD(self, running):
         print('updated AP steps')
-        self.APstepLCD.display(stepAP)
-        self.APABSposLCD.display(ABS_AP)
-        self.APRelposLCD.display(REL_AP)
+        self.APstepLCD.display(var_list.APsteps)
+        self.APABSposLCD.display(var_list.APcurABSdist)
+        self.APRelposLCD.display(var_list.APcurRELdist)
         return
 
-    def updateMLLCD(self, stepML,ABS_ML,REL_ML):
+    @Slot(bool)
+    def updateMLLCD(self, running):
         print('updated ML steps')
-        self.MLstepLCD.display(stepML)
-        self.MLABSposLCD.display(ABS_ML)
-        self.MLRelposLCD.display(REL_ML)
+        self.MLstepLCD.display(var_list.MLsteps)
+        self.MLABSposLCD.display(var_list.MLcurABSdist)
+        self.MLRelposLCD.display(var_list.MLcurRELdist)
         return
 
-    def updateDVLCD(self, stepDV,ABS_DV,REL_DV):
+    @Slot(bool)
+    def updateDVLCD(self, running):
         print('updated DV steps')
-        self.DVstepLCD.display(stepDV)
-        self.DVABSposLCD.display(ABS_DV)
-        self.DVRelposLCD.display(REL_DV)
+        self.DVstepLCD.display(var_list.DVsteps)
+        self.DVABSposLCD.display(var_list.DVcurABSdist)
+        self.DVRelposLCD.display(var_list.DVcurRELdist)
         return
 
     def uitest(self):
@@ -794,6 +797,11 @@ class MainWindow(QMainWindow):
         mainbuttonthread.selectlistcoordinates_signal.connect(self.selectlistcoordinates)
         mainbuttonthread.engagemovement_signal.connect(self.engagemovement)
         controlthread.timerupdate_signal.connect(self.timercountdownupdate)
+        Steppercontrol.APlcd_signal.connect(self.updateAPLCD)
+        Steppercontrol.MLlcd_signal.connect(self.updateMLLCDd)
+        Steppercontrol.DVlcd_signal.connect(self.updateDVLCD)
+
+
 
     #     mainbuttonthread.selecrowtoggle_signal.connect(self.selectrowtoggle)
 

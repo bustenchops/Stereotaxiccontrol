@@ -200,7 +200,7 @@ class buttonprogram(QObject):
                     # #engage! button
                     if lastbut[var_list.engagebut] == 1:
                         self.engagemovement_signal.emit(True)
-                        time.sleep(0.1)
+                        time.sleep(0.01)
                         self.engagemovement_signal.emit(False)
 
                     #

@@ -1,11 +1,17 @@
 import RPi.GPIO as GPIO
+from PySide6.QtCore import (Slot, QObject, Signal, Qt)
 import time
 
 from VariableList import var_list
 
-class Steppercontrol:
+class Steppercontrol(QObject):
+    APlcd_signal = Signal(bool)
+    MLlcd_signal = Signal(bool)
+    DVlcd_signal = Signal(bool)
+
 
     def __init__(self,enablepin,steppin,directionpin,limitpin,Axis,Plusdir,Minusdir,Stepcon_sendtoUI):
+        super().__init__()
         self.enable = enablepin
         self.step = steppin
         self.direction = directionpin
@@ -198,7 +204,10 @@ class Steppercontrol:
             # self.sendtoUI.updateAPstepLCD(var_list.APsteps)
             # self.sendtoUI.updateAPabsposLCD(var_list.APcurABSdist)
             # self.sendtoUI.updateAPrelposLCD(var_list.APcurRELdist)
-            self.sendtoUI.updateAPLCD(var_list.APsteps, var_list.APcurABSdist, var_list.APcurRELdist)
+            self.AVlcd_signal.emit(True)
+            time.sleep(0.01)
+            self.AVlcd_signal.emit(False)
+            # self.sendtoUI.updateAPLCD(var_list.APsteps, var_list.APcurABSdist, var_list.APcurRELdist)
 
         if self.axis == 2:
             print('ML calculation')
@@ -208,7 +217,10 @@ class Steppercontrol:
             # self.sendtoUI.updateMLstepLCD(var_list.MLsteps)
             # self.sendtoUI.updateMLabsposLCD(var_list.MLcurABSdist)
             # self.sendtoUI.updateMLrelposLCD(var_list.MLcurRELdist)
-            self.sendtoUI.updateMLLCD(var_list.MLsteps, var_list.MLcurABSdist, var_list.MLcurRELdist)
+            self.MLlcd_signal.emit(True)
+            time.sleep(0.01)
+            self.MLlcd_signal.emit(False)
+            # self.sendtoUI.updateMLLCD(var_list.MLsteps, var_list.MLcurABSdist, var_list.MLcurRELdist)
 
         if self.axis == 3:
             print('DV calculation')
@@ -218,6 +230,9 @@ class Steppercontrol:
             # self.sendtoUI.updateDVstepLCD(var_list.DVsteps)
             # self.sendtoUI.updateDVabsposLCD(var_list.DVcurABSdist)
             # self.sendtoUI.updateDVrelposLCD(var_list.DVcurRELdist)
-            self.sendtoUI.updateDVLCD(var_list.DVsteps, var_list.DVcurABSdist, var_list.DVcurRELdist)
+            self.DVlcd_signal.emit(True)
+            time.sleep(0.01)
+            self.DVlcd_signal.emit(False)
+            # self.sendtoUI.updateDVLCD(var_list.DVsteps, var_list.DVcurABSdist, var_list.DVcurRELdist)
 
 # concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)
