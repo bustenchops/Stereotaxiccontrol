@@ -419,8 +419,6 @@ class threadedcontrols(QObject):
 
     def dvinsertauto(self, compensation, targetdepth, insrate, numberopauses, lengpauses):
 
-
-
         print('moving to DV insertion target')
         if insrate == 0:
             return
