@@ -455,22 +455,23 @@ class threadedcontrols(QObject):
             for r in range (absstepsbevcomp):
                 var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
                 print('downtocomp')
-
+            var_list.DVmove.PosRelAbsCalc()
         elif stepsbevelcomp < 0:
             absstepsbevcomp = abs(stepsbevelcomp)
             for r in range(absstepsbevcomp):
                 var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
                 print('uptocomp')
-        var_list.DVmove.PosRelAbsCalc()
+            var_list.DVmove.PosRelAbsCalc()
 
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
-
+        time.sleep(0.1)
         bevelcompquestion = self.get_user_input('Bevel Comp. Check:',
                                                 'Check Bevel Comp. Adjust if needed and press OK.')
-
         reportcomp = self.get_user_input('Offset:', f"Current offset: {var_list.DVcurRELdist}.")
-
+        var_list.APmove.PosRelAbsCalc()
+        var_list.MLmove.PosRelAbsCalc()
+        var_list.DVmove.PosRelAbsCalc()
 
         reltargetdiff = abs(self.inttargetdepth - var_list.DVcurRELdist)
 
