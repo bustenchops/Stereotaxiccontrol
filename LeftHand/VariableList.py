@@ -146,9 +146,9 @@ class var_list:
 #Variables that may need tweaking
     calibrationsteps = 4000
     backoff = 50 #200
-    APadvance = 0 #2000
-    DVadvance = 0 #400
-    MLadvance = 0 #400
+    APadvance = 2000 #2000
+    DVadvance = 400 #400
+    MLadvance = 400 #400
 
     APworking = 6400
     MLworking = 6070
