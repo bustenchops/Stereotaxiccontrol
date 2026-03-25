@@ -162,7 +162,7 @@ class var_list:
     DVup_five = 675 # about 5 mm
 
 # how many steps DV goes up and then back when changing the offsets to avoid scrapping the skull
-    DVup_OffsetSafety = 1340 #about 1cm
+    DVup_OffsetSafety = 1340 #about 1 cm
 
 
 #DEFINE STEPPER CONTROL PINS
