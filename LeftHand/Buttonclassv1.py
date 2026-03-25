@@ -203,30 +203,30 @@ class buttonprogram(QObject):
                         time.sleep(0.01)
                         self.engagemovement_signal.emit(False)
 
-                    #
-                    # #retractAP
-                    # if lastbut[var_list.retractAP] == 1:
-                    #     if var_list.safetybutton == 1:
-                    #         self.sendtoUI.APretractmovent()
-                    #         self.sendtoUI.uncheckstuff(4)
-                    #
-                    # #returnAP
-                    # if lastbut[var_list.returnAP] == 1:
-                    #     if var_list.safetybutton == 1:
-                    #         self.sendtoUI.APreturnmovement()
-                    #         self.sendtoUI.uncheckstuff(4)
-                    #
-                    # #retractDV
-                    # if lastbut[var_list.retractDV] == 1:
-                    #     if var_list.safetybutton == 1:
-                    #         self.sendtoUI.DVreturnmovement()
-                    #         self.sendtoUI.uncheckstuff(4)
-                    #
-                    # #returnDV
-                    # if lastbut[var_list.returnDV] == 1:
-                    #     if var_list.safetybutton == 1:
-                    #         self.sendtoUI.DVreturnmovement()
-                    #         self.sendtoUI.uncheckstuff(4)
+
+                    #retractAP
+                    if lastbut[var_list.retractAP] == 1:
+                        if var_list.safetybutton == 1:
+                            self.APretractmovent()
+                            self.sendtoUI.uncheckstuff(4)
+
+                    #returnAP
+                    if lastbut[var_list.returnAP] == 1:
+                        if var_list.safetybutton == 1:
+                            self.APreturnmovement()
+                            self.sendtoUI.uncheckstuff(4)
+
+                    #retractDV
+                    if lastbut[var_list.retractDV] == 1:
+                        if var_list.safetybutton == 1:
+                            self.DVreturnmovement()
+                            self.sendtoUI.uncheckstuff(4)
+
+                    #returnDV
+                    if lastbut[var_list.returnDV] == 1:
+                        if var_list.safetybutton == 1:
+                            self.DVreturnmovement()
+                            self.sendtoUI.uncheckstuff(4)
 
                     #functionone
                     if lastbut[var_list.functionone] == 1:
@@ -856,7 +856,7 @@ class buttonprogram(QObject):
             self.sendtoUI.uncheckstuff(4)
             return
         else:
-            APdiffreturn = var_list.APsteps - var_list.APretractstart
+            APdiffreturn = abs(var_list.APsteps - var_list.APretractstart)
             go_upDVby = var_list.DVrelpos - var_list.DVup_bregramhome
             if (var_list.DVsteps > go_upDVby):
                 DVdiff = var_list.DVsteps - go_upDVby
@@ -869,6 +869,7 @@ class buttonprogram(QObject):
             var_list.MLmove.PosRelAbsCalc()
             var_list.DVmove.PosRelAbsCalc()
 
+        var_list.APretractstart = 0
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
 
@@ -879,12 +880,13 @@ class buttonprogram(QObject):
             self.sendtoUI.uncheckstuff(4)
             return
         else:
+            var_list.APretractstart = var_list.APsteps
             for x in range(var_list.DVsteps):
                 var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
 
-            var_list.APmove.PosRelAbsCalc()
-            var_list.MLmove.PosRelAbsCalc()
-            var_list.DVmove.PosRelAbsCalc()
+        var_list.APmove.PosRelAbsCalc()
+        var_list.MLmove.PosRelAbsCalc()
+        var_list.DVmove.PosRelAbsCalc()
 
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
@@ -892,13 +894,19 @@ class buttonprogram(QObject):
         self.sendtoUI.uncheckstuff(4)
 
     def DVreturnmovement(self):
-        for x in range(var_list.DVretractstart):
-            var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
+        if var_list.DVretractstart == 0:
+            self.sendtoUI.uncheckstuff(4)
+            return
+        else:
+            DVdiffreturn = abs(var_list.DVsteps - var_list.DVretractstart)
+            for x in range(DVdiffreturn):
+                var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
 
         var_list.APmove.PosRelAbsCalc()
         var_list.MLmove.PosRelAbsCalc()
         var_list.DVmove.PosRelAbsCalc()
 
+        var_list.DVretractstart = 0
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
         var_list.DVretractstart = 0
