@@ -549,7 +549,7 @@ class threadedcontrols():
 
         self.wdfirstdist = round(self.firstdist / var_list.DVstepdistance)
         self.withdrawdist = (var_list.DVsteps - self.wdfirstdist) - var_list.DVrelpos
-        self.withstepsperpause = self.withdrawdist / self.numberwdpause
+        self.withstepsperpause = int(self.withdrawdist / self.numberwdpause)
         self.withstepsperpauseremainder = self.withdrawdist % self.numberwdpause
         self.secondpause = self.wdtotalpause - self.waitfirsttime
         self.secondtimer = self.secondpause
