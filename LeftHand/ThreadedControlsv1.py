@@ -540,7 +540,7 @@ class threadedcontrols():
             return
 
         print('withdrawing')
-        self.firstdist = int(withfirstdist)
+        self.firstdist = float(withfirstdist)
         self.numberwdpause = int(withnumpause)
         self.wdtotalpause = int(withtotalpause)
         self.waitfirsttime = int(withfirstwait)
