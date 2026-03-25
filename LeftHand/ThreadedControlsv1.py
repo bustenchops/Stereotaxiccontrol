@@ -506,7 +506,7 @@ class threadedcontrols():
                         # self.timerupdate_signal.emit(self.countdowntime)
                         time.sleep(1)
                         self.countdowntime -= 1
-                self.countdowntime = self.intlengpause
+                self.countdowntime = self.intlengpauses
             for f in range(remainderpause):
                 if var_list.dvinsertstop == 0:
                     var_list.DVmove.PosRelAbsCalc()
