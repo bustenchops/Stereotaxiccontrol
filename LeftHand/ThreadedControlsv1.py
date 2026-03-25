@@ -585,7 +585,7 @@ class threadedcontrols():
                     time.sleep(1)
                     self.secondtimer -= 1
             for y in range(withnumpause):
-                for x in range(self.withdrawdist):
+                for x in range(self.withstepsperpause):
                     if var_list.withdrawinsertstop == 0:
                         self.sendtoUI.uncheckstuff(3)
                         self.sendtoUI.uncheckstuff(4)
@@ -615,9 +615,9 @@ class threadedcontrols():
                     time.sleep(roundwdrate)
 
         var_list.DVmove.PosRelAbsCalc()
-
-        # for g in range (var_list.DVup_bregramhome):
-        #     var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+        time.sleep(2)
+        for g in range (var_list.DVup_five):
+            var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
 
         var_list.APmove.PosRelAbsCalc()
         var_list.MLmove.PosRelAbsCalc()
