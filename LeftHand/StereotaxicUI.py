@@ -616,7 +616,7 @@ class MainWindow(QMainWindow):
 
         if self.withdrawcheckbox.isChecked():
             print('withdraw')
-            self.var_list.withdrawinsertstop = 1
+            var_list.withdrawinsertstop = 1
             withdrrate = self.withdrawmanrate.toPlainText()
             withnumpause= self.withdrawnumpause.toPlainText()
             withpausetime = self.withdrawpausetime.toPlainText()
