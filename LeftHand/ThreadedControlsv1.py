@@ -592,7 +592,7 @@ class threadedcontrols():
                     # self.sendtoUI.timercountdownupdate(self.countdowntimB)
                     time.sleep(1)
                     self.secondtimer -= 1
-            for y in range(withnumpause):
+            for y in range(self.numberwdpause):
                 for x in range(self.withstepsperpause):
                     if var_list.withdrawinsertstop == 0:
                         self.sendtoUI.uncheckstuff(3)
