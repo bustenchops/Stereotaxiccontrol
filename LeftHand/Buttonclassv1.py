@@ -880,7 +880,7 @@ class buttonprogram(QObject):
             self.sendtoUI.uncheckstuff(4)
             return
         else:
-            var_list.APretractstart = var_list.APsteps
+            var_list.DVretractstart = var_list.DVsteps
             for x in range(var_list.DVsteps):
                 var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
 
