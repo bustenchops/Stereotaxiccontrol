@@ -540,17 +540,25 @@ class threadedcontrols():
             return
 
         print('withdrawing')
-        self.wdfirstdist = withfirstdist / var_list.DVstepdistance
-        self.withdrawdist = (var_list.DVsteps - withfirstdist) - var_list.DVrelpos
-        self.withstepsperpause = self.withdrawdist / withnumpause
-        self.withstepsperpauseremainder = self.withdrawdist % withnumpause
-        self.secondpause = withtotalpause - withfirstwait
-        self.secondtimer = self.secondpause
-        self.countdowntimA = withfirstwait
-        self.countdowntimB = self.secondpause
-        self.wdptime = withpausetime
+        self.firstdist = int(withfirstdist)
+        self.numberwdpause = int(withnumpause)
+        self.wdtotalpause = int(withtotalpause)
+        self.waitfirsttime = int(withfirstwait)
+        self.wdrate = int(withdrrate)
 
-        wdrate = 1 / (withdrrate * ( 1 / var_list.DVstepdistance ) / 60)
+
+        self.wdfirstdist = round(self.firstdist / var_list.DVstepdistance)
+        self.withdrawdist = (var_list.DVsteps - self.wdfirstdist) - var_list.DVrelpos
+        self.withstepsperpause = self.withdrawdist / self.numberwdpause
+        self.withstepsperpauseremainder = self.withdrawdist % self.numberwdpause
+        self.secondpause = self.wdtotalpause - self.waitfirsttime
+        self.secondtimer = self.secondpause
+        self.countdowntimA = self.waitfirsttime
+        self.countdowntimB = self.secondpause
+        self.pausetime = int(withpausetime)
+        self.wdptime = self.pausetime
+
+        wdrate = 1 / (self.wdrate  * ( 1 / var_list.DVstepdistance ) / 60)
         roundwdrate = round(wdrate, 3)
 
         if var_list.DVsteps > var_list.DVrelpos:
@@ -594,7 +602,7 @@ class threadedcontrols():
                         var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
                         time.sleep(roundwdrate)
                 var_list.DVmove.PosRelAbsCalc()
-                for t in range(withpausetime):
+                for t in range(self.pausetime):
                     if var_list.withdrawinsertstop == 0:
                         self.sendtoUI.uncheckstuff(2)
                         self.sendtoUI.uncheckstuff(4)
@@ -604,7 +612,7 @@ class threadedcontrols():
                         # self.sendtoUI.timercountdownupdate(self.wdptime)
                         time.sleep(1)
                         self.wdptime -= 1
-                self.wdptime = withpausetime
+                self.wdptime = self.pausetime
             for f in range(self.withstepsperpauseremainder):
                 if var_list.withdrawinsertstop == 0:
                     self.sendtoUI.uncheckstuff(3)
