@@ -563,7 +563,7 @@ class threadedcontrols():
 
         if var_list.DVsteps > var_list.DVrelpos:
             print('DV down')
-            for o in range(withfirstwait):
+            for o in range(self.waitfirsttime):
                 if var_list.withdrawinsertstop == 0:
                     self.sendtoUI.uncheckstuff(3)
                     self.sendtoUI.uncheckstuff(4)
