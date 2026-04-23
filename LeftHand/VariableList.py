@@ -147,8 +147,6 @@ class var_list:
     rotoB_ML = 16
     rotoA_DV = 20
     rotoB_DV = 21
-
-
     rotoA_AUX = 14
     rotoB_AUX = 15
 
