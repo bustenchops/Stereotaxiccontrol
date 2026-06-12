@@ -416,7 +416,7 @@ class MainWindow(QMainWindow):
         var_list.eventime = time.time() * 1000
         var_list.firstandonly = time.time() * 1000
 
-# concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)
+# concept and  code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)
 
 #######program code############
 
