@@ -162,7 +162,7 @@ class mainprogram:
 
 
     #Event handling for the encoders and hard wired buttons each encoder
-    def ML_event(self, evA, evB, evC, calcnewstate, calcdelta):
+    def ML_event(self, evA, evB, evC, calcnewstate, calcdelta, nowtimers):
         # if event == RotaryEncoder.CLOCKWISE:
         #     print('ML clockwise')
         # elif event == RotaryEncoder.ANTICLOCKWISE:
@@ -173,7 +173,7 @@ class mainprogram:
         # elif event == RotaryEncoder.BUTTONUP:
         #     return
 
-        line = f"{evA}, {evB}, {evC}, {calcnewstate}, {calcdelta}\n"
+        line = f"{evA}, {evB}, {evC}, {calcnewstate}, {calcdelta}, {nowtimers}\n"
         print('ML:   A:', evA, 'B: ', evB, 'C: ', evC, 'newstate: ', calcnewstate, 'delta: ', calcdelta)
 
         with open('MLvariable_log.txt', "a") as file:
@@ -183,7 +183,7 @@ class mainprogram:
 
 
     #Event handling for the encoders and hard wired buttons each encoder
-    def DV_event(self, evA, evB, evC, calcnewstate, calcdelta):
+    def DV_event(self, evA, evB, evC, calcnewstate, calcdelta, nowtimers):
         #
         # if event == RotaryEncoder.CLOCKWISE:
         #     print('DV clockwise')
@@ -195,7 +195,7 @@ class mainprogram:
         # elif event == RotaryEncoder.BUTTONUP:
         #     return
 
-        line = f"{evA}, {evB}, {evC}, {calcnewstate}, {calcdelta}\n"
+        line = f"{evA}, {evB}, {evC}, {calcnewstate}, {calcdelta}, {nowtimers}\n"
         print('DV:   A:', evA, 'B: ', evB, 'C: ', evC, 'newstate: ', calcnewstate, 'delta: ', calcdelta)
 
         with open('DVvariable_log.txt', "a") as file:
