@@ -3,15 +3,15 @@ cd ..
 
 source ./venv1/bin/activate
 
-rclone copy -P onedrive:'**fulldirectory/finalfolder**' /home/**rest_of_directory_to**/TargetLists
+rclone copy -P onedrive:'Usask Job/Targetlists' /home/pi/TargetLists
 
-cd /home/**rest_of_directory_to**/Stereotaxiccontrol
+cd /home/pi//Stereotaxiccontrol
 
 git pull
 
 # Pick one and uncomment it
 # cd /RightHand
-# cd /LeftHand
+cd LeftHand
 
 python StereotaxicUI.py
 

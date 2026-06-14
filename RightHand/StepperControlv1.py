@@ -1,11 +1,13 @@
 import RPi.GPIO as GPIO
+from PySide6.QtCore import (Slot, QObject, Signal, Qt)
 import time
 
 from VariableList import var_list
 
-class Steppercontrol:
+class Steppercontrol():
 
     def __init__(self,enablepin,steppin,directionpin,limitpin,Axis,Plusdir,Minusdir,Stepcon_sendtoUI):
+        super().__init__()
         self.enable = enablepin
         self.step = steppin
         self.direction = directionpin
@@ -14,6 +16,7 @@ class Steppercontrol:
             # AP = 1
             # ML = 2
             # DV = 3
+            # AUX = 4
         self.axis = Axis
             # NOTE plus and minus direction relative to stereo coordinates
         self.goplus = Plusdir
@@ -28,7 +31,7 @@ class Steppercontrol:
         GPIO.setup(self.enable, GPIO.OUT, initial=1)
         GPIO.setup(self.step, GPIO.OUT, initial=0)
         GPIO.setup(self.direction, GPIO.OUT, initial=0)
-        GPIO.setup(self.limit, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(self.limit, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
     def steppgo(self,move_direction, speed, btwnsteps):
 
@@ -36,10 +39,10 @@ class Steppercontrol:
             #print('stop flag cleared and zero limit cleared')
             if var_list.lastenablestate == 1:
                 GPIO.output(self.enable, 0)
+                var_list.lastenablestate = 0
 
             for x in range (speed):
-
-                if GPIO.input(self.limit):
+                if not GPIO.input(self.limit):
                     GPIO.output(self.direction,move_direction)
                     GPIO.output(self.step, 1)
                     time.sleep(btwnsteps)
@@ -53,7 +56,7 @@ class Steppercontrol:
                         else:
                             var_list.APsteps -= 1
                     elif self.axis == 2:
-                        if move_direction == self.goplus: #MV steps up and MV measure on the frame goes up
+                        if move_direction == self.goplus: #MV steps up and MV measure on the frame goes minus
                             var_list.MLsteps += 1
                         else:
                             var_list.MLsteps -= 1
@@ -92,13 +95,24 @@ class Steppercontrol:
                             time.sleep(btwnsteps)
                             var_list.DVsteps += 1
 
+                    elif self.axis == 4:
+                        if move_direction == self.goplus:  # DV steps up and DV measure goes minus
+                            GPIO.output(self.direction, move_direction)
+                            GPIO.output(self.step, 1)
+                            time.sleep(btwnsteps)
+                            GPIO.output(self.step, 0)
+                            time.sleep(btwnsteps)
+                            var_list.AUXsteps += 1
+
         else:
-            print("Emergency Stopped - Cannot move until re-zeroed")
+            # print("Emergency Stopped - Cannot move until re-zeroed")
+            return
 
 # to clear the limit switch and zeros
     def backoffafterzero(self, backoff, speed, btwnsteps):
         if var_list.lastenablestate == 1:
             GPIO.output(self.enable, 0)
+            var_list.lastenablestate = 0
 
         if self.axis == 1:
             print('backoff AP:',backoff,' steps')
@@ -111,7 +125,7 @@ class Steppercontrol:
         elif self.axis == 2:
             print('backoff ML',backoff,' steps')
             for x in range(backoff):
-                GPIO.output(self.direction, var_list.MLright)
+                GPIO.output(self.direction, var_list.MLleft)
                 GPIO.output(self.step, 1)
                 time.sleep(btwnsteps)
                 GPIO.output(self.step, 0)
@@ -125,10 +139,14 @@ class Steppercontrol:
                 GPIO.output(self.step, 0)
                 time.sleep(btwnsteps)
 
+        GPIO.output(self.enable, 1)
+        var_list.lastenablestate = 1
+
 #at calibration further advances the steps so there is a bit of working room
     def APadvanceafterbackoff(self, speed, btwnsteps):
         if var_list.lastenablestate == 1:
             GPIO.output(self.enable, 0)
+            var_list.lastenablestate = 0
 
         for x in range(var_list.APadvance):
             GPIO.output(self.direction, var_list.APback)
@@ -137,9 +155,13 @@ class Steppercontrol:
             GPIO.output(self.step, 0)
             time.sleep(btwnsteps)
 
+        GPIO.output(self.enable, 1)
+        var_list.lastenablestate = 1
+
     def DVadvanceafterbackoff(self, speed, btwnsteps):
         if var_list.lastenablestate == 1:
             GPIO.output(self.enable, 0)
+            var_list.lastenablestate = 0
 
         for x in range(var_list.DVadvance):
             GPIO.output(self.direction, var_list.DVdown)
@@ -148,16 +170,23 @@ class Steppercontrol:
             GPIO.output(self.step, 0)
             time.sleep(btwnsteps)
 
+        GPIO.output(self.enable, 1)
+        var_list.lastenablestate = 1
+
     def MLadvanceafterbackoff(self, speed, btwnsteps):
         if var_list.lastenablestate == 1:
             GPIO.output(self.enable, 0)
+            var_list.lastenablestate = 0
 
         for x in range(var_list.MLadvance):
-            GPIO.output(self.direction, var_list.MLright)
+            GPIO.output(self.direction, var_list.MLleft)
             GPIO.output(self.step, 1)
             time.sleep(btwnsteps)
             GPIO.output(self.step, 0)
             time.sleep(btwnsteps)
+
+        GPIO.output(self.enable, 1)
+        var_list.lastenablestate = 1
 
 
     def PosRelAbsCalc(self):
@@ -176,8 +205,8 @@ class Steppercontrol:
         if self.axis == 2:
             print('ML calculation')
             var_list.MLcurRELdist = round(
-                ((var_list.MLsteps - var_list.MLrelpos) * var_list.MLstepdistance), 3)
-            var_list.MLcurABSdist = round((var_list.MLsteps * var_list.MLstepdistance), 3)
+                ((var_list.MLsteps - var_list.MLrelpos) * var_list.MLstepdistance * -1), 3)
+            var_list.MLcurABSdist = round((var_list.MLsteps * var_list.MLstepdistance * -1), 3)
             # self.sendtoUI.updateMLstepLCD(var_list.MLsteps)
             # self.sendtoUI.updateMLabsposLCD(var_list.MLcurABSdist)
             # self.sendtoUI.updateMLrelposLCD(var_list.MLcurRELdist)

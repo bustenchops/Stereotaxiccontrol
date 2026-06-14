@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys
-from PySide6.QtCore import (QRect, QThreadPool, Slot, QObject, Signal, QThread)
+from PySide6.QtCore import (QRect, QThreadPool, Slot, QObject, Signal, QThread, Qt)
 from PySide6.QtGui import (QFont)
 from PySide6.QtWidgets import (QApplication, QFrame, QLCDNumber, QMainWindow, QMenuBar, QRadioButton, QStatusBar,
                                QWidget, QLabel, QPlainTextEdit, QCheckBox, QPushButton, QListWidget,QFileDialog, QButtonGroup)
@@ -9,6 +9,8 @@ from StepperControlv1 import Steppercontrol
 from Buttonclassv1 import buttonprogram
 from ThreadedControlsv1 import threadedcontrols
 from VariableList import var_list
+from timerthread import threadedtimer
+import time
 
 
 
@@ -23,13 +25,13 @@ class MainWindow(QMainWindow):
 #Setup GUI LAYOUT
 
         self.setObjectName(u"MainWindow")
-        self.resize(800, 480)
+        self.resize(1240, 550)
 
         self.widget = QWidget()
 
         self.APstepLCD = QLCDNumber(self.widget)
         self.APstepLCD.setObjectName(u"APstepLCD")
-        self.APstepLCD.setGeometry(QRect(170, 37, 131, 61))
+        self.APstepLCD.setGeometry(QRect(110, 37, 90, 45))
         self.APstepLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.APstepLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.APstepLCD.setLineWidth(1)
@@ -38,7 +40,7 @@ class MainWindow(QMainWindow):
 
         self.MLstepLCD = QLCDNumber(self.widget)
         self.MLstepLCD.setObjectName(u"MLstepLCD")
-        self.MLstepLCD.setGeometry(QRect(340, 37, 131, 61))
+        self.MLstepLCD.setGeometry(QRect(270, 37, 90, 45))
         self.MLstepLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.MLstepLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.MLstepLCD.setLineWidth(1)
@@ -47,7 +49,7 @@ class MainWindow(QMainWindow):
 
         self.DVstepLCD = QLCDNumber(self.widget)
         self.DVstepLCD.setObjectName(u"DVstepLCD")
-        self.DVstepLCD.setGeometry(QRect(500, 37, 131, 61))
+        self.DVstepLCD.setGeometry(QRect(430, 37, 90, 45))
         self.DVstepLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.DVstepLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.DVstepLCD.setLineWidth(1)
@@ -56,7 +58,7 @@ class MainWindow(QMainWindow):
 
         self.APABSposLCD = QLCDNumber(self.widget)
         self.APABSposLCD.setObjectName(u"APABSposLCD")
-        self.APABSposLCD.setGeometry(QRect(170, 107, 131, 61))
+        self.APABSposLCD.setGeometry(QRect(110, 92, 90, 45))
         self.APABSposLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.APABSposLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.APABSposLCD.setLineWidth(1)
@@ -65,7 +67,7 @@ class MainWindow(QMainWindow):
 
         self.MLABSposLCD = QLCDNumber(self.widget)
         self.MLABSposLCD.setObjectName(u"MLABSposLCD")
-        self.MLABSposLCD.setGeometry(QRect(340, 107, 131, 61))
+        self.MLABSposLCD.setGeometry(QRect(270, 92, 90, 45))
         self.MLABSposLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.MLABSposLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.MLABSposLCD.setLineWidth(1)
@@ -74,7 +76,7 @@ class MainWindow(QMainWindow):
 
         self.DVABSposLCD = QLCDNumber(self.widget)
         self.DVABSposLCD.setObjectName(u"DVABSposLCD")
-        self.DVABSposLCD.setGeometry(QRect(500, 107, 131, 61))
+        self.DVABSposLCD.setGeometry(QRect(430, 92, 90, 45))
         self.DVABSposLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.DVABSposLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.DVABSposLCD.setLineWidth(1)
@@ -83,7 +85,7 @@ class MainWindow(QMainWindow):
 
         self.APRelposLCD = QLCDNumber(self.widget)
         self.APRelposLCD.setObjectName(u"APRelposLCD")
-        self.APRelposLCD.setGeometry(QRect(170, 177, 131, 61))
+        self.APRelposLCD.setGeometry(QRect(90, 150, 131, 61))
         self.APRelposLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.APRelposLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.APRelposLCD.setLineWidth(1)
@@ -92,7 +94,7 @@ class MainWindow(QMainWindow):
 
         self.MLRelposLCD = QLCDNumber(self.widget)
         self.MLRelposLCD.setObjectName(u"MLRelposLCD")
-        self.MLRelposLCD.setGeometry(QRect(340, 177, 131, 61))
+        self.MLRelposLCD.setGeometry(QRect(250, 150, 131, 61))
         self.MLRelposLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.MLRelposLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.MLRelposLCD.setLineWidth(1)
@@ -101,7 +103,7 @@ class MainWindow(QMainWindow):
 
         self.DVRelposLCD = QLCDNumber(self.widget)
         self.DVRelposLCD.setObjectName(u"DVRelposLCD")
-        self.DVRelposLCD.setGeometry(QRect(500, 177, 131, 61))
+        self.DVRelposLCD.setGeometry(QRect(410, 150, 131, 61))
         self.DVRelposLCD.setFrameShape(QFrame.Shape.StyledPanel)
         self.DVRelposLCD.setFrameShadow(QFrame.Shadow.Raised)
         self.DVRelposLCD.setLineWidth(1)
@@ -112,186 +114,347 @@ class MainWindow(QMainWindow):
         toplabelfont.setPointSize(18)
         toplabelfont.setBold(True)
 
-        self.APlabel = QLabel("AP", self.widget)
-        self.APlabel.setObjectName(u"APlabel")
-        self.APlabel.setGeometry(QRect(220, -3, 41, 41))
-        self.APlabel.setFont(toplabelfont)
+        smalllabelfont = QFont()
+        smalllabelfont.setPointSize(8)
+        smalllabelfont.setBold(False)
 
-        self.MLlabel = QLabel("ML", self.widget)
-        self.MLlabel.setObjectName(u"MLlabel")
-        self.MLlabel.setGeometry(QRect(390, -3, 41, 41))
-        self.MLlabel.setFont(toplabelfont)
-
-        self.DVlabel = QLabel("DV", self.widget)
-        self.DVlabel.setObjectName(u"DVlabel")
-        self.DVlabel.setGeometry(QRect(550, -3, 41, 41))
-        self.DVlabel.setFont(toplabelfont)
-
-        stepposlabelfont = QFont()
-        stepposlabelfont.setPointSize(12)
-        stepposlabelfont.setBold(False)
-
-        self.stepposlabel = QLabel("Step position:", self.widget)
-        self.stepposlabel.setObjectName(u"stepposlabel")
-        self.stepposlabel.setGeometry(QRect(60, 47, 111, 41))
-        self.stepposlabel.setFont(stepposlabelfont)
+        smalllmanualfont = QFont()
+        smalllmanualfont.setPointSize(10)
+        smalllmanualfont.setBold(False)
 
         poslabelfont = QFont()
         poslabelfont.setPointSize(20)
         poslabelfont.setBold(False)
 
-        self.ABSposLabel = QLabel("ABS pos:", self.widget)
-        self.ABSposLabel.setObjectName(u"ABSposlabel")
-        self.ABSposLabel.setGeometry(QRect(60, 107, 111, 61))
-        self.ABSposLabel.setFont(poslabelfont)
-
-        self.RELposLabel = QLabel("REL pos:", self.widget)
-        self.RELposLabel.setObjectName(u"RELposlabel")
-        self.RELposLabel.setGeometry(QRect(60, 177, 111, 61))
-        self.RELposLabel.setFont(poslabelfont)
-
         manualenterfont = QFont()
         manualenterfont.setPointSize(16)
         manualenterfont.setBold(False)
 
-        self.APmanualenter = QPlainTextEdit(self.widget)
-        self.APmanualenter.setObjectName(u"APmanualenter")
-        self.APmanualenter.setGeometry(QRect(420, 260, 91, 40))
-        self.APmanualenter.setFont(manualenterfont)
-
-        self.MLmanualenter = QPlainTextEdit(self.widget)
-        self.MLmanualenter.setObjectName(u"MLmanualenter")
-        self.MLmanualenter.setGeometry(QRect(420, 310, 91, 40))
-        self.MLmanualenter.setFont(manualenterfont)
-
-        self.DVmanualenter = QPlainTextEdit(self.widget)
-        self.DVmanualenter.setObjectName(u"DVmanualenter")
-        self.DVmanualenter.setGeometry(QRect(420, 360, 91, 40))
-        self.DVmanualenter.setFont(manualenterfont)
-
-        self.APlabel = QLabel("AP", self.widget)
-        self.APlabel.setObjectName(u"APlabelmanual")
-        self.APlabel.setGeometry(QRect(370, 260, 41, 40))
-        self.APlabel.setFont(toplabelfont)
-
-        self.MLlabel = QLabel("ML", self.widget)
-        self.MLlabel.setObjectName(u"MLlabelmanual")
-        self.MLlabel.setGeometry(QRect(370, 310, 41, 40))
-        self.MLlabel.setFont(toplabelfont)
-
-        self.DVlabel = QLabel("DV", self.widget)
-        self.DVlabel.setObjectName(u"DVlabelmanual")
-        self.DVlabel.setGeometry(QRect(370, 360, 41, 40))
-        self.DVlabel.setFont(toplabelfont)
-
-        self.speciesgroup = QButtonGroup(self)
-        self.speciesgroup.setExclusive(True)
-        self.offsetgroup = QButtonGroup(self)
-        self.offsetgroup.setExclusive(True)
+        coordlabelfont = QFont()
+        coordlabelfont.setPointSize(16)
+        coordlabelfont.setBold(True)
 
         radiobuttonfont = QFont()
         radiobuttonfont.setPointSize(12)
         radiobuttonfont.setBold(False)
 
-        self.speciesgrouplabel = QLabel("Species:", self)
+        self.APlabel = QLabel("AP", self.widget)
+        self.APlabel.setObjectName(u"APlabel")
+        self.APlabel.setGeometry(QRect(142, -3, 41, 41))
+        self.APlabel.setFont(toplabelfont)
+
+        self.MLlabel = QLabel("ML", self.widget)
+        self.MLlabel.setObjectName(u"MLlabel")
+        self.MLlabel.setGeometry(QRect(297, -3, 41, 41))
+        self.MLlabel.setFont(toplabelfont)
+
+        self.DVlabel = QLabel("DV", self.widget)
+        self.DVlabel.setObjectName(u"DVlabel")
+        self.DVlabel.setGeometry(QRect(460, -3, 41, 41))
+        self.DVlabel.setFont(toplabelfont)
+
+        self.stepposlabel = QLabel("Steps:", self.widget)
+        self.stepposlabel.setObjectName(u"stepposlabel")
+        self.stepposlabel.setGeometry(QRect(15, 37, 111, 41))
+        self.stepposlabel.setFont(poslabelfont)
+
+        self.ABSposLabel = QLabel("ABS:", self.widget)
+        self.ABSposLabel.setObjectName(u"ABSposlabel")
+        self.ABSposLabel.setGeometry(QRect(15, 80, 111, 61))
+        self.ABSposLabel.setFont(poslabelfont)
+
+        self.RELposLabel = QLabel("REL:", self.widget)
+        self.RELposLabel.setObjectName(u"RELposlabel")
+        self.RELposLabel.setGeometry(QRect(15, 148, 111, 61))
+        self.RELposLabel.setFont(poslabelfont)
+
+        self.APmanualenter = QPlainTextEdit(self.widget)
+        self.APmanualenter.setObjectName(u"APmanualenter")
+        self.APmanualenter.setGeometry(QRect(525, 370, 75, 40))
+        self.APmanualenter.setFont(manualenterfont)
+
+        self.MLmanualenter = QPlainTextEdit(self.widget)
+        self.MLmanualenter.setObjectName(u"MLmanualenter")
+        self.MLmanualenter.setGeometry(QRect(525, 420, 75, 40))
+        self.MLmanualenter.setFont(manualenterfont)
+
+        self.DVmanualenter = QPlainTextEdit(self.widget)
+        self.DVmanualenter.setObjectName(u"DVmanualenter")
+        self.DVmanualenter.setGeometry(QRect(525, 470, 75, 40))
+        self.DVmanualenter.setFont(manualenterfont)
+
+
+        self.APlabel = QLabel("AP", self.widget)
+        self.APlabel.setObjectName(u"APlabelmanual")
+        self.APlabel.setGeometry(QRect(490, 370, 41, 40))
+        self.APlabel.setFont(coordlabelfont)
+
+        self.MLlabel = QLabel("ML", self.widget)
+        self.MLlabel.setObjectName(u"MLlabelmanual")
+        self.MLlabel.setGeometry(QRect(490, 420, 41, 40))
+        self.MLlabel.setFont(coordlabelfont)
+
+        self.DVlabel = QLabel("DV", self.widget)
+        self.DVlabel.setObjectName(u"DVlabelmanual")
+        self.DVlabel.setGeometry(QRect(490, 470, 41, 40))
+        self.DVlabel.setFont(coordlabelfont)
+
+        self.targetname = QPlainTextEdit(self.widget)
+        self.targetname.setObjectName(u"targetnameselected")
+        self.targetname.setGeometry(QRect(500, 298, 435, 33))
+        self.targetname.setFont(radiobuttonfont)
+
+
+        self.speciesgroup = QButtonGroup(self)
+        self.speciesgroup.setExclusive(True)
+        self.offsetgroup = QButtonGroup(self)
+        self.offsetgroup.setExclusive(True)
+        self.speedgroup = QButtonGroup(self)
+        self.speedgroup.setExclusive(True)
+
+
+        self.targetlabel = QLabel("Selected Target:", self)
+        self.targetlabel.setObjectName(u"selectedtargetlabel")
+        self.targetlabel.setGeometry(QRect(375, 305, 130, 20))
+        self.targetlabel.setFont(radiobuttonfont)
+
+        self.coordinatelabel = QLabel("Coordinates:", self)
+        self.coordinatelabel.setObjectName(u"coordinateslabel")
+        self.coordinatelabel.setGeometry(QRect(495, 340, 130, 20))
+        self.coordinatelabel.setFont(radiobuttonfont)
+
+        self.DVinsertcheckbox = QCheckBox("DV insert:", self.widget)
+        self.DVinsertcheckbox.setObjectName(u"DVinsertionbox")
+        self.DVinsertcheckbox.setGeometry(QRect(640, 340, 130, 20))
+        self.DVinsertcheckbox.setFont(radiobuttonfont)
+        self.DVinsertcheckbox.clicked.connect(self.on_DVinsert_changed)
+
+        self.DVinsertratelabel = QLabel("Rate (mm/min):", self)
+        self.DVinsertratelabel.setObjectName(u"dvinsertrate")
+        self.DVinsertratelabel.setGeometry(QRect(615, 365, 130, 20))
+        self.DVinsertratelabel.setFont(smalllabelfont)
+
+        self.DVinsertpausetimelabel = QLabel("Pause time:", self)
+        self.DVinsertpausetimelabel.setObjectName(u"dvpausetime")
+        self.DVinsertpausetimelabel.setGeometry(QRect(701, 418, 130, 20))
+        self.DVinsertpausetimelabel.setFont(smalllabelfont)
+
+        self.DVinsertpauselabel = QLabel("Num.Bursts:", self)
+        self.DVinsertpauselabel.setObjectName(u"dvnumpauses")
+        self.DVinsertpauselabel.setGeometry(QRect(701, 365, 130, 20))
+        self.DVinsertpauselabel.setFont(smalllabelfont)
+
+        self.DVinsertdepthlabel = QLabel("Target DV:", self)
+        self.DVinsertdepthlabel.setObjectName(u"dvtargetdepth")
+        self.DVinsertdepthlabel.setGeometry(QRect(615, 418, 130, 20))
+        self.DVinsertdepthlabel.setFont(smalllabelfont)
+
+        self.DVinsertcompenslabel = QLabel("Bevel comp.:", self)
+        self.DVinsertcompenslabel.setObjectName(u"DVinsertcompenslabel")
+        self.DVinsertcompenslabel.setGeometry(QRect(615, 473, 130, 20))
+        self.DVinsertcompenslabel.setFont(smalllabelfont)
+
+        # self.timertimereportlabel = QLabel("Countdown:", self)
+        # self.timertimereportlabel.setObjectName(u"timertimereportlabel")
+        # self.timertimereportlabel.setGeometry(QRect(701, 473, 130, 20))
+        # self.timertimereportlabel.setFont(smalllabelfont)
+
+
+        self.DVinsertmanrate = QPlainTextEdit(self.widget)
+        self.DVinsertmanrate.setObjectName(u"DVinsertmanrate")
+        self.DVinsertmanrate.setGeometry(QRect(627, 385, 50, 31))
+        self.DVinsertmanrate.setFont(smalllmanualfont)
+
+        self.DVinserttarget = QPlainTextEdit(self.widget)
+        self.DVinserttarget.setObjectName(u"DVinserttarget")
+        self.DVinserttarget.setGeometry(QRect(627, 438, 50, 31))
+        self.DVinserttarget.setFont(smalllmanualfont)
+
+        self.DVinsertcompens = QPlainTextEdit(self.widget)
+        self.DVinsertcompens.setObjectName(u"DVinsertcompens")
+        self.DVinsertcompens.setGeometry(QRect(627, 493, 50, 31))
+        self.DVinsertcompens.setFont(smalllmanualfont)
+
+        self.DVinsertnumpause = QPlainTextEdit(self.widget)
+        self.DVinsertnumpause.setObjectName(u"DVinsertnumpause")
+        self.DVinsertnumpause.setGeometry(QRect(711, 385, 50, 31))
+        self.DVinsertnumpause.setFont(smalllmanualfont)
+
+        self.DVinsertpausetime = QPlainTextEdit(self.widget)
+        self.DVinsertpausetime.setObjectName(u"DVinsertpausetime")
+        self.DVinsertpausetime.setGeometry(QRect(711, 438, 50, 31))
+        self.DVinsertpausetime.setFont(smalllmanualfont)
+
+        # self.timertimereport = QPlainTextEdit(self.widget)
+        # self.timertimereport.setObjectName(u"countdowtimer")
+        # self.timertimereport.setGeometry(QRect(711, 493, 50, 31))
+        # self.timertimereport.setFont(smalllmanualfont)
+
+        self.withdrawcheckbox = QCheckBox("Withdraw:", self.widget)
+        self.withdrawcheckbox.setObjectName(u"withdrawcheckbox")
+        self.withdrawcheckbox.setGeometry(QRect(808, 340, 130, 20))
+        self.withdrawcheckbox.setFont(radiobuttonfont)
+        self.withdrawcheckbox.clicked.connect(self.on_withdraw_changed)
+
+        self.withdrawratelabel = QLabel("Rate (mm/min):", self)
+        self.withdrawratelabel.setObjectName(u"withdrawratelabel")
+        self.withdrawratelabel.setGeometry(QRect(787, 365, 130, 20))
+        self.withdrawratelabel.setFont(smalllabelfont)
+
+        self.withdrawpausetimelabel = QLabel("Pause time:", self)
+        self.withdrawpausetimelabel.setObjectName(u"withdrawpausetimelabel")
+        self.withdrawpausetimelabel.setGeometry(QRect(787, 473, 130, 20))
+        self.withdrawpausetimelabel.setFont(smalllabelfont)
+
+        self.withdrawnumpauselabel = QLabel("Num.Bursts:", self)
+        self.withdrawnumpauselabel.setObjectName(u"withdrawnumpauselabel")
+        self.withdrawnumpauselabel.setGeometry(QRect(787, 418, 130, 20))
+        self.withdrawnumpauselabel.setFont(smalllabelfont)
+
+        self.withdrawfirstwaitlabel = QLabel("First wait (s):", self)
+        self.withdrawfirstwaitlabel.setObjectName(u"withdrawfirstwaitlabel")
+        self.withdrawfirstwaitlabel.setGeometry(QRect(875, 365, 130, 20))
+        self.withdrawfirstwaitlabel.setFont(smalllabelfont)
+
+        self.withdrawtotalwaitlabel = QLabel("Total wait (s):", self)
+        self.withdrawtotalwaitlabel.setObjectName(u"withdrawtotalwaitlabel")
+        self.withdrawtotalwaitlabel.setGeometry(QRect(875, 473, 130, 20))
+        self.withdrawtotalwaitlabel.setFont(smalllabelfont)
+
+        self.withdrawfirstdistwaitlabel = QLabel("First Withdraw (mm):", self)
+        self.withdrawfirstdistwaitlabel.setObjectName(u"withdrawfirstdistwaitlabel")
+        self.withdrawfirstdistwaitlabel.setGeometry(QRect(875, 418, 130, 20))
+        self.withdrawfirstdistwaitlabel.setFont(smalllabelfont)
+
+        self.withdrawmanrate = QPlainTextEdit(self.widget)
+        self.withdrawmanrate.setObjectName(u"withdrawmanrate")
+        self.withdrawmanrate.setGeometry(QRect(799, 385, 50, 31))
+        self.withdrawmanrate.setFont(smalllmanualfont)
+
+        self.withdrawtotpause = QPlainTextEdit(self.widget)
+        self.withdrawtotpause.setObjectName(u"withdrawtotpause")
+        self.withdrawtotpause.setGeometry(QRect(887, 493, 50, 31))
+        self.withdrawtotpause.setFont(smalllmanualfont)
+
+        self.withdrawfirstdist = QPlainTextEdit(self.widget)
+        self.withdrawfirstdist.setObjectName(u"withdrawfirstdist")
+        self.withdrawfirstdist.setGeometry(QRect(887, 438, 50, 31))
+        self.withdrawfirstdist.setFont(smalllmanualfont)
+
+        self.withdrawnumpause = QPlainTextEdit(self.widget)
+        self.withdrawnumpause.setObjectName(u"withdrawnumpause")
+        self.withdrawnumpause.setGeometry(QRect(799, 438, 50, 31))
+        self.withdrawnumpause.setFont(smalllmanualfont)
+
+        self.withdrawpausetime = QPlainTextEdit(self.widget)
+        self.withdrawpausetime.setObjectName(u"withdrawpausetime")
+        self.withdrawpausetime.setGeometry(QRect(799, 493, 50, 31))
+        self.withdrawpausetime.setFont(smalllmanualfont)
+
+        self.withdrawfirstwait = QPlainTextEdit(self.widget)
+        self.withdrawfirstwait.setObjectName(u"withdrawfirstwait")
+        self.withdrawfirstwait.setGeometry(QRect(887, 385, 50, 31))
+        self.withdrawfirstwait.setFont(smalllmanualfont)
+
+        self.speciesgrouplabel = QLabel("Set Species:", self)
         self.speciesgrouplabel.setObjectName(u"speciesgrouplabel")
-        self.speciesgrouplabel.setGeometry(QRect(652, 40, 111, 16))
+        self.speciesgrouplabel.setGeometry(QRect(575, 35, 111, 16))
         self.speciesgrouplabel.setFont(radiobuttonfont)
 
-        # self.speciesgroup.radiolabel = QLabel("Species", self.widget)
-        # self.speciesgroup.radiolabel.setObjectName(u"Animallabelmanual")
-        # self.speciesgroup.radiolabel.setGeometry(QRect(652, 40, 111, 16))
-        # self.speciesgroup.radiolabel.setFont(radiobuttonfont)
 
         self.ratradio = QRadioButton("Rat", self)
-        self.ratradio.setGeometry(QRect(662, 70, 92, 20))
+        self.ratradio.setGeometry(QRect(580, 65, 92, 20))
         self.ratradio.setFont(radiobuttonfont)
 
+        self.nullradio = QRadioButton("Null", self)
+        self.nullradio.setGeometry(QRect(580, 95, 92, 20))
+        self.nullradio.setFont(radiobuttonfont)
+
+
         self.mouseradio = QRadioButton("Mouse", self)
-        self.mouseradio.setGeometry(QRect(662, 100, 92, 20))
+        self.mouseradio.setGeometry(QRect(580, 125, 92, 20))
         self.mouseradio.setFont(radiobuttonfont)
 
         self.speciesgroup.addButton(self.ratradio)
         self.speciesgroup.addButton(self.mouseradio)
-
-        # self.speciesgroup.ratoffsetcheck = QRadioButton("Rat", self.widget)
-        # self.speciesgroup.ratoffsetcheck.setObjectName(u"ratradio")
-        # self.speciesgroup.ratoffsetcheck.setGeometry(QRect(662, 70, 92, 20))
-        # self.speciesgroup.ratoffsetcheck.setFont(radiobuttonfont)
-
-        # self.speciesgroup.mouseoffsetcheck = QRadioButton("Mouse", self.widget)
-        # self.speciesgroup.mouseoffsetcheck.setObjectName(u"mouseradio")
-        # self.speciesgroup.mouseoffsetcheck.setGeometry(QRect(662, 100, 92, 20))
-        # self.speciesgroup.mouseoffsetcheck.setFont(radiobuttonfont)
+        self.speciesgroup.addButton(self.nullradio)
 
         self.offsetgrouplabel = QLabel("Current Offset:", self)
         self.offsetgrouplabel.setObjectName(u"offsetgrouplabel")
-        self.offsetgrouplabel.setGeometry(QRect(652, 140, 111, 16))
+        self.offsetgrouplabel.setGeometry(QRect(706, 35, 120, 16))
         self.offsetgrouplabel.setFont(radiobuttonfont)
 
-        # self.offsetgroup.radiolabel = QLabel("Current Offset", self.widget)
-        # self.offsetgroup.radiolabel.setObjectName(u"DVlabelmanual")
-        # self.offsetgroup.radiolabel.setGeometry(QRect(652, 140, 111, 16))
-        # self.offsetgroup.radiolabel.setFont(radiobuttonfont)
-
         self.drillradio = QRadioButton("Drill", self)
-        self.drillradio.setGeometry(QRect(662, 170, 92, 20))
+        self.drillradio.setGeometry(QRect(711, 65, 92, 20))
         self.drillradio.setFont(radiobuttonfont)
 
         self.needleradio = QRadioButton("Syringe", self)
-        self.needleradio.setGeometry(QRect(662, 200, 92, 20))
+        self.needleradio.setGeometry(QRect(711, 95, 92, 20))
         self.needleradio.setFont(radiobuttonfont)
 
         self.fiberradio = QRadioButton("Probe", self)
-        self.fiberradio.setGeometry(QRect(662, 230, 92, 20))
+        self.fiberradio.setGeometry(QRect(711, 125, 92, 20))
         self.fiberradio.setFont(radiobuttonfont)
 
         self.offsetgroup.addButton(self.drillradio)
         self.offsetgroup.addButton(self.needleradio)
         self.offsetgroup.addButton(self.fiberradio)
 
-        # self.offsetgroup.drilloffsetcheck = QRadioButton("Drill", self.widget)
-        # self.offsetgroup.drilloffsetcheck.setObjectName(u"drillradio")
-        # self.offsetgroup.drilloffsetcheck.setGeometry(QRect(662, 170, 92, 20))
-        # self.offsetgroup.drilloffsetcheck.setFont(radiobuttonfont)
-        #
-        # self.offsetgroup.needleoffsetcheck = QRadioButton("Syringe", self.widget)
-        # self.offsetgroup.needleoffsetcheck.setObjectName(u"needleradio")
-        # self.offsetgroup.needleoffsetcheck.setGeometry(QRect(662, 200, 92, 20))
-        # self.offsetgroup.needleoffsetcheck.setFont(radiobuttonfont)
-        #
-        # self.offsetgroup.fiberoffsetcheck = QRadioButton("Probe", self.widget)
-        # self.offsetgroup.fiberoffsetcheck.setObjectName(u"proberadio")
-        # self.offsetgroup.fiberoffsetcheck.setGeometry(QRect(662, 230, 92, 20))
-        # self.offsetgroup.fiberoffsetcheck.setFont(radiobuttonfont)
+        self.speedgrouplabel = QLabel("Current Speed:", self)
+        self.speedgrouplabel.setObjectName(u"speedgrouplabel")
+        self.speedgrouplabel.setGeometry(QRect(855, 35, 120, 16))
+        self.speedgrouplabel.setFont(radiobuttonfont)
 
-        self.checkBox = QCheckBox("Make it so", self.widget)
-        self.checkBox.setObjectName(u"engagecheckbox")
-        self.checkBox.setGeometry(QRect(530, 270, 105, 20))
-        self.checkBox.setFont(radiobuttonfont)
+        self.finespeedset = QRadioButton("Fine", self)
+        self.finespeedset.setGeometry(QRect(860, 65, 92, 20))
+        self.finespeedset.setFont(radiobuttonfont)
+
+        self.medspeedset = QRadioButton("Medium", self)
+        self.medspeedset.setGeometry(QRect(860, 95, 92, 20))
+        self.medspeedset.setFont(radiobuttonfont)
+
+        self.coarsespeedset = QRadioButton("Coarse", self)
+        self.coarsespeedset.setGeometry(QRect(860, 125, 92, 20))
+        self.coarsespeedset.setFont(radiobuttonfont)
+
+        self.speedgroup.addButton(self.finespeedset)
+        self.speedgroup.addButton(self.medspeedset)
+        self.speedgroup.addButton(self.coarsespeedset)
+
+        self.makeitsoBox = QCheckBox("Make it so", self.widget)
+        self.makeitsoBox.setObjectName(u"makeitsocheckbox")
+        self.makeitsoBox.setGeometry(QRect(375, 355, 105, 20))
+        self.makeitsoBox.setFont(radiobuttonfont)
+        self.makeitsoBox.clicked.connect(self.on_makeitso_changed)
+
+        self.movebutton = QPushButton("Engage", self.widget)
+        self.movebutton.setObjectName(u"movebutton")
+        self.movebutton.setGeometry(QRect(375, 398, 101, 81))
+        self.movebutton.setFont(radiobuttonfont)
+        self.movebutton.clicked.connect(self.engagemovement)
+
+        self.safetyBox = QCheckBox("Safety Disengaged", self.widget)
+        self.safetyBox.setObjectName(u"safetycheckbox")
+        self.safetyBox.setGeometry(QRect(105, 490, 175, 20))
+        self.safetyBox.setFont(radiobuttonfont)
+        self.safetyBox.clicked.connect(self.on_safety_changed)
 
         self.armcoordinatebutton = QPushButton("Arm Coordinates", self.widget)
         self.armcoordinatebutton.setObjectName(u"armcoordinatebutton")
-        self.armcoordinatebutton.setGeometry(QRect(110, 380, 161, 31))
-        self.armcoordinatebutton.setFont(stepposlabelfont)
+        self.armcoordinatebutton.setGeometry(QRect(105, 445, 161, 31))
+        self.armcoordinatebutton.setFont(radiobuttonfont)
         self.armcoordinatebutton.clicked.connect(self.selectlistcoordinates)
 
         self.loadpresetbutton = QPushButton("Load Preset File", self.widget)
         self.loadpresetbutton.setObjectName(u"loadpresetbutton")
-        self.loadpresetbutton.setGeometry(QRect(110, 243, 171, 31))
-        self.loadpresetbutton.setFont(stepposlabelfont)
+        self.loadpresetbutton.setGeometry(QRect(105, 230, 171, 31))
+        self.loadpresetbutton.setFont(radiobuttonfont)
         self.loadpresetbutton.clicked.connect(self.choseafile)
-
-        self.movebutton = QPushButton("Engage", self.widget)
-        self.movebutton.setObjectName(u"movebutton")
-        self.movebutton.setGeometry(QRect(540, 310, 101, 81))
-        self.movebutton.setFont(stepposlabelfont)
-        self.movebutton.clicked.connect(self.plaintextgrab)
 
         self.listWidget = QListWidget(self.widget)
         self.listWidget.setObjectName(u"listWidget")
-        self.listWidget.setGeometry(QRect(40, 273, 311, 110))
-        self.listWidget.setFont(stepposlabelfont)
+        self.listWidget.setGeometry(QRect(35, 273, 320, 160))
+        self.listWidget.setFont(radiobuttonfont)
 
         self.menubar = QMenuBar()
         self.menubar.setGeometry(QRect(0, 0, 800, 33))
@@ -299,71 +462,266 @@ class MainWindow(QMainWindow):
         self.statusbar = QStatusBar()
         self.setCentralWidget(self.widget)
 
-#UPDATE the LCDS
-    def updateAPLCD(self, stepAP,ABS_AP,REL_AP):
+
+
+#Checkbox control
+    def uncheckstuff(self, whichone):
+        print("unchecking")
+        if whichone == 1:
+            self.makeitsoBox.setChecked(False)
+            self.on_makeitso_changed()
+        if whichone == 2:
+            self.DVinsertcheckbox.setChecked(False)
+            self.on_DVinsert_changed()
+        if whichone == 3:
+            self.withdrawcheckbox.setChecked(False)
+            self.on_withdraw_changed()
+        if whichone == 4:
+            self.safetyBox.setChecked(False)
+            self.on_safety_changed()
+
+    def checkstuff(self, whichone):
+        print("checking")
+        if whichone == 1:
+            self.makeitsoBox.setChecked(True)
+            self.on_makeitso_changed()
+        if whichone == 2:
+            self.DVinsertcheckbox.setChecked(True)
+            self.on_DVinsert_changed()
+        if whichone == 3:
+            self.withdrawcheckbox.setChecked(True)
+            self.on_withdraw_changed()
+        if whichone == 4:
+            self.safetyBox.setChecked(True)
+            self.on_safety_changed()
+
+    def on_makeitso_changed(self):
+        if self.withdrawcheckbox.isChecked():
+            self.uncheckstuff(3)
+        if self.DVinsertcheckbox.isChecked():
+            self.uncheckstuff(2)
+        if self.makeitsoBox.isChecked():
+            print("make it so State changed: Checked")
+            var_list.Makeitsoindicator = 1
+            var_list.Makeitsobuttimeouttime = time.time()
+        else:
+            print("make it so State changed: Unchecked")
+            var_list.Makeitsoindicator = 0
+
+    def on_DVinsert_changed(self):
+        if self.makeitsoBox.isChecked():
+            self.uncheckstuff(1)
+        if self.withdrawcheckbox.isChecked():
+            self.uncheckstuff(3)
+        if self.DVinsertcheckbox.isChecked():
+            if var_list.safetybutton == 1:
+                print("DVinsert State changed: Checked")
+                var_list.DVinsertindicator= 1
+                var_list.DVinserttimeouttime = time.time()
+            else:
+                print("safety not on")
+                self.DVinsertcheckbox.setChecked(False)
+        else:
+            print("DVinsert  State changed: Unchecked")
+            var_list.DVinsertindicator = 0
+            #var_list.safetybutton = 0
+            #self.uncheckstuff(False)
+            self.uncheckstuff(4)
+
+    def on_withdraw_changed(self):
+        if self.makeitsoBox.isChecked():
+            self.uncheckstuff(1)
+        if self.DVinsertcheckbox.isChecked():
+            self.uncheckstuff(2)
+        if self.withdrawcheckbox.isChecked():
+            if var_list.safetybutton == 1:
+                print("withdraw State changed: Checked")
+                var_list.Withdrawlindicator= 1
+                var_list.Withdrawltimeouttime = time.time()
+            else:
+                print("safety not on")
+                self.withdrawcheckbox.setChecked(False)
+        else:
+            print("withdraw  State changed: Unchecked")
+            var_list.Withdrawlindicator = 0
+            # var_list.safetybutton = 0
+            # self.safetyBox.setChecked(False)
+            self.uncheckstuff(4)
+
+    def on_safety_changed(self):
+        if self.safetyBox.isChecked():
+            print("safety State changed: Checked")
+            var_list.safetybutton = 1
+            var_list.Safetytimeouttime = time.time()
+        else:
+            print("safety  State changed: Unchecked")
+            var_list.safetybutton = 0
+
+# UPDATE the LCDS
+    @Slot()
+    def updateAPLCD(self, stepsupdate, curABS, curREL):
         print('updated AP steps')
-        self.APstepLCD.display(stepAP)
-        self.APABSposLCD.display(ABS_AP)
-        self.APRelposLCD.display(REL_AP)
+        self.APstepLCD.display(stepsupdate)
+        self.APABSposLCD.display(curABS)
+        self.APRelposLCD.display(curREL)
         return
 
-    def updateMLLCD(self, stepML,ABS_ML,REL_ML):
+    @Slot()
+    def updateMLLCD(self, stepsupdate, curABS, curREL):
         print('updated ML steps')
-        self.MLstepLCD.display(stepML)
-        self.MLABSposLCD.display(ABS_ML)
-        self.MLRelposLCD.display(REL_ML)
+        self.MLstepLCD.display(stepsupdate)
+        self.MLABSposLCD.display(curABS)
+        self.MLRelposLCD.display(curREL)
         return
 
-    def updateDVLCD(self, stepDV,ABS_DV,REL_DV):
+    @Slot()
+    def updateDVLCD(self, stepsupdate, curABS, curREL):
         print('updated DV steps')
-        self.DVstepLCD.display(stepDV)
-        self.DVABSposLCD.display(ABS_DV)
-        self.DVRelposLCD.display(REL_DV)
+        self.DVstepLCD.display(stepsupdate)
+        self.DVABSposLCD.display(curABS)
+        self.DVRelposLCD.display(curREL)
         return
 
     def uitest(self):
         print('the send to UI was good')
 
 #grabs the plaintext from the text boxes only if the checkbox is selected
-    @Slot()
-    def plaintextgrab(self):
-        APcooord = self.APmanualenter.toPlainText()
-        MLcooord = self.MLmanualenter.toPlainText()
-        DVcooord = self.DVmanualenter.toPlainText()
-        if self.checkBox.isChecked():
-            print(f"Grad text to go to AP:{APcooord}, ML:{MLcooord}, DV:{DVcooord}")
-            #self.gototargetnow = threadedcontrols(window)
-            #threadpool.start(self.gototargetnow.movetoTargetList(APcooord,MLcooord,DVcooord))
-            controlthread.movetoTargetList(APcooord,MLcooord,DVcooord)
-            self.checkBox.setChecked(False)
+    # @Slot(str)
+    # def timercountdownupdate(self,lefttime):
+    #     self.timertimereport.setPlainText(lefttime)
 
-#select a TXT file to load and preloads the targets
+    @Slot(bool)
+    def engagemovement(self):
+        print('engage movement')
+        if self.makeitsoBox.isChecked():
+            print('target')
+            APcooord = self.APmanualenter.toPlainText()
+            MLcooord = self.MLmanualenter.toPlainText()
+            DVcooord = self.DVmanualenter.toPlainText()
+            print(f"Grad text to go to AP:{APcooord}, ML:{MLcooord}, DV:{DVcooord}")
+            controlthread.movetoTargetList(APcooord, MLcooord, DVcooord)
+            self.uncheckstuff(1)
+
+        if self.DVinsertcheckbox.isChecked():
+            print('DV insert')
+            var_list.dvinsertstop = 1
+            targetdepth = self.DVinserttarget.toPlainText()
+            compensateforbev = self.DVinsertcompens.toPlainText()
+            insertrate = self.DVinsertmanrate.toPlainText()
+            numberofpauses = self.DVinsertnumpause.toPlainText()
+            lengthofpauses = self.DVinsertpausetime.toPlainText()
+            print('DV insert started')
+            controlthread.dvinsertauto(compensateforbev, targetdepth, insertrate, numberofpauses, lengthofpauses)
+            self.uncheckstuff(2)
+
+        if self.withdrawcheckbox.isChecked():
+            print('withdraw')
+            var_list.withdrawinsertstop = 1
+            withdrrate = self.withdrawmanrate.toPlainText()
+            withnumpause= self.withdrawnumpause.toPlainText()
+            withpausetime = self.withdrawpausetime.toPlainText()
+            withfirstdist = self.withdrawfirstdist.toPlainText()
+            withfirstwait = self.withdrawfirstwait.toPlainText()
+            withtotalpause = self.withdrawtotpause.toPlainText()
+            controlthread.withdrawauto(withdrrate, withnumpause, withpausetime, withfirstdist, withfirstwait, withtotalpause)
+            self.uncheckstuff(3)
+
+    @Slot()
+    def functiononebutton(self):
+        controlthread.yodudeA()
+        self.uncheckstuff(4)
+
+    @Slot()
+    def functiontwobutton(self):
+        controlthread.yodudeB()
+        self.uncheckstuff(4)
+
+
+# select a TXT file to load and preloads the targets
     @Slot()
     def choseafile(self):
         print("click load file")
         file_dialog = QFileDialog(self)
-        file_dialog.setNameFilter("Text Files (*.txt)")
+        file_dialog.setNameFilter("Text Files (*.csv)")
 
         if file_dialog.exec():
             self.selected_file = file_dialog.selectedFiles()[0]
             print(f'Selected file: {self.selected_file}')
 
         with open(self.selected_file, 'r') as file:
-            lines = file.readlines()
-            for line in lines:
+            self.listWidget.clear()
+            next(file) #skips the first line
+            for line in file:
                 self.listWidget.addItem(line.strip())
+        var_list.countoflistwidget = self.listWidget.count()
+        print('number of items:')
+        print(var_list.countoflistwidget)
 
-#loads the coordinates from the list to the text boxes
-    @Slot()
-    def selectlistcoordinates(self):
+    #loads the coordinates from the list to the text boxes
+    @Slot(bool)
+    def selectlistcoordinates(self, running):
+        print('loading the selected coordinates')
         selected_items = self.listWidget.selectedItems()
         selected_text = selected_items[0].text()
-        name, APlist, MLlist, DVlist = selected_text.split(' ')
-        self.APmanualenter.setPlainText(APlist)
-        self.MLmanualenter.setPlainText(MLlist)
-        self.DVmanualenter.setPlainText(DVlist)
+        parts = selected_text.split(',')
+        if len(parts) != 15:
+            print('not enough comma sep values')
+            return
+        for i, p in enumerate(parts):
+                print(f"Part{i}: {p}")
+        # name, APlist, MLlist, DVlist, DVsafe, compensat, DVrate, DVpause, DVpausetime, WDrate, WDpause, WDpausetime, WDfirstWD = selected_text.split(',')
+        # , WDfirstwait, WDtotwait
+        self.targetname.setPlainText(parts[0])
+        self.APmanualenter.setPlainText(parts[1])
+        self.MLmanualenter.setPlainText(parts[2])
+        self.DVmanualenter.setPlainText(parts[4])
+        self.DVinserttarget.setPlainText(parts[3])
+        self.DVinsertcompens.setPlainText(parts[5])
+        self.DVinsertmanrate.setPlainText(parts[6])
+        self.DVinsertnumpause.setPlainText(parts[7])
+        self.DVinsertpausetime.setPlainText(parts[8])
+        self.withdrawmanrate.setPlainText(parts[9])
+        self.withdrawnumpause.setPlainText(parts[10])
+        self.withdrawpausetime.setPlainText(parts[11])
+        self.withdrawfirstdist.setPlainText(parts[12])
+        self.withdrawfirstwait.setPlainText(parts[13])
+        self.withdrawtotpause.setPlainText(parts[14])
 
-#sets the radio button for rat or mouse
+    @Slot()
+    def selecrowtoggle(self):
+        self.listWidget.setCurrentRow(var_list.list_toggle)
+
+    # note I dont think this is going to be used...keep for now though.
+    # @Slot(int)
+    # def toggleselectlist(self, toglistnum):
+    # #to enumerate the items and put them in the list.
+    #     selected_items = self.listWidget.item(toglistnum)
+    #     selected_text = selected_items[0].text()
+    #     parts = selected_text.split(',')
+    #     if len(parts) != 15:
+    #         print('not enough comma sep values')
+    #         return
+    #     for i, p in enumerate(parts):
+    #         print(f"Part{i}: {p}")
+    #     # name, APlist, MLlist, DVlist, DVsafe, compensat, DVrate, DVpause, DVpausetime, WDrate, WDpause, WDpausetime, WDfirstWD = selected_text.split(',')
+    #     # , WDfirstwait, WDtotwait
+    #     self.targetname.setPlainText(parts[0])
+    #     self.APmanualenter.setPlainText(parts[1])
+    #     self.MLmanualenter.setPlainText(parts[2])
+    #     self.DVmanualenter.setPlainText(parts[4])
+    #     self.DVinserttarget.setPlainText(parts[3])
+    #     self.DVinsertcompens.setPlainText(parts[5])
+    #     self.DVinsertmanrate.setPlainText(parts[6])
+    #     self.DVinsertnumpause.setPlainText(parts[7])
+    #     self.DVinsertpausetime.setPlainText(parts[8])
+    #     self.withdrawmanrate.setPlainText(parts[9])
+    #     self.withdrawnumpause.setPlainText(parts[10])
+    #     self.withdrawpausetime.setPlainText(parts[11])
+    #     self.withdrawfirstdist.setPlainText(parts[12])
+    #     self.withdrawfirstwait.setPlainText(parts[13])
+    #     self.withdrawtotpause.setPlainText(parts[14])
+
+    #sets the radio button for rat or mouse
     @Slot()
     def ratselected(self):
         self.ratradio.toggle()
@@ -372,7 +730,23 @@ class MainWindow(QMainWindow):
     def mouseselected(self):
         self.mouseradio.toggle()
 
+    @Slot()
+    def noneselected(self):
+        self.nullradio.toggle()
+
 #controls the toggles for the drill, needle and probe
+    @Slot()
+    def setfinespeed(self):
+        self.finespeedset.toggle()
+
+    @Slot()
+    def setmedspeed(self):
+        self.medspeedset.toggle()
+
+    @Slot()
+    def setcoarsespeed(self):
+        self.coarsespeedset.toggle()
+
     @Slot()
     def drilloffset(self):
         self.drillradio.toggle()
@@ -386,7 +760,7 @@ class MainWindow(QMainWindow):
         self.fiberradio.toggle()
 
 # Report Current Speed
-    @Slot(int)
+    @Slot()
     def currentspeed(self, stepsper):  # not used yet but plan is to put it in the interface
         self.stepperstepsper = stepsper
 
@@ -409,12 +783,22 @@ class MainWindow(QMainWindow):
         print("AP start")
         var_list.APmove = Steppercontrol(var_list.enableAll,var_list.stepAP,var_list.directionAP,var_list.limitAP,1,var_list.APforward,var_list.APback, window)
         print('AP finished, ML start')
-        var_list.MLmove = Steppercontrol(var_list.enableAll,var_list.stepML,var_list.directionML,var_list.limitML,2,var_list.MLright,var_list.MLleft, window)
+        var_list.MLmove = Steppercontrol(var_list.enableAll,var_list.stepML,var_list.directionML,var_list.limitML,2,var_list.MLleft,var_list.MLright, window)
         print('ML finished, DV start')
         var_list.DVmove = Steppercontrol(var_list.enableAll,var_list.stepDV,var_list.directionDV,var_list.limitDV,3,var_list.DVdown,var_list.DVup, window)
         print('steppers are a go')
+        var_list.AUXmove = Steppercontrol(var_list.enableAll,var_list.stepAUX,var_list.directionAUX,var_list.limitAUX,3,var_list.AuxDown,var_list.AuxUP, window)
+        print('steppers are a go')
+        var_list.eventime = time.time() * 1000
+        var_list.firstandonly = time.time() * 1000
 
+    def start_signals(self):
+        print('start signals')
+        mainbuttonthread.selectlistcoordinates_signal.connect(self.selectlistcoordinates)
+        mainbuttonthread.engagemovement_signal.connect(self.engagemovement)
+        # controlthread.timerupdate_signal.connect(self.timercountdownupdate)
 
+    #     mainbuttonthread.selecrowtoggle_signal.connect(self.selectrowtoggle)
 
 # concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)
 
@@ -426,14 +810,22 @@ window = MainWindow()
 window.initializesteppers()
 
 mainbuttonthread = buttonprogram(window)
-#mainbuttonthread.sendtoUI(window)
+        #mainbuttonthread.sendtoUI(window)
 controlthread = threadedcontrols(window)
-#controlthread.sendtoUI(window)
+        #controlthread.sendtoUI(window)
+timedthread = threadedtimer(window)
 
 #Start Threads
 threadpool = QThreadPool()
 threadpool.start(mainbuttonthread.runbuttonthread)
 threadpool.start(controlthread.runcontrolthread)
+threadpool.start(timedthread.runtimerthread)
+
+# mainbuttonthread.selectlistcoordinates_signal.connect(window.selectlistcoordinates)
+# print('connect 1')
+# mainbuttonthread.selecrowtoggle_signal.connect(window.selectrowtoggle)
+# print('connect 2')
+window.start_signals()
 
 window.show()
 
