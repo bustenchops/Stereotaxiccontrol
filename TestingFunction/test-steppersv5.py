@@ -141,7 +141,8 @@ class mainprogram:
 
 
 
-    def AP_event(self, evA, evB, evC, calcnewstate, calcdelta, nowtimers):
+    def AP_event(self, event):
+                 # evA, evB, evC, calcnewstate, calcdelta, nowtimers):
         if event == RotaryEncoder.CLOCKWISE:
             print('AP clockwise')
         elif event == RotaryEncoder.ANTICLOCKWISE:
@@ -163,7 +164,8 @@ class mainprogram:
 
 
     #Event handling for the encoders and hard wired buttons each encoder
-    def ML_event(self, evA, evB, evC, calcnewstate, calcdelta, nowtimers):
+    def ML_event(self, event):
+                 # evA, evB, evC, calcnewstate, calcdelta, nowtimers):
         if event == RotaryEncoder.CLOCKWISE:
             print('ML clockwise')
         elif event == RotaryEncoder.ANTICLOCKWISE:
@@ -185,7 +187,8 @@ class mainprogram:
 
 
     #Event handling for the encoders and hard wired buttons each encoder
-    def DV_event(self, evA, evB, evC, calcnewstate, calcdelta, nowtimers):
+    def DV_event(self, event):
+                 # evA, evB, evC, calcnewstate, calcdelta, nowtimers):
 
         if event == RotaryEncoder.CLOCKWISE:
             print('DV clockwise')
