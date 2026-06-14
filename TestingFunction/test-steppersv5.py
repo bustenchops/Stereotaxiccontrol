@@ -142,64 +142,67 @@ class mainprogram:
 
 
     def AP_event(self, evA, evB, evC, calcnewstate, calcdelta, nowtimers):
-        # if event == RotaryEncoder.CLOCKWISE:
-        #     print('AP clockwise')
-        # elif event == RotaryEncoder.ANTICLOCKWISE:
-        #     print('AP counterclock')
-        # #This is a hard wired button note the encoder switch
-        # elif event == RotaryEncoder.BUTTONDOWN:
-        #     mainprogram.emergencystop(self)
-        # elif event == RotaryEncoder.BUTTONUP:
-        #     return
+        if event == RotaryEncoder.CLOCKWISE:
+            print('AP clockwise')
+        elif event == RotaryEncoder.ANTICLOCKWISE:
+            print('AP counterclock')
+        #This is a hard wired button note the encoder switch
+        elif event == RotaryEncoder.BUTTONDOWN:
+            mainprogram.emergencystop(self)
+        elif event == RotaryEncoder.BUTTONUP:
+            return
 
-        line = f"{evA}, {evB}, {evC}, {calcnewstate}, {calcdelta}, {nowtimers}\n"
-        print('AP:   A:', evA, 'B: ', evB, 'C: ', evC, 'newstate: ', calcnewstate, 'delta: ', calcdelta)
-
-        with open('APvariable_log.txt', "a") as file:
-            file.write(line)
+        # USE BELOW TO REPORT THE ENCODER IFNO AND MAKE LOG FILES
+        # line = f"{evA}, {evB}, {evC}, {calcnewstate}, {calcdelta}, {nowtimers}\n"
+        # print('AP:   A:', evA, 'B: ', evB, 'C: ', evC, 'newstate: ', calcnewstate, 'delta: ', calcdelta)
+        #
+        # with open('APvariable_log.txt', "a") as file:
+        #     file.write(line)
 
         return
 
 
     #Event handling for the encoders and hard wired buttons each encoder
     def ML_event(self, evA, evB, evC, calcnewstate, calcdelta, nowtimers):
-        # if event == RotaryEncoder.CLOCKWISE:
-        #     print('ML clockwise')
-        # elif event == RotaryEncoder.ANTICLOCKWISE:
-        #     print('ML counterclock')
-        # elif event == RotaryEncoder.BUTTONDOWN:
-        #     print("event 1st misc buttonclicked")
-        #     return
-        # elif event == RotaryEncoder.BUTTONUP:
-        #     return
+        if event == RotaryEncoder.CLOCKWISE:
+            print('ML clockwise')
+        elif event == RotaryEncoder.ANTICLOCKWISE:
+            print('ML counterclock')
+        elif event == RotaryEncoder.BUTTONDOWN:
+            print("event 1st misc buttonclicked")
+            return
+        elif event == RotaryEncoder.BUTTONUP:
+            return
 
-        line = f"{evA}, {evB}, {evC}, {calcnewstate}, {calcdelta}, {nowtimers}\n"
-        print('ML:   A:', evA, 'B: ', evB, 'C: ', evC, 'newstate: ', calcnewstate, 'delta: ', calcdelta)
-
-        with open('MLvariable_log.txt', "a") as file:
-            file.write(line)
+        # USE BELOW TO REPORT THE ENCODER IFNO AND MAKE LOG FILES
+        # line = f"{evA}, {evB}, {evC}, {calcnewstate}, {calcdelta}, {nowtimers}\n"
+        # print('ML:   A:', evA, 'B: ', evB, 'C: ', evC, 'newstate: ', calcnewstate, 'delta: ', calcdelta)
+        #
+        # with open('MLvariable_log.txt', "a") as file:
+        #     file.write(line)
 
         return
 
 
     #Event handling for the encoders and hard wired buttons each encoder
     def DV_event(self, evA, evB, evC, calcnewstate, calcdelta, nowtimers):
+
+        if event == RotaryEncoder.CLOCKWISE:
+            print('DV clockwise')
+        elif event == RotaryEncoder.ANTICLOCKWISE:
+            print('DV counterclock')
+        elif event == RotaryEncoder.BUTTONDOWN:
+            print("event 2nd misc buttonclicked")
+            return
+        elif event == RotaryEncoder.BUTTONUP:
+            return
+
+        # USE BELOW TO REPORT THE ENCODER IFNO AND MAKE LOG FILES
+        # line = f"{evA}, {evB}, {evC}, {calcnewstate}, {calcdelta}, {nowtimers}\n"
+        # print('DV:   A:', evA, 'B: ', evB, 'C: ', evC, 'newstate: ', calcnewstate, 'delta: ', calcdelta)
         #
-        # if event == RotaryEncoder.CLOCKWISE:
-        #     print('DV clockwise')
-        # elif event == RotaryEncoder.ANTICLOCKWISE:
-        #     print('DV counterclock')
-        # elif event == RotaryEncoder.BUTTONDOWN:
-        #     print("event 2nd misc buttonclicked")
-        #     return
-        # elif event == RotaryEncoder.BUTTONUP:
-        #     return
-
-        line = f"{evA}, {evB}, {evC}, {calcnewstate}, {calcdelta}, {nowtimers}\n"
-        print('DV:   A:', evA, 'B: ', evB, 'C: ', evC, 'newstate: ', calcnewstate, 'delta: ', calcdelta)
-
-        with open('DVvariable_log.txt', "a") as file:
-            file.write(line)
+        # with open('DVvariable_log.txt', "a") as file:
+        #     file.write(line)
 
         return
 

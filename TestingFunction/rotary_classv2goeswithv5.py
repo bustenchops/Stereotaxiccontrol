@@ -38,6 +38,8 @@ class RotaryEncoder:
         self.pinB = pinB
         self.button = button
         self.sendtoThreadedControl = callbackdef
+        self.encodercount = 0
+        self.rev_encodercount = 0
 
         GPIO.setmode(GPIO.BCM)
 
@@ -56,39 +58,55 @@ class RotaryEncoder:
         return
 
     def stateanddelay(self, rotdata):
-        print('state and delay calculation')
-        self.comparetimer = time.time() * 1000
-        if var_list.lastdirection == rotdata:
-            # print('first:', var_list.firstandonly)
-            # print('varlist time:',var_list.eventime)
-            # print('newest time:', self.comparetimer)
-            self.testtime = self.comparetimer - var_list.eventime
-            if self.testtime >= var_list.eventdelay:
-                # print('test2')
-                var_list.eventime = self.comparetimer
-                # print('delay:', self.testtime)
-                return True
-            else:
-                # print('event delay fail.....time:', self.testtime)
-                return False
-        elif var_list.lastdirection != rotdata:
-            # print('test3')
-            self.testtime = self.comparetimer - var_list.eventime
-            if self.testtime >= var_list.backwardrotdelay:
-                # print('test4')
-                var_list.eventime = self.comparetimer
-                # print('delay:', self.testtime)
-                return True
-            else:
-                # print('event changerotation delay fail.....time:', self.testtime)
-                return False
+        thetimenow = time.time() * 1000
+        differencetime = thetimenow - var_list.eventime
+        if (differencetime) > var_list.eventdelay:
+            self.encodercount = 0
+            self.rev_encodercount = 0
+            var_list.eventime = thetimenow
+            print('stateanddelay - encoder=0 eventime = timenow')
+        if rotdata == var_list.lastdirection:
+            self.encodercount += 1
+            print('count:',self.encodercount)
+        else:
+            self.rev_encodercount += 1
+            print('reverse count:', self.rev_encodercount)
+        if self.encodercount == 3:
+            print('return true same direction')
+            return True
+        if self.rev_encodercount == 3 and (differencetime) > var_list.backwardrotdelay:
+            print('return true opposite direction')
+            return True
+        else:
+            return False
 
-    # def reportevent(self,evA,evB,evC,calcnewstate,calcdelta):
-    #     line = f"{evA}, {evB}, {evC}, {calcnewstate}, {calcdelta}\n"
-    #     print('A:',evA,'B: ',evB,'C: ',evC,'newstate: ',calcnewstate,'delta: ',calcdelta)
-    #
-    #     with open('variable_log.txt', "a") as file:
-    #         file.write(line)
+        # print('state and delay calculation')
+        # self.comparetimer = time.time() * 1000
+        # if var_list.lastdirection == rotdata:
+        #     # print('first:', var_list.firstandonly)
+        #     # print('varlist time:',var_list.eventime)
+        #     # print('newest time:', self.comparetimer)
+        #     self.testtime = self.comparetimer - var_list.eventime
+        #     if self.testtime >= var_list.eventdelay:
+        #         # print('test2')
+        #         var_list.eventime = self.comparetimer
+        #         # print('delay:', self.testtime)
+        #         return True
+        #     else:
+        #         # print('event delay fail.....time:', self.testtime)
+        #         return False
+        # elif var_list.lastdirection != rotdata:
+        #     # print('test3')
+        #     self.testtime = self.comparetimer - var_list.eventime
+        #     if self.testtime >= var_list.backwardrotdelay:
+        #         # print('test4')
+        #         var_list.eventime = self.comparetimer
+        #         # print('delay:', self.testtime)
+        #         return True
+        #     else:
+        #         # print('event changerotation delay fail.....time:', self.testtime)
+        #         return False
+
 
     # Call back routine called by switch events
     def switch_event(self, switch):
@@ -110,66 +128,51 @@ class RotaryEncoder:
         self.last_state = new_state
         self.event = 0
         self.nowtimer = time.time() * 1000
-        # self.reportevent(self.rotary_a, self.rotary_b, self.rotary_c,new_state,delta)
-        self.sendtoThreadedControl(self.rotary_a, self.rotary_b, self.rotary_c,new_state,delta,self.nowtimer)
 
-        # if delta == 1:
-        #     if self.stateanddelay(delta):
-        #         if self.direction == self.CLOCKWISE:
-        #             self.event = self.direction
-        #             print(self.direction, "  CLOCKWISE   ", self.CLOCKWISE)
-        #         else:
-        #             self.direction = self.CLOCKWISE
-        #             print(self.direction, "  change to CLOCKWISE   ", self.CLOCKWISE)
-        #         var_list.lastdirection = delta
-        #
-        # elif delta == 3:
-        #     if self.stateanddelay(delta):
-        #         if self.direction == self.ANTICLOCKWISE:
-        #             self.event = self.direction
-        #             print(self.direction, "  ANTICLOCKWISE   ", self.ANTICLOCKWISE)
-        #         else:
-        #             self.direction = self.ANTICLOCKWISE
-        #             print(self.direction, "  changed to ANTICLOCKWISE   ", self.ANTICLOCKWISE)
-        #         var_list.lastdirection = delta
-        #
-        #     # print(self.direction, "  ANTICLOCKWISE   ", self.ANTICLOCKWISE)
+        # use this to test with log files using test-steppersV5.py
+        # self.sendtoThreadedControl(self.rotary_a, self.rotary_b, self.rotary_c,new_state,delta,self.nowtimer)
 
-        # if self.event > 0:
-        #     if self.event == 1:
-        #         print('ACTION clockwise')
-        #         self.sendtoThreadedControl(self.event)
-        #     if self.event == 2:
-        #         print('ACTION counterclockwise')
-        #         self.sendtoThreadedControl(self.event)
+        if delta == 1:
+            if self.stateanddelay(delta):
+                if self.direction == self.CLOCKWISE:
+                    self.event = self.direction
+                    print(self.direction, "  CLOCKWISE   ", self.CLOCKWISE)
+                else:
+                    self.direction = self.CLOCKWISE
+                    print(self.direction, "  change to CLOCKWISE   ", self.CLOCKWISE)
+                var_list.lastdirection = delta
 
-#         #    self.callback(event)
-#         # print('do something count = ',self.count)
-#         # self.count += 1
-#         # print(event)
-#
-#         return
+        elif delta == 3:
+            if self.stateanddelay(delta):
+                if self.direction == self.ANTICLOCKWISE:
+                    self.event = self.direction
+                    print(self.direction, "  ANTICLOCKWISE   ", self.ANTICLOCKWISE)
+                else:
+                    self.direction = self.ANTICLOCKWISE
+                    print(self.direction, "  changed to ANTICLOCKWISE   ", self.ANTICLOCKWISE)
+                var_list.lastdirection = delta
+
+        if self.event > 0:
+            if self.event == self.CLOCKWISE:
+                print('ACTION clockwise')
+                self.sendtoThreadedControl(self.event)
+            if self.event == self.ANTICLOCKWISE:
+                print('ACTION counterclockwise')
+                self.sendtoThreadedControl(self.event)
+
+        return
 #
 #     # Push button up event
     def button_event(self, button):
-        return
-#         if GPIO.input(self.button):
-#             self.event = self.BUTTONUP
-#             print('release')
-#         else:
-#             self.event = self.BUTTONDOWN
-#             print('press')
-#             self.sendtoThreadedControl(self.event)
-#         # print('button pressed')
-#         # self.sendtoThreadedControl(self.event)
-#
-#         self.callback(self.event)
-#         print('button')
-#         return
-#
-#
-# # Get a switch state
-# def getSwitchState(self, switch):
-#     return GPIO.input(switch)
+
+        if GPIO.input(self.button):
+            self.event = self.BUTTONUP
+            print('release')
+            self.sendtoThreadedControl(self.event)
+        else:
+            self.event = self.BUTTONDOWN
+            print('press')
+            self.sendtoThreadedControl(self.event)
+
 #
 # # End of RotaryEncoder class
