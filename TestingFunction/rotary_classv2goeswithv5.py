@@ -64,7 +64,7 @@ class RotaryEncoder:
             self.encodercount = 0
             self.rev_encodercount = 0
             var_list.eventime = thetimenow
-            # print('stateanddelay - encoder=0 eventime = timenow')
+            print('timer reset')
         if rotdata == var_list.lastdirection:
             self.encodercount += 1
             # print('count:',self.encodercount)
