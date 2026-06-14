@@ -64,19 +64,19 @@ class RotaryEncoder:
             self.encodercount = 0
             self.rev_encodercount = 0
             var_list.eventime = thetimenow
-            print('stateanddelay - encoder=0 eventime = timenow')
+            # print('stateanddelay - encoder=0 eventime = timenow')
         if rotdata == var_list.lastdirection:
             self.encodercount += 1
-            print('count:',self.encodercount)
+            # print('count:',self.encodercount)
         else:
             self.rev_encodercount += 1
-            print('reverse count:', self.rev_encodercount)
+            # print('reverse count:', self.rev_encodercount)
         if self.encodercount == 3:
-            print('return true same direction')
+            # print('return true same direction')
             return True
         if self.rev_encodercount == 3:
                 # and (differencetime) > var_list.backwardrotdelay):
-            print('return true opposite direction')
+            # print('return true opposite direction')
             return True
         else:
             return False
@@ -137,28 +137,28 @@ class RotaryEncoder:
             if self.stateanddelay(delta):
                 if self.direction == self.CLOCKWISE:
                     self.event = self.direction
-                    print(self.direction, "  CLOCKWISE   ", self.CLOCKWISE)
+                    # print(self.direction, "  CLOCKWISE   ", self.CLOCKWISE)
                 else:
                     self.direction = self.CLOCKWISE
-                    print(self.direction, "  change to CLOCKWISE   ", self.CLOCKWISE)
+                    # print(self.direction, "  change to CLOCKWISE   ", self.CLOCKWISE)
                 var_list.lastdirection = delta
 
         elif delta == 3:
             if self.stateanddelay(delta):
                 if self.direction == self.ANTICLOCKWISE:
                     self.event = self.direction
-                    print(self.direction, "  ANTICLOCKWISE   ", self.ANTICLOCKWISE)
+                    # print(self.direction, "  ANTICLOCKWISE   ", self.ANTICLOCKWISE)
                 else:
                     self.direction = self.ANTICLOCKWISE
-                    print(self.direction, "  changed to ANTICLOCKWISE   ", self.ANTICLOCKWISE)
+                    # print(self.direction, "  changed to ANTICLOCKWISE   ", self.ANTICLOCKWISE)
                 var_list.lastdirection = delta
 
         if self.event > 0:
             if self.event == self.CLOCKWISE:
-                print('ACTION clockwise')
+                # print('ACTION clockwise')
                 self.sendtoThreadedControl(self.event)
             if self.event == self.ANTICLOCKWISE:
-                print('ACTION counterclockwise')
+                # print('ACTION counterclockwise')
                 self.sendtoThreadedControl(self.event)
 
         return
