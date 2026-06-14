@@ -71,6 +71,7 @@ class RotaryEncoder:
         else:
             self.rev_encodercount += 1
             print('reverse count:', self.rev_encodercount)
+        print('this is after the reverse count')
         if self.encodercount == 3:
             print('return true same direction')
             return True
