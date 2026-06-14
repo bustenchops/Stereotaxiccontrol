@@ -150,8 +150,8 @@ class RotaryEncoder:
 #         return
 #
 #     # Push button up event
-#     def button_event(self, button):
-#
+    def button_event(self, button):
+        return
 #         if GPIO.input(self.button):
 #             self.event = self.BUTTONUP
 #             print('release')
