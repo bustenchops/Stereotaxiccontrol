@@ -28,9 +28,9 @@ class var_list:
     NeedleMLmm = float(-31.22)
     NeedleDVmm = float(5)
 
-    FiberAPmm = float(-20)
-    FiberMLmm = float(-21.22)
-    FiberDVmm = float(-2)
+    FiberAPmm = float(-5.069)
+    FiberMLmm = float(31.22)
+    FiberDVmm = float(1.1)
 
 # variable to let program know which offset of toggled on. 1-drill,2-syringe,3-probe
     TOGGLEoff = 1
@@ -42,8 +42,8 @@ class var_list:
                     'selectdown', 'selectup', 'retractAP', 'returnAP', 'bregmahome',
                    'gotolambdabut', 'ratselect', 'mouseselect', 'functionone', 'armbut',
                    'relativeML', 'retractDV', 'returnDV', 'functiontwo', 'relativeAP',
-                   'relativeALLset', 'offpostwo', 'offposone' 'movefast', 'moveslow',
-                   'relativeDV', 'unassigned']
+                   'relativeALLset', 'offpostwo', 'offposone', 'unassigned', 'movefast', 'moveslow',
+                   'relativeDV']
 
     lastbuttonstate = [0 for x in range(len(buttonarray))]
 
@@ -58,7 +58,7 @@ class var_list:
     relativeML = 20
     relativeDV = 31
     relativeALL = 25
-    fullretract = 2
+    fullretractbut = 2
 
     bregmahome = 14
     bregmahomeDVabs = 5
@@ -145,10 +145,10 @@ class var_list:
 
 #Variables that may need tweaking
     calibrationsteps = 4000
-    backoff = 200
-    APadvance = 2000
-    DVadvance = 400
-    MLadvance = 400
+    backoff = 50 #200
+    APadvance = 2000 #2000
+    DVadvance = 400 #400
+    MLadvance = 400 #400
 
     APworking = 6400
     MLworking = 6070
@@ -162,7 +162,7 @@ class var_list:
     DVup_five = 675 # about 5 mm
 
 # how many steps DV goes up and then back when changing the offsets to avoid scrapping the skull
-    DVup_OffsetSafety = 1340 #about 1cm
+    DVup_OffsetSafety = 1340 #about 1 cm
 
 
 #DEFINE STEPPER CONTROL PINS
@@ -187,12 +187,12 @@ class var_list:
     limitAUX = 13
 
 #DEFINE ROTARY ENCODER PINS
-    rotoA_AP = 25
-    rotoB_AP =  8
+    rotoA_AP = 21
+    rotoB_AP = 20
     rotoA_ML = 12
     rotoB_ML = 16
-    rotoA_DV = 20
-    rotoB_DV = 21
+    rotoA_DV = 8
+    rotoB_DV = 25
     rotoA_fourth = 14
     rotoB_fourth =  15
 
@@ -229,13 +229,15 @@ class var_list:
     Withdrawlindicator = 0
     Makeitsoindicator = 0
 
-    ratormouseselect = 1  #1 is mouse 2 is rat (mouse default)
+
+    ratormouseselect = 1  #1 is mouse 2 is rat 3 is null(mouse default)
     ratlambda = 1208   # steps for 9mm at 0.0745 per step
     mouselambda = 550  # steps for 4.1mm at 0.0745 per step
     rellambda = 0
 
 # For timerthread safety timeouts
     timeoutlength = 3
+
 
     DVinserttimeouttime = None
     Safetytimeouttime = None
