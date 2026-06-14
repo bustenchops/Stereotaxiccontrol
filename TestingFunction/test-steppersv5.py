@@ -153,7 +153,7 @@ class mainprogram:
         #     return
 
         line = f"{evA}, {evB}, {evC}, {calcnewstate}, {calcdelta}\n"
-        print('A:', evA, 'B: ', evB, 'C: ', evC, 'newstate: ', calcnewstate, 'delta: ', calcdelta)
+        print('AP:   A:', evA, 'B: ', evB, 'C: ', evC, 'newstate: ', calcnewstate, 'delta: ', calcdelta)
 
         with open('APvariable_log.txt', "a") as file:
             file.write(line)
@@ -174,7 +174,7 @@ class mainprogram:
         #     return
 
         line = f"{evA}, {evB}, {evC}, {calcnewstate}, {calcdelta}\n"
-        print('A:', evA, 'B: ', evB, 'C: ', evC, 'newstate: ', calcnewstate, 'delta: ', calcdelta)
+        print('ML:   A:', evA, 'B: ', evB, 'C: ', evC, 'newstate: ', calcnewstate, 'delta: ', calcdelta)
 
         with open('MLvariable_log.txt', "a") as file:
             file.write(line)
@@ -196,7 +196,7 @@ class mainprogram:
         #     return
 
         line = f"{evA}, {evB}, {evC}, {calcnewstate}, {calcdelta}\n"
-        print('A:', evA, 'B: ', evB, 'C: ', evC, 'newstate: ', calcnewstate, 'delta: ', calcdelta)
+        print('DV:   A:', evA, 'B: ', evB, 'C: ', evC, 'newstate: ', calcnewstate, 'delta: ', calcdelta)
 
         with open('DVvariable_log.txt', "a") as file:
             file.write(line)
