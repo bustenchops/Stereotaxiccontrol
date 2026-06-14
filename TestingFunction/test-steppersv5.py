@@ -141,7 +141,7 @@ class mainprogram:
 
 
 
-    def AP_event(self, evA, evB, evC, calcnewstate, calcdelta):
+    def AP_event(self, evA, evB, evC, calcnewstate, calcdelta, nowtimers):
         # if event == RotaryEncoder.CLOCKWISE:
         #     print('AP clockwise')
         # elif event == RotaryEncoder.ANTICLOCKWISE:
@@ -152,7 +152,7 @@ class mainprogram:
         # elif event == RotaryEncoder.BUTTONUP:
         #     return
 
-        line = f"{evA}, {evB}, {evC}, {calcnewstate}, {calcdelta}\n"
+        line = f"{evA}, {evB}, {evC}, {calcnewstate}, {calcdelta}, {nowtimers}\n"
         print('AP:   A:', evA, 'B: ', evB, 'C: ', evC, 'newstate: ', calcnewstate, 'delta: ', calcdelta)
 
         with open('APvariable_log.txt', "a") as file:

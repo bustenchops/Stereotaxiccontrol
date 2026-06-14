@@ -109,9 +109,9 @@ class RotaryEncoder:
         delta = (new_state - self.last_state) % 4
         self.last_state = new_state
         self.event = 0
-
+        self.nowtimer = time.time() * 1000
         # self.reportevent(self.rotary_a, self.rotary_b, self.rotary_c,new_state,delta)
-        self.sendtoThreadedControl(self.rotary_a, self.rotary_b, self.rotary_c,new_state,delta)
+        self.sendtoThreadedControl(self.rotary_a, self.rotary_b, self.rotary_c,new_state,delta,self.nowtimer)
 
         # if delta == 1:
         #     if self.stateanddelay(delta):
