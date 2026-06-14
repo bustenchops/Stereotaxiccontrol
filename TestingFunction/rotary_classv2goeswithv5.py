@@ -83,12 +83,12 @@ class RotaryEncoder:
                 # print('event changerotation delay fail.....time:', self.testtime)
                 return False
 
-    def reportevent(self,evA,evB,evC,calcnewstate,calcdelta):
-        line = f"{evA}, {evB}, {evC}, {calcnewstate}, {calcdelta}\n"
-        print('A:',evA,'B: ',evB,'C: ',evC,'newstate: ',calcnewstate,'delta: ',calcdelta)
-
-        with open('variable_log.txt', "a") as file:
-            file.write(line)
+    # def reportevent(self,evA,evB,evC,calcnewstate,calcdelta):
+    #     line = f"{evA}, {evB}, {evC}, {calcnewstate}, {calcdelta}\n"
+    #     print('A:',evA,'B: ',evB,'C: ',evC,'newstate: ',calcnewstate,'delta: ',calcdelta)
+    #
+    #     with open('variable_log.txt', "a") as file:
+    #         file.write(line)
 
     # Call back routine called by switch events
     def switch_event(self, switch):
@@ -110,7 +110,8 @@ class RotaryEncoder:
         self.last_state = new_state
         self.event = 0
 
-        self.reportevent(self.rotary_a, self.rotary_b, self.rotary_c,new_state,delta)
+        # self.reportevent(self.rotary_a, self.rotary_b, self.rotary_c,new_state,delta)
+        self.sendtoThreadedControl(self.rotary_a, self.rotary_b, self.rotary_c,new_state,delta)
 
         # if delta == 1:
         #     if self.stateanddelay(delta):
