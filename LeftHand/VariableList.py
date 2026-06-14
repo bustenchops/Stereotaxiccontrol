@@ -30,27 +30,29 @@ class var_list:
     TOGGLEoff = 1
 
 # DEFINE NUMBER OF BUTTONS AND ORDER IN ARRAY
-    buttonarray = ['moveslow', 'needleoffset', 'drilloffset', 'HomeToABSzero', 'movefast',
-                   'recalibrate', 'bregmahome', 'relativeAP', 'HomerelativeZero', 'relativeALLset',
-                   'FiberOffset', 'relativeML', 'relativeDV' , 'miscbuttonA', 'miscbuttonB']
+    buttonarray = ['movefast', 'bregmahome', 'relativeML', 'relativeAP', 'moveslow',
+                   'HomeToABSzero', 'recalibrate', 'miscbuttonA', 'presetworking', 'FiberOffset',
+                   'needleoffset', 'drilloffset', 'relativeDV', 'relativeALLset', 'HomerelativeZero',
+                   'miscbuttonC']
     lastbuttonstate = [0 for x in range(len(buttonarray))]
 
 # BUTTON POSITION IN SHIFT REGISTER ARRAY
-    moveslow = 0
-    needleoff = 1
-    drilloff = 2
-    homeABSzero = 3
-    movefast = 4
-    recalibrate = 5
-    bregmahome = 6
-    relativeAP = 7
-    homeRELzero = 8
-    relativeALL = 9
-    fiberoff = 10
+    movefast = 6
+    bregmahome = 14
     relativeML = 11
-    relativeDV = 12
-    miscbuttonA = 13
-    miscbuttonB = 14
+    relativeAP = 9
+    moveslow = 7
+    homeABSzero = 8 #full retract
+    recalibrate = 10
+    miscbuttonA =  1# speciesselect
+    miscbuttonB =  3 # gotoworking preset
+    fiberoff = 4
+    needleoff = 15
+    drilloff = 5
+    relativeDV = 0
+    relativeALL = 13
+    homeRELzero = 12 #gotolambda
+    miscbuttonC = 2 #unassigned
 
 #DEFINE EMERGENCY STOP and hard wired buttons
     emergstop = 26
@@ -141,28 +143,26 @@ class var_list:
     limitDV = 19
 
 #DEFINE ROTARY ENCODER PINS
-    rotoA_AP = 25
-    rotoB_AP =  8
-    rotoA_ML = 12
-    rotoB_ML = 16
-    rotoA_DV = 20
-    rotoB_DV = 21
-
-
+    rotoA_AP = 21
+    rotoB_AP = 20
+    rotoA_ML = 8
+    rotoB_ML = 25
+    rotoA_DV = 12
+    rotoB_DV = 16
     rotoA_AUX = 14
     rotoB_AUX = 15
 
 #ENCODER CALC VARIABLES
     eventime = 0
-    eventdelay = 200
-    backwardrotdelay = 400
+    eventdelay = 330
+    backwardrotdelay = 500
     lastdirection = 0 #3 = counterclock, 1 = clock
     thecount = 0
     firstandonly = 0
 
 #DEFINE STEPPER DIRECTIONS
-    APback = 1
-    APforward = 0
+    APback = 0
+    APforward = 1
     MLleft = 1
     MLright = 0
     DVup = 0

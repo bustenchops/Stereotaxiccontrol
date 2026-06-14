@@ -2,7 +2,7 @@ import time
 import RPi.GPIO as GPIO
 
 from VariableList import var_list
-from RotatryEncoderv1 import RotaryEncoder
+from RotaryEncoderv2 import RotaryEncoder
 import tkinter as tk
 from tkinter import simpledialog
 
