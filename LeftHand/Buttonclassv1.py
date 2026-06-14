@@ -144,7 +144,8 @@ class buttonprogram(QObject):
                                 if var_list.TOGGLEoff == 3:
                                     self.fibermovetooffset()
                                     print('send to probe working')
-                            else:
+                            # else:
+                            elif var_list.TOGGLEoff == 1:
                                 self.sendtoworking()
                             # var_list.safetybutton = 0
                             self.sendtoUI.uncheckstuff(4)
