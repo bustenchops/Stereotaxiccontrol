@@ -95,7 +95,13 @@ class threadedcontrols:
             var_list.DVmove.steppgo(var_list.DVup, var_list.stepper_speed, var_list.btnSteps)
             var_list.DVmove.PosRelAbsCalc()
         elif event == RotaryEncoder.BUTTONDOWN:
-            print("hardwired event button B clicked")
+            print("Withdraw Hardware Button")
+            if var_list.safetybutton == 1:
+                print('Autowithdraw started')
+                var_list.withdrawinsertstop = 1
+                self.withdrawauto(var_list.wdtotalpause, var_list.wdnumpause, var_list.wdrate)
+                var_list.safetybutton = 0
+
             return
         elif event == RotaryEncoder.BUTTONUP:
             return
@@ -372,7 +378,119 @@ class threadedcontrols:
         var_list.lastenablestate = 1
 
 
+    def withdrawauto(self, withtotalpause, withnumpause, withdrrate):
 
+        if withdrrate == 0:
+            return
+        elif withdrrate == None:
+            return
+        if withnumpause == 0:
+            return
+        elif withnumpause == None:
+            return
+
+        print('withdrawing')
+        self.firstdist = float(var_list.withfirstdist)
+        self.numberwdpause = int(withnumpause)
+        self.wdtotalpause = int(withtotalpause)
+        self.waitfirsttime = int(var_list.withfirstwait)
+        self.wdrate = int(withdrrate)
+
+
+        self.wdfirstdist = round(self.firstdist / var_list.DVstepdistance)
+        self.withdrawdist = (var_list.DVsteps - self.wdfirstdist) - var_list.DVrelpos
+        self.withstepsperpause = int(self.withdrawdist / self.numberwdpause)
+        self.withstepsperpauseremainder = self.withdrawdist % self.numberwdpause
+        self.secondpause = self.wdtotalpause - self.waitfirsttime
+        self.secondtimer = self.secondpause
+        self.countdowntimA = self.waitfirsttime
+        self.countdowntimB = self.secondpause
+        self.pausetime = int(var_list.withpausetime)
+        self.wdptime = self.pausetime
+
+        wdrate = 1 / (self.wdrate  * ( 1 / var_list.DVstepdistance ) / 60)
+        roundwdrate = round(wdrate, 3)
+
+        if var_list.DVsteps > var_list.DVrelpos:
+            print('DV lower than bregma')
+            for o in range(self.waitfirsttime):
+                if var_list.withdrawinsertstop == 0:
+                    print('STOP WITHDRAW')
+                    # self.sendtoUI.uncheckstuff(3)
+                    # self.sendtoUI.uncheckstuff(4)
+                    return
+                else:
+                    print(self.countdowntimA)
+                    # self.sendtoUI.timercountdownupdate(self.countdowntimA)
+                    time.sleep(1)
+                    self.countdowntimA -= 1
+            for f in range(self.wdfirstdist):
+                if var_list.withdrawinsertstop == 0:
+                    print('STOP WITHDRAW')
+                    # self.sendtoUI.uncheckstuff(3)
+                    # self.sendtoUI.uncheckstuff(4)
+                    return
+                else:
+                    var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+                    time.sleep(roundwdrate)
+            var_list.DVmove.PosRelAbsCalc()
+            for j in range(self.secondpause):
+                if var_list.withdrawinsertstop == 0:
+                    print('STOP WITHDRAW')
+                    # self.sendtoUI.uncheckstuff(3)
+                    # self.sendtoUI.uncheckstuff(4)
+                    return
+                else:
+                    print(self.secondtimer)
+                    # self.sendtoUI.timercountdownupdate(self.countdowntimB)
+                    time.sleep(1)
+                    self.secondtimer -= 1
+            for y in range(self.numberwdpause):
+                for x in range(self.withstepsperpause):
+                    if var_list.withdrawinsertstop == 0:
+                        print('STOP WITHDRAW')
+                        # self.sendtoUI.uncheckstuff(3)
+                        # self.sendtoUI.uncheckstuff(4)
+                        return
+                    else:
+                        var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+                        time.sleep(roundwdrate)
+                var_list.DVmove.PosRelAbsCalc()
+                for t in range(self.pausetime):
+                    if var_list.withdrawinsertstop == 0:
+                        print('STOP WITHDRAW')
+                        # self.sendtoUI.uncheckstuff(3)
+                        # self.sendtoUI.uncheckstuff(4)
+                        return
+                    else:
+                        print(self.wdptime)
+                        # self.sendtoUI.timercountdownupdate(self.wdptime)
+                        time.sleep(1)
+                        self.wdptime -= 1
+                self.wdptime = self.pausetime
+            for f in range(self.withstepsperpauseremainder):
+                if var_list.withdrawinsertstop == 0:
+                    print('STOP WITHDRAW')
+                    # self.sendtoUI.uncheckstuff(3)
+                    # self.sendtoUI.uncheckstuff(4)
+                    return
+                else:
+                    var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+                    time.sleep(roundwdrate)
+
+        var_list.DVmove.PosRelAbsCalc()
+        time.sleep(2)
+        for g in range (var_list.DVup_five):
+            var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+
+        var_list.APmove.PosRelAbsCalc()
+        var_list.MLmove.PosRelAbsCalc()
+        var_list.DVmove.PosRelAbsCalc()
+
+
+        GPIO.output(var_list.enableAll, 1)
+        var_list.lastenablestate = 1
+        var_list.withdrawinsertstop = 0
 
 # question and waits for user input
     def calibratethings(self):

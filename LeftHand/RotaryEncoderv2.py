@@ -1,4 +1,4 @@
-!/usr/bin/env python
+#!/usr/bin/env python
 #
 # Raspberry Pi Rotary Encoder Class
 # $Id: rotary_class.py,v 1.3 2021/04/20 12:23:04 bob Exp $

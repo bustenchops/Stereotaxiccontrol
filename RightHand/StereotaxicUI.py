@@ -14,6 +14,7 @@ import time
 
 
 
+
 class MainWindow(QMainWindow):
 
     def __init__(self):
@@ -358,10 +359,13 @@ class MainWindow(QMainWindow):
     def selectlistcoordinates(self):
         selected_items = self.listWidget.selectedItems()
         selected_text = selected_items[0].text()
-        name, APlist, MLlist, DVlist = selected_text.split(' ')
+        name, APlist, MLlist, DVlist, withtotalpause, withnumpause, withdrrate = selected_text.split(' ')
         self.APmanualenter.setPlainText(APlist)
         self.MLmanualenter.setPlainText(MLlist)
         self.DVmanualenter.setPlainText(DVlist)
+        var_list.wdtotalpause = withtotalpause
+        var_list.wdnumpause = withnumpause
+        var_list.wdrate = withdrrate
 
 #sets the radio button for rat or mouse
     @Slot()

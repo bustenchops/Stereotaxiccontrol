@@ -22,35 +22,37 @@ class var_list:
     NeedleMLmm = float(-31.22)
     NeedleDVmm = float(5)
 
-    FiberAPmm = float(-5.069)
-    FiberMLmm = float(31.22)
-    FiberDVmm = float(1.1)
+    FiberAPmm = float(-20)
+    FiberMLmm = float(-21.22)
+    FiberDVmm = float(-2)
 
 # variable to let program know which offset of toggled on. 1-drill,2-syringe,3-probe
     TOGGLEoff = 1
 
 # DEFINE NUMBER OF BUTTONS AND ORDER IN ARRAY
-    buttonarray = ['moveslow', 'needleoffset', 'drilloffset', 'HomeToABSzero', 'movefast',
-                   'recalibrate', 'bregmahome', 'relativeAP', 'HomerelativeZero', 'relativeALLset',
-                   'FiberOffset', 'relativeML', 'relativeDV' , 'miscbuttonA', 'miscbuttonB']
+    buttonarray = ['movefast', 'bregmahome', 'relativeML', 'relativeAP', 'moveslow',
+                   'HomeToABSzero', 'recalibrate', 'miscbuttonA', 'presetworking', 'FiberOffset',
+                   'needleoffset', 'drilloffset', 'relativeDV', 'relativeALLset', 'HomerelativeZero',
+                   'miscbuttonC']
     lastbuttonstate = [0 for x in range(len(buttonarray))]
 
 # BUTTON POSITION IN SHIFT REGISTER ARRAY
-    moveslow = 0
-    needleoff = 1
-    drilloff = 2
-    homeABSzero = 3
-    movefast = 4
-    recalibrate = 5
-    bregmahome = 6
-    relativeAP = 7
-    homeRELzero = 8
-    relativeALL = 9
-    fiberoff = 10
+    movefast = 6
+    bregmahome = 14
     relativeML = 11
-    relativeDV = 12
-    miscbuttonA = 13
-    miscbuttonB = 14
+    relativeAP = 9
+    moveslow = 7
+    homeABSzero = 8 #full retract
+    recalibrate = 10
+    miscbuttonA =  1# speciesselect
+    miscbuttonB =  3 # gotoworking preset
+    fiberoff = 4
+    needleoff = 15
+    drilloff = 5
+    relativeDV = 0
+    relativeALL = 13
+    homeRELzero = 12 #gotolambda
+    miscbuttonC = 2 #unassigned
 
 #DEFINE EMERGENCY STOP and hard wired buttons
     emergstop = 26
@@ -110,9 +112,9 @@ class var_list:
     DVadvance = 400
     MLadvance = 400
 
-    APworking = 3600
-    MLworking = 6070
-    DVworking = 4400
+    APworking = 4550
+    MLworking = 5990
+    DVworking = 4900
 
     fullretract = 7650
     fullretractML = 9500
@@ -141,33 +143,33 @@ class var_list:
     limitDV = 19
 
 #DEFINE ROTARY ENCODER PINS
-    rotoA_AP = 25
-    rotoB_AP =  8
-    rotoA_ML = 12
-    rotoB_ML = 16
-    rotoA_DV = 20
-    rotoB_DV = 21
+    rotoA_AP = 21
+    rotoB_AP = 20
+    rotoA_ML = 8
+    rotoB_ML = 25
+    rotoA_DV = 12
+    rotoB_DV = 16
     rotoA_AUX = 14
     rotoB_AUX = 15
 
 #ENCODER CALC VARIABLES
     eventime = 0
-    eventdelay = 250
-    backwardrotdelay = 500
+    eventdelay = 200
+    backwardrotdelay = 400
     lastdirection = 0 #3 = counterclock, 1 = clock
     thecount = 0
     firstandonly = 0
 
 #DEFINE STEPPER DIRECTIONS
-    APback = 1
-    APforward = 0
+    APback = 0
+    APforward = 1
     MLleft = 1
     MLright = 0
     DVup = 0
     DVdown = 1
 
-    calibfilename = 'CalibrationLH.txt'
-    offsetfilename = 'offsetsLH.txt'
+    calibfilename = 'CalibrationRH.txt'
+    offsetfilename = 'offsetsRH.txt'
 
     lastenablestate = 1
     emergencystopflag = 0
@@ -178,19 +180,5 @@ class var_list:
     ratlambda = 1208   # steps for 9mm at 0.0745 per step
     mouselambda = 550  # steps for 4.1mm at 0.0745 per step
     rellambda = 0
-
-    withdrawinsertstop = 0
-    DVup_five = 675 # about 5 mm
-
-    withpausetime = 5 #seconds
-    withfirstdist = 0.1 #mm
-    withfirstwait = 60 #seconds
-
-    wdtotalpause = 0
-    wdnumpause = 0
-    wdrate = 0
-
-
-
 
 # concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)

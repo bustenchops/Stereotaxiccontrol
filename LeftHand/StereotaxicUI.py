@@ -420,9 +420,7 @@ class MainWindow(QMainWindow):
         var_list.eventime = time.time() * 1000
         var_list.firstandonly = time.time() * 1000
 
-
-
-# concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)
+# concept and  code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)
 
 #######program code############
 
@@ -436,12 +434,10 @@ mainbuttonthread = buttonprogram(window)
 controlthread = threadedcontrols(window)
 #controlthread.sendtoUI(window)
 
-
 #Start Threads
 threadpool = QThreadPool()
 threadpool.start(mainbuttonthread.runbuttonthread)
 threadpool.start(controlthread.runcontrolthread)
-
 
 window.show()
 
