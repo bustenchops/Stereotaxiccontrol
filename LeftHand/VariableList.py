@@ -52,7 +52,7 @@ class var_list:
     relativeDV = 0
     relativeALL = 13
     homeRELzero = 12 #gotolambda
-    miscbuttonC = 2 #unassigned
+    miscbuttonC = 2 #autowithdraw
 
 #DEFINE EMERGENCY STOP and hard wired buttons
     emergstop = 26
@@ -180,5 +180,19 @@ class var_list:
     ratlambda = 1208   # steps for 9mm at 0.0745 per step
     mouselambda = 550  # steps for 4.1mm at 0.0745 per step
     rellambda = 0
+
+    withdrawinsertstop = 0
+    DVup_five = 675 # about 5 mm
+
+    withpausetime = 5 #seconds
+    withfirstdist = 0.1 #mm
+    withfirstwait = 60 #seconds
+
+    wdtotalpause = 0
+    wdnumpause = 0
+    wdrate = 0
+
+
+
 
 # concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)

@@ -79,6 +79,7 @@ class threadedcontrols:
             # print("hardwired event button A clicked")
             print('safety disengaged')
             var_list.safetybutton = 1
+            var_list.withdrawinsertstop = 0
             return
         elif event == RotaryEncoder.BUTTONUP:
             return
@@ -95,8 +96,6 @@ class threadedcontrols:
             var_list.DVmove.PosRelAbsCalc()
         elif event == RotaryEncoder.BUTTONDOWN:
             print("hardwired event button B clicked")
-            print('safety disengaged')
-            var_list.safetybutton = 1
             return
         elif event == RotaryEncoder.BUTTONUP:
             return
@@ -371,6 +370,8 @@ class threadedcontrols:
 
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
+
+
 
 
 # question and waits for user input
