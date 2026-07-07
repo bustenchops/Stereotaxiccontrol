@@ -389,9 +389,9 @@ class threadedcontrols:
         elif withnumpause == None:
             withnumpause = 3
         if withtotalpause == 0:
-            withtotalpause = 3
+            withtotalpause = 300
         elif withnumpause == None:
-            withtotalpause =3
+            withtotalpause =300
 
         print('withdrawing')
         self.firstdist = float(var_list.withfirstdist)
