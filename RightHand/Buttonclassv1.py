@@ -677,13 +677,17 @@ class buttonprogram:
     def withdrawauto(self, withtotalpause, withnumpause, withdrrate):
 
         if withdrrate == 0:
-            return
+            withdrrate = 7
         elif withdrrate == None:
-            return
+            withdrrate = 7
         if withnumpause == 0:
-            return
+            withnumpause = 3
         elif withnumpause == None:
-            return
+            withnumpause = 3
+        if withtotalpause == 0:
+            withtotalpause = 3
+        elif withnumpause == None:
+            withtotalpause =3
 
         print('withdrawing')
         self.firstdist = float(var_list.withfirstdist)
