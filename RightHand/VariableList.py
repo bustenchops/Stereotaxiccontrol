@@ -52,7 +52,7 @@ class var_list:
     relativeDV = 0
     relativeALL = 13
     homeRELzero = 12 #gotolambda
-    miscbuttonC = 2 #unassigned
+    miscbuttonC = 2 #AUTOWITHDRAW
 
 #DEFINE EMERGENCY STOP and hard wired buttons
     emergstop = 26
