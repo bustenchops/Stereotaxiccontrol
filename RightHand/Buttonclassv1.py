@@ -675,7 +675,7 @@ class buttonprogram:
         var_list.TOGGLEoff = 1
 
     def withdrawauto(self, withtotalpause, withnumpause, withdrrate):
-
+        var_list.safetybutton = 0
         if withdrrate == 0:
             withdrrate = 7
         elif withdrrate == None:
