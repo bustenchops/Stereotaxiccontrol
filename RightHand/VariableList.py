@@ -192,6 +192,7 @@ class var_list:
     wdnumpause = 0
     wdrate = 0
 
+    refillstartposition = 0
 
 
 

@@ -46,11 +46,13 @@ class buttonprogram:
 
                 if var_list.engagebutton == 1:
                     #button to home to ABS zero
-                    if lastbut[var_list.homeABSzero] == 1:
+                    if lastbut[var_list.fillposition] == 1:
                         if var_list.safetybutton == 1:
-                            print('HOME to ABS Zero')
-                            self.hometoABSzero()
-                            var_list.safetybutton = 0
+                            if var_list.refillstartposition == 0:
+                                print('Rtraction to fill')
+                                self.retracttofill()
+                                var_list.safetybutton = 0
+
 
                     #set relative zero for ALL
                     if lastbut[var_list.relativeALL] == 1:
@@ -293,6 +295,38 @@ class buttonprogram:
 
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
+
+    def retracttofill(self):
+        print('retract to fill - moving up 2mm to be safe')
+        if var_list.refillstartposition == 0:
+            for x in range(var_list.DVup_bregramhome):
+                var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+            print('retracting DV to fill')
+            var_list.refillstartposition = var_list.DVsteps
+            for x in range(var_list.refillstartposition):
+                var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
+
+            var_list.APmove.PosRelAbsCalc()
+            var_list.MLmove.PosRelAbsCalc()
+            var_list.DVmove.PosRelAbsCalc()
+
+            GPIO.output(var_list.enableAll, 1)
+            var_list.lastenablestate = 1
+
+        if var_list.refillstartposition > 0:
+            print('returning to DV refill start position')
+            DVdiffreturn = abs(var_list.DVsteps - var_list.refillstartposition)
+            for x in range(DVdiffreturn):
+                var_list.DVmove.steppgo(var_list.DVdown, var_list.finespeed, var_list.btnSteps)
+
+            var_list.APmove.PosRelAbsCalc()
+            var_list.MLmove.PosRelAbsCalc()
+            var_list.DVmove.PosRelAbsCalc()
+
+            GPIO.output(var_list.enableAll, 1)
+            var_list.lastenablestate = 1
+            var_list.refillstartposition = 0
+
 
     def upDVrelhomeAP_ML(self):
         print('relative home AP and ML homed DVup')
