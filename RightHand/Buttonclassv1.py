@@ -739,6 +739,7 @@ class buttonprogram:
         self.wdtotalpause = int(withtotalpause)
         self.waitfirsttime = int(var_list.withfirstwait)
         self.wdrate = int(withdrrate)
+        print("self stuff: total pause:", self.wdtotalpause, " number pauses:", self.numberwdpause, " rate mm/min:", self.wdrate)
 
 
         self.wdfirstdist = round(self.firstdist / var_list.DVstepdistance)
