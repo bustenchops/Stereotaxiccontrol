@@ -720,12 +720,16 @@ class buttonprogram:
     def withdrawauto(self, withtotalpause, withnumpause, withdrrate):
 
         if withdrrate == 0:
+            print('criteria not met cancelling')
             return
         elif withdrrate == None:
+            print('criteria not met cancelling')
             return
         if withnumpause == 0:
+            print('criteria not met cancelling')
             return
         elif withnumpause == None:
+            print('criteria not met cancelling')
             return
 
         print('withdrawing')
