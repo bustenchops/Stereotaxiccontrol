@@ -52,6 +52,9 @@ class buttonprogram:
                                 print('Rtraction to fill')
                                 self.retracttofill()
                                 var_list.safetybutton = 0
+                            elif var_list.refillstartposition > 0:
+                                self.returnafterfill()
+                                var_list.safetybutton = 0
 
 
                     #set relative zero for ALL
@@ -298,7 +301,7 @@ class buttonprogram:
 
     def retracttofill(self):
         print('retract to fill - moving up 2mm to be safe')
-        if var_list.refillstartposition == 0:
+        if var_list.refillstatus == 0:
             for x in range(var_list.DVup_bregramhome):
                 var_list.DVmove.steppgo(var_list.DVup, var_list.finespeed, var_list.btnSteps)
             print('retracting DV to fill')
@@ -312,8 +315,12 @@ class buttonprogram:
 
             GPIO.output(var_list.enableAll, 1)
             var_list.lastenablestate = 1
+            var_list.refillstatus = 1
+        else:
+            return
 
-        if var_list.refillstartposition > 0:
+    def returnafterfill(self):
+        if var_list.refillstatus == 1:
             print('returning to DV refill start position')
             DVdiffreturn = abs(var_list.DVsteps - var_list.refillstartposition)
             for x in range(DVdiffreturn):
@@ -326,7 +333,9 @@ class buttonprogram:
             GPIO.output(var_list.enableAll, 1)
             var_list.lastenablestate = 1
             var_list.refillstartposition = 0
-
+            var_list.refillstatus = 0
+        else:
+            return
 
     def upDVrelhomeAP_ML(self):
         print('relative home AP and ML homed DVup')
