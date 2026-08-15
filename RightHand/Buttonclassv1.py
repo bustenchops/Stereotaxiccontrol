@@ -90,7 +90,7 @@ class buttonprogram:
                     if lastbut[var_list.miscbuttonC] == 1:
                         if var_list.safetybutton == 1:
                             print('Autowithdraw started')
-                            var_list.withdrawinsertstop == 1
+                            var_list.withdrawinsertstop = 1
                             self.withdrawauto(var_list.wdtotalpause, var_list.wdnumpause, var_list.wdrate)
                             var_list.safetybutton = 0
 
@@ -757,7 +757,7 @@ class buttonprogram:
         roundwdrate = round(wdrate, 3)
 
         if var_list.DVsteps > var_list.DVrelpos:
-            print('DV lower than bregma')
+            print('DV lower than bregma - that is a good thing')
             for o in range(self.waitfirsttime):
                 if var_list.withdrawinsertstop == 0:
                     print('STOP WITHDRAW-1')
