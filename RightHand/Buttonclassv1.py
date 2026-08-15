@@ -733,6 +733,7 @@ class buttonprogram:
             return
 
         print('withdrawing')
+        print("total pause:", withtotalpause, " number pauses:", withnumpause, " rate mm/min:", withdrrate)
         self.firstdist = float(var_list.withfirstdist)
         self.numberwdpause = int(withnumpause)
         self.wdtotalpause = int(withtotalpause)
