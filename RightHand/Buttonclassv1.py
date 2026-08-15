@@ -759,7 +759,7 @@ class buttonprogram:
             print('DV lower than bregma')
             for o in range(self.waitfirsttime):
                 if var_list.withdrawinsertstop == 0:
-                    print('STOP WITHDRAW')
+                    print('STOP WITHDRAW-1')
                     # self.sendtoUI.uncheckstuff(3)
                     # self.sendtoUI.uncheckstuff(4)
                     return
@@ -770,7 +770,7 @@ class buttonprogram:
                     self.countdowntimA -= 1
             for f in range(self.wdfirstdist):
                 if var_list.withdrawinsertstop == 0:
-                    print('STOP WITHDRAW')
+                    print('STOP WITHDRAW-2')
                     # self.sendtoUI.uncheckstuff(3)
                     # self.sendtoUI.uncheckstuff(4)
                     return
@@ -780,7 +780,7 @@ class buttonprogram:
             var_list.DVmove.PosRelAbsCalc()
             for j in range(self.secondpause):
                 if var_list.withdrawinsertstop == 0:
-                    print('STOP WITHDRAW')
+                    print('STOP WITHDRAW-3')
                     # self.sendtoUI.uncheckstuff(3)
                     # self.sendtoUI.uncheckstuff(4)
                     return
@@ -792,7 +792,7 @@ class buttonprogram:
             for y in range(self.numberwdpause):
                 for x in range(self.withstepsperpause):
                     if var_list.withdrawinsertstop == 0:
-                        print('STOP WITHDRAW')
+                        print('STOP WITHDRAW-4')
                         # self.sendtoUI.uncheckstuff(3)
                         # self.sendtoUI.uncheckstuff(4)
                         return
@@ -802,7 +802,7 @@ class buttonprogram:
                 var_list.DVmove.PosRelAbsCalc()
                 for t in range(self.pausetime):
                     if var_list.withdrawinsertstop == 0:
-                        print('STOP WITHDRAW')
+                        print('STOP WITHDRAW-5')
                         # self.sendtoUI.uncheckstuff(3)
                         # self.sendtoUI.uncheckstuff(4)
                         return
@@ -814,7 +814,7 @@ class buttonprogram:
                 self.wdptime = self.pausetime
             for f in range(self.withstepsperpauseremainder):
                 if var_list.withdrawinsertstop == 0:
-                    print('STOP WITHDRAW')
+                    print('STOP WITHDRAW-6')
                     # self.sendtoUI.uncheckstuff(3)
                     # self.sendtoUI.uncheckstuff(4)
                     return
