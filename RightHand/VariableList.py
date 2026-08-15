@@ -31,7 +31,7 @@ class var_list:
 
 # DEFINE NUMBER OF BUTTONS AND ORDER IN ARRAY
     buttonarray = ['movefast', 'bregmahome', 'relativeML', 'relativeAP', 'moveslow',
-                   'HomeToABSzero', 'recalibrate', 'miscbuttonA', 'presetworking', 'FiberOffset',
+                   'fillposition', 'recalibrate', 'miscbuttonA', 'presetworking', 'FiberOffset',
                    'needleoffset', 'drilloffset', 'relativeDV', 'relativeALLset', 'HomerelativeZero',
                    'miscbuttonC']
     lastbuttonstate = [0 for x in range(len(buttonarray))]
@@ -42,7 +42,7 @@ class var_list:
     relativeML = 11
     relativeAP = 9
     moveslow = 7
-    homeABSzero = 8 #full retract
+    fillposition = 8 #moves up to fill position and back down , was: homeABSzero
     recalibrate = 10
     miscbuttonA =  1# speciesselect
     miscbuttonB =  3 # gotoworking preset
