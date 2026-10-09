@@ -95,6 +95,7 @@ class threadedcontrols:
             var_list.DVmove.steppgo(var_list.DVup, var_list.stepper_speed, var_list.btnSteps)
             var_list.DVmove.PosRelAbsCalc()
         elif event == RotaryEncoder.BUTTONDOWN:
+#This is for the grey one that runs the old school board
             print("Withdraw Hardware Button")
             if var_list.safetybutton == 1:
                 print('Autowithdraw started')
@@ -377,7 +378,7 @@ class threadedcontrols:
         GPIO.output(var_list.enableAll, 1)
         var_list.lastenablestate = 1
 
-
+# this is for the old one that runs the old school board.
     def withdrawauto(self, withtotalpause, withnumpause, withdrrate):
 
         if withdrrate == 0:
