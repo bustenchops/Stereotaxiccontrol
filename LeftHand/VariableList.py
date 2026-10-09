@@ -190,7 +190,8 @@ class var_list:
     wdnumpause = 0
     wdrate = 0
 
-
+    refillstartposition = 0
+    refillstatus = 0
 
 
 # concept and code created by Kirk Mulatz (original code https://github.com/bustenchops/Stereotaxiccontrol (experiment branch)
