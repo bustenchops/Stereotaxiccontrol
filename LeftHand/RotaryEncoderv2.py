@@ -77,7 +77,7 @@ class RotaryEncoder:
             # print('return true same direction')
             return True
         if self.rev_encodercount == 3:
-            # self.encodercount = 0
+            self.encodercount = 0
             self.rev_encodercount += 1
                 # and (differencetime) > var_list.backwardrotdelay):
             # print('return true opposite direction')
